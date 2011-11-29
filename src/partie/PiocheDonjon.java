@@ -6,12 +6,10 @@ import java.util.Vector;
 import comportement.Action;
 import comportement.ChangerNiveau;
 import comportement.PiocherCarte;
-import comportement.Interface.IncidentFacheux;
+import comportement.classes.*;
 
-import carte.Arme;
-import carte.Donjon;
-import carte.Malediction;
-import carte.Monstre;
+import carte.*;
+
 
 
 public class PiocheDonjon {

@@ -2,7 +2,7 @@ package carte;
 import java.util.ArrayList;
 
 import comportement.*;
-import comportement.Interface.Equipement;
+import comportement.classes.Equipement;
 
 
 

@@ -1,10 +1,6 @@
 package carte;
-import java.util.ArrayList;
-
-import comportement.Action;
-import comportement.Interface.Condition;
-import comportement.Interface.IncidentFacheux;
-import comportement.Interface.Malus;
+import comportement.classes.IncidentFacheux;
+import comportement.classes.Sortilege;
 
 
 public class Donjon extends Carte {
@@ -15,9 +11,9 @@ public class Donjon extends Carte {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Donjon(Malus malus) {
+	public Donjon(Sortilege sortilege) {
 		super();
-		this.malus = malus;
+		this.sortilege = sortilege;
 		// TODO Auto-generated constructor stub
 	}
 

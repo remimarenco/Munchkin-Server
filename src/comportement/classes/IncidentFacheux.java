@@ -1,4 +1,4 @@
-package comportement.Interface;
+package comportement.classes;
 
 import java.util.Vector;
 

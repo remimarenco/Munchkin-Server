@@ -1,10 +1,7 @@
 package carte;
-import java.util.ArrayList;
 
-import comportement.Action;
-import comportement.Interface.Condition;
-import comportement.Interface.IncidentFacheux;
-import comportement.Interface.Malus;
+import comportement.classes.Condition;
+import comportement.classes.IncidentFacheux;
 
 
 public class Monstre extends Donjon {

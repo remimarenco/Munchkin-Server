@@ -2,12 +2,13 @@ package carte;
 import java.util.ArrayList;
 
 import comportement.Action;
-import comportement.classes.Equipement;
+import comportement.classes.IncidentFacheux;
+import comportement.classes.Sortilege;
 
 
-public class Arme extends Tresor {
+public class Sort extends Donjon {
 
-	public Arme(Equipement tab) {
+	public Sort(Sortilege tab) {
 		super(tab);
 		// TODO Auto-generated constructor stub
 	}

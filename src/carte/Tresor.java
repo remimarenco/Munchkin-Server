@@ -2,8 +2,8 @@ package carte;
 import java.util.ArrayList;
 
 import comportement.Action;
-import comportement.Interface.Equipement;
-import comportement.Interface.Malus;
+import comportement.classes.Equipement;
+
 
 
 public class Tresor extends Carte {

@@ -3,17 +3,17 @@ import java.util.ArrayList;
 
 import joueur.Personnage;
 import comportement.*;
-import comportement.Interface.Condition;
-import comportement.Interface.Equipement;
-import comportement.Interface.IncidentFacheux;
-import comportement.Interface.Malus;
+import comportement.classes.Condition;
+import comportement.classes.Equipement;
+import comportement.classes.IncidentFacheux;
+import comportement.classes.Sortilege;
 
 
 
 public abstract class Carte {
 	protected IncidentFacheux incidentFacheux;
 	protected Equipement equipement;
-	protected Malus malus;
+	protected Sortilege sortilege;
 	protected Condition condition;
 
 	
@@ -74,10 +74,10 @@ public abstract class Carte {
 	}
 	
 	public void appliquerMalus(){
-		if(this.malus != null)
+		if(this.sortilege != null)
 		{
 			Personnage pers = new Personnage("Joueur 2 ");
-			this.malus.mettreMalus(pers);
+			this.sortilege.mettreSortilege(pers);
 		}
 		else
 		{
