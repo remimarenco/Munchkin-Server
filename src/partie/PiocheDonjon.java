@@ -18,15 +18,17 @@ public class PiocheDonjon extends Pioche{
         super();
         load();
     }
-
+    /**
+     * Permet de charger les cartes dans la piocheDonjon.
+     * On définit :
+     * - Un vecteur d'action, permettant de référencer les actions de la future carte
+     * à instancier
+     * - On ajout à ce vecteur
+     */
     public void load(){
-            Vector<Action> actionTab = new Vector<Action>();
-            actionTab.add(new PiocherCarte(1));
-            actionTab.add(new ChangerNiveau(5));
-            pioche.add(new Monstre(null,new IncidentFacheux(actionTab)));
-            //piocheDonjon.add(new Malediction());
-            /*piocheDonjon.add(new Monstre(new ChangerNiveau(1)));			
-            piocheDonjon.add(new Malediction(new ChangerEquipement(true)));
-            piocheDonjon.add(new Objet(new ))*/
+        Vector<Action> actionTab = new Vector<Action>();
+        actionTab.add(new PiocherCarte(1));
+        actionTab.add(new ChangerNiveau(5));
+        pioche.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab)));
     }
 }
