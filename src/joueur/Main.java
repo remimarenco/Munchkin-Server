@@ -1,5 +1,5 @@
 package joueur;
 
-public class Main {
+public class Main extends CartesJoueur{
 
 }

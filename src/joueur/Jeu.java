@@ -1,5 +1,9 @@
 package joueur;
 
-public class Jeu {
+import carte.Carte;
 
+public class Jeu extends CartesJoueur{
+
+    
+    
 }

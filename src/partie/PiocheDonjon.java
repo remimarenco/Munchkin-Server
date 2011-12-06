@@ -12,34 +12,21 @@ import carte.*;
 
 
 
-public class PiocheDonjon {
+public class PiocheDonjon extends Pioche{
 
-private static ArrayList<Donjon> piocheDonjon= new ArrayList<Donjon>();
+    public PiocheDonjon() {
+        super();
+        load();
+    }
 
-
-	public PiocheDonjon() {
-	super();
-	load();
-	}
-
-
-
-	public ArrayList<Donjon> getPiocheDonjon() {
-		return piocheDonjon;
-	}
-
-
-
-	public void load(){
-		Vector<Action> actionTab = new Vector<Action>();
-		actionTab.add(new PiocherCarte(1));
-		actionTab.add(new ChangerNiveau(5));
-		piocheDonjon.add(new Monstre(null,new IncidentFacheux(actionTab)));
-		//piocheDonjon.add(new Malediction());
-		/*piocheDonjon.add(new Monstre(new ChangerNiveau(1)));			
-		piocheDonjon.add(new Malediction(new ChangerEquipement(true)));
-		piocheDonjon.add(new Objet(new ))*/
-	}
-	
-	
+    public void load(){
+            Vector<Action> actionTab = new Vector<Action>();
+            actionTab.add(new PiocherCarte(1));
+            actionTab.add(new ChangerNiveau(5));
+            pioche.add(new Monstre(null,new IncidentFacheux(actionTab)));
+            //piocheDonjon.add(new Malediction());
+            /*piocheDonjon.add(new Monstre(new ChangerNiveau(1)));			
+            piocheDonjon.add(new Malediction(new ChangerEquipement(true)));
+            piocheDonjon.add(new Objet(new ))*/
+    }
 }

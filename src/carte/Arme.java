@@ -8,6 +8,7 @@ import comportement.classes.Equipement;
  * @author user
  */
 public class Arme extends Tresor {
+
         /**
          * Constructeur de la classe Arme.
          * Permet de renseigner les paramètres de la classe Trésor ainsi que l'équipement engendré
