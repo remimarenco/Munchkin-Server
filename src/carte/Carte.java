@@ -18,15 +18,6 @@ public abstract class Carte {
     protected Equipement equipement;
     protected Sortilege sortilege;
     protected Condition condition;
-
-    public Carte(String nom, String description, IncidentFacheux incidentFacheux, Equipement equipement, Sortilege sortilege, Condition condition) {
-        this.nom = nom;
-        this.description = description;
-        this.incidentFacheux = incidentFacheux;
-        this.equipement = equipement;
-        this.sortilege = sortilege;
-        this.condition = condition;
-    }           
     
     public void action(){
         appliquerCondition();

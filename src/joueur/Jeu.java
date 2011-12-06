@@ -7,8 +7,8 @@ public class Jeu extends CartesJoueur{
     @Override
     public boolean ajouterCarte(Carte c) {
         if(super.ajouterCarte(c)){
-            
             // Appliquer la classe, la race, etc...
+            
             
             return true;
         }else{
