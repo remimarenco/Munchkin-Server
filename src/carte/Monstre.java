@@ -22,5 +22,10 @@ public class Monstre extends Donjon {
         this.condition = condition;
         this.incidentFacheux = incidentFacheux;
     }
+    
+    public boolean appliquerIncidentsFacheux(){
+        
+        return true;
+    }
 
 }

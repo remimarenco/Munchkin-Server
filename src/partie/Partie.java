@@ -85,4 +85,8 @@ public class Partie {
         return piocheTresor;
     }
 
+    public boolean choixCombat(){
+        return true;
+    }
+    
 }

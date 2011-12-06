@@ -14,6 +14,12 @@ import java.util.ArrayList;
 public class CartesJoueur {
     
     protected ArrayList<Carte> cartes;
+    protected Joueur joueur;
+
+    public CartesJoueur(ArrayList<Carte> cartes, Joueur joueur) {
+        this.cartes = cartes;
+        this.joueur = joueur;
+    }
 
     public CartesJoueur() {
         cartes = new ArrayList<Carte>();
