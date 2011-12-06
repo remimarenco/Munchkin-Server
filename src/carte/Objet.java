@@ -1,7 +1,4 @@
 package carte;
-import java.util.ArrayList;
-
-import comportement.*;
 import comportement.classes.Equipement;
 
 
@@ -20,8 +17,8 @@ public class Objet extends Tresor {
      * @param description
      * @param equipement
      */
-    public Objet(String nom, String description, int id, Equipement equipement) {
-        super(nom, description, id);
+    public Objet(String nom, String description, Equipement equipement) {
+        super(nom, description);
         this.equipement = equipement;
     }
 
