@@ -1,23 +1,23 @@
 package carte;
-import comportement.classes.IncidentFacheux;
-import comportement.classes.Sortilege;
 
 
+
+
+
+
+/**
+ * Classe Donjon permettant de référencer les cartes donjon
+ * @author user
+ */
 public class Donjon extends Carte {
 
-	public Donjon(IncidentFacheux tab) {
-		super();
-		incidentFacheux = tab;
-		// TODO Auto-generated constructor stub
-	}
-
-	public Donjon(Sortilege sortilege) {
-		super();
-		this.sortilege = sortilege;
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-
+    /**
+     * Constructeur de la classe donjon. Hérite de la classe Carte
+     * @param nom
+     * @param description
+     */
+    public Donjon(String nom, String description) {
+        this.nom = nom;
+        this.description = description;
+    }
 }
