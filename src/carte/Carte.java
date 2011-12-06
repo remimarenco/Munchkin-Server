@@ -11,11 +11,15 @@ import comportement.classes.Sortilege;
 
 
 public abstract class Carte {
+
+    
+        protected String nom;
+        protected String description;
+        
 	protected IncidentFacheux incidentFacheux;
 	protected Equipement equipement;
 	protected Sortilege sortilege;
 	protected Condition condition;
-
 	
 	public void action(){
 		appliquerCondition();
@@ -57,7 +61,7 @@ public abstract class Carte {
 		}
 		else
 		{
-			System.out.println("Cette carte n'a pas d'équipement");
+			System.out.println("Cette carte n'a pas d'ï¿½quipement");
 		}
 	}
 	
@@ -84,10 +88,4 @@ public abstract class Carte {
 			System.out.println("Cette carte n'a pas de malus");
 		}
 	}
-	
-	
-	
-	
-	
-
 }
