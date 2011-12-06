@@ -14,8 +14,9 @@ public class Tresor extends Carte {
          * @param description
          * @param equipement
          */
-	public Tresor(String nom, String description) {
+	public Tresor(String nom, String description, int id) {
             this.nom = nom;
             this.description = description;
+            this.id = id;
 	}
 }
