@@ -18,8 +18,8 @@ public class Sort extends Donjon {
          * @param description
          * @param sortilege
          */
-	public Sort(String nom, String description, Sortilege sortilege) {
-		super(nom, description);
+	public Sort(String nom, String description, int id, Sortilege sortilege) {
+		super(nom, description, id);
 		this.sortilege = sortilege;
 	}
 
