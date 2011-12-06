@@ -26,6 +26,15 @@ public class Personnage {
         super();
     }
 
+    public boolean changerNiveau(int deltaNiveau){
+        if(this.niveau + deltaNiveau < 1)
+            this.setNiveau(1);
+        else
+            this.setNiveau(this.niveau + deltaNiveau);
+        
+        return true;
+    }
+    
     public int getNiveau() {
         return niveau;
     }

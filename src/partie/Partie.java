@@ -7,14 +7,14 @@ import joueur.Joueur;
 
 public class Partie {
 	
-    private PiocheTresor piocheTresor;
-    private PiocheDonjon piocheDonjon;
-    private Defausse defausseTresor;
-    private Defausse defausseDonjon;
-    private ArrayList<Joueur> listeJoueurs;
+    private PiocheTresor        piocheTresor;
+    private PiocheDonjon        piocheDonjon;
+    private Defausse            defausseTresor;
+    private Defausse            defausseDonjon;
+    private ArrayList<Joueur>   listeJoueurs;
 
 
-    public Partie() {
+    public Partie(){
         
         piocheDonjon    = new PiocheDonjon();
         piocheTresor    = new PiocheTresor();
@@ -22,20 +22,15 @@ public class Partie {
         defausseDonjon  = new DefausseDonjon();
         listeJoueurs    = new ArrayList<Joueur>();
         
-        for (Carte carte : this.piocheTresor.getPioche()) {
-            carte.action();
-        } 
-
-        for (Carte carte : this.piocheDonjon.getPioche()) {
-            // Cas d'un besoin de faire une condition
-            carte.action();
-            // Cas d'un besoin de faire un incident f�cheux
-
-            // Cas d'un besoin de faire un malus
-            // Cas d'un besoin d'�quiper un objet
-        } 
+        this.run();
     }
 
+    
+    public void run(){
+        
+    }
+    
+    
     public Partie(PiocheTresor piocheTresor, PiocheDonjon piocheDonjon, Defausse defausseTresor, Defausse defausseDonjon, ArrayList<Joueur> listeJoueurs) {
         this.piocheTresor = piocheTresor;
         this.piocheDonjon = piocheDonjon;
