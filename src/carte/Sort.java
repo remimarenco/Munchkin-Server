@@ -1,8 +1,4 @@
 package carte;
-import java.util.ArrayList;
-
-import comportement.Action;
-import comportement.classes.IncidentFacheux;
 import comportement.classes.Sortilege;
 
 /**
@@ -18,8 +14,8 @@ public class Sort extends Donjon {
          * @param description
          * @param sortilege
          */
-	public Sort(String nom, String description, int id, Sortilege sortilege) {
-		super(nom, description, id);
+	public Sort(String nom, String description, Sortilege sortilege) {
+		super(nom, description);
 		this.sortilege = sortilege;
 	}
 
