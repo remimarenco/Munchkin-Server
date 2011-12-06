@@ -12,7 +12,7 @@ import comportement.classes.Sortilege;
 
 public abstract class Carte {
 
-    
+        protected int id;
         protected String nom;
         protected String description;
         
