@@ -1,13 +1,8 @@
 package carte;
 
-
-
-
-
-
 /**
  * Classe Donjon permettant de référencer les cartes donjon
- * @author user
+ * @author Rémi Marenco
  */
 public class Donjon extends Carte {
 
@@ -16,8 +11,9 @@ public class Donjon extends Carte {
      * @param nom
      * @param description
      */
-    public Donjon(String nom, String description) {
+    public Donjon(String nom, String description, int id) {
         this.nom = nom;
         this.description = description;
+        this.id = id;
     }
 }
