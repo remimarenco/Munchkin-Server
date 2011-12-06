@@ -20,8 +20,8 @@ public class Objet extends Tresor {
      * @param description
      * @param equipement
      */
-    public Objet(String nom, String description, Equipement equipement) {
-        super(nom, description);
+    public Objet(String nom, String description, int id, Equipement equipement) {
+        super(nom, description, id);
         this.equipement = equipement;
     }
 
