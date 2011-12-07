@@ -12,19 +12,19 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public abstract class Pioche {
+public class Pioche<T> {
     
-    protected static ArrayList<Donjon> pioche = new ArrayList<Donjon>();
+    protected ArrayList<T> pioche = new ArrayList<T>();
 
     public Pioche() {
     }
     
-    public ArrayList<Donjon> getPioche() {
+    public ArrayList<T> getPioche() {
         return pioche;
     }
     
-    public Carte tirerCarte(){
-        Carte ret = pioche.get(0);
+    public T tirerCarte(){
+        T ret = pioche.get(0);
         pioche.remove(0);
         return ret;
     }
