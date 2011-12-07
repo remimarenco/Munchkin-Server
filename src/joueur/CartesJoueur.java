@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author user
+ * @author washi
  */
 public class CartesJoueur {
     
@@ -19,6 +19,7 @@ public class CartesJoueur {
     public CartesJoueur(ArrayList<Carte> cartes, Joueur joueur) {
         this.cartes = cartes;
         this.joueur = joueur;
+
     }
 
     public CartesJoueur() {
