@@ -1,13 +1,17 @@
 package comportement;
 
+import joueur.Joueur;
 
+/**
+ * Classe abstraite permettant de définir des actions
+ * @author Rémi Marenco
+ */
 public abstract class Action {
 
-		
-	public Action(){
-		super();
-	}
-	
-	public abstract void action();
+    /**
+     * Méthode abstraite permettant de lancer l'action
+     * @param joueurImpacte => Joueur recevant l'action
+     */
+    public abstract void action(Joueur joueurImpacte);
 
 }
