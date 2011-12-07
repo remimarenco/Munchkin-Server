@@ -5,6 +5,7 @@ import comportement.classes.Condition;
 import comportement.classes.Equipement;
 import comportement.classes.IncidentFacheux;
 import comportement.classes.Sortilege;
+import joueur.Joueur;
 
 
 
@@ -18,10 +19,13 @@ public abstract class Carte {
     protected Equipement equipement;
     protected Sortilege sortilege;
     protected Condition condition;
-    
-    public void action(){
+
+    /**
+     * Méthode de test de toutes les méthodes d'actions
+     */
+    public void action(Joueur joueurImpacte){
         appliquerCondition();
-        appliquerIncidentFacheux();
+        appliquerIncidentFacheux(joueurImpacte);
         appliquerMalus();
         equiper();
     }
@@ -36,10 +40,10 @@ public abstract class Carte {
 
 
 
-    public void appliquerIncidentFacheux(){
+    public void appliquerIncidentFacheux(Joueur joueurImpacte){
         if(this.incidentFacheux != null){
-            Personnage pers = new Personnage("Joueur 1 ");
-            this.incidentFacheux.actionIncidentFacheux(pers);
+            System.out.println(joueurImpacte.getNom());
+            this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
         }else{
             System.out.println("Cette carte n'a pas d'incident facheux");
         }
