@@ -3,9 +3,6 @@
  * and open the template in the editor.
  */
 package partie;
-
-import carte.Carte;
-import carte.Donjon;
 import java.util.ArrayList;
 
 /**
