@@ -1,12 +1,6 @@
 package jeu;
-import java.util.HashMap;
 
 import partie.Partie;
-
-import comportement.Action;
-
-import carte.Carte;
-import carte.Monstre;
 
 
 
