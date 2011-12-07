@@ -5,7 +5,7 @@ import carte.Tresor;
 import java.util.ArrayList;
 import joueur.Joueur;
 
-public class Partie {
+public final class Partie {
 	
     private Pioche              piocheTresor;
     private Pioche              piocheDonjon;
