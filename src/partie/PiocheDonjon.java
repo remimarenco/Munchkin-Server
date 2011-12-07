@@ -1,7 +1,6 @@
 package partie;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import comportement.Action;
 import comportement.ChangerNiveau;
@@ -26,7 +25,7 @@ public class PiocheDonjon extends Pioche{
      * - On ajout à ce vecteur
      */
     public void load(){
-        Vector<Action> actionTab = new Vector<Action>();
+        ArrayList<Action> actionTab = new ArrayList<Action>();
         actionTab.add(new PiocherCarte(1));
         actionTab.add(new ChangerNiveau(5));
         pioche.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab)));
