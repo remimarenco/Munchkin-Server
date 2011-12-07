@@ -1,14 +1,14 @@
 package partie;
 
-import joueur.Personnage;
-import carte.Carte;
+import carte.Donjon;
+import carte.Tresor;
 import java.util.ArrayList;
 import joueur.Joueur;
 
 public class Partie {
 	
-    private PiocheTresor        piocheTresor;
-    private PiocheDonjon        piocheDonjon;
+    private Pioche              piocheTresor;
+    private Pioche              piocheDonjon;
     private Defausse            defausseTresor;
     private Defausse            defausseDonjon;
     private ArrayList<Joueur>   listeJoueurs;
@@ -16,8 +16,8 @@ public class Partie {
 
     public Partie(){
         
-        piocheDonjon    = new PiocheDonjon();
-        piocheTresor    = new PiocheTresor();
+        piocheDonjon    = new Pioche<Donjon>();
+        piocheTresor    = new Pioche<Tresor>();
         defausseTresor  = new DefausseTresor();
         defausseDonjon  = new DefausseDonjon();
         listeJoueurs    = new ArrayList<Joueur>();
@@ -31,7 +31,7 @@ public class Partie {
     }
     
     
-    public Partie(PiocheTresor piocheTresor, PiocheDonjon piocheDonjon, Defausse defausseTresor, Defausse defausseDonjon, ArrayList<Joueur> listeJoueurs) {
+    public Partie(Pioche<Tresor> piocheTresor, Pioche<Donjon> piocheDonjon, Defausse defausseTresor, Defausse defausseDonjon, ArrayList<Joueur> listeJoueurs) {
         this.piocheTresor = piocheTresor;
         this.piocheDonjon = piocheDonjon;
         this.defausseTresor = defausseTresor;
@@ -41,7 +41,7 @@ public class Partie {
 
 
     public boolean commencerTour(){
-        Carte enJeu = piocheDonjon.tirerCarte();
+        Donjon enJeu = (Donjon) piocheDonjon.tirerCarte();
         return true;
     }
 
@@ -69,19 +69,19 @@ public class Partie {
         this.listeJoueurs = listeJoueurs;
     }
 
-    public PiocheDonjon getPiocheDonjon() {
+    public Pioche<Donjon> getPiocheDonjon() {
         return piocheDonjon;
     }
     
-    public void setPiocheDonjon(PiocheDonjon piocheDonjon) {
+    public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
         this.piocheDonjon = piocheDonjon;
     }
     
-    public void setPiocheTresor(PiocheTresor piocheTresor) {
+    public void setPiocheTresor(Pioche<Tresor> piocheTresor) {
         this.piocheTresor = piocheTresor;
     }
 
-    public PiocheTresor getPiocheTresor() {
+    public Pioche<Tresor> getPiocheTresor() {
         return piocheTresor;
     }
 
