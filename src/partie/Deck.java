@@ -42,13 +42,25 @@ public final class Deck {
      * - On ajout à ce vecteur
      */
     private void load(){
+        /**
+         * Permet de référencer les actions de la carte
+         */
         ArrayList<Action> actionTab = new ArrayList<Action>();
+        /**
+         * Premiere action
+         */
         actionTab.add(new PiocherCarte(PiocherCarte.PIOCHE_DONJON, 1));
+        /**
+         * Deuxième action
+         */
         actionTab.add(new ChangerNiveau(5));
-        
-        cartes.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab)));
-        cartes.add(new Monstre("Monstre1", "Le premier monstre", null, null));
-        cartes.add(new Monstre("Monstre2", "Le deuxième monstre", null, null));
+        /**
+         * Ajout de la carte avec les actions définies au dessus
+         */
+        cartes.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab), 10));
+
+        cartes.add(new Monstre("Monstre1", "Le premier monstre", null, null, 5));
+        cartes.add(new Monstre("Monstre2", "Le deuxième monstre", null, null, 3));
         cartes.add(new Objet("Objet1", "Le premier objet", null));
         cartes.add(new Objet("Objet1", "Le deuxième objet", null));
         cartes.add(new Sort("Sort1", "Le premier sort", null));
