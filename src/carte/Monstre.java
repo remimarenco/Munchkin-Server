@@ -10,6 +10,9 @@ import comportement.classes.IncidentFacheux;
  * @author Rémi Marenco
  */
 public class Monstre extends Donjon {
+    protected int puissance;
+    // TODO : Comportement monstre vaincu
+
     /**
      * Constructeur de la classe Monstre. Hérite de la classe Donjon
      * @param nom
@@ -17,10 +20,11 @@ public class Monstre extends Donjon {
      * @param condition
      * @param incidentFacheux
      */
-    public Monstre(String nom, String description, Condition condition, IncidentFacheux incidentFacheux) {
+    public Monstre(String nom, String description, Condition condition, IncidentFacheux incidentFacheux, int puissance) {
         super(nom, description);
         this.condition = condition;
         this.incidentFacheux = incidentFacheux;
+        this.puissance = puissance;
     }
     
     public boolean appliquerIncidentsFacheux(){
