@@ -2,6 +2,7 @@ package partie;
 
 import carte.Carte;
 import carte.Donjon;
+import carte.Monstre;
 import carte.Tresor;
 import com.sun.xml.internal.ws.api.DistributedPropertySet;
 import java.util.ArrayList;
@@ -83,13 +84,23 @@ public final class Partie extends Vector<Joueur> {
                 if(c.getClass().getName().equals("carte.Monstre")){
                     Combat combat = new Combat(this);
                     combat.getCampGentil().add(enCours.getPersonnage());
-                    combat.getCampMechant().add(c);
                     
-                    System.out.println("C'est un monstre ! Combattre ? (o/n)");
+                    Monstre m = (Monstre) c;
+                    combat.getCampMechant().add(m);
+                    
+                    System.out.println("Vous avez tiré le monstre :");
+                    System.out.println(m.getNom() + "(Puissance : " + m.getPuissance() + ")");
+                    System.out.println(m.getDescription());
+                    
+                    System.out.println("Combattre ? (o/n)");
                     Scanner sc = new Scanner(System.in);
                     String str = sc.nextLine();
                     if(str.equals("o") || str.equals("O")){
-                        combat.combattre();
+                        if(combat.combattre()){
+                            System.out.println("Vous avez gagné !");
+                        }else{
+                            System.out.println("Vous avez perdu...");
+                        }
                     }else if(str.equals("n") || str.equals("n")){
                         if(combat.tenterDeguerpir()){
                             System.out.println("Vous avez réussi à déguérpir !");

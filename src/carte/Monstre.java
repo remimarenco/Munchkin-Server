@@ -36,4 +36,18 @@ public class Monstre extends Donjon {
         return true;
     }
 
+    public int getPuissance() {
+        return puissance;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    
+    
 }

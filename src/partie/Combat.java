@@ -1,7 +1,9 @@
 package partie;
 
+import carte.Monstre;
 import java.util.ArrayList;
 import java.util.Iterator;
+import joueur.Personnage;
 
 public class Combat {
     private ArrayList<Object> CampGentil;
@@ -41,13 +43,36 @@ public class Combat {
         Iterator itMechant = CampMechant.iterator();
         
         while(itGentil.hasNext()){
-            
+            Object obj = itGentil.next();
+            if(obj instanceof Personnage){
+                Personnage p = (Personnage) obj;
+                puissanceGentil += p.getNiveau();
+            }else if(obj instanceof Monstre){
+                Monstre m = (Monstre) obj;
+                puissanceGentil += m.getPuissance();
+            }else{
+                System.out.print("Petit problème dans le camps des gentils !");
+                return false;
+            }
         }
         
         while(itMechant.hasNext()){
-            
+            Object obj = itMechant.next();
+            if(obj instanceof Personnage){
+                Personnage p = (Personnage) obj;
+                puissanceMechant += p.getNiveau();
+            }else if(obj instanceof Monstre){
+                Monstre m = (Monstre) obj;
+                puissanceMechant += m.getPuissance();
+            }else{
+                System.out.print("Petit problème dans le camps des méchants !");
+                return false;
+            }
         }
         
-        return true;
+        if(puissanceGentil > puissanceMechant)
+            return true;
+        else 
+            return false;
     }
 }
