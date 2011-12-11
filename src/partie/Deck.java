@@ -13,6 +13,8 @@ import comportement.ChangerNiveau;
 import comportement.PiocherCarte;
 import comportement.classes.IncidentFacheux;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -24,6 +26,7 @@ public final class Deck {
     public Deck() {
         cartes = new ArrayList<Carte>();
         this.load();
+        cartes = melanger();
     }
 
     public static ArrayList<Carte> getCartes() {
@@ -33,7 +36,12 @@ public final class Deck {
     public static void setCartes(ArrayList<Carte> cartes) {
         Deck.cartes = cartes;
     }
-
+    
+    public static ArrayList melanger(){
+        ArrayList nouvelle = new ArrayList(cartes);
+        Collections.shuffle(nouvelle);
+        return nouvelle; 
+    }
 
     /**
      * Permet de charger les cartes dans la piocheDonjon.
