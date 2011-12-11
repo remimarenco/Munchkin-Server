@@ -42,6 +42,7 @@ public class Communication extends Thread{
         return true;
     }
 
+    @Override
   synchronized  public void run(){
         boolean test=true;
        try{

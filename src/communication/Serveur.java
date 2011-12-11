@@ -25,7 +25,8 @@ public class Serveur {
             socket_ecoute = new ServerSocket(port);
             while (true) {
                 Socket st = socket_ecoute.accept();
-                new Communication(st, this).start();
+               Communication com= new Communication(st, this);
+               com.start();               
             }
         } catch (Exception e) {
             try {

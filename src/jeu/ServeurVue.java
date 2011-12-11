@@ -105,7 +105,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 // TODO add your handling code here:
     
     this.nombreJoueur=Integer.parseInt(jComboBox1.getSelectedItem().toString());
-    Serveur serv= new Serveur(8888,nombreJoueur); 
+    Serveur serv= new Serveur(8767,nombreJoueur); 
 }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
