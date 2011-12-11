@@ -3,7 +3,7 @@ package joueur;
 import carte.Carte;
 import partie.Partie;
 
-public class Joueur {
+public class Joueur extends Thread {
 	
     private Main main;
     private Jeu jeu;

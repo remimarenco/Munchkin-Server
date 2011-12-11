@@ -19,8 +19,7 @@ import communication.Serveur;
 public class ServeurVue extends javax.swing.JFrame {
 
     
-    private int nombreJoueur=0;
-    
+          
     /** Creates new form ServeurVue */
     public ServeurVue() {
         initComponents();
@@ -55,6 +54,11 @@ public class ServeurVue extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,11 +106,14 @@ public class ServeurVue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:
+// TODO add your handling code here:       
+    Serveur serv= new Serveur(8767,Integer.parseInt(jComboBox1.getSelectedItem().toString())); 
     
-    this.nombreJoueur=Integer.parseInt(jComboBox1.getSelectedItem().toString());
-    Serveur serv= new Serveur(8767,nombreJoueur); 
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+this.dispose();
+}//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

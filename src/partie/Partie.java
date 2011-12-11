@@ -7,13 +7,14 @@ import com.sun.xml.internal.ws.api.DistributedPropertySet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Vector;
 import joueur.Joueur;
 
 /**
  * 
  * @author Julien
  */
-public final class Partie {
+public final class Partie extends Vector<Joueur> {
 	
     private Deck                deck;
     private Pioche              piocheTresor;
