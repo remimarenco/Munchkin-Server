@@ -20,7 +20,7 @@ public class Serveur {
     
 
     
-    public Serveur(int port) {
+    public Serveur(int port,int nombreJoueur) {
         try {
             socket_ecoute = new ServerSocket(port);
             while (true) {
