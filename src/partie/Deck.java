@@ -22,6 +22,7 @@ public final class Deck {
     private static ArrayList<Carte> cartes;
 
     public Deck() {
+        cartes = new ArrayList<Carte>();
         this.load();
     }
 

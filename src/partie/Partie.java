@@ -7,6 +7,7 @@ import joueur.Joueur;
 
 public final class Partie {
 	
+    private Deck                deck;
     private Pioche              piocheTresor;
     private Pioche              piocheDonjon;
     private Defausse            defausseTresor;
@@ -15,19 +16,18 @@ public final class Partie {
 
 
     public Partie(){
-        
-        piocheDonjon    = new Pioche<Donjon>();
-        piocheTresor    = new Pioche<Tresor>();
+        piocheDonjon    = new Pioche<Donjon>("carte.Donjon");
+        piocheTresor    = new Pioche<Tresor>("carte.Tresor");
         defausseTresor  = new DefausseTresor();
         defausseDonjon  = new DefausseDonjon();
         listeJoueurs    = new ArrayList<Joueur>();
-        
-        this.run();
+        deck            = new Deck();
     }
 
     
     public void run(){
-        
+        piocheDonjon.init(this.deck);
+        piocheTresor.init(this.deck);
     }
     
     

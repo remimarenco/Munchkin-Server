@@ -25,9 +25,9 @@ public class PiocheDonjon extends Pioche{
      * - On ajout à ce vecteur
      */
     public void load(){
-        ArrayList<Action> actionTab = new ArrayList<Action>();
-        actionTab.add(new PiocherCarte(1));
-        actionTab.add(new ChangerNiveau(5));
-        pioche.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab)));
+//        ArrayList<Action> actionTab = new ArrayList<Action>();
+//        actionTab.add(new PiocherCarte(1));
+//        actionTab.add(new ChangerNiveau(5));
+//        pioche.add(new Monstre("MonstreTest", "La description du monstre", null, new IncidentFacheux(actionTab)));
     }
 }
