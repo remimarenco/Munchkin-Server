@@ -6,6 +6,7 @@ import carte.Tresor;
 import com.sun.xml.internal.ws.api.DistributedPropertySet;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 import joueur.Joueur;
 
 /**
@@ -63,6 +64,47 @@ public final class Partie {
         
         this.distribuer();
         
+        Iterator it = listeJoueurs.iterator();
+        Joueur enCours;
+        Carte c;
+        
+        while(true){
+            while(it.hasNext()){
+                enCours = (Joueur) it.next();
+                c = (Carte) piocheDonjon.tirerCarte(); 
+                if(c == null){
+                    System.out.println("Plus rien dans la pioche, au revoir !");
+                    return;
+                }
+                System.out.println("Pour le joueur " + enCours.getNom() + " : ");
+                
+                
+                if(c.getClass().getName().equals("carte.Monstre")){
+                    Combat combat = new Combat(this);
+                    combat.getCampGentil().add(enCours.getPersonnage());
+                    combat.getCampMechant().add(c);
+                    
+                    System.out.println("C'est un monstre ! Combattre ? (o/n)");
+                    Scanner sc = new Scanner(System.in);
+                    String str = sc.nextLine();
+                    if(str.equals("o") || str.equals("O")){
+                        combat.combattre();
+                    }else if(str.equals("n") || str.equals("n")){
+                        if(combat.tenterDeguerpir()){
+                            System.out.println("Vous avez réussi à déguérpir !");
+                        }else{
+                            System.out.println("Vous n'avez pas réussi à déguerpir...");
+                        }
+                    }else{
+                        System.out.println("Pô compris");
+                    }
+                    
+                }else{
+                    System.out.println("Ce n'est pas un monstre...");
+                }
+            }
+            it = listeJoueurs.iterator();
+        }
     }
     
     

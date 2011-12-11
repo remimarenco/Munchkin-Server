@@ -74,10 +74,5 @@ public class Personnage {
     
     public void setaChangeSexe(boolean aChangeSexe) {
         this.aChangeSexe = aChangeSexe;
-    }
-
-    
-    
-    
-    
+    }    
 }
