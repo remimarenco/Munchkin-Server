@@ -35,5 +35,8 @@ public class CartesJoueur {
         cartes.remove(c);
         return true;
     }
-    
+
+    public ArrayList<Carte> getCartes() {
+        return cartes;
+    }
 }

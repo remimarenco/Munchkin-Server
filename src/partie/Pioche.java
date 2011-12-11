@@ -31,6 +31,9 @@ public class Pioche<T> {
     }
     
     public T tirerCarte(){
+        if(pioche.isEmpty())
+            return null;
+        
         T ret = pioche.get(0);
         pioche.remove(0);
         return ret;
@@ -44,8 +47,9 @@ public class Pioche<T> {
         while(it.hasNext()){
             c = (Carte) it.next(); 
 //            System.out.println(c.getClass().getName());
-            if(c.getClass().getSuperclass().getName().equals(this.type))
+            if(c.getClass().getSuperclass().getName().equals(this.type)){
                 this.pioche.add((T) c);
+            }
         }
     }
 }

@@ -14,7 +14,6 @@ import comportement.PiocherCarte;
 import comportement.classes.IncidentFacheux;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  *
@@ -23,20 +22,35 @@ import java.util.List;
 public final class Deck {
     private static ArrayList<Carte> cartes;
 
+    /**
+     * 
+     */
     public Deck() {
         cartes = new ArrayList<Carte>();
         this.load();
         cartes = melanger();
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static ArrayList<Carte> getCartes() {
         return cartes;
     }
 
+    /**
+     * 
+     * @param cartes 
+     */
     public static void setCartes(ArrayList<Carte> cartes) {
         Deck.cartes = cartes;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static ArrayList melanger(){
         ArrayList nouvelle = new ArrayList(cartes);
         Collections.shuffle(nouvelle);

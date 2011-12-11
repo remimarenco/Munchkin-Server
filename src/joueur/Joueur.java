@@ -18,6 +18,13 @@ public class Joueur {
         this.personnage = new Personnage();
     }
     
+    public Joueur(String nom) {
+        this.main = new Main();
+        this.jeu = new Jeu();
+        this.nom = nom;
+        this.personnage = new Personnage();
+    }
+    
     public Joueur(Main main, Jeu jeu, String nom, Personnage personnage) {
         this.main = main;
         this.jeu = jeu;
