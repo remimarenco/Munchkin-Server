@@ -9,6 +9,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import joueur.Joueur;
+import partie.Partie;
 
 /**
  *
@@ -17,16 +19,20 @@ import java.util.logging.Logger;
 public class Serveur {
     private ServerSocket socket_ecoute;
     private CommunicationList comList= new CommunicationList();
-    
+    private Partie partie;
+    private int nombreJoueur;
 
     
     public Serveur(int port,int nombreJoueur) {
         try {
             socket_ecoute = new ServerSocket(port);
+            partie=new Partie();
+            this.nombreJoueur=nombreJoueur;
             while (true) {
-                Socket st = socket_ecoute.accept();
+                Socket st = socket_ecoute.accept();                
                Communication com= new Communication(st, this);
                com.start();               
+                
             }
         } catch (Exception e) {
             try {
@@ -43,9 +49,10 @@ public class Serveur {
 
             case Message.CONNECT:
 
-                if (this.comList.LoginDispo(msg.getNick_src()) == true) {
+                if (this.comList.LoginDispo(msg.getNick_src()) && partie.getListeJoueurs().size()<nombreJoueur) {
                     com.setName(msg.getNick_src());
                     this.comList.add(com);
+                    partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
                     String text = msg.getNick_src() + " est maintenant parmis nous";
                     Message message = new Message(Message.MESSAGE, "admin", "Partie", text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
@@ -56,8 +63,13 @@ public class Serveur {
                         this.comList.get(i).sendMessage(message);
                         this.comList.get(i).sendMessage(message2);
                     }
-
-                } else {
+                }
+                else if(partie.getListeJoueurs().size()== nombreJoueur){
+                        Message mesg = new Message(Message.MESSAGE, "admin", "Partie","La partie est pleine !");
+                        com.sendMessage(mesg);
+                    }
+                    
+                else {
 
                     Message message = new Message(Message.NICKEXIST, "admin", "Partie", "Ce pseudo est deja utilise, veuillez choisir un autre !");
                     com.sendMessage(message);
