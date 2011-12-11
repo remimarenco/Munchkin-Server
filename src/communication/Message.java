@@ -14,11 +14,11 @@ import java.io.DataOutputStream;
 public class Message {
     
     
-     public static final int CONNECT=0;
+      public static final int CONNECT=0;
         public static final int DISCONNECT=1;
         public static final int MESSAGE=2;
-        public static final int LISTE=3;
-        public static int NICKEXIST=4;
+        public static final int LISTE=3;       
+        public static final int NICKEXIST=5;
         
         private String nick_src=new String("");     
         private String nick_dest=new String("");    
@@ -93,7 +93,7 @@ public class Message {
         return this.nick_src;
     }
 
-    Object getNick_dest() {
+    public String getNick_dest() {
         return this.nick_dest;
     }
     

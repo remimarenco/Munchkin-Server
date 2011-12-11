@@ -38,7 +38,7 @@ public class Communication extends Thread{
   
     public boolean sendMessage(String message,String nick_dest){
 
-        new Message(Message.MESSAGE,getName(),nick_dest,message).write(out);
+        new Message(Message.MESSAGE,getName(),nick_dest,message).write(out);        
         return true;
     }
 

@@ -47,7 +47,7 @@ public class Serveur {
                     com.setName(msg.getNick_src());
                     this.comList.add(com);
                     String text = msg.getNick_src() + " est maintenant parmis nous";
-                    Message message = new Message(Message.MESSAGE, "admin", "General", text);
+                    Message message = new Message(Message.MESSAGE, "admin", "Partie", text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
                     String list = this.comList.getListe();
                     System.out.println(list);
@@ -59,7 +59,7 @@ public class Serveur {
 
                 } else {
 
-                    Message message = new Message(Message.NICKEXIST, "admin", "General", "Ce pseudo est deja utilise, veuillez choisir un autre !");
+                    Message message = new Message(Message.NICKEXIST, "admin", "Partie", "Ce pseudo est deja utilise, veuillez choisir un autre !");
                     com.sendMessage(message);
 
                 }
@@ -68,13 +68,13 @@ public class Serveur {
             case Message.DISCONNECT:
                 String listeVide = new String("");
                 com.setName(msg.getNick_src());
-                Message message1 = new Message(Message.MESSAGE, "admin", "General", "Vous etes deconnecte du serveur, a bientot !");
+                Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous etes deconnecte du serveur, a bientot !");
                 com.sendMessage(message1);
                 com.sendList(listeVide);
                 comList.remove(com);
                 Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
 
-                Message message = new Message(Message.MESSAGE, "admin", "General", msg.getNick_src() + " quitte le serveur !");
+                Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !");
                 String list2 = comList.getListe();
                 for (int i = 0; i < comList.size(); i++) {
                     comList.get(i).sendList(list2);
@@ -83,13 +83,13 @@ public class Serveur {
                 }
                 break;
             case Message.MESSAGE:
-                if (msg.getNick_dest().equals("General")) {
+                if (msg.getNick_dest().equals("Partie")) {
                     for (int i = 0; i < comList.size(); i++) {
                         comList.get(i).sendMessage(msg);
 
                     }
                 } else {
-                    int indexDest = comList.getCommunication(msg.getNick_src());
+                    int indexDest = comList.getCommunication(msg.getNick_dest());
 
                     if (indexDest == -1) {
                         Message message5 = new Message(Message.MESSAGE, "admin", msg.getNick_src(), "Le destinataire de votre message n'est plus ou pas connecté");
