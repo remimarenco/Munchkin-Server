@@ -5,6 +5,7 @@
 package communication;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -25,7 +26,8 @@ public class Serveur {
     
     public Serveur(int port,int nombreJoueur) {
         try {
-            socket_ecoute = new ServerSocket(port);
+            socket_ecoute = new ServerSocket(port,10,null);
+           
             partie=new Partie();
             this.nombreJoueur=nombreJoueur;
             while (true) {
