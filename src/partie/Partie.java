@@ -15,7 +15,7 @@ import joueur.Joueur;
  * 
  * @author Julien
  */
-public final class Partie extends Vector<Joueur> {
+public final class Partie extends ArrayList<Joueur>{
 	
     private Deck                deck;
     private Pioche              piocheTresor;

@@ -4,6 +4,7 @@
  */
 package communication;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -11,7 +12,7 @@ import java.util.Vector;
  *
  * @author user
  */
-public class CommunicationList extends Vector<Communication> {
+public class CommunicationList extends ArrayList<Communication> {
     
     
     
