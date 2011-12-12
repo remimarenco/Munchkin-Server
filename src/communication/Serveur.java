@@ -53,7 +53,7 @@ public class Serveur {
                 if (this.comList.LoginDispo(msg.getNick_src()) && partie.getListeJoueurs().size()<nombreJoueur) {
                     com.setName(msg.getNick_src());
                     this.comList.add(com);
-                    partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
+                    //partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message = new Message(Message.MESSAGE, "admin", "Partie", text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
@@ -85,7 +85,7 @@ public class Serveur {
                 com.sendMessage(message1);
                 com.sendList(listeVide);
                 comList.remove(com);
-                partie.removeJoueurByName(msg.getNick_src());
+                //partie.removeJoueurByName(msg.getNick_src());
                 Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
 
                 Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !\n");
