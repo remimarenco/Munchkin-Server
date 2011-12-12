@@ -247,4 +247,16 @@ public final class Partie extends ArrayList<Joueur>{
         return true;
     }
     
+    /**
+     * 
+     * @param name 
+     */
+    public void removeJoueurByName(String name){
+        for(Joueur j : this.listeJoueurs){
+            if(j.getNom().equals(name))
+                this.listeJoueurs.remove(j);
+        }
+            
+    }
+    
 }

@@ -85,6 +85,7 @@ public class Serveur {
                 com.sendMessage(message1);
                 com.sendList(listeVide);
                 comList.remove(com);
+                partie.removeJoueurByName(msg.getNick_src());
                 Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
 
                 Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !\n");
