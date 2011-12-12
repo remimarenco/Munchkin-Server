@@ -4,7 +4,6 @@ import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
 import carte.Tresor;
-import com.sun.xml.internal.ws.api.DistributedPropertySet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
