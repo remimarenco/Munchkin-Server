@@ -26,8 +26,7 @@ public class Serveur {
     
     public Serveur(int port,int nombreJoueur) {
         try {
-            socket_ecoute = new ServerSocket(port,10,null);
-           
+            socket_ecoute = new ServerSocket(port);           
             partie=new Partie();
             this.nombreJoueur=nombreJoueur;
             while (true) {
