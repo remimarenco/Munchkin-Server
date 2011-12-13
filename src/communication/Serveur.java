@@ -55,13 +55,19 @@ public class Serveur {
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message = new Message(Message.MESSAGE, "admin", "Partie", text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
+                    Message message3 = new Message(message.MESSAGE,"admin","Partie","La partie est pleine, elle demarre ! \n");
                     String list = this.partie.getListe();
                     System.out.println(list);
-                    for (int i = 0; i < this.partie.size(); i++) {
-                        this.partie.get(i).sendList(list);
-                        this.partie.get(i).sendMessage(message);
-                        this.partie.get(i).sendMessage(message2);
+                    for(Joueur j : this.partie){
+                        j.sendList(list);
+                        j.sendMessage(message);
+                        j.sendMessage(message2);
+                        if(this.partie.size()==this.nombreJoueur){
+                            j.sendMessage(message3);
+                        }
                     }
+                    if(this.partie.size()==this.nombreJoueur)
+                        this.partie.run();
                 }
                 else if(partie.size()== nombreJoueur){
                         Message mesg = new Message(Message.MESSAGE, "admin", "Partie","La partie est pleine !\n");

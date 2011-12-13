@@ -4,6 +4,7 @@ import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
 import carte.Tresor;
+import communication.Message;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -59,11 +60,11 @@ public final class Partie extends ArrayList<Joueur>{
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);
         
-//        listeJoueurs.add(new Joueur("Joueur 1"));
-//        listeJoueurs.add(new Joueur("Joueur 2"));
-//        listeJoueurs.add(new Joueur("Joueur 3"));
-//        listeJoueurs.add(new Joueur("Joueur 4"));
-//        
+        listeJoueurs.add(new Joueur("Joueur 1"));
+        listeJoueurs.add(new Joueur("Joueur 2"));
+        listeJoueurs.add(new Joueur("Joueur 3"));
+        listeJoueurs.add(new Joueur("Joueur 4"));
+        
         this.distribuer();
         
         Iterator it = listeJoueurs.iterator();
@@ -79,6 +80,8 @@ public final class Partie extends ArrayList<Joueur>{
                     return;
                 }
                 System.out.println("Pour le joueur " + enCours.getNom() + " : ");
+                //envoi du message a tous les client connecté
+                this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
                 
                 
                 if(c.getClass().getName().equals("carte.Monstre")){
@@ -310,6 +313,12 @@ public final class Partie extends ArrayList<Joueur>{
             }
         }
        return j;
+    }
+    
+    public void sendMessageToAll(String txt){
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt);
+        for(Joueur j : this)
+            j.sendMessage(msg);
     }
     
 }

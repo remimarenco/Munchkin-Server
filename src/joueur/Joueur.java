@@ -27,6 +27,13 @@ public class Joueur extends Thread {
         this.nom = new String();
         this.personnage = new Personnage();
     }
+     public Joueur(String nom) {
+        
+        this.main = new Main();
+        this.jeu = new Jeu();
+        this.nom = nom;
+        this.personnage = new Personnage();
+    }
     
     public Joueur(String nom,Socket st,Object parent) {
         initCommunication(st, parent);
