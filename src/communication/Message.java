@@ -4,6 +4,7 @@
  */
 package communication;
 
+import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
@@ -24,6 +25,7 @@ public class Message {
         private String nick_dest=new String("");    
         private String message=new String("");
         private int type;
+        private Color color;
         
         
 
@@ -41,6 +43,18 @@ public class Message {
             this.nick_src=nick_src;          
             this.nick_dest=nick_dest;        
             this.message=msg;           
+        }
+   public Message(int type,String nick_src,String nick_dest,String msg,Color color){
+            this.type=type;
+            
+            this.nick_src=nick_src;      
+            
+            this.color=color;
+          
+            this.nick_dest=nick_dest;
+        
+            this.message=msg;
+           
         }
 
     public boolean read(DataInputStream in) {
@@ -96,5 +110,10 @@ public class Message {
     public String getNick_dest() {
         return this.nick_dest;
     }
+
+    public Color getColor() {
+        return color;
+    }
+    
     
 }

@@ -5,11 +5,11 @@ import carte.Donjon;
 import carte.Monstre;
 import carte.Tresor;
 import communication.Message;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.Vector;
 import joueur.Joueur;
 
 /**
@@ -24,6 +24,7 @@ public final class Partie extends ArrayList<Joueur>{
     private Defausse            defausseTresor;
     private Defausse            defausseDonjon;
     private ArrayList<Joueur>   listeJoueurs;
+    private Color Color;
 
     /**
      * 
@@ -96,19 +97,27 @@ public final class Partie extends ArrayList<Joueur>{
                     System.out.println(m.getDescription());
                     
                     System.out.println("Combattre ? (o/n)");
+                    this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a tiré le monstre : \n"
+                            + m.getNom() + "(Puissance : " + m.getPuissance() + ")\n"
+                            + m.getDescription() +"\n"
+                            +" Va-t il combattre ?\n");
                     Scanner sc = new Scanner(System.in);
                     String str = sc.nextLine();
                     if(str.equals("o") || str.equals("O")){
                         if(combat.combattre()){
                             System.out.println("Vous avez gagné !");
+                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a gagné le combat ! \n");
                         }else{
                             System.out.println("Vous avez perdu...");
+                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
                         }
                     }else if(str.equals("n") || str.equals("n")){
                         if(combat.tenterDeguerpir()){
                             System.out.println("Vous avez réussi à déguérpir !");
+                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
                         }else{
                             System.out.println("Vous n'avez pas réussi à déguerpir...");
+                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
                         }
                     }else{
                         System.out.println("Pô compris");
@@ -316,7 +325,7 @@ public final class Partie extends ArrayList<Joueur>{
     }
     
     public void sendMessageToAll(String txt){
-        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt);
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.RED);
         for(Joueur j : this)
             j.sendMessage(msg);
     }
