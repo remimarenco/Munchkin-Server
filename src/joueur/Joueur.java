@@ -91,6 +91,7 @@ public class Joueur extends Thread {
         boolean test=true;
        try{
         while(test){
+            this.msg=new Message();//Important pour distinguer les messages
             if(msg.read(in)){
                 if(parent instanceof Serveur){
                     ((Serveur)parent).interpretMessage(msg,this);
