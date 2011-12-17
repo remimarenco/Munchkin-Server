@@ -328,5 +328,9 @@ public final class Partie extends ArrayList<Joueur>{
         for(Joueur j : this)
             j.sendMessage(msg);
     }
+     public void sendQuestionToEnCours(String txt,Joueur enCours){
+        Message msg=new Message(Message.MESSAGE,"Partie",enCours.getName(),txt);
+        enCours.sendMessage(msg);
+    }
     
 }
