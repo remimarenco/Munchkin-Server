@@ -1,16 +1,21 @@
 package comportement.classes;
 
+import java.util.Vector;
+
+import comportement.Action;
+
 import joueur.Personnage;
 
 public class Condition {
-	
-	public Condition()
+	private Vector<Action> tabAction;
+	public Condition(Vector<Action> tabAction)
 	{
-		System.out.println("Coucou");
+		super();
+		this.tabAction = tabAction;
 	}
 	
 	public void mettreCondition(Personnage pers)
 	{
-		System.out.println("Coucou");
+		
 	}
 }
