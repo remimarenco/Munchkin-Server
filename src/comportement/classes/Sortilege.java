@@ -1,20 +1,22 @@
 package comportement.classes;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import comportement.Action;
 
+import joueur.Joueur;
 import joueur.Personnage;
 
 public class Sortilege {
-	private Vector<Action> tabAction;
+	private ArrayList<Action> tabAction;
 	
-	public Sortilege(Vector<Action> tabAction) {
+	public Sortilege(ArrayList<Action> tabAction) {
 		super();
 		this.tabAction = tabAction;
 	}
 
-	public void mettreSortilege(Personnage pers)
+	public void mettreSortilege(Joueur joueurImpacte)
 	{
 		
 	}
