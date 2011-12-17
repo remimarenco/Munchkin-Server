@@ -77,7 +77,7 @@ public final class Partie extends ArrayList<Joueur>{
         listeJoueurs.add(new Joueur("Joueur 2", this));
         listeJoueurs.add(new Joueur("Joueur 3", this));
         listeJoueurs.add(new Joueur("Joueur 4", this));
-        this.enCours= this.get(0);
+        //this.enCours= this.get(0);
         this.distribuer();
         
         Iterator it = listeJoueurs.iterator();
@@ -89,9 +89,9 @@ public final class Partie extends ArrayList<Joueur>{
                 enCours = (Joueur) it.next();
                 
                 if(piocheDonjon.isEmpty()){
-                    System.out.println("Plus rien dans la pioche, on récupère la défausse !");
+                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
                     piocheDonjon.setPioche(defausseDonjon.getDefausse());
-                    defausseDonjon.vider();
+//                    defausseDonjon.vider();
                 }
                 
                 if(piocheDonjon.isEmpty()){
@@ -126,7 +126,7 @@ public final class Partie extends ArrayList<Joueur>{
                             + m.getNom() + "(Puissance : " + m.getPuissance() + ")\n"
                             + m.getDescription() +"\n"
                             +" Va-t il combattre ?\n");
-                    this.sendQuestionToEnCours("Combattre ?");
+//                    this.sendQuestionToEnCours("Combattre ?");
                     Scanner sc = new Scanner(System.in);
                     String str = sc.nextLine();
                     if(str.equals("o") || str.equals("O")){
