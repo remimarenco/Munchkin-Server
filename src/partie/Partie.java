@@ -3,6 +3,7 @@ package partie;
 import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
+import carte.Sort;
 import carte.Tresor;
 import communication.Message;
 import java.awt.AWTException;
@@ -82,7 +83,7 @@ public final class Partie extends ArrayList<Joueur>{
         
         Iterator it = listeJoueurs.iterator();
         Joueur enCours;
-        Carte c;
+        Carte cartePiochee;
         
         while(true){
             while(it.hasNext()){
@@ -99,8 +100,8 @@ public final class Partie extends ArrayList<Joueur>{
                     return;
                 }
                 
-                c = (Carte) piocheDonjon.tirerCarte(); 
-                if(c == null){
+                cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
+                if(cartePiochee == null){
                     System.out.println("Problème lors du tirage dans la pioche donjon");
                     return;
                 }
@@ -110,46 +111,61 @@ public final class Partie extends ArrayList<Joueur>{
                 this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
                 
                 
-                if(c.getClass().getName().equals("carte.Monstre")){
+                //if(c.getClass().getName().equals("carte.Monstre")){ // OMG, on compare jamais des chaines de caractère sur des noms de classe ou de variable => On change le nom de la classe, bye bye la comparaison
+                if(cartePiochee.getClass().equals(Monstre.class))
+                {
                     Combat combat = new Combat(this);
                     combat.getCampGentil().add(enCours.getPersonnage());
                     
-                    Monstre m = (Monstre) c;
-                    combat.getCampMechant().add(m);
+                    Monstre monstrePioche = (Monstre) cartePiochee;
+                    combat.getCampMechant().add(monstrePioche);
                     
                     System.out.println("Vous avez tiré le monstre :");
-                    System.out.println(m.getNom() + "(Puissance : " + m.getPuissance() + ")");
-                    System.out.println(m.getDescription());
+                    System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
+                    System.out.println(monstrePioche.getDescription());
                     
                     System.out.println("Combattre ? (o/n)");
                     this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a tiré le monstre : \n"
-                            + m.getNom() + "(Puissance : " + m.getPuissance() + ")\n"
-                            + m.getDescription() +"\n"
+                            + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
+                            + monstrePioche.getDescription() +"\n"
                             +" Va-t il combattre ?\n");
 //                    this.sendQuestionToEnCours("Combattre ?");
                     Scanner sc = new Scanner(System.in);
-                    String str = sc.nextLine();
-                    if(str.equals("o") || str.equals("O")){
-                        if(combat.combattre()){
-                            System.out.println("Vous avez gagné !");
-                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a gagné le combat ! \n");
-                        }else{
-                            System.out.println("Vous avez perdu...");
-                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
-                            m.appliquerIncidentsFacheux(enCours);
-                        }
-                    }else if(str.equals("n") || str.equals("n")){
-                        if(combat.tenterDeguerpir()){
-                            System.out.println("Vous avez réussi à déguérpir !");
-                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
-                        }else{
-                            System.out.println("Veuillez entrer 'o' ou 'n'");
-                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
-                        }
-                    }
-                    this.defausseDonjon.ajouterCarte(c);
-                }else{
-                    System.out.println("Ce n'est pas un monstre...");
+                    String str;
+                    do
+                    {
+                    	str = sc.nextLine();
+	                    if(str.equals("o") || str.equals("O")){
+	                        if(combat.combattre()){
+	                            System.out.println("Vous avez gagné !");
+	                            monstrePioche.appliquerMonstreVaincu(enCours);
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a gagné le combat ! \n");
+	                        }else{
+	                            System.out.println("Vous avez perdu...");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
+	                            monstrePioche.appliquerIncidentFacheux(enCours);
+	                        }
+	                    }else if(str.equals("n") || str.equals("n")){
+	                        if(combat.tenterDeguerpir()){
+	                            System.out.println("Vous avez réussi à déguérpir !");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
+	                        }
+	                        else{
+	                        	// Chelou le passage dans le else
+		                        // Si on ne peut pas déguerpir, on dit au joueur d'entrer o ou n ?
+	                            //System.out.println("Veuillez entrer 'o' ou 'n'");
+	                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
+	                        }
+	                    }
+	                    else
+	                    {
+	                    	System.out.println("Veuillez entrer une réponse correcte");
+	                    }
+                    // On boucle tant qu'il n'a pas donné de réponse
+                    }while(!(str.equals("o") || str.equals("O") || str.equals("n") || str.equals("n")));
+                    this.defausseDonjon.ajouterCarte(cartePiochee);
+                }else if(cartePiochee.getClass().equals(Sort.class)){
+                    System.out.println("C'est un sort !!");
                 }
             }
             it = listeJoueurs.iterator();
