@@ -72,7 +72,7 @@ public final class Deck {
         /**
          * Premiere action
          */
-        actionTab.add(new PiocherCarte(PiocherCarte.PIOCHE_DONJON, 1));
+        actionTab.add(new PiocherCarte(Constante.PIOCHE_DONJON, 1));
         /**
          * Deuxième action
          */

@@ -1,7 +1,8 @@
 package joueur;
 
 public class Personnage {
-	
+
+    
     private int     niveau;
     private char    sexe;
     private boolean aChangeSexe;

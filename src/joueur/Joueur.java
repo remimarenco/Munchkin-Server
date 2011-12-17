@@ -6,6 +6,7 @@ import communication.Serveur;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import partie.Constante;
 import partie.Partie;
 
 public class Joueur extends Thread {
@@ -27,12 +28,20 @@ public class Joueur extends Thread {
         this.nom = new String();
         this.personnage = new Personnage();
     }
-     public Joueur(String nom) {
-        
+    
+    public Joueur(String nom) {
         this.main = new Main();
         this.jeu = new Jeu();
         this.nom = nom;
         this.personnage = new Personnage();
+    }
+     
+    public Joueur(String nom, Partie p) {
+        this.main = new Main();
+        this.jeu = new Jeu();
+        this.nom = nom;
+        this.personnage = new Personnage();
+        this.partie = p;
     }
     
     public Joueur(String nom,Socket st,Object parent) {
@@ -87,26 +96,27 @@ public class Joueur extends Thread {
     }
 
     @Override
-  synchronized  public void run(){
+    synchronized  public void run(){
         boolean test=true;
-       try{
-        while(test){
-            this.msg=new Message();//Important pour distinguer les messages
-            if(msg.read(in)){
-                if(parent instanceof Serveur){
-                    ((Serveur)parent).interpretMessage(msg,this);
-                }                
-            }
-            else if(!msg.read(in)){
-                    Message message=new Message(Message.DISCONNECT,this.getName());                                       
-                    ((Serveur)parent).interpretMessage(message,this);                   
-                    this.interrupt();
-                    test=false;                    
+        try{
+            while(test){
+                this.msg=new Message();//Important pour distinguer les messages
+                if(msg.read(in)){
+                    if(parent instanceof Serveur){
+                        ((Serveur)parent).interpretMessage(msg,this);
+                    }                
+                }
+                else if(!msg.read(in)){
+                        Message message=new Message(Message.DISCONNECT,this.getName());                                       
+                        ((Serveur)parent).interpretMessage(message,this);                   
+                        this.interrupt();
+                        test=false;                    
+                }
             }
         }
-    }
-    catch(Exception e){       
-        System.out.println("Exception com Serv : "+e.toString());}
+        catch(Exception e){       
+            System.out.println("Exception com Serv : "+e.toString());
+        }
     }
     
     
@@ -161,4 +171,17 @@ public class Joueur extends Thread {
         this.jeu.ajouterCarte(c);
         return true;
     }
+    
+    public boolean piocherCarte(int typePioche){
+        if(typePioche == Constante.PIOCHE_DONJON){
+            this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
+        }else if(typePioche == Constante.PIOCHE_DONJON){
+            this.main.ajouterCarte(this.partie.getPiocheTresor().tirerCarte());
+        }else{
+            System.out.println("Quelque chose a dû merder quelquepart...");
+            return false;
+        }
+        return true;
+    }
+
 }

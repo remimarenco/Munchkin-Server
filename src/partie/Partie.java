@@ -61,10 +61,10 @@ public final class Partie extends ArrayList<Joueur>{
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);
         
-        listeJoueurs.add(new Joueur("Joueur 1"));
-        listeJoueurs.add(new Joueur("Joueur 2"));
-        listeJoueurs.add(new Joueur("Joueur 3"));
-        listeJoueurs.add(new Joueur("Joueur 4"));
+        listeJoueurs.add(new Joueur("Joueur 1", this));
+        listeJoueurs.add(new Joueur("Joueur 2", this));
+        listeJoueurs.add(new Joueur("Joueur 3", this));
+        listeJoueurs.add(new Joueur("Joueur 4", this));
         
         this.distribuer();
         

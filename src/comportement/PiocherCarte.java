@@ -1,6 +1,7 @@
 package comportement;
 
 import joueur.Joueur;
+import partie.Constante;
 
 /**
  * Classe permettant de faire une action de piocher une carte donjon ou trésor
@@ -18,11 +19,6 @@ public class PiocherCarte extends Action {
      */
     private int type_pioche;
 
-    /**
-     * Enum du type de pioche
-     */
-    public static final int PIOCHE_TRESOR = 1;
-    public static final int PIOCHE_DONJON = 2;
 
     /**
      * Constructeur de piocherCarte
@@ -44,21 +40,17 @@ public class PiocherCarte extends Action {
     @Override
     public void action(Joueur joueurImpacte) {
         // On récupère le nom du joueur qui reçoit l'action
-        System.out.print("Le joueur "+joueurImpacte.getNom());
+        System.out.print("Le joueur " + joueurImpacte.getNom());
         // Affichage selon le nombre de carte
         if(nbCarte > 1)
-        {
             System.out.print(" pioche "+nbCarte+" carte dans la pioche ");
-        }
         else
-        {
             System.out.print(" pioche "+nbCarte+" cartes dans la pioche ");
-        }
 
-        if(type_pioche == PIOCHE_DONJON)
+        if(type_pioche == Constante.PIOCHE_DONJON)
         {
             System.out.println("donjon");
-            joueurImpacte.getMain().ajouterCarte(null);
+            joueurImpacte.piocherCarte(Constante.PIOCHE_DONJON);
         }
         else
         {
