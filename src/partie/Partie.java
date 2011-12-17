@@ -80,7 +80,7 @@ public final class Partie extends ArrayList<Joueur>{
                     System.out.println("Plus rien dans la pioche, au revoir !");
                     return;
                 }
-                System.out.println("Pour le joueur " + enCours.getNom() + " : ");
+                System.out.println("\n\n" + enCours.getNom() + " : ");
                 //envoi du message a tous les client connecté
                 this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
                 
@@ -116,11 +116,9 @@ public final class Partie extends ArrayList<Joueur>{
                             System.out.println("Vous avez réussi à déguérpir !");
                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
                         }else{
-                            System.out.println("Vous n'avez pas réussi à déguerpir...");
+                            System.out.println("Veuillez entrer 'o' ou 'n'");
                              this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
                         }
-                    }else{
-                        System.out.println("Pô compris");
                     }
                     
                 }else{
@@ -310,7 +308,7 @@ public final class Partie extends ArrayList<Joueur>{
      */
     public Integer getCommunication(String nick_dest){
          int i=0;
-         int j=0;        
+         int j=0;
         while(i<this.size()){
             if(this.get(i).getName().equals(nick_dest)){
                 j=i;
@@ -318,7 +316,7 @@ public final class Partie extends ArrayList<Joueur>{
             }
             else{
                 i++;
-                j=-1;
+                j--;
             }
         }
        return j;

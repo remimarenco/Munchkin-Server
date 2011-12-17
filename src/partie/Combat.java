@@ -70,7 +70,7 @@ public class Combat {
             }
         }
         
-        if(puissanceGentil > puissanceMechant)
+        if(puissanceGentil >= puissanceMechant)
             return true;
         else 
             return false;
