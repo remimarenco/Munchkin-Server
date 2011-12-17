@@ -44,7 +44,7 @@ public class ServeurVue extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre de Joueur :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3", "4", "5", "6" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6" }));
 
         jButton1.setText("Start");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

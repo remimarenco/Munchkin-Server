@@ -5,11 +5,22 @@ import carte.Donjon;
 import carte.Monstre;
 import carte.Tresor;
 import communication.Message;
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.ByteArrayInputStream;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import joueur.Joueur;
 
 /**
@@ -24,6 +35,7 @@ public final class Partie extends ArrayList<Joueur>{
     private Defausse            defausseTresor;
     private Defausse            defausseDonjon;
     private ArrayList<Joueur>   listeJoueurs;
+    private Joueur enCours;
     private Color Color;
 
     /**
@@ -57,7 +69,7 @@ public final class Partie extends ArrayList<Joueur>{
     /**
      * 
      */
-    public void run(){
+  synchronized public void run(){
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);
         
@@ -65,7 +77,7 @@ public final class Partie extends ArrayList<Joueur>{
         listeJoueurs.add(new Joueur("Joueur 2", this));
         listeJoueurs.add(new Joueur("Joueur 3", this));
         listeJoueurs.add(new Joueur("Joueur 4", this));
-        
+        this.enCours= this.get(0);
         this.distribuer();
         
         Iterator it = listeJoueurs.iterator();
@@ -114,6 +126,7 @@ public final class Partie extends ArrayList<Joueur>{
                             + m.getNom() + "(Puissance : " + m.getPuissance() + ")\n"
                             + m.getDescription() +"\n"
                             +" Va-t il combattre ?\n");
+                    this.sendQuestionToEnCours("Combattre ?");
                     Scanner sc = new Scanner(System.in);
                     String str = sc.nextLine();
                     if(str.equals("o") || str.equals("O")){
@@ -341,9 +354,16 @@ public final class Partie extends ArrayList<Joueur>{
         for(Joueur j : this)
             j.sendMessage(msg);
     }
-     public void sendQuestionToEnCours(String txt,Joueur enCours){
-        Message msg=new Message(Message.MESSAGE,"Partie",enCours.getName(),txt);
-        enCours.sendMessage(msg);
+     public void sendQuestionToEnCours(String txt){
+        Message msg=new Message(Message.QUESTION,"Partie",this.enCours.getName(),txt);
+        this.enCours.sendMessage(msg);
     }
+     
+     public void writeInConsole(Message msg){           
+      
+ 
+     
+    }
+
     
 }

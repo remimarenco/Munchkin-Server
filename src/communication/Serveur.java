@@ -70,8 +70,16 @@ public class Serveur {
                             j.sendMessage(message3);
                         }
                     }
-                    if(this.partie.size()==this.nombreJoueur)
-                        this.partie.run();
+                    if(this.partie.size()==this.nombreJoueur){
+                        Thread thrd= new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            partie.run();
+                        }
+                        });
+                        thrd.start();
+                       
+                    }
                 }
                 else if(partie.size()== nombreJoueur){
                         Message mesg = new Message(Message.MESSAGE, "admin", "Partie","La partie est pleine !\n");
@@ -129,18 +137,8 @@ public class Serveur {
                 }
                 break;
             case Message.ANSWER:
-        try {
-            Robot rbt= new Robot();
-            rbt.keyPress(KeyEvent.VK_MINUS);
-            if(msg.getMessage().equals("Non"))
-                rbt.keyPress(KeyEvent.VK_N);
-            else
-                rbt.keyPress(KeyEvent.VK_O);
-            rbt.keyPress(KeyEvent.VK_ENTER);
-        } catch (AWTException ex) {
-            Logger.getLogger(Serveur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
+            this.partie.writeInConsole(msg);
+            break;
             
         }
     }
