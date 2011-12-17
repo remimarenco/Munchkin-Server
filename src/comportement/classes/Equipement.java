@@ -9,7 +9,6 @@ import joueur.Personnage;
 
 
 public  class Equipement {
-	@SuppressWarnings("unused")
 	private Vector<Action> tabAction;
 	
 	
