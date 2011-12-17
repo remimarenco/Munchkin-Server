@@ -90,8 +90,8 @@ public final class Partie extends ArrayList<Joueur>{
                 
                 if(piocheDonjon.isEmpty()){
                     System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
-                    piocheDonjon.setPioche(defausseDonjon.getDefausse());
-//                    defausseDonjon.vider();
+                    piocheDonjon.setPioche(new ArrayList<Donjon> (defausseDonjon.getDefausse()));
+                    defausseDonjon.vider();
                 }
                 
                 if(piocheDonjon.isEmpty()){
