@@ -32,16 +32,28 @@ public class Monstre extends Donjon {
         this.puissance = puissance;
     }
     
-    public boolean appliquerIncidentsFacheux(Joueur joueurImpacte){
+    /*
+     * Déjà implémentée dans Carte
+    public boolean appliquerCondition(Joueur joueurImpacte)
+    {
+    	this.condition.mettreCondition(joueurImpacte);
+    	return true;
+    }
+    */
+    /* Déjà implémentée dans Carte
+     * public boolean appliquerIncidentsFacheux(Joueur joueurImpacte){
         this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
         return true;
-    }
+    } */
     
+    /*
+     * Déjà implémentée dans Carte
     public boolean appliquerMonstreVaincu(Joueur joueurImpacte)
     {
     	this.monstreVaincu.actionMonstreVaincu(joueurImpacte);
     	return true;
     }
+    */
 
     public int getPuissance() {
         return puissance;
