@@ -2,6 +2,7 @@ package carte;
 
 import comportement.classes.Condition;
 import comportement.classes.IncidentFacheux;
+import joueur.Joueur;
 
 /**
  * Classe Monstre.
@@ -31,8 +32,8 @@ public class Monstre extends Donjon {
         this.niveau_gagne = niveau_gagne;
     }
     
-    public boolean appliquerIncidentsFacheux(){
-        
+    public boolean appliquerIncidentsFacheux(Joueur joueurImpacte){
+        this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
         return true;
     }
 

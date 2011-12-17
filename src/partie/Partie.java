@@ -80,7 +80,7 @@ public final class Partie extends ArrayList<Joueur>{
                     System.out.println("Plus rien dans la pioche, au revoir !");
                     return;
                 }
-                System.out.println("\n\n" + enCours.getNom() + " : ");
+                System.out.println("\n\n" + enCours.getNom() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
                 //envoi du message a tous les client connecté
                 this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
                 
@@ -110,6 +110,7 @@ public final class Partie extends ArrayList<Joueur>{
                         }else{
                             System.out.println("Vous avez perdu...");
                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
+                            m.appliquerIncidentsFacheux(enCours);
                         }
                     }else if(str.equals("n") || str.equals("n")){
                         if(combat.tenterDeguerpir()){
