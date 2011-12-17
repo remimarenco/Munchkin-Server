@@ -34,10 +34,10 @@ public abstract class Carte {
      * Méthode de test de toutes les méthodes d'actions
      */
     public void action(Joueur joueurImpacte){
-        appliquerCondition();
+        appliquerCondition(joueurImpacte);
         appliquerIncidentFacheux(joueurImpacte);
-        appliquerMalus();
-        equiper();
+        appliquerSortilege(joueurImpacte);
+        equiper(joueurImpacte);
     }
 
     public void setEquipement(Equipement equipement) {
@@ -59,30 +59,40 @@ public abstract class Carte {
         }
     }
 
-    public void equiper(){
+    public void equiper(Joueur joueurImpacte){
         if(this.equipement != null){
-            Personnage pers = new Personnage("Joueur 3 ");
-            equipement.equipe(pers);
+            // Personnage pers = new Personnage("Joueur 3 ");
+            equipement.equipe(joueurImpacte);
         }else{
             System.out.println("Cette carte n'a pas d'�quipement");
         }
     }
 
-    public void appliquerCondition(){
+    public void appliquerCondition(Joueur joueurImpacte){
         if(this.condition != null){
-            Personnage pers = new Personnage("Joueur 2 ");
-            this.condition.mettreCondition(pers);
+            //Personnage pers = new Personnage("Joueur 2 ");
+            this.condition.mettreCondition(joueurImpacte);
         }else{
             System.out.println("Cette carte n'a pas de condition");
         }
     }
 
-    public void appliquerMalus(){
+    public void appliquerSortilege(Joueur joueurImpacte){
         if(this.sortilege != null){
-            Personnage pers = new Personnage("Joueur 2 ");
-            this.sortilege.mettreSortilege(pers);
+            //Personnage pers = new Personnage("Joueur 2 ");
+            this.sortilege.mettreSortilege(joueurImpacte);
         }else{
             System.out.println("Cette carte n'a pas de malus");
+        }
+    }
+    
+    public void appliquerMonstreVaincu(Joueur joueurImpacte)
+    {
+    	if(this.monstreVaincu != null){
+            //Personnage pers = new Personnage("Joueur 2 ");
+            this.monstreVaincu.actionMonstreVaincu(joueurImpacte);
+        }else{
+            System.out.println("Cette carte n'a pas de résultat d'un monstre vaincu");
         }
     }
 }
