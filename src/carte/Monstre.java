@@ -2,6 +2,7 @@ package carte;
 
 import comportement.classes.Condition;
 import comportement.classes.IncidentFacheux;
+import comportement.classes.MonstreVaincu;
 import joueur.Joueur;
 
 /**
@@ -23,18 +24,23 @@ public class Monstre extends Donjon {
      * @param condition
      * @param incidentFacheux
      */
-    public Monstre(String nom, String description, Condition condition, IncidentFacheux incidentFacheux, int puissance, int tresor, int niveau_gagne) {
+    public Monstre(String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, int puissance) {
         super(nom, description);
         this.condition = condition;
         this.incidentFacheux = incidentFacheux;
+        this.monstreVaincu = monstreVaincu;
         this.puissance = puissance;
-        this.tresor = tresor;
-        this.niveau_gagne = niveau_gagne;
     }
     
     public boolean appliquerIncidentsFacheux(Joueur joueurImpacte){
         this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
         return true;
+    }
+    
+    public boolean appliquerMonstreVaincu(Joueur joueurImpacte)
+    {
+    	this.monstreVaincu.actionMonstreVaincu(joueurImpacte);
+    	return true;
     }
 
     public int getPuissance() {
@@ -47,8 +53,5 @@ public class Monstre extends Donjon {
 
     public String getDescription() {
         return description;
-    }
-
-    
-    
+    }    
 }
