@@ -43,9 +43,9 @@ public class PiocherCarte extends Action {
         System.out.print("Le joueur " + joueurImpacte.getNom());
         // Affichage selon le nombre de carte
         if(nbCarte > 1)
-            System.out.print(" pioche "+nbCarte+" carte dans la pioche ");
-        else
             System.out.print(" pioche "+nbCarte+" cartes dans la pioche ");
+        else
+            System.out.print(" pioche "+nbCarte+" carte dans la pioche ");
 
         if(type_pioche == Constante.DONJON)
         {
@@ -55,6 +55,7 @@ public class PiocherCarte extends Action {
         else
         {
             System.out.println("trésor");
+            joueurImpacte.piocherCarte(Constante.TRESOR);
         }
     }
 }
