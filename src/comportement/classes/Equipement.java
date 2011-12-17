@@ -1,26 +1,28 @@
 package comportement.classes;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import comportement.Action;
 
+import joueur.Joueur;
 import joueur.Personnage;
 
 
 
 public  class Equipement {
-	private Vector<Action> tabAction;
+	private ArrayList<Action> tabAction;
 	
 	
 	
-	public Equipement(Vector<Action> tabAction) {
+	public Equipement(ArrayList<Action> tabAction) {
 		super();
 		this.tabAction = tabAction;
 	}
 
 
 
-	public  void equipe(Personnage pers){
+	public  void equipe(Joueur joueurImpacte){
 		
 	}
 	
