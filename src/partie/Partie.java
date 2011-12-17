@@ -32,8 +32,8 @@ public final class Partie extends ArrayList<Joueur>{
     public Partie(){
         piocheDonjon    = new Pioche<Donjon>("carte.Donjon");
         piocheTresor    = new Pioche<Tresor>("carte.Tresor");
-        defausseTresor  = new DefausseTresor();
-        defausseDonjon  = new DefausseDonjon();
+        defausseDonjon  = new Defausse<Donjon>();
+        defausseTresor  = new Defausse<Tresor>();
         listeJoueurs    = new ArrayList<Joueur>();
         deck            = new Deck();
     }
@@ -75,11 +75,24 @@ public final class Partie extends ArrayList<Joueur>{
         while(true){
             while(it.hasNext()){
                 enCours = (Joueur) it.next();
-                c = (Carte) piocheDonjon.tirerCarte(); 
-                if(c == null){
-                    System.out.println("Plus rien dans la pioche, au revoir !");
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("Plus rien dans la pioche, on récupère la défausse !");
+                    piocheDonjon.setPioche(defausseDonjon.getDefausse());
+                    defausseDonjon.vider();
+                }
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
                     return;
                 }
+                
+                c = (Carte) piocheDonjon.tirerCarte(); 
+                if(c == null){
+                    System.out.println("Problème lors du tirage dans la pioche donjon");
+                    return;
+                }
+                
                 System.out.println("\n\n" + enCours.getNom() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
                 //envoi du message a tous les client connecté
                 this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
@@ -121,7 +134,7 @@ public final class Partie extends ArrayList<Joueur>{
                              this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
                         }
                     }
-                    
+                    this.defausseDonjon.ajouterCarte(c);
                 }else{
                     System.out.println("Ce n'est pas un monstre...");
                 }

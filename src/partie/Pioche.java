@@ -29,6 +29,11 @@ public class Pioche<T> {
     public ArrayList<T> getPioche() {
         return pioche;
     }
+
+    public void setPioche(ArrayList<T> pioche) {
+        this.pioche = pioche;
+    }
+    
     
     public T tirerCarte(){
         if(pioche.isEmpty())
@@ -37,6 +42,10 @@ public class Pioche<T> {
         T ret = pioche.get(0);
         pioche.remove(0);
         return ret;
+    }
+    
+    public boolean isEmpty(){
+        return this.pioche.isEmpty();
     }
     
     public void init(Deck deck){

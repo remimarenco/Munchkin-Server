@@ -3,24 +3,39 @@ package partie;
 import java.util.ArrayList;
 
 import carte.Carte;
+import java.util.Iterator;
 
 
-public abstract class Defausse {
+public class Defausse<T> {
     
-    protected ArrayList<Carte> defausse= new ArrayList<Carte>();
+    protected ArrayList<T> defausse= new ArrayList<T>();
 
     public Defausse() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public boolean ajouterCarte(Carte c){
+    public ArrayList<T> getDefausse() {
+        return defausse;
+    }
+
+    public void setDefausse(ArrayList<T> defausse) {
+        this.defausse = defausse;
+    }
+    
+    
+
+    public boolean ajouterCarte(T c){
         this.defausse.add(c);
         return true;
     }
     
-    public boolean supprimerCarte(Carte c){
+    public boolean supprimerCarte(T c){
         this.defausse.remove(c);
         return true;
+    }
+    
+    public void vider(){
+        defausse.clear();
     }
 }
