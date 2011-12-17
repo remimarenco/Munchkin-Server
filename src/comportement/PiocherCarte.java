@@ -47,10 +47,10 @@ public class PiocherCarte extends Action {
         else
             System.out.print(" pioche "+nbCarte+" cartes dans la pioche ");
 
-        if(type_pioche == Constante.PIOCHE_DONJON)
+        if(type_pioche == Constante.DONJON)
         {
             System.out.println("donjon");
-            joueurImpacte.piocherCarte(Constante.PIOCHE_DONJON);
+            joueurImpacte.piocherCarte(Constante.DONJON);
         }
         else
         {

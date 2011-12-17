@@ -1,5 +1,7 @@
 package carte;
 
+import partie.Constante;
+
 /**
  * Classe Donjon permettant de référencer les cartes donjon
  * @author Rémi Marenco
@@ -14,7 +16,8 @@ public class Donjon extends Carte {
     public Donjon(String nom, String description) {
         this.nom = nom;
         this.description = description;
-        this.id = this.id + 1;
+        Donjon.id = Donjon.id + 1;
+        this.type = Constante.DONJON;
     }
     
     

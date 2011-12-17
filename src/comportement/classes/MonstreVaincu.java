@@ -7,15 +7,14 @@ import joueur.Joueur;
 import comportement.Action;
 
 public class MonstreVaincu {
-	public ArrayList<Action> tabAction;
 	
-	public MonstreVaincu(ArrayList<Action> tab)
-    {
+    public ArrayList<Action> tabAction;
+	
+    public MonstreVaincu(ArrayList<Action> tab){
             tabAction = tab;
     }
 	
-	public void actionMonstreVaincu(Joueur joueurImpacte)
-	{
-		
-	}
+    public void actionMonstreVaincu(Joueur joueurImpacte){
+
+    }
 }

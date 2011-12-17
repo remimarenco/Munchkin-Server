@@ -14,14 +14,14 @@ import java.util.Iterator;
 public class Pioche<T> {
     
     protected ArrayList<T> pioche;
-    protected String type;
+    protected int type;
     
     public Pioche() {
         pioche  = new ArrayList<T>();
-        type    = new String();
+        type    = 0;
     }
     
-    public Pioche(String n) {
+    public Pioche(int n) {
         pioche  = new ArrayList<T>();
         type    = n;
     }
@@ -49,14 +49,13 @@ public class Pioche<T> {
     }
     
     public void init(Deck deck){
-        ArrayList<Carte> cartes = deck.getCartes();
+        ArrayList<Carte> cartes = Deck.getCartes();
         Iterator it = cartes.iterator();
         Carte c;
         
         while(it.hasNext()){
             c = (Carte) it.next(); 
-//            System.out.println(c.getClass().getName());
-            if(c.getClass().getSuperclass().getName().equals(this.type)){
+            if(c.getType() == this.type){
                 this.pioche.add((T) c);
             }
         }

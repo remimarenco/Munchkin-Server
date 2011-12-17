@@ -173,9 +173,9 @@ public class Joueur extends Thread {
     }
     
     public boolean piocherCarte(int typePioche){
-        if(typePioche == Constante.PIOCHE_DONJON){
+        if(typePioche == Constante.DONJON){
             this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
-        }else if(typePioche == Constante.PIOCHE_DONJON){
+        }else if(typePioche == Constante.DONJON){
             this.main.ajouterCarte(this.partie.getPiocheTresor().tirerCarte());
         }else{
             System.out.println("Quelque chose a dû merder quelquepart...");

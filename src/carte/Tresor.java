@@ -1,5 +1,7 @@
 package carte;
 
+import partie.Constante;
+
 
 /**
  * Classe Trésor.
@@ -7,6 +9,7 @@ package carte;
  * @author Rémi Marenco
  */
 public class Tresor extends Carte {
+    
         /**
          * Constructeur de la classe Tresor.
          * Enregistre les paramètres de la classe carte ainsi que l'équipement
@@ -17,6 +20,7 @@ public class Tresor extends Carte {
 	public Tresor(String nom, String description) {
             this.nom = nom;
             this.description = description;
-            this.id = this.id + 1;
+            Tresor.id = Tresor.id + 1;
+            this.type = Constante.TRESOR;
 	}
 }

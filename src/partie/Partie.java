@@ -30,8 +30,8 @@ public final class Partie extends ArrayList<Joueur>{
      * 
      */
     public Partie(){
-        piocheDonjon    = new Pioche<Donjon>("carte.Donjon");
-        piocheTresor    = new Pioche<Tresor>("carte.Tresor");
+        piocheDonjon    = new Pioche<Donjon>(Constante.DONJON);
+        piocheTresor    = new Pioche<Tresor>(Constante.TRESOR);
         defausseDonjon  = new Defausse<Donjon>();
         defausseTresor  = new Defausse<Tresor>();
         listeJoueurs    = new ArrayList<Joueur>();

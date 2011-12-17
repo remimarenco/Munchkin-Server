@@ -15,6 +15,7 @@ public abstract class Carte {
     protected static int id = 0;
     protected String nom;
     protected String description;
+    protected int type;
 
     protected IncidentFacheux incidentFacheux;
     protected Equipement equipement;
@@ -22,6 +23,13 @@ public abstract class Carte {
     protected Condition condition;
     protected MonstreVaincu monstreVaincu;
 
+    public int getType() {
+        return type;
+    }
+
+    
+    
+    
     /**
      * Méthode de test de toutes les méthodes d'actions
      */
