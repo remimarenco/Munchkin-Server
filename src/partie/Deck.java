@@ -102,7 +102,7 @@ public final class Deck {
         cartes.add(new Monstre("Poulet élevé aux stérroïdes", "Frit c'est délicieux", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
-        cartes.add(new Monstre("Mr Nonos", "Si vous devez vous enfuir, vous perdez un niveau, mÃªme si vous arrivez à  déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
+        cartes.add(new Monstre("Mr Nonos", "Si vous devez vous enfuir, vous perdez un niveau, même si vous arrivez à  déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         cartes.add(new Monstre("Octaèdre gélatineux", "+1 au jet pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
