@@ -4,14 +4,19 @@
  */
 package communication;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import joueur.Joueur;
 import partie.Partie;
+import sun.awt.SunHints.Key;
 
 /**
  *
@@ -78,7 +83,6 @@ public class Serveur {
 
                     Message message = new Message(Message.NICKEXIST, "admin", "Partie", "Ce pseudo est deja utilise, veuillez choisir un autre ! \n");
                     com.sendMessage(message);
-
                 }
 
                 break;
@@ -105,7 +109,6 @@ public class Serveur {
                 if (msg.getNick_dest().equals("Partie")) {
                     for (int i = 0; i < partie.size(); i++) {
                         partie.get(i).sendMessage(msg);
-
                     }
                 } else {
                     int indexDest = partie.getCommunication(msg.getNick_dest());
@@ -126,6 +129,19 @@ public class Serveur {
 
                 }
                 break;
+            case Message.ANSWER:
+        try {
+            Robot rbt= new Robot();
+            rbt.keyPress(KeyEvent.VK_MINUS);
+            if(msg.getMessage().equals("Non"))
+                rbt.keyPress(KeyEvent.VK_N);
+            else
+                rbt.keyPress(KeyEvent.VK_O);
+            rbt.keyPress(KeyEvent.VK_ENTER);
+        } catch (AWTException ex) {
+            Logger.getLogger(Serveur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
             
         }
     }
