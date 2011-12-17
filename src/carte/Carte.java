@@ -4,6 +4,7 @@ import joueur.Personnage;
 import comportement.classes.Condition;
 import comportement.classes.Equipement;
 import comportement.classes.IncidentFacheux;
+import comportement.classes.MonstreVaincu;
 import comportement.classes.Sortilege;
 import joueur.Joueur;
 
@@ -19,6 +20,7 @@ public abstract class Carte {
     protected Equipement equipement;
     protected Sortilege sortilege;
     protected Condition condition;
+    protected MonstreVaincu monstreVaincu;
 
     /**
      * Méthode de test de toutes les méthodes d'actions
