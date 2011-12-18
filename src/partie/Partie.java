@@ -179,6 +179,118 @@ public final class Partie extends ArrayList<Joueur>{
     }
     
     
+  synchronized public void run2(){
+        piocheDonjon.init(this.deck);
+        piocheTresor.init(this.deck);
+        
+        listeJoueurs.add(new Joueur("Joueur 1", this));
+        listeJoueurs.add(new Joueur("Joueur 2", this));
+        listeJoueurs.add(new Joueur("Joueur 3", this));
+        listeJoueurs.add(new Joueur("Joueur 4", this));
+//        this.enCours= this.get(0);
+        this.distribuer();
+        
+        Iterator it = listeJoueurs.iterator();
+        Joueur enCours;
+        Carte cartePiochee;
+        
+        while(true){
+            while(it.hasNext()){
+                enCours = (Joueur) it.next();
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
+                    piocheDonjon.setPioche(new ArrayList<Donjon> (defausseDonjon.getDefausse()));
+                    defausseDonjon.vider();
+                }
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
+                    return;
+                }
+                
+                cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
+                if(cartePiochee == null){
+                    System.out.println("Problème lors du tirage dans la pioche donjon");
+                    return;
+                }
+                
+                System.out.println("\n\n" + enCours.getNom() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
+                //envoi du message a tous les client connecté
+                this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
+                
+                
+                // === MONSTRE ===
+                if(cartePiochee.getClass().equals(Monstre.class))
+                {
+                    Combat combat = new Combat(this);
+                    combat.getCampGentil().add(enCours.getPersonnage());
+                    
+                    Monstre monstrePioche = (Monstre) cartePiochee;
+                    combat.getCampMechant().add(monstrePioche);
+                    
+                    System.out.println("Vous avez tiré le monstre :");
+                    System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
+                    System.out.println(monstrePioche.getDescription());
+                    
+                    System.out.println("Combattre ? (o/n)");
+//                    this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a tiré le monstre : \n"
+//                            + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
+//                            + monstrePioche.getDescription() +"\n"
+//                            +" Va-t il combattre ?\n");
+//                    this.sendQuestionToEnCours("Combattre ?");
+//                    this.answer=null;
+//                    while( this.answer==null){}
+                    
+                    Scanner sc = new Scanner(System.in);
+                    this.answer = sc.nextLine();
+                    
+	                    if(this.answer.equals("O") || this.answer.equals("o")){
+	                        if(combat.combattre()){
+	                            System.out.println("Vous avez gagné !");
+	                            monstrePioche.appliquerMonstreVaincu(enCours);
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a gagné le combat ! \n");
+	                        }else{
+	                            System.out.println("Vous avez perdu...");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
+	                            monstrePioche.appliquerIncidentFacheux(enCours);
+	                        }
+	                    }else if(this.answer.equals("N") || this.answer.equals("n")){
+	                        if(combat.tenterDeguerpir()){
+	                            System.out.println("Vous avez réussi à déguérpir !");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
+	                        }
+	                        else{
+	                        	// Chelou le passage dans le else
+		                        // Si on ne peut pas déguerpir, on dit au joueur d'entrer o ou n ?
+	                            //System.out.println("Veuillez entrer 'o' ou 'n'");
+	                             this.sendMessageToAll("Le joueur : " +enCours.getNom() + " n'a pas réussi a deguerpir ! \n");
+	                        }
+	                    }
+	                    else
+	                    {
+	                    	System.out.println("Veuillez entrer une réponse correcte");
+	                    }
+                    // On boucle tant qu'il n'a pas donné de réponse
+                    
+                    this.defausseDonjon.ajouterCarte(cartePiochee);
+                }
+                // ===============
+                
+                // ==== SORT ====
+                else if(cartePiochee.getClass().equals(Sort.class)){
+                    System.out.println("C'est un sort !!");
+//                     this.sendMessageToAll("C'est un sort !!\n");
+                    Sort s = (Sort) cartePiochee;
+                    s.appliquerSortilege(enCours);
+                }
+                // ==============
+            }
+            it = listeJoueurs.iterator();
+        }
+    }
+    
+    
 
     /**
      * 

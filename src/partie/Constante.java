@@ -15,4 +15,8 @@ public class Constante {
      */
     public static final int TRESOR = 1;
     public static final int DONJON = 2;
+    
+    public static final int SEXE_M = 1;
+    public static final int SEXE_F = 2;
+    
 }
