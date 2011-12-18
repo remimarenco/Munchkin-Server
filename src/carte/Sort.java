@@ -7,6 +7,7 @@ import comportement.classes.Sortilege;
  * @author Rémi Marenco
  */
 public class Sort extends Donjon {
+    
         /**
          * Constructeur de la classe sort
          * Permet d'enregistrer l'action de lancer un ensemble de sortilege
@@ -19,6 +20,6 @@ public class Sort extends Donjon {
 		this.sortilege = sortilege;
 	}
 
-
+        
 
 }

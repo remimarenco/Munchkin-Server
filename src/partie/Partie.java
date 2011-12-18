@@ -36,8 +36,8 @@ public final class Partie extends ArrayList<Joueur>{
     private Defausse            defausseTresor;
     private Defausse            defausseDonjon;
     private ArrayList<Joueur>   listeJoueurs;
-    private Joueur enCours;
-    private Color Color;
+    private Joueur              enCours;
+    private Color               Color;
     private String answer;
 
     /**
@@ -112,7 +112,7 @@ public final class Partie extends ArrayList<Joueur>{
                 this.sendMessageToAll("Le joueur : " +enCours.getNom() + "pioche une carte ! : \n");
                 
                 
-                //if(c.getClass().getName().equals("carte.Monstre")){ // OMG, on compare jamais des chaines de caractère sur des noms de classe ou de variable => On change le nom de la classe, bye bye la comparaison
+                // === MONSTRE ===
                 if(cartePiochee.getClass().equals(Monstre.class))
                 {
                     Combat combat = new Combat(this);
@@ -164,10 +164,15 @@ public final class Partie extends ArrayList<Joueur>{
                     // On boucle tant qu'il n'a pas donné de réponse
                     
                     this.defausseDonjon.ajouterCarte(cartePiochee);
-                }else if(cartePiochee.getClass().equals(Sort.class)){
+                }
+                // ===============
+                
+                // ==== SORT ====
+                else if(cartePiochee.getClass().equals(Sort.class)){
                     System.out.println("C'est un sort !!");
                      this.sendMessageToAll("C'est un sort !!\n");
                 }
+                // ==============
             }
             it = listeJoueurs.iterator();
         }

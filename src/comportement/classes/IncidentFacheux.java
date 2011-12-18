@@ -35,9 +35,7 @@ public class IncidentFacheux {
             System.out.println("--- Incident facheux ---");
             System.out.println("Un incident facheux vient de se déclencher sur " + joueurImpacte.getNom() + " :");
             for(Action action : tabAction)
-            {
-                    action.action(joueurImpacte);
-            }
+                action.action(joueurImpacte);
             System.out.println("--- Fin d'incident facheux ---");
     }
 
