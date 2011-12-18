@@ -16,7 +16,7 @@ public class ModifDeguerpir extends Action{
 	
 	
 	
-	public ModifDeguerpir(int bonusDeguerpir, int niveauMax, int sexe, ArrayList<Race> tabRace, ArrayList<Classe> tabClasse) {
+	public ModifDeguerpir(Integer bonusDeguerpir, Integer niveauMax, Integer sexe, ArrayList<Race> tabRace, ArrayList<Classe> tabClasse) {
 		super();
 		this.bonusDeguerpir = bonusDeguerpir;
 		this.niveauMax=niveauMax;
