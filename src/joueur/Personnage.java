@@ -9,7 +9,6 @@ public class Personnage {
     private int     capaciteFuite;
     private int		bonusCapaciteFuite;
     private int     nbEquipement;
-    private int     puissance;
     private int		bonusPuissance;
 	
     
@@ -20,7 +19,6 @@ public class Personnage {
         this.capaciteFuite  	= capaciteFuite;
         this.bonusCapaciteFuite	= 0;
         this.nbEquipement   	= nbEquipement;
-        this.puissance 			= 0;
         this.bonusPuissance 	= 0;
         		
     }
@@ -90,14 +88,6 @@ public class Personnage {
 
 	public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
 		this.bonusCapaciteFuite = bonusCapaciteFuite;
-	}
-
-	public int getPuissance() {
-		return puissance;
-	}
-
-	public void setPuissance(int puissance) {
-		this.puissance = puissance;
 	}
 
 	public int getBonusPuissance() {
