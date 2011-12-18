@@ -23,7 +23,7 @@ public class Personnage {
         this.nbEquipement   	= nbEquipement;
         this.bonusPuissance 	= 0;
         		
-        this.race = Constante.Race_Humaine;
+        this.race = Constante.RACE_HUMAINE;
         this.classe = null;
     }
         

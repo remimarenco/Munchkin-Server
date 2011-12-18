@@ -5,7 +5,6 @@
 package joueur;
 
 import carte.Carte;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import java.util.ArrayList;
 import java.util.Random;
 import partie.Constante;
