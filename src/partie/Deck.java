@@ -54,8 +54,8 @@ public final class Deck {
      * 
      * @return 
      */
-    public static ArrayList melanger(){
-        ArrayList nouvelle = new ArrayList(cartes);
+    public static ArrayList<Carte> melanger(){
+        ArrayList<Carte> nouvelle = new ArrayList<Carte>(cartes);
         Collections.shuffle(nouvelle);
         return nouvelle; 
     }
