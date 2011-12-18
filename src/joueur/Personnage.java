@@ -4,7 +4,7 @@ public class Personnage {
 
     
     private int     niveau;
-    private char    sexe;
+    private int    sexe;
     private boolean aChangeSexe;
     private int     capaciteFuite;
     private int		bonusCapaciteFuite;
@@ -13,7 +13,7 @@ public class Personnage {
     private int		bonusPuissance;
 	
     
-    public Personnage(int niveau, char sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
+    public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
         this.niveau         	= niveau;
         this.sexe           	= sexe;
         this.aChangeSexe    	= aChangeSexe;
@@ -67,11 +67,11 @@ public class Personnage {
         this.nbEquipement = nbEquipement;
     }
 
-    public void setSexe(char sexe) {
+    public void setSexe(int sexe) {
         this.sexe = sexe;
     }
     
-    public char getSexe() {
+    public int getSexe() {
         return sexe;
     }
     
