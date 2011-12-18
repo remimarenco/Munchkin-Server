@@ -18,7 +18,7 @@ public class Sortilege {
 
     public void actionSortilege(Joueur joueurImpacte){
         System.out.println("----- Sortilège -----");
-        System.out.println("Un sortilège s'applique sur " + joueurImpacte.getNom() + " :");
+        System.out.println("Un sortilège s'applique sur " + joueurImpacte.getName() + " :");
         for(Action action : tabAction)
             action.action(joueurImpacte);
         System.out.println("--- Fin sortilège ---");

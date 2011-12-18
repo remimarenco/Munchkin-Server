@@ -40,7 +40,7 @@ public class PiocherCarte extends Action {
     @Override
     public void action(Joueur joueurImpacte) {
         // On récupère le nom du joueur qui reçoit l'action
-        System.out.print("Le joueur " + joueurImpacte.getNom());
+        System.out.print("Le joueur " + joueurImpacte.getName());
         // Affichage selon le nombre de carte
         if(nbCarte > 1)
             System.out.print(" pioche "+nbCarte+" cartes dans la pioche ");

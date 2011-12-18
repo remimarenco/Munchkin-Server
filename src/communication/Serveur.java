@@ -38,7 +38,7 @@ public class Serveur {
             this.nombreJoueur=nombreJoueur;
             while (true) {               
                Socket st = socket_ecoute.accept();                
-               Joueur com= new Joueur(st, this);
+               Joueur com= new Joueur(st, this,partie);
                com.start();                 
             }
         } catch (Exception e) {

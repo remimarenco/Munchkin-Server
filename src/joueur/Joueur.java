@@ -16,8 +16,7 @@ import partie.Partie;
 public class Joueur extends Thread {
 	
     private Main main;
-    private Jeu jeu;
-    private String nom;
+    private Jeu jeu;   
     private Personnage personnage;
     private Partie partie;
     private Message msg=new Message();
@@ -26,50 +25,31 @@ public class Joueur extends Thread {
     private DataOutputStream out=null;
     
     
-    public Joueur(Socket st,Object parent) {        
+    public Joueur(Socket st,Object parent,Partie partie) {        
         initCommunication(st, parent);
         this.main = new Main();
-        this.jeu = new Jeu();
-        this.nom = new String();
+        this.jeu = new Jeu();        
         this.personnage = new Personnage();
-    }
-    
-    public Joueur(String nom) {
-        this.main = new Main();
-        this.jeu = new Jeu();
-        this.nom = nom;
-        this.personnage = new Personnage();
-    }
+        this.partie=partie;
+    }   
+ 
      
-    public Joueur(String nom, Partie p) {
-        this.main = new Main();
-        this.jeu = new Jeu();
-        this.nom = nom;
-        this.personnage = new Personnage();
-        this.partie = p;
-    }
+
     
-    public Joueur(String nom,Socket st,Object parent) {
-        initCommunication(st, parent);
-        this.main = new Main();
-        this.jeu = new Jeu();
-        this.nom = nom;
-        this.personnage = new Personnage();
-    }
+
     
-    public Joueur(Main main, Jeu jeu, String nom, Personnage personnage,Socket st,Object parent) {
+    public Joueur(Main main, Jeu jeu, Personnage personnage,Partie partie,Socket st,Object parent) {
         initCommunication(st, parent);
         this.main = main;
-        this.jeu = jeu;
-        this.nom = nom;
+        this.jeu = jeu;        
         this.personnage = personnage;
+        this.partie=partie;
     }
 
     public Joueur(Main main, Jeu jeu, String nom, Personnage personnage, Partie partie,Socket st,Object parent) {
         initCommunication(st, parent);
         this.main = main;
-        this.jeu = jeu;
-        this.nom = nom;
+        this.jeu = jeu;        
         this.personnage = personnage;
         this.partie = partie;
     }
@@ -137,13 +117,6 @@ public class Joueur extends Thread {
     
     
 	
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
     
     public Jeu getJeu() {
         return jeu;

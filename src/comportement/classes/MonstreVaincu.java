@@ -17,7 +17,7 @@ public class MonstreVaincu {
 	public void actionMonstreVaincu(Joueur joueurImpacte)
 	{
 		System.out.println("--- Monstre Vaincu ---");
-        System.out.println("Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getNom() + " :");
+        System.out.println("Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :");
         for(Action action : tabAction)
         {
                 action.action(joueurImpacte);

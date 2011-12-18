@@ -34,7 +34,7 @@ public class ChangerNiveau extends Action {
             /**
              * On affiche des informations différentes selon le gain ou la perte de niveau
              */
-            System.out.print(joueurImpacte.getNom());
+            System.out.print(joueurImpacte.getName());
             if(niveau < 0)
                     System.out.println(" perds ");
             else if(niveau > 0)
@@ -48,7 +48,7 @@ public class ChangerNiveau extends Action {
             {
             	System.out.println(niveau+" niveau !!");
             }
-            System.out.println(joueurImpacte.getNom() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau());
+            System.out.println(joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau());
     }
 
 }
