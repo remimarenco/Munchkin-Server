@@ -331,13 +331,18 @@ public final class Deck {
     }
 
     private void nouvellesActionsMonstreVaincu(ArrayList<Action> actionTabMonstreVaincu, PiocherCarte piocherCarte, ChangerNiveau changerNiveau){
-        actionTabMonstreVaincu.clear();
-        actionTabMonstreVaincu.add(piocherCarte);
-        actionTabMonstreVaincu.add(changerNiveau);
+        actionTabMonstreVaincu = new ArrayList<Action>();
+        if(piocherCarte != null)
+            actionTabMonstreVaincu.add(piocherCarte);
+        if(changerNiveau != null)
+            actionTabMonstreVaincu.add(changerNiveau);
     }
     
     private void nouvellesActionsIncidentFacheux(ArrayList<Action> actionTabIncident, ChangerNiveau changerNiveau, DefausserCarte defausserCarte){
-        actionTabIncident.clear();
-        actionTabIncident.add(changerNiveau);
+        actionTabIncident = new ArrayList<Action>();
+        if(changerNiveau != null)
+            actionTabIncident.add(changerNiveau);
+        if(defausserCarte != null)
+            actionTabIncident.add(defausserCarte);
     }
 }
