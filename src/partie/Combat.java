@@ -6,13 +6,13 @@ import java.util.Iterator;
 import joueur.Personnage;
 
 public class Combat {
-    private ArrayList<Object> CampGentil;
+    private ArrayList<Personnage> CampGentil;
     private ArrayList<Object> CampMechant;
     private Partie partie;
 
     public Combat(Partie partie) {
         this.partie = partie;
-        CampGentil= new ArrayList<Object>();
+        CampGentil= new ArrayList<Personnage>();
         CampMechant= new ArrayList<Object>();
     }
 
@@ -21,7 +21,7 @@ public class Combat {
 
     
     
-    public ArrayList<Object> getCampGentil() {
+    public ArrayList<Personnage> getCampGentil() {
         return CampGentil;
     }
 
@@ -31,6 +31,11 @@ public class Combat {
     
     
     public boolean tenterDeguerpir() {
+    	// Le camp gentil tente de déguerpir
+    	for(Personnage gentil : CampGentil)
+    	{
+    		gentil.deguerpir();
+    	}
         return true;
     }    
     
