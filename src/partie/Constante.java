@@ -4,6 +4,17 @@
  */
 package partie;
 
+import joueur.Classe;
+import joueur.Elfe;
+import joueur.Guerrier;
+import joueur.Halfelin;
+import joueur.Humain;
+import joueur.Magicien;
+import joueur.Nain;
+import joueur.Pretre;
+import joueur.Race;
+import joueur.Voleur;
+
 import java.util.Random;
 
 /**
@@ -22,9 +33,29 @@ public class Constante {
     public static final int TRESOR = 1;
     public static final int DONJON = 2;
     
+    /**
+     * Type de sexe
+     */
     public static final int SEXE_M = 1;
     public static final int SEXE_F = 2;
     
+    /**
+     * Races
+     */
+    public static final Race Race_Humaine = new Humain();
+    /*public static final Race Race_Elfe = new Elfe();
+    public static final Race Race_Nain = new Nain();
+    public static final Race Race_Halfelin = new Halfelin();
+    */
+    
+    /**
+     * Classes
+     */
+    /*public static final Classe Classe_Pretre = new Pretre();
+    public static final Classe Classe_Voleur = new Voleur();
+    public static final Classe Classe_Guerrier = new Guerrier();
+    public static final Classe Classe_Magicien = new Magicien();
+    */
     public static final int CARTE_OBJET     = 1;
     public static final int CARTE_SORT      = 2;
     public static final int CARTE_RACE      = 3;
