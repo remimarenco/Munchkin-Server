@@ -13,8 +13,7 @@ import joueur.Joueur;
  */
 public class Monstre extends Donjon {
     protected int puissance;
-    protected int tresor;
-    protected int niveau_gagne;
+    protected int bonusPuissance;
     // TODO : Comportement monstre vaincu
 
     /**
@@ -65,5 +64,17 @@ public class Monstre extends Donjon {
 
     public String getDescription() {
         return description;
-    }    
+    }
+
+	public void setPuissance(int puissance) {
+		this.puissance = puissance;
+	}
+
+	public int getBonusPuissance() {
+		return bonusPuissance;
+	}
+
+	public void setBonusPuissance(int bonusPuissance) {
+		this.bonusPuissance = bonusPuissance;
+	}
 }

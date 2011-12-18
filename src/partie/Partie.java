@@ -156,7 +156,8 @@ public final class Partie extends ArrayList<Joueur>{
 	                    }
                     // On boucle tant qu'il n'a pas donné de réponse
                     
-                    this.defausseDonjon.ajouterCarte(cartePiochee);
+	               monstrePioche.setBonusPuissance(0);
+                   this.defausseDonjon.ajouterCarte(cartePiochee);
                 }
                 // ===============
                 
@@ -166,6 +167,10 @@ public final class Partie extends ArrayList<Joueur>{
                      this.sendMessageToAll("C'est un sort !!\n");
                 }
                 // ==============
+                
+                // On annule les bonus temporaires
+                this.enCours.getPersonnage().setBonusCapaciteFuite(0);
+                this.enCours.getPersonnage().setBonusPuissance(0);
             }
             it = this.iterator();
         }

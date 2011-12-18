@@ -54,8 +54,8 @@ public final class Deck {
      * 
      * @return 
      */
-    public static ArrayList<Carte> melanger(){
-        ArrayList<Carte> nouvelle = new ArrayList<Carte>(cartes);
+    public static ArrayList melanger(){
+        ArrayList nouvelle = new ArrayList(cartes);
         Collections.shuffle(nouvelle);
         return nouvelle; 
     }
@@ -85,7 +85,7 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
-        cartes.add(new Monstre("Rat Musclé", "Créature de l'enfer +3 contre les prÃªtres", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
+        cartes.add(new Monstre("Rat Musclé", "Créature de l'enfer +3 contre les prêtres", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
@@ -98,7 +98,7 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
-        cartes.add(new Monstre("Poulet élevé aux stérroïdes", "Frit c'est délicieux (Rappel combo avec flammes)", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
+        cartes.add(new Monstre("Poulet élevé aux stérroïdes", "Frit c'est délicieux", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
@@ -331,18 +331,13 @@ public final class Deck {
     }
 
     private void nouvellesActionsMonstreVaincu(ArrayList<Action> actionTabMonstreVaincu, PiocherCarte piocherCarte, ChangerNiveau changerNiveau){
-        actionTabMonstreVaincu = new ArrayList<Action>();
-        if(piocherCarte != null)
-            actionTabMonstreVaincu.add(piocherCarte);
-        if(changerNiveau != null)
-            actionTabMonstreVaincu.add(changerNiveau);
+        actionTabMonstreVaincu.clear();
+        actionTabMonstreVaincu.add(piocherCarte);
+        actionTabMonstreVaincu.add(changerNiveau);
     }
     
     private void nouvellesActionsIncidentFacheux(ArrayList<Action> actionTabIncident, ChangerNiveau changerNiveau, DefausserCarte defausserCarte){
-        actionTabIncident = new ArrayList<Action>();
-        if(changerNiveau != null)
-            actionTabIncident.add(changerNiveau);
-        if(defausserCarte != null)
-            actionTabIncident.add(defausserCarte);
+        actionTabIncident.clear();
+        actionTabIncident.add(changerNiveau);
     }
 }
