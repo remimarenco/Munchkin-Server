@@ -42,7 +42,7 @@ public class Constante {
     /**
      * Races
      */
-    public static final Race Race_Humaine = new Humain();
+    public static final Race RACE_HUMAINE = new Humain();
     /*public static final Race Race_Elfe = new Elfe();
     public static final Race Race_Nain = new Nain();
     public static final Race Race_Halfelin = new Halfelin();
