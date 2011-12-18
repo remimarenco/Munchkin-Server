@@ -9,6 +9,10 @@ import java.net.Socket;
 import partie.Constante;
 import partie.Partie;
 
+/**
+ * Un Joueur est un Thread de communication
+ * @author Meg4mi
+ */
 public class Joueur extends Thread {
 	
     private Main main;
@@ -20,7 +24,8 @@ public class Joueur extends Thread {
     private Object parent=null;
     private DataInputStream in=null;
     private DataOutputStream out=null;
-
+    
+    
     public Joueur(Socket st,Object parent) {        
         initCommunication(st, parent);
         this.main = new Main();
@@ -69,7 +74,11 @@ public class Joueur extends Thread {
         this.partie = partie;
     }
     
-    
+    /**
+     * Methode d'initialisation pour le thread et les communications reseaux
+     * @param st
+     * @param parent 
+     */
     private void initCommunication(Socket st,Object parent){
         try{
         this.parent=parent;
@@ -81,20 +90,27 @@ public class Joueur extends Thread {
         }
     }
   
+    /**
+     * Envoi la liste des joueurs connectés aux clients
+     * @param list 
+     */
     public void sendList(String list){
         new Message(Message.LISTE,"admin","General",list).write(out);
     }
 
+    /**
+     * Envoi un message via le socket via la methode write
+     * @param message
+     * @return vrai quand le message est envoyé
+     */
     public boolean sendMessage(Message message){
         message.write(out); 
         return true;
-    }    
-  
-    public boolean sendMessage(String message,String nick_dest){
-        new Message(Message.MESSAGE,getName(),nick_dest,message).write(out);        
-        return true;
-    }
-
+    }   
+   
+    /**
+     * Methode run du thread;
+     */
     @Override
     synchronized  public void run(){
         boolean test=true;
@@ -110,7 +126,7 @@ public class Joueur extends Thread {
                         Message message=new Message(Message.DISCONNECT,this.getName());                                       
                         ((Serveur)parent).interpretMessage(message,this);                   
                         this.interrupt();
-                        test=false;                    
+                        test=false;                   
                 }
             }
         }

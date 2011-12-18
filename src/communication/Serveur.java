@@ -18,8 +18,8 @@ import joueur.Joueur;
 import partie.Partie;
 
 /**
- *
- * @author user
+ * 
+ * @author Meg4mi
  */
 public class Serveur {
     private ServerSocket socket_ecoute;
@@ -27,7 +27,11 @@ public class Serveur {
     
     private int nombreJoueur;
 
-    
+    /**
+     * Constructeur
+     * @param port
+     * @param nombreJoueur 
+     */
     public Serveur(int port,int nombreJoueur) {
         try {
             socket_ecoute = new ServerSocket(port);            
@@ -47,6 +51,12 @@ public class Serveur {
         }
     }
     
+    /**
+     * Methode appelé par le serveur lors de la reception d'un message.
+     * Traite le message en fonction de son type et sa destination
+     * @param msg
+     * @param com 
+     */
     public void interpretMessage(Message msg, Joueur com) {
          switch (msg.getType()) {
 

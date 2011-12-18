@@ -382,9 +382,8 @@ public final class Partie extends ArrayList<Joueur>{
     }
      
      public boolean answer(Message msg){          
-      this.answer=(String)msg.getMessage();
-      return true;
-     
+      this.answer=msg.getMessage();
+      return true;     
     }
 
     
