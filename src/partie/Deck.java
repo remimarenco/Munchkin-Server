@@ -76,9 +76,9 @@ public final class Deck {
         ArrayList<Action> actionTabMonstreVaincu = new ArrayList<Action>();
 
         
-        /**
-         * Ajout de la carte avec les actions définies au dessus
-         */
+        // ================
+        // === MONSTRES ===
+        // ================
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
         cartes.add(new Monstre("Morpions", "Impossible de déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
@@ -238,7 +238,24 @@ public final class Deck {
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
         cartes.add(new Monstre("Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 20));
         
+        nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
+        // FAUX !!
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, null);
+        cartes.add(new Monstre("Gobelin Estropié", "+1 au jet pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
         
+        nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
+        // FAUX !!
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, null);
+        cartes.add(new Monstre("Plante d'ornement", "Les elfes tirent une carte Trésor supplémentaire après l'avoir vaincue.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
+	// ================
+        // ================
+        // ================
+        
+        
+        
+        // =============
+        // === SORTS ===
+        // =============
         cartes.add(new Sort("Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", null));
         cartes.add(new Sort("Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", null));
         cartes.add(new Sort("Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", null));
@@ -246,7 +263,6 @@ public final class Deck {
         cartes.add(new Sort("Bébé", "-5 au niveau du monstre(niveau minimum: 1). A jouer pendant le combat. Si le monstre est vaincu, tirez 1 cartes trésor en moins (minimum 1).", null));
         cartes.add(new Sort("Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", null));
         cartes.add(new Sort("Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", null));
-        
         cartes.add(new Sort("Malédiction!", "Perdez 1 niveau", null));
         cartes.add(new Sort("Malédiction!", "Perdez 1 niveau", null));
         cartes.add(new Sort("Malédiction!", "Perdez le couvre-chef que vous portez", null));
@@ -296,19 +312,22 @@ public final class Deck {
         cartes.add(new Sort("Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
         cartes.add(new Sort("Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
         cartes.add(new Sort("Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
-		
-        // Monstres
-        nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
-        cartes.add(new Monstre("Gobelin Estropié", "+1 au jet pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
-        cartes.add(new Sort("Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", null));
-        nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
-        cartes.add(new Monstre("Plante d'ornement", "Les elfes tirent une carte Trésor supplémentaire après l'avoir vaincue.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
-		
+	cartes.add(new Sort("Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", null));
+        // =============
+        // =============
+        // =============
+        
+        
+        
+        // ==============
+        // === OBJETS ===
+        // ==============
         cartes.add(new Objet("Objet1", "Le premier objet", null));
-        
         cartes.add(new Objet("Objet1", "Le deuxième objet", null));
+        // ==============
+        // ==============
+        // ==============
         
-        cartes.add(new Sort("Sort1", "Le premier sort", null));
     }
 
     private void nouvellesActionsMonstreVaincu(ArrayList<Action> actionTabMonstreVaincu, PiocherCarte piocherCarte, ChangerNiveau changerNiveau){
