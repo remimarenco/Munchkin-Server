@@ -7,15 +7,22 @@ public class Personnage {
     private char    sexe;
     private boolean aChangeSexe;
     private int     capaciteFuite;
+    private int		bonusCapaciteFuite;
     private int     nbEquipement;
+    private int     puissance;
+    private int		bonusPuissance;
 	
     
-    public Personnage(int niveau, char sexe, boolean aChangeSexe, int capaciteFuite, int nbEquipement) {
-        this.niveau         = niveau;
-        this.sexe           = sexe;
-        this.aChangeSexe    = aChangeSexe;
-        this.capaciteFuite  = capaciteFuite;
-        this.nbEquipement   = nbEquipement;
+    public Personnage(int niveau, char sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
+        this.niveau         	= niveau;
+        this.sexe           	= sexe;
+        this.aChangeSexe    	= aChangeSexe;
+        this.capaciteFuite  	= capaciteFuite;
+        this.bonusCapaciteFuite	= 0;
+        this.nbEquipement   	= nbEquipement;
+        this.puissance 			= 0;
+        this.bonusPuissance 	= 0;
+        		
     }
         
     public Personnage() {
@@ -75,5 +82,29 @@ public class Personnage {
     
     public void setaChangeSexe(boolean aChangeSexe) {
         this.aChangeSexe = aChangeSexe;
-    }    
+    }
+
+	public int getBonusCapaciteFuite() {
+		return bonusCapaciteFuite;
+	}
+
+	public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
+		this.bonusCapaciteFuite = bonusCapaciteFuite;
+	}
+
+	public int getPuissance() {
+		return puissance;
+	}
+
+	public void setPuissance(int puissance) {
+		this.puissance = puissance;
+	}
+
+	public int getBonusPuissance() {
+		return bonusPuissance;
+	}
+
+	public void setBonusPuissance(int bonusPuissance) {
+		this.bonusPuissance = bonusPuissance;
+	}    
 }
