@@ -1,14 +1,16 @@
 package joueur;
 
-public class Personnage {
+import partie.Constante;
 
-    
+public class Personnage {
     private int     niveau;
     private int    sexe;
     private boolean aChangeSexe;
     private int     capaciteFuite;
     private int		bonusCapaciteFuite;
     private int     nbEquipement;
+    private Race    race;
+    private Classe	classe;
     private int		bonusPuissance;
 	
     
@@ -21,6 +23,8 @@ public class Personnage {
         this.nbEquipement   	= nbEquipement;
         this.bonusPuissance 	= 0;
         		
+        this.race = Constante.Race_Humaine;
+        this.classe = null;
     }
         
     public Personnage() {
@@ -81,6 +85,29 @@ public class Personnage {
     public void setaChangeSexe(boolean aChangeSexe) {
         this.aChangeSexe = aChangeSexe;
     }
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
+		// On modifie le personnage selon la race
+		race.modifPersonnage(this);
+	}
+
+	public Classe getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+	public void deguerpir() {
+		// TODO Auto-generated method stub
+		
+	}    
 
 	public int getBonusCapaciteFuite() {
 		return bonusCapaciteFuite;
