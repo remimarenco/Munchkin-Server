@@ -96,5 +96,8 @@ public class Personnage {
 
 	public void setBonusPuissance(int bonusPuissance) {
 		this.bonusPuissance = bonusPuissance;
-	}    
+	}
+        public int getPuissance(){
+            return 1;
+        }
 }
