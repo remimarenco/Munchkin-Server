@@ -6,6 +6,7 @@ import communication.Serveur;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 import partie.Constante;
 import partie.Partie;
 
@@ -31,11 +32,7 @@ public class Joueur extends Thread {
         this.jeu = new Jeu();        
         this.personnage = new Personnage();
         this.partie=partie;
-    }   
- 
-     
-
-    
+    }  
 
     
     public Joueur(Main main, Jeu jeu, Personnage personnage,Partie partie,Socket st,Object parent) {
@@ -171,6 +168,19 @@ public class Joueur extends Thread {
             return false;
         }
         return true;
+    }
+    
+    public HashMap<String,String> generateInfos(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        map.put("Nom", this.getName());
+        map.put("Niveau Personnage",Integer.toString(this.getPersonnage().getNiveau()));
+        if(this.getPersonnage().getSexe()==Constante.SEXE_F)
+            map.put("Sexe","Feminin");
+        else
+             map.put("Sexe","Masculin");
+        map.put("Capacité de fuite",Integer.toString(this.getPersonnage().getCapaciteFuite()));
+        map.put("Puissance",Integer.toString(this.getPersonnage().getPuissance()));
+        return map;
     }
 
 }

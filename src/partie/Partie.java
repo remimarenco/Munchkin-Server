@@ -416,6 +416,15 @@ public final class Partie extends ArrayList<Joueur>{
         }            
     }
     
+    public Joueur getJoueurByName(String name){
+        Joueur ret=null;
+        for(Joueur j : this){
+            if(j.getName().equals(name))
+                ret=j;
+        }
+        return ret;
+    }
+    
     /**
      * 
      * @param log

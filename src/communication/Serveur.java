@@ -146,9 +146,15 @@ public class Serveur {
 
                 }
                 break;
-            case Message.ANSWER:
+            case Message.QUESTION:
             this.partie.answer(msg);
             break;
+            case Message.INFO_JOUEUR:
+                Joueur j=
+                this.partie.getJoueurByName(msg.getNick_dest());
+                if(j!=null)
+                    com.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", com.getName(), j.generateInfos()));
+                break;
             
         }
     }
