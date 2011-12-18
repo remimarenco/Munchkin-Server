@@ -1,6 +1,7 @@
 package comportement;
 
 import joueur.Joueur;
+import partie.Constante;
 
 /**
  * Classe permettant de définir l'action d'un changement de niveau
@@ -34,6 +35,11 @@ public class ChangerNiveau extends Action {
             /**
              * On affiche des informations différentes selon le gain ou la perte de niveau
              */
+             
+             if(this.niveau == Constante.NB_PAR_DE){
+                 this.niveau = Constante.nbAleatoire(1, 6+1);
+             }
+        
             System.out.print(joueurImpacte.getName());
             if(niveau < 0)
                     System.out.println(" perds ");

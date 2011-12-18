@@ -12,11 +12,8 @@ import partie.Partie;
  */
 public class Guillaume {
     public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+        // TODO Auto-generated method stub
 	ServeurVue serV= new ServeurVue();
         serV.setVisible(true);
-        
-			
-		}
+    }
 }

@@ -5,7 +5,10 @@
 package joueur;
 
 import carte.Carte;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import java.util.ArrayList;
+import java.util.Random;
+import partie.Constante;
 
 /**
  *
@@ -35,6 +38,11 @@ public class CartesJoueur {
         cartes.remove(c);
         return true;
     }
+    
+    public Carte getRandomCarte(){
+        int valeur = Constante.nbAleatoire(0, cartes.size());
+        return cartes.get(valeur);
+    }    
 
     public ArrayList<Carte> getCartes() {
         return cartes;

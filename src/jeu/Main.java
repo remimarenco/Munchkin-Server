@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Partie p=new Partie();
 //        p.run();
-       // p.run2();
+        p.run2();
     }
 		
 		

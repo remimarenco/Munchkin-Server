@@ -483,6 +483,10 @@ public final class Partie extends ArrayList<Joueur>{
       this.answer=msg.getMessage();
       return true;     
     }
+
+    public void run2() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
  
      
 
