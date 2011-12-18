@@ -137,7 +137,7 @@ public class Serveur {
                 }
                 break;
             case Message.ANSWER:
-            this.partie.writeInConsole(msg);
+            this.partie.answer(msg);
             break;
             
         }

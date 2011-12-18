@@ -38,6 +38,7 @@ public final class Partie extends ArrayList<Joueur>{
     private ArrayList<Joueur>   listeJoueurs;
     private Joueur enCours;
     private Color Color;
+    private String answer;
 
     /**
      * 
@@ -78,7 +79,7 @@ public final class Partie extends ArrayList<Joueur>{
         listeJoueurs.add(new Joueur("Joueur 2", this));
         listeJoueurs.add(new Joueur("Joueur 3", this));
         listeJoueurs.add(new Joueur("Joueur 4", this));
-        //this.enCours= this.get(0);
+        this.enCours= this.get(0);
         this.distribuer();
         
         Iterator it = listeJoueurs.iterator();
@@ -129,13 +130,12 @@ public final class Partie extends ArrayList<Joueur>{
                             + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
                             + monstrePioche.getDescription() +"\n"
                             +" Va-t il combattre ?\n");
-//                    this.sendQuestionToEnCours("Combattre ?");
-                    Scanner sc = new Scanner(System.in);
-                    String str;
-                    do
-                    {
-                    	str = sc.nextLine();
-	                    if(str.equals("o") || str.equals("O")){
+                    this.sendQuestionToEnCours("Combattre ?");
+                    this.answer=null;
+                    while( this.answer==null){}
+                    
+                    	
+	                    if(this.answer.equals("Yes")){
 	                        if(combat.combattre()){
 	                            System.out.println("Vous avez gagné !");
 	                            monstrePioche.appliquerMonstreVaincu(enCours);
@@ -145,7 +145,7 @@ public final class Partie extends ArrayList<Joueur>{
 	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + "  a perdu le combat ! \n");
 	                            monstrePioche.appliquerIncidentFacheux(enCours);
 	                        }
-	                    }else if(str.equals("n") || str.equals("n")){
+	                    }else if(this.answer.equals("Non")){
 	                        if(combat.tenterDeguerpir()){
 	                            System.out.println("Vous avez réussi à déguérpir !");
 	                            this.sendMessageToAll("Le joueur : " +enCours.getNom() + " a réussi a deguerpir ! \n");
@@ -162,10 +162,11 @@ public final class Partie extends ArrayList<Joueur>{
 	                    	System.out.println("Veuillez entrer une réponse correcte");
 	                    }
                     // On boucle tant qu'il n'a pas donné de réponse
-                    }while(!(str.equals("o") || str.equals("O") || str.equals("n") || str.equals("n")));
+                    
                     this.defausseDonjon.ajouterCarte(cartePiochee);
                 }else if(cartePiochee.getClass().equals(Sort.class)){
                     System.out.println("C'est un sort !!");
+                     this.sendMessageToAll("C'est un sort !!\n");
                 }
             }
             it = listeJoueurs.iterator();
@@ -375,9 +376,9 @@ public final class Partie extends ArrayList<Joueur>{
         this.enCours.sendMessage(msg);
     }
      
-     public void writeInConsole(Message msg){           
-      
- 
+     public boolean answer(Message msg){          
+      this.answer=(String)msg.getMessage();
+      return true;
      
     }
 
