@@ -71,7 +71,7 @@ public final class Partie extends ArrayList<Joueur>{
     /**
      * 
      */
-  synchronized public void run(){
+  synchronized public void run(int nbJoueur){
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);       
         this.distribuer();
@@ -79,7 +79,7 @@ public final class Partie extends ArrayList<Joueur>{
         Iterator it = this.iterator();        
         Carte cartePiochee;
         
-        while(true){
+        while(nbJoueur==this.size()){
             while(it.hasNext()){
                 enCours = (Joueur) it.next();
                 
@@ -125,7 +125,7 @@ public final class Partie extends ArrayList<Joueur>{
                             +" Va-t il combattre ?\n");
                     this.sendQuestionToEnCours("Combattre ?");
                     this.answer=null;
-                    while( this.answer==null){}
+                    while( this.answer==null && this.size()==nbJoueur){}
                     
                     	
 	                    if(this.answer.equals("Yes")){

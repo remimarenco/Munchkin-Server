@@ -22,8 +22,10 @@ import partie.Partie;
  * @author Meg4mi
  */
 public class Serveur {
+     public static boolean runningflag=true;
     private ServerSocket socket_ecoute;
-    private Partie partie= new Partie();
+    private Partie partie;
+    private  Thread thrd;
     
     private int nombreJoueur;
 
@@ -36,10 +38,12 @@ public class Serveur {
         try {
             socket_ecoute = new ServerSocket(port);            
             this.nombreJoueur=nombreJoueur;
+            this.partie=new Partie();
             while (true) {               
                Socket st = socket_ecoute.accept();                
                Joueur com= new Joueur(st, this,partie);
-               com.start();                 
+               com.start();
+               
             }
         } catch (Exception e) {
             try {
@@ -49,6 +53,25 @@ public class Serveur {
                 Logger.getLogger(Serveur.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    private Thread newThread(){
+        Thread t= new Thread(new Runnable() {
+                        @Override
+                        public void run() {  
+                            Thread thisThread = Thread.currentThread();
+                            while (thrd == thisThread) {
+                                partie.run(nombreJoueur);
+                            }
+                            
+                        }
+                        });
+        return t;
+    }
+    
+     private void stop() {
+             thrd=null;
+       
     }
     
     /**
@@ -81,12 +104,7 @@ public class Serveur {
                         }
                     }
                     if(this.partie.size()==this.nombreJoueur){
-                        Thread thrd= new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            partie.run();
-                        }
-                        });
+                        thrd=newThread();
                         thrd.start();
                        
                     }
@@ -110,6 +128,8 @@ public class Serveur {
                 com.sendMessage(message1);
                 com.sendList(listeVide);
                 partie.remove(com);
+                if(thrd.isAlive())
+                   this.stop();
                 //partie.removeJoueurByName(msg.getNick_src());
                 Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
 
