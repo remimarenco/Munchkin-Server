@@ -429,12 +429,15 @@ public final class Deck {
 
 	private void nouvellesActionsMonstreVaincu(ArrayList<Action> actionTabMonstreVaincu, PiocherCarte piocherCarte, ChangerNiveau changerNiveau){
         actionTabMonstreVaincu.clear();
-        actionTabMonstreVaincu.add(piocherCarte);
+        if(piocherCarte != null)
+            actionTabMonstreVaincu.add(piocherCarte);
+        if(changerNiveau != null)
         actionTabMonstreVaincu.add(changerNiveau);
     }
     
     private void nouvellesActionsIncidentFacheux(ArrayList<Action> actionTabIncident, ChangerNiveau changerNiveau, DefausserCarte defausserCarte){
         actionTabIncident.clear();
+        if(changerNiveau != null)
         actionTabIncident.add(changerNiveau);
     }
 }
