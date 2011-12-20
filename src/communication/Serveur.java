@@ -103,6 +103,7 @@ public class Serveur {
                             j.sendMessage(message3);
                         }
                     }
+                    this.partie.sendInfosJoueursToAll();
                     if(this.partie.size()==this.nombreJoueur){
                         thrd=newThread();
                         thrd.start();
@@ -169,12 +170,7 @@ public class Serveur {
             case Message.QUESTION:
             this.partie.answer(msg);
             break;
-            case Message.INFO_JOUEUR:
-                Joueur j=
-                this.partie.getJoueurByName(msg.getNick_dest());
-                if(j!=null)
-                    com.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", com.getName(), j.generateInfos()));
-                break;
+           
             
         }
     }

@@ -493,6 +493,14 @@ public final class Partie extends ArrayList<Joueur>{
         this.enCours.sendMessage(msg);
     }
      
+     public void sendInfosJoueursToAll(){
+         for(Joueur j :this){
+             for(Joueur j2 :this)
+             j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
+         }
+     }
+             
+     
      public boolean answer(Message msg){          
       this.answer=msg.getMessage();
       return true;     
