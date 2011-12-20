@@ -87,6 +87,7 @@ public final class Deck {
         ArrayList<Action> actionTabMonstreVaincu = new ArrayList<Action>();
         ArrayList<Action> actionTabMalediction = new ArrayList<Action>();
         ArrayList<Action> actionEquipement = new ArrayList<Action>();
+        ArrayList<Action> actionDeguerpir = new ArrayList<Action>();
         ArrayList<Classe> tabClasse = new ArrayList<Classe>();
         ArrayList<Race> tabRace = new ArrayList<Race>();
         Monstre mstr;
@@ -132,7 +133,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
-        cartes.add(new Monstre(6, "Mr Nonos", "Si vous devez vous enfuir, vous perdez un niveau, même si vous arrivez à  déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new ChangerNiveau(-1));
+        cartes.add(new Monstre(6, "Mr Nonos", "Si vous devez vous enfuir, vous perdez un niveau, même si vous arrivez à  déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
@@ -143,6 +146,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
+        actionDeguerpir.clear();
+        // TODO a faire comme il faut parce que la c'est a chier
+        actionDeguerpir.add(new DefausserCarte());
         cartes.add(new Monstre(8, "Pit Bull", "Si vous ne pouvez le vaincre, vous pouvez le distraire(vous déguerpissez automatiquement) en lachant une baguette un baton ou une lance. Va chercher Médor!", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
@@ -236,6 +242,8 @@ public final class Deck {
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.MAIN));
         resetCondition(actionTabMalediction, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, null, Constante.SEXE_F, null, null));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new PiocherCarte(Constante.TRESOR, 1));
         cartes.add(new Monstre(20, "Amazone", "N'attaque ni les joueur féminin, ni les joueur masculin qui ont changé de sexe, mais se content de leur donner un trésor", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 8));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
