@@ -28,8 +28,22 @@ public class ModifDeguerpir extends Action{
 
 
 	@Override
-	public void action(Joueur joueurImpacte) {
-		// TODO Auto-generated method stub
+	public String action(Joueur joueurImpacte) {
+                String out = "";
+                out += "On passe dans une action de modification déguerpir :\n";
+                out += "Le bonus déguerpir est : " + bonusDeguerpir + ", le niveau max pour ce bonus est : "
+                        + niveauMax + ", le sexe sur lequel il s'applique est : "+ sexe + ", les races impliquées sont : ";
+                for(Race race : tabRace)
+                {
+                    out += race.toString();
+                }
+                out += ", les classes impliquées sont : ";
+                for(Classe classe : tabClasse)
+                {
+                    out += classe.toString();
+                }
+                out += "\n";
+
 		boolean accept=true;
 		boolean raceTrouve=false;
 		boolean classeTrouve=false;
@@ -67,6 +81,7 @@ public class ModifDeguerpir extends Action{
 		
 		if(accept==true)
 			joueurImpacte.getPersonnage().setBonusCapaciteFuite(joueurImpacte.getPersonnage().getBonusCapaciteFuite()+bonusDeguerpir);
-	}
+                return out;
+        }
 
 }

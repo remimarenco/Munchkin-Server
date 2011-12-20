@@ -22,8 +22,15 @@ public  class Equipement {
 
 
 
-	public  void equipe(Joueur joueurImpacte){
-		
+	public String equipe(Joueur joueurImpacte)
+        {
+            String out;
+            out = "--- Equipement ---\n";
+            out += "Un equipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+            for(Action action : tabAction)
+                out += action.action(joueurImpacte);
+            out += "--- Fin d'equipement ---\n";
+            return out;
 	}
 	
 }

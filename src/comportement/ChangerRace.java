@@ -9,8 +9,9 @@ public class ChangerRace extends Action {
 	}
 
 	@Override
-	public void action(Joueur joueurImpacte) {
+	public String action(Joueur joueurImpacte) {
 		// TODO Auto-generated method stub
-		
+		String out = "";
+                return out;
 	}
 }

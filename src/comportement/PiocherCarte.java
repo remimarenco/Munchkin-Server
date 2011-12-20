@@ -17,7 +17,7 @@ public class PiocherCarte extends Action {
     /**
      * Type de pioche dans laquelle piocher les cartes
      */
-    private int type_pioche;
+    private Class type_pioche;
 
 
     /**
@@ -27,7 +27,7 @@ public class PiocherCarte extends Action {
      * @param nbCarte
      * => Nombre de cartes à piocher sur l'action
      */
-    public PiocherCarte(int type_pioche,int nbCarte){
+    public PiocherCarte(Class type_pioche,int nbCarte){
         this.nbCarte = nbCarte;
         this.type_pioche=type_pioche;
     }
@@ -38,24 +38,26 @@ public class PiocherCarte extends Action {
      * => Le joueur qui va piocher les cartes
      */
     @Override
-    public void action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte) {
+        String out = "";
         // On récupère le nom du joueur qui reçoit l'action
-        System.out.print("Le joueur " + joueurImpacte.getName());
+        out += "Le joueur " + joueurImpacte.getName();
         // Affichage selon le nombre de carte
         if(nbCarte > 1)
-            System.out.print(" pioche "+nbCarte+" cartes dans la pioche ");
+           out += " pioche "+nbCarte+" cartes dans la pioche ";
         else
-            System.out.print(" pioche "+nbCarte+" carte dans la pioche ");
+            out += " pioche "+nbCarte+" carte dans la pioche ";
 
         if(type_pioche == Constante.DONJON)
         {
-            System.out.println("donjon");
+            out += "donjon";
             joueurImpacte.piocherCarte(Constante.DONJON);
         }
         else
         {
-            System.out.println("trésor");
+            out += "trésor";
             joueurImpacte.piocherCarte(Constante.TRESOR);
         }
+        return out;
     }
 }

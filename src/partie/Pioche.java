@@ -14,16 +14,12 @@ import java.util.Iterator;
 public class Pioche<T> {
     
     protected ArrayList<T> pioche;
-    protected int type;
+    //protected int type;
+    protected Class typePioche;
     
-    public Pioche() {
+    public Pioche(Class typePioche) {
         pioche  = new ArrayList<T>();
-        type    = 0;
-    }
-    
-    public Pioche(int n) {
-        pioche  = new ArrayList<T>();
-        type    = n;
+        this.typePioche = typePioche;
     }
     
     public ArrayList<T> getPioche() {
@@ -52,10 +48,10 @@ public class Pioche<T> {
         ArrayList<Carte> cartes = Deck.getCartes();
         Iterator it = cartes.iterator();
         Carte c;
-        
+
         while(it.hasNext()){
             c = (Carte) it.next(); 
-            if(c.getType() == this.type){
+            if(c.getClass().equals(this.typePioche.getClass())){
                 this.pioche.add((T) c);
             }
         }

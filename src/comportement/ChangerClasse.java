@@ -9,8 +9,8 @@ public class ChangerClasse extends Action{
 	}
 
 	@Override
-	public void action(Joueur joueurImpacte) {
+	public String action(Joueur joueurImpacte) {
 		// TODO Auto-generated method stub
-		
+		return "action non implémentée";
 	}
 }

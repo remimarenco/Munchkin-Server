@@ -25,8 +25,26 @@ public class ModifPuissanceMonstre extends Action{
 	}
 
 	@Override
-	public void action(Joueur joueurImpacte) {
-		
+	public String action(Joueur joueurImpacte) {
+                String out = "";
+                out += "On passe dans une action de modification de puissance de monstre :\n";
+                out += "Le monstre impliqué est "+monstre.getNom();
+                out += ", le bonus puissance attribué est de " + this.bonusPuissance;
+                out += ", les classes contre lesquelles ce bonus s'applique sont :";
+                for(Race race : tabRace)
+                {
+                    out += " ";
+                    out += race.toString();
+                }
+                out += ", les races contre lesquelles ce bonus s'applique sont :";
+                for(Classe classe : tabClasse)
+                {
+                    out += " ";
+                    out += classe.toString();
+                }
+                out += "\n";
+
+
 		boolean accept=true;
 		boolean raceTrouve=false;
 		boolean classeTrouve=false;
@@ -54,6 +72,7 @@ public class ModifPuissanceMonstre extends Action{
 		
 		if (accept)
 			monstre.setPuissance(monstre.getPuissance()+bonusPuissance);
+                return out;
 		
 	}
 

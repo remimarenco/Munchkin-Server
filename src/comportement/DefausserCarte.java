@@ -28,7 +28,10 @@ public class DefausserCarte extends Action{
     }
 
     @Override
-    public void action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte) {
+        String out = "";
+        out += "Une action de défausse de carte est en cours : \n";
+        out += "On défausse " + this.nbCarte + " de type " + this.typeCarte + " dans le tas " + this.typeTas + "\n";
         Carte c = null;
         
         if(this.typeTas == Constante.TAS_CHOISIR){
@@ -62,7 +65,9 @@ public class DefausserCarte extends Action{
             }
         }else{
             throw new UnsupportedOperationException("Problème lors du choix du tas de défausse");
-        }     
+        }
+
+        return out;
     }
     
     

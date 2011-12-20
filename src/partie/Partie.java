@@ -3,6 +3,7 @@ package partie;
 import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
+import carte.Objet;
 import carte.Sort;
 import carte.Tresor;
 import communication.Message;
@@ -131,7 +132,7 @@ public final class Partie extends ArrayList<Joueur>{
 	                    if(this.answer.equals("Yes")){
 	                        if(combat.combattre()){
 	                            System.out.println("Vous avez gagné !");
-	                            monstrePioche.appliquerMonstreVaincu(enCours);
+	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
 	                        }else{
 	                            System.out.println("Vous avez perdu...");
@@ -166,6 +167,16 @@ public final class Partie extends ArrayList<Joueur>{
                     System.out.println("C'est un sort !!");
                      this.sendMessageToAll("C'est un sort !!\n");
                 }
+                else if(cartePiochee.getClass().equals(Objet.class))
+                {
+                    Objet objet = (Objet) cartePiochee;
+                    objet.equiper(enCours);
+                    System.out.println("C'est un sort !!");
+                    this.sendMessageToAll("C'est un objet !!\n");
+
+                }
+
+
                 // ==============
                 
                 // On annule les bonus temporaires

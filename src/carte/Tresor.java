@@ -19,6 +19,6 @@ public class Tresor extends Carte {
          */
 	public Tresor(int id,String nom, String description) {
             super(id, nom, description);
-            this.type = Constante.TRESOR;
+            //this.type = Constante.TRESOR;
 	}
 }

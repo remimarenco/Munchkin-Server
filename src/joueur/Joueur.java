@@ -158,7 +158,7 @@ public class Joueur extends Thread {
         return true;
     }
     
-    public boolean piocherCarte(int typePioche){
+    public boolean piocherCarte(Class typePioche){
         if(typePioche == Constante.DONJON){
             this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
         }else if(typePioche == Constante.DONJON){

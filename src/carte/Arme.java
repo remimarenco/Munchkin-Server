@@ -5,7 +5,7 @@ import comportement.classes.Equipement;
  * Classe Arme.
  * Hérite de Tresor.
  * Représente les armes des personnages dans leur jeu
- * @author user
+ * @author Rémi Marenco
  */
 public class Arme extends Tresor {
 

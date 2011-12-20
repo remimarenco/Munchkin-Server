@@ -4,6 +4,8 @@
  */
 package partie;
 
+import carte.Donjon;
+import carte.Tresor;
 import joueur.Classe;
 import joueur.Elfe;
 import joueur.Guerrier;
@@ -30,8 +32,8 @@ public class Constante {
     public static final int NB_TOUT             = -2;
     public static final int NB_TOUT_CONCERNE    = -3;
     
-    public static final int TRESOR = 1;
-    public static final int DONJON = 2;
+    public static final Class TRESOR = Tresor.class;
+    public static final Class DONJON = Donjon.class;
     
     /**
      * Type de sexe

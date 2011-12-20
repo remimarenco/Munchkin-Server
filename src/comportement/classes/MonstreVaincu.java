@@ -14,14 +14,16 @@ public class MonstreVaincu {
             tabAction = tab;
     }
 	
-	public void actionMonstreVaincu(Joueur joueurImpacte)
+	public String actionMonstreVaincu(Joueur joueurImpacte)
 	{
-		System.out.println("--- Monstre Vaincu ---");
-        System.out.println("Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :");
-        for(Action action : tabAction)
-        {
-                action.action(joueurImpacte);
+            String out = "";
+            out += "--- Monstre Vaincu ---\n";
+            out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+            for(Action action : tabAction)
+            {
+                    out += action.action(joueurImpacte);
+            }
+            out += "--- Fin de monstre vaincu ---\n";
+            return out;
         }
-        System.out.println("--- Fin d'incident facheux ---");
-	}
 }

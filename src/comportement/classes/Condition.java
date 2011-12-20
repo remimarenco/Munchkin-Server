@@ -18,6 +18,10 @@ public class Condition {
 	
 	public void mettreCondition(Joueur joueurImpacte)
 	{
-		
+            System.out.println("--- Condition ---");
+            System.out.println("Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :");
+            for(Action action : tabAction)
+            action.action(joueurImpacte);
+            System.out.println("--- Fin de condition ---");
 	}
 }

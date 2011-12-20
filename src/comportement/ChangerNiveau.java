@@ -31,30 +31,32 @@ public class ChangerNiveau extends Action {
      * @param joueurImpacte
      */
     @Override
-    public void action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte) {
             /**
              * On affiche des informations différentes selon le gain ou la perte de niveau
              */
-             
+             String out = "";
+
              if(this.niveau == Constante.NB_PAR_DE){
                  this.niveau = Constante.nbAleatoire(1, 6+1);
              }
         
-            System.out.print(joueurImpacte.getName());
+            out += joueurImpacte.getName();
             if(niveau < 0)
-                    System.out.println(" perds ");
+                    out += " perds ";
             else if(niveau > 0)
-                    System.out.print(" gagne ");
+                    out += " gagne ";
             joueurImpacte.getPersonnage().changerNiveau(niveau);
             if(niveau > 1 || niveau < -1)
             {
-            	System.out.println(niveau+" niveaux !!");
+            	out += niveau+" niveaux !!\n";
             }
             else
             {
-            	System.out.println(niveau+" niveau !!");
+            	out += niveau+" niveau !!\n";
             }
-            System.out.println(joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau());
+            out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
+            return out;
     }
 
 }
