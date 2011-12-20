@@ -1,6 +1,7 @@
 package carte;
 
 import comportement.classes.Condition;
+import comportement.classes.IncidentDeguerpir;
 import comportement.classes.IncidentFacheux;
 import comportement.classes.MonstreVaincu;
 import joueur.Joueur;
@@ -23,11 +24,12 @@ public class Monstre extends Donjon {
      * @param condition
      * @param incidentFacheux
      */
-    public Monstre(int id,String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, int puissance) {
+    public Monstre(int id,String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, IncidentDeguerpir incidentDeguerpir, int puissance) {
         super(id,nom, description);
         this.condition = condition;
         this.incidentFacheux = incidentFacheux;
         this.monstreVaincu = monstreVaincu;
+        this.incidentDeguerpir = incidentDeguerpir;
         this.puissance = puissance;
     }
     

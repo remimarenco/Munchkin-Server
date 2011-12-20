@@ -10,9 +10,9 @@ public class MonstreVaincu {
 	public ArrayList<Action> tabAction;
 	
 	public MonstreVaincu(ArrayList<Action> tab)
-    {
-            tabAction = tab;
-    }
+        {
+                tabAction = tab;
+        }
 	
 	public String actionMonstreVaincu(Joueur joueurImpacte)
 	{

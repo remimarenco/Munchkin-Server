@@ -2,6 +2,7 @@ package carte;
 
 import comportement.classes.Condition;
 import comportement.classes.Equipement;
+import comportement.classes.IncidentDeguerpir;
 import comportement.classes.IncidentFacheux;
 import comportement.classes.MonstreVaincu;
 import comportement.classes.Sortilege;
@@ -80,6 +81,13 @@ public abstract class Carte {
      * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected MonstreVaincu monstreVaincu;
+
+    /**
+     * IncidentDeguerpir d'une carte => valable seulement si c'est un
+     * Résultat du design pattern Strategy
+     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
+     */
+    protected IncidentDeguerpir incidentDeguerpir;
 
     /**
      * Constructeur de la carte
