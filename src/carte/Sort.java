@@ -9,8 +9,7 @@ import comportement.classes.Sortilege;
 public class Sort extends Donjon {
     
         /**
-         * Constructeur de la classe sort
-         * Permet d'enregistrer l'action de lancer un ensemble de sortilege
+         * Constructeur de la classe sort (un sortilège)
          * @param nom
          * @param description
          * @param sortilege

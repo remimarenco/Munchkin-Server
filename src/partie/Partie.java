@@ -103,7 +103,7 @@ public final class Partie extends ArrayList<Joueur>{
                 
                 System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
                 //envoi du message a tous les client connecté
-                this.sendMessageToAll("Le joueur : " +enCours.getName() + "pioche une carte ! : \n");
+                this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
                 
                 
                 // === MONSTRE ===
@@ -145,9 +145,6 @@ public final class Partie extends ArrayList<Joueur>{
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
 	                        }
 	                        else{
-	                        	// Chelou le passage dans le else
-		                        // Si on ne peut pas déguerpir, on dit au joueur d'entrer o ou n ?
-	                            //System.out.println("Veuillez entrer 'o' ou 'n'");
 	                             this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
 	                        }
 	                    }

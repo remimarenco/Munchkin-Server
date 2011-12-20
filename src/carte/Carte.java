@@ -17,13 +17,39 @@ public abstract class Carte {
     /**
      * id de la carte, permettant de la référencer côté seriveur et client
      */
-    protected static int id = 0;
+    protected Integer id = 0;
     protected String nom;
     /**
      * Description de la carte, correspondante à la réalité
      */
     protected String description;
 
+    public  Integer getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
+    
     /**
      * IncidentFacheux d'une carte => valable seulement si c'est un monstre
      * Résultat du design pattern Strategy
@@ -64,7 +90,7 @@ public abstract class Carte {
     public Carte(int id, String nom, String description) {
         this.nom = nom;
         this.description = description;
-        Carte.id = id;
+        this.id = id;
     }
     
     /*

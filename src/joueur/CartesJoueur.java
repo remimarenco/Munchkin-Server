@@ -6,6 +6,7 @@ package joueur;
 
 import carte.Carte;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import partie.Constante;
 
@@ -45,5 +46,15 @@ public class CartesJoueur {
 
     public ArrayList<Carte> getCartes() {
         return cartes;
+    }
+    
+    public HashMap<String,String> generateInfos(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        for(Carte c : this.cartes){
+            map.put("id", c.getId().toString());
+            map.put("nom", c.getNom());
+            map.put("description", c.getDescription());
+        }
+        return map;
     }
 }

@@ -1,6 +1,7 @@
 package joueur;
 
 import carte.Carte;
+import java.util.HashMap;
 
 public class Main extends CartesJoueur{
 
