@@ -13,10 +13,10 @@ public class Donjon extends Carte {
      * @param nom
      * @param description
      */
-    public Donjon(String nom, String description) {
+    public Donjon(int id ,String nom, String description) {
         this.nom = nom;
         this.description = description;
-        Donjon.id = Donjon.id + 1;
+        Donjon.id = id;
         this.type = Constante.DONJON;
     }
     

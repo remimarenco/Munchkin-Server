@@ -23,8 +23,8 @@ public class Monstre extends Donjon {
      * @param condition
      * @param incidentFacheux
      */
-    public Monstre(String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, int puissance) {
-        super(nom, description);
+    public Monstre(int id,String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, int puissance) {
+        super(id,nom, description);
         this.condition = condition;
         this.incidentFacheux = incidentFacheux;
         this.monstreVaincu = monstreVaincu;

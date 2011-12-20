@@ -16,8 +16,8 @@ public class Arme extends Tresor {
          * @param description
          * @param equipement
          */
-	public Arme(String nom, String description, Equipement equipement) {
-		super(nom, description);
+	public Arme(int id,String nom, String description, Equipement equipement) {
+		super(id,nom, description);
 		this.equipement = equipement;
 	}
 }

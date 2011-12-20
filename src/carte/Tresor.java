@@ -17,10 +17,10 @@ public class Tresor extends Carte {
          * @param description
          * @param equipement
          */
-	public Tresor(String nom, String description) {
+	public Tresor(int id,String nom, String description) {
             this.nom = nom;
             this.description = description;
-            Tresor.id = Tresor.id + 1;
+            Tresor.id =id;
             this.type = Constante.TRESOR;
 	}
 }
