@@ -76,7 +76,7 @@ public final class Partie extends ArrayList<Joueur>{
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);       
         this.distribuer();
-        
+        this.sendInfosJoueursToAll();
         Iterator it = this.iterator();        
         Carte cartePiochee;
         
@@ -159,6 +159,7 @@ public final class Partie extends ArrayList<Joueur>{
                     
 	               monstrePioche.setBonusPuissance(0);
                    this.defausseDonjon.ajouterCarte(cartePiochee);
+                   this.sendInfosJoueursToAll();
                 }
                 // ===============
                 
