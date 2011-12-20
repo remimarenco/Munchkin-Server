@@ -14,9 +14,7 @@ public class Donjon extends Carte {
      * @param description
      */
     public Donjon(int id ,String nom, String description) {
-        this.nom = nom;
-        this.description = description;
-        Donjon.id = id;
+        super(id, nom, description);
         this.type = Constante.DONJON;
     }
     

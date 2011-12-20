@@ -22,6 +22,12 @@ public abstract class Carte {
     protected Condition condition;
     protected MonstreVaincu monstreVaincu;
 
+    public Carte(int id, String nom, String description) {
+        this.nom = nom;
+        this.description = description;
+        Carte.id = id;
+    }
+    
     
     public int getType(){
         return type;

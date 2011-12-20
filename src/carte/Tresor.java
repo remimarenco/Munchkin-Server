@@ -18,9 +18,7 @@ public class Tresor extends Carte {
          * @param equipement
          */
 	public Tresor(int id,String nom, String description) {
-            this.nom = nom;
-            this.description = description;
-            Tresor.id =id;
+            super(id, nom, description);
             this.type = Constante.TRESOR;
 	}
 }
