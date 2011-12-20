@@ -6,7 +6,7 @@ import comportement.classes.IncidentFacheux;
 import comportement.classes.MonstreVaincu;
 import comportement.classes.Sortilege;
 import joueur.Joueur;
-
+import sun.reflect.Reflection;
 
 /**
  * Classe carte permettant de gérer toutes les cartes du jeu

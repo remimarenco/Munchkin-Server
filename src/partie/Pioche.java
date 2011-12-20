@@ -49,9 +49,12 @@ public class Pioche<T> {
         Iterator it = cartes.iterator();
         Carte c;
 
+        /**
+         * On ajoute la carte dans la pioche seulement si elle appartient à un type de pioche (Donjon ou Trésor)
+         */
         while(it.hasNext()){
-            c = (Carte) it.next(); 
-            if(c.getClass().equals(this.typePioche.getClass())){
+            c = (Carte) it.next();
+            if(c.getClass().getSuperclass().equals(this.typePioche)){
                 this.pioche.add((T) c);
             }
         }
