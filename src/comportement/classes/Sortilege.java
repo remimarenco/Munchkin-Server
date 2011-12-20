@@ -16,11 +16,24 @@ public class Sortilege {
         this.tabAction = tabAction;
     }
 
-    public void actionSortilege(Joueur joueurImpacte){
-        System.out.println("----- Sortilège -----");
-        System.out.println("Un sortilège s'applique sur " + joueurImpacte.getName() + " :");
-        for(Action action : tabAction)
-            action.action(joueurImpacte);
-        System.out.println("--- Fin sortilège ---");
+    public String actionSortilege(Joueur joueurImpacte)
+    {
+        String out = "";
+        if(tabAction == null)
+        {
+            out += "Aucune sortilège à appliquer";
+        }
+        else
+        {
+            out += "----- Sortilège -----\n";
+            out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
+            for(Action action : tabAction)
+                out += action.action(joueurImpacte);
+            out += "\n";
+            out += "--- Fin sortilège ---";
+        }
+        out += "\n";
+
+        return out;
     }
 }

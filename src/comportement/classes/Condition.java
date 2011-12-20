@@ -12,16 +12,26 @@ public class Condition {
 	private ArrayList<Action> tabAction;
 	public Condition(ArrayList<Action> tabAction)
 	{
-		super();
 		this.tabAction = tabAction;
 	}
 	
-	public void mettreCondition(Joueur joueurImpacte)
+	public String mettreCondition(Joueur joueurImpacte)
 	{
-            System.out.println("--- Condition ---");
-            System.out.println("Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :");
-            for(Action action : tabAction)
-            action.action(joueurImpacte);
-            System.out.println("--- Fin de condition ---");
+            String out = "";
+
+            if(tabAction == null)
+            {
+                out += "Aucune condition sur ce monstre\n";
+            }
+            else
+            {
+                out += "--- Condition ---\n";
+                out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
+                for(Action action : tabAction)
+                    out += action.action(joueurImpacte);
+                out += "\n";
+                out += "--- Fin de condition ---\n";
+            }
+            return out;
 	}
 }

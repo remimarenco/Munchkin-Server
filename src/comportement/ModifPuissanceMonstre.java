@@ -30,25 +30,45 @@ public class ModifPuissanceMonstre extends Action{
                 out += "On passe dans une action de modification de puissance de monstre :\n";
                 out += "Le monstre impliqué est "+monstre.getNom();
                 out += ", le bonus puissance attribué est de " + this.bonusPuissance;
-                out += ", les classes contre lesquelles ce bonus s'applique sont :";
-                for(Race race : tabRace)
+                
+
+                if(tabRace != null || !(tabRace.isEmpty()))
                 {
-                    out += " ";
-                    out += race.toString();
+                    out += ", les races contre lesquelles ce bonus s'applique sont :";
+                    for(Race race : tabRace)
+                    {
+                        out += " ";
+                        out += race.toString();
+                    }
                 }
-                out += ", les races contre lesquelles ce bonus s'applique sont :";
-                for(Classe classe : tabClasse)
+                else
                 {
-                    out += " ";
-                    out += classe.toString();
+                    out += " , aucune race n'est concernée par ce bonus";
                 }
-                out += "\n";
+
+                
+                
+                if(tabClasse != null || !(tabClasse.isEmpty()))
+                {
+                    out += ", les classes contre lesquelles ce bonus s'applique sont :";
+                    for(Classe classe : tabClasse)
+                    {
+                        out += " ";
+                        out += classe.toString();
+                    }
+                    out += "\n";
+                }
+                else
+                {
+                    out += " , aucune classe n'est concernée par ce bonus";
+                }
+                System.out.println(out);
 
 
 		boolean accept=true;
 		boolean raceTrouve=false;
 		boolean classeTrouve=false;
-		if(tabRace!=null)
+		if(tabRace != null || tabRace.isEmpty())
 		{
 			for(Race race: tabRace)
 			{
@@ -59,7 +79,7 @@ public class ModifPuissanceMonstre extends Action{
 				accept=false;
 		}
 		
-		if(tabClasse!=null)
+		if(tabClasse != null || tabClasse.isEmpty())
 		{
 			for(Classe classe: tabClasse)
 			{

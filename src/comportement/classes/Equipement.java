@@ -24,12 +24,21 @@ public  class Equipement {
 
 	public String equipe(Joueur joueurImpacte)
         {
-            String out;
-            out = "--- Equipement ---\n";
-            out += "Un equipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-            for(Action action : tabAction)
-                out += action.action(joueurImpacte);
-            out += "--- Fin d'equipement ---\n";
+            String out = "";
+
+            if(tabAction != null)
+            {
+                out += "--- Equipement ---\n";
+                out += "Un equipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+                for(Action action : tabAction)
+                    out += action.action(joueurImpacte);
+                out += "--- Fin d'equipement ---\n";
+            }
+            else
+            {
+               out += "Aucun equipement !\n";
+            }
+
             return out;
 	}
 	

@@ -145,11 +145,11 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public void appliquerIncidentFacheux(Joueur joueurImpacte){
+    public String appliquerIncidentFacheux(Joueur joueurImpacte){
         if(this.incidentFacheux != null)
-            this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
+            return this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
         else
-            System.out.println("Cette carte n'a pas d'incident facheux");
+            return "Cette carte n'a pas d'incident facheux\n";
     }
 
     /**
@@ -158,11 +158,11 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public void equiper(Joueur joueurImpacte){
+    public String equiper(Joueur joueurImpacte){
         if(this.equipement != null)
-            equipement.equipe(joueurImpacte);
+            return equipement.equipe(joueurImpacte);
         else
-            System.out.println("Cette carte n'a pas d'équipement");
+            return "Cette carte n'a pas d'équipement\n";
     }
 
     /**
@@ -171,11 +171,11 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public void appliquerCondition(Joueur joueurImpacte){
+    public String appliquerCondition(Joueur joueurImpacte){
         if(this.condition != null)
-            this.condition.mettreCondition(joueurImpacte);
+            return this.condition.mettreCondition(joueurImpacte);
         else
-            System.out.println("Cette carte n'a pas de condition");
+            return "Cette carte n'a pas de condition\n";
     }
 
     /**
@@ -184,11 +184,11 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public void appliquerSortilege(Joueur joueurImpacte){
+    public String appliquerSortilege(Joueur joueurImpacte){
         if(this.sortilege != null)
-            this.sortilege.actionSortilege(joueurImpacte);
+            return this.sortilege.actionSortilege(joueurImpacte);
         else
-            System.out.println("Cette carte n'a pas de malus");
+            return "Cette carte n'a pas de malus\n";
     }
 
     /**

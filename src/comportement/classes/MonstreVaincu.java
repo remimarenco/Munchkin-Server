@@ -17,13 +17,24 @@ public class MonstreVaincu {
 	public String actionMonstreVaincu(Joueur joueurImpacte)
 	{
             String out = "";
-            out += "--- Monstre Vaincu ---\n";
-            out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-            for(Action action : tabAction)
+
+            if(tabAction == null)
             {
-                    out += action.action(joueurImpacte);
+                out += "Aucune condition sur ce monstre\n";
             }
-            out += "--- Fin de monstre vaincu ---\n";
+            else
+            {
+                out += "--- Monstre Vaincu ---\n";
+                out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+                for(Action action : tabAction)
+                {
+                        out += action.action(joueurImpacte);
+                }
+                out += "\n";
+                out += "--- Fin de monstre vaincu ---";
+            }
+            out += "\n";
+            
             return out;
         }
 }

@@ -113,12 +113,18 @@ public final class Partie extends ArrayList<Joueur>{
                     combat.getCampGentil().add(enCours.getPersonnage());
                     
                     Monstre monstrePioche = (Monstre) cartePiochee;
+
                     combat.getCampMechant().add(monstrePioche);
                     
                     System.out.println("Vous avez tiré le monstre :");
                     System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
                     System.out.println(monstrePioche.getDescription());
-                    
+
+                    /**
+                     * On applique la condition du monstre
+                     */
+                    this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
+
                     System.out.println("Combattre ? (o/n)");
                     this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
                             + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
@@ -132,10 +138,13 @@ public final class Partie extends ArrayList<Joueur>{
 	                    if(this.answer.equals("Yes")){
 	                        if(combat.combattre()){
 	                            System.out.println("Vous avez gagné !");
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
 	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
 	                        }else{
 	                            System.out.println("Vous avez perdu...");
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+                                    this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
 	                            monstrePioche.appliquerIncidentFacheux(enCours);
 	                        }
@@ -145,7 +154,8 @@ public final class Partie extends ArrayList<Joueur>{
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
 	                        }
 	                        else{
-	                             this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
 	                        }
 	                    }
 	                    else

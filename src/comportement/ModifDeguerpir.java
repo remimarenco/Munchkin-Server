@@ -32,18 +32,37 @@ public class ModifDeguerpir extends Action{
                 String out = "";
                 out += "On passe dans une action de modification déguerpir :\n";
                 out += "Le bonus déguerpir est : " + bonusDeguerpir + ", le niveau max pour ce bonus est : "
-                        + niveauMax + ", le sexe sur lequel il s'applique est : "+ sexe + ", les races impliquées sont : ";
-                for(Race race : tabRace)
+                        + niveauMax + ", le sexe sur lequel il s'applique est : "+ sexe;
+
+                if(tabRace != null)
                 {
-                    out += race.toString();
+                    out += ", les races impliquées sont : ";
+                    for(Race race : tabRace)
+                    {
+                        out += race.toString();
+                    }
+
                 }
-                out += ", les classes impliquées sont : ";
-                for(Classe classe : tabClasse)
+                else
                 {
-                    out += classe.toString();
+                    out += ", aucune race impliquée";
+                }
+
+                if(tabClasse != null)
+                {
+                    out += ", les classes impliquées sont : ";
+                    for(Classe classe : tabClasse)
+                    {
+                        out += classe.toString();
+                    }
+                    
+                }
+                else
+                {
+                    out += ", aucune classe impliquée";
                 }
                 out += "\n";
-
+                
 		boolean accept=true;
 		boolean raceTrouve=false;
 		boolean classeTrouve=false;

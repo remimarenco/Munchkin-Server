@@ -44,18 +44,36 @@ public class ModifPuissancePersonnage extends Action{
                 out += "On passe dans une action de modification de puissance de personnage :\n";
                 out += "Le joueur impliqué est "+joueurImpacte.getName();
                 out += ", le bonus puissance attribué est de " + this.bonusPuissance;
-                out += ", les classes pour lesquelles ce bonus s'applique sont :";
-                for(Race race : tabRace)
+
+
+                if(tabRace != null)
                 {
-                    out += " ";
-                    out += race.toString();
+                    out += ", les races pour lesquelles ce bonus s'applique sont :";
+                    for(Race race : tabRace)
+                    {
+                        out += " ";
+                        out += race.toString();
+                    }
                 }
-                out += ", les races pour lesquelles ce bonus s'applique sont :";
-                for(Classe classe : tabClasse)
+                else
                 {
-                    out += " ";
-                    out += classe.toString();
+                    out += "Aucun classe pour ce bonus";
                 }
+
+                if(tabClasse != null)
+                {
+                    out += ", les classes pour lesquelles ce bonus s'applique sont :";
+                    for(Classe classe : tabClasse)
+                    {
+                        out += " ";
+                        out += classe.toString();
+                    }
+                }
+                else
+                {
+                    out += "Aucune classe pour ce bonus";
+                }
+
                 out += "\n";
 		
 		if(tabRace!=null)

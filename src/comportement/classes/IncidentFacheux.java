@@ -23,20 +23,34 @@ public class IncidentFacheux {
      */
     public IncidentFacheux(ArrayList<Action> tab)
     {
-            tabAction = tab;
+            this.tabAction = tab;
     }
 
     /**
      * Application de l'ensemble des actions de l'incident fâcheux sur le joueur
      * @param joueurImpacte
      */
-    public void actionIncidentFacheux(Joueur joueurImpacte)
+    public String actionIncidentFacheux(Joueur joueurImpacte)
     {
-            System.out.println("--- Incident facheux ---");
-            System.out.println("Un incident facheux vient de se déclencher sur " + joueurImpacte.getName() + " :");
+        String out = "";
+        if(tabAction != null || !(tabAction.isEmpty()))
+        {
+            out += "--- Incident facheux ---\n";
+            out += "Un incident facheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+            out += "Il y a " + tabAction.size();
             for(Action action : tabAction)
-                action.action(joueurImpacte);
-            System.out.println("--- Fin d'incident facheux ---");
+            {
+                out += "\nAction : !";
+                out += action.action(joueurImpacte);
+            }
+            out += "--- Fin d'incident facheux ---\n";
+        }
+        else
+        {
+            out += "Aucune incident fâcheux !!\n";
+        }
+
+        return out;
     }
 
 }
