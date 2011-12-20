@@ -82,13 +82,13 @@ public class ModifPuissancePersonnage extends Action{
 		
 		if(!bNiveau)
 		{
-			puissanceObjet=joueurImpacte.getPersonnage().getPuissance()-joueurImpacte.getPersonnage().getNiveau();
-			this.bonusPuissance -= puissanceObjet;
-		}
-		if(!bObjet)
-		{
 			niveauJoueur=joueurImpacte.getPersonnage().getNiveau();
 			this.bonusPuissance -= niveauJoueur;
+		}
+                if(!bObjet)
+		{
+			puissanceObjet=joueurImpacte.getPersonnage().getPuissance()-joueurImpacte.getPersonnage().getNiveau();
+			this.bonusPuissance -= puissanceObjet;
 		}
 		
 		if(accept)

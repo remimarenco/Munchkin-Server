@@ -15,6 +15,7 @@ import comportement.ChangerRace;
 import comportement.DefausserCarte;
 import comportement.ModifDeguerpir;
 import comportement.ModifPuissanceMonstre;
+import comportement.ModifPuissancePersonnage;
 import comportement.PiocherCarte;
 import comportement.classes.Condition;
 import comportement.classes.Equipement;
@@ -94,7 +95,7 @@ public final class Deck {
         // ================
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
-        actionTabCondition.clear();
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-1000, null, null, null, null));
         cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
         
@@ -120,9 +121,9 @@ public final class Deck {
 
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
-        actionTabCondition.clear();
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-1, null, null, null, null));
-        cartes.add(new Monstre(4, "Grenouilles volantes", "Malus de 1 pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
+        cartes.add(new Monstre(4, "Grenouilles volantes", "Malus de 1 pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
@@ -135,7 +136,9 @@ public final class Deck {
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
-        cartes.add(new Monstre(7, "Octaèdre gélatineux", "+1 au jet pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(1, null, null, null, null));
+        cartes.add(new Monstre(7, "Octaèdre gélatineux", "+1 au jet pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
@@ -143,24 +146,46 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
-        cartes.add(new Monstre(9, "Harpies", "Résistent à  la magie, +5 Contre les magiciens", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(9, "Harpies", "Résistent à  la magie, +5 Contre les magiciens", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4);
+        tabClasse.add(Constante.CLASSE_MAGICIEN);
+        actionTabCondition.add(new ModifPuissanceMonstre(null, tabClasse, 5, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
-        cartes.add(new Monstre(10, "Cheval Zombi", "+5 contre les nains", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(10, "Cheval Zombi", "+5 contre les nains", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4);
+        tabRace.add(Constante.RACE_NAIN);
+        actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 5, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_PAR_DE, Constante.TAS_CHOISIR));
-        cartes.add(new Monstre(11, "Escargot sous acide", "-2 pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(-2, null, null, null, null));
+        cartes.add(new Monstre(11, "Escargot sous acide", "-2 pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 2, Constante.JEU));
-        cartes.add(new Monstre(12, "Lépreuxchaun", "Mais il est dégueu! +5 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(12, "Lépreuxchaun", "Mais il est dégueu! +5 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 4);
+        tabRace.add(Constante.RACE_ELFE);
+        actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 5, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
-        cartes.add(new Monstre(13, "Manticorenithorynque", "Résiste à  la magie, +6 contre les magiciens", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(13, "Manticorenithorynque", "Résiste à  la magie, +6 contre les magiciens", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6);
+        tabClasse.add(Constante.CLASSE_MAGICIEN);
+        actionTabCondition.add(new ModifPuissanceMonstre(null, tabClasse, 6, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
@@ -169,35 +194,58 @@ public final class Deck {
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
-        cartes.add(new Monstre(15, "Huissier", "N'attaque pas les voleurs (entres confrères...). Un voleur qui rencontre un huissier peut choisir de défausser deux cartes trésors et en tirer deux nouvelles", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        tabClasse.add(Constante.CLASSE_VOLEUR);
+        actionTabCondition.add(new ModifDeguerpir(+1000, null, null, null, tabClasse));
+        cartes.add(new Monstre(15, "Huissier", "N'attaque pas les voleurs (entres confrères...). Un voleur qui rencontre un huissier peut choisir de défausser deux cartes trésors et en tirer deux nouvelles", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_RACE, 1, Constante.MAIN));
-        cartes.add(new Monstre(16, "Binoclar Hurleur", "+6 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(16, "Binoclar Hurleur", "+6 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 6);
+        tabClasse.add(Constante.CLASSE_GUERRIER);
+        actionTabCondition.add(new ModifPuissanceMonstre(null, tabClasse, 6, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.MAIN));
-        cartes.add(new Monstre(17, "Suceur de tête", "C'est dégueu! +6 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(17, "Suceur de tête", "C'est dégueu! +6 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8);
+        tabRace.add(Constante.RACE_ELFE);
+        actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 6, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
-        cartes.add(new Monstre(18, "Vamps...Ires!?!", "Aucun objet ne vous servira contre elles, vous combattez uniquement avec votre niveau de personnage", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifPuissancePersonnage(null, null, 0, true, false));
+        cartes.add(new Monstre(18, "Vamps...Ires!?!", "Aucun objet ne vous servira contre elles, vous combattez uniquement avec votre niveau de personnage", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
+        // TODO après implémentation de l'aide
         cartes.add(new Monstre(19, "Belvédère Sauvage", "Nul ne peut vous aider, vous devez affronter seul le Belvédère", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.MAIN));
-        cartes.add(new Monstre(20, "Amazone", "N'attaque ni les joueur féminin, ni les joueur masculin qui ont changé de sexe, mais se content de leur donner un trésor", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, null, Constante.SEXE_F, null, null));
+        cartes.add(new Monstre(20, "Amazone", "N'attaque ni les joueur féminin, ni les joueur masculin qui ont changé de sexe, mais se content de leur donner un trésor", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 8));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(Constante.NB_PAR_DE), null);
-        cartes.add(new Monstre(21, "3872 Orques", "+6 contre les nains en raison d'une rancune obscure, certes, mais millénaire", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 10));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(21, "3872 Orques", "+6 contre les nains en raison d'une rancune obscure, certes, mais millénaire", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 10);
+        tabRace.add(Constante.RACE_NAIN);
+        actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 6, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX
@@ -210,66 +258,113 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
-        cartes.add(new Monstre(24, "Fan de Vampire", "Au lieu de le combattre, un prÃªtre peut chasser le fan de vampire en criant simplement \"bouga bouga!\" et s'emparer de son trésor. Dans ce cas il ne gagne aucun niveau.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12));
+        cartes.add(new Monstre(24, "Fan de Vampire", "Au lieu de le combattre, un prêtre peut chasser le fan de vampire en criant simplement \"bouga bouga!\" et s'emparer de son trésor. Dans ce cas il ne gagne aucun niveau.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
-        cartes.add(new Monstre(25, "Succube Langue-de-Belle-Mère", "Créature de l'enfer, +4 contre les prÃªtres. Vous devez défausser un objet (que vous choisissez) avant le combat", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12));
+        // TODO défausser objet a moins qu'on simplifie en mettant défausser a la fin
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(25, "Succube Langue-de-Belle-Mère", "Créature de l'enfer, +4 contre les prêtres. Vous devez défausser un objet (que vous choisissez) avant le combat", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12);
+        tabClasse.add(Constante.CLASSE_PRETRE);
+        actionTabCondition.add(new ModifPuissanceMonstre(null, tabClasse, 4, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
-        cartes.add(new Monstre(26, "Bigfoot, Alias Grand-Pied", "+3 Contre les nains et les Halfelins", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(26, "Bigfoot, Alias Grand-Pied", "+3 Contre les nains et les Halfelins", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 12);
+        tabRace.add(Constante.RACE_NAIN);
+        tabRace.add(Constante.RACE_HALFELIN);
+        actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 3, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
-        cartes.add(new Monstre(27, "Horreur non euclidienne indicible", "+4 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        mstr = new Monstre(27, "Horreur non euclidienne indicible", "+4 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14);
+        tabClasse.add(Constante.CLASSE_GUERRIER);
+        actionTabCondition.add(new ModifPuissanceMonstre(null, tabClasse, 4, mstr));
+        mstr.setCondition(new Condition(actionTabCondition));
+        cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
-        cartes.add(new Monstre(28, "Golem Fracassé", "Vous pouvez combattre ce golem complètement défoncé ou vous contenter de lui faire coucou et lui laisser son trésor. (Exception: Les savoureux halfelins doivent combattre)", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        tabRace.add(Constante.RACE_ELFE);
+        tabRace.add(Constante.RACE_HUMAINE);
+        tabRace.add(Constante.RACE_NAIN);
+        actionTabCondition.add(new ModifDeguerpir(1000, null, null, tabRace, null));
+        tabRace.clear();
+        tabRace.add(Constante.RACE_HALFELIN);
+        actionTabCondition.add(new ModifDeguerpir(-1000, null, null, tabRace, null));
+        cartes.add(new Monstre(28, "Golem Fracassé", "Vous pouvez combattre ce golem complètement défoncé ou vous contenter de lui faire coucou et lui laisser son trésor. (Exception: Les savoureux halfelins doivent combattre)", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.JEU));
-        cartes.add(new Monstre(29, "Représentant en assurance", "Votre niveau ne compte pas, vous le combattez uniquement avec vos bonus", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifPuissancePersonnage(null, null, 0, false, true));
+        cartes.add(new Monstre(29, "Représentant en assurance", "Votre niveau ne compte pas, vous le combattez uniquement avec vos bonus", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 14));
 
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
-        cartes.add(new Monstre(30, "Tut-Tuuut-Ankh-Ammon", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
+        cartes.add(new Monstre(30, "Tut-Tuuut-Ankh-Ammon", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
-        cartes.add(new Monstre(31, "René Crophage et fils, dépanneurs en chirurgie", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
+        cartes.add(new Monstre(31, "René Crophage et fils, dépanneurs en chirurgie", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX 
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
-        cartes.add(new Monstre(32, "Hippogriffe", "Ne poursuit aucun personnage de niveau 3 ou inférieur.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
+        cartes.add(new Monstre(32, "Hippogriffe", "Ne poursuit aucun personnage de niveau 3 ou inférieur.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 16));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
-        cartes.add(new Monstre(33, "Céphalopodzilla", "C'est gluant! Les elfes combattent à  -4. Ne poursuivra aucun personnage de niveau 4 ou moins, sauf si c'est un elfe.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 18));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        tabRace.add(Constante.RACE_HALFELIN);
+        tabRace.add(Constante.RACE_HUMAINE);
+        tabRace.add(Constante.RACE_NAIN);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
+        tabRace.clear();
+        tabRace.add(Constante.RACE_ELFE);
+        actionTabCondition.add(new ModifPuissancePersonnage(tabRace, null, -4));
+        cartes.add(new Monstre(33, "Céphalopodzilla", "C'est gluant! Les elfes combattent à  -4. Ne poursuivra aucun personnage de niveau 4 ou moins, sauf si c'est un elfe.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 18));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,5), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
-        cartes.add(new Monstre(34, "Balrog Charolais", "Ne poursuit aucun personnage de niveau 4 ou inférieur.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 18));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 4, null, null, null));
+        cartes.add(new Monstre(34, "Balrog Charolais", "Ne poursuit aucun personnage de niveau 4 ou inférieur.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 18));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,5), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
-        cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 20));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1000, 5, null, null, null));
+        cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 20));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, null, null);
-        cartes.add(new Monstre(93, "Gobelin Estropié", "+1 au jet pour déguerpir", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
+        resetCondition(actionTabMalediction, tabClasse, tabRace);
+        actionTabCondition.add(new ModifDeguerpir(+1, null, null, null, null));
+        cartes.add(new Monstre(93, "Gobelin Estropié", "+1 au jet pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), 1));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
