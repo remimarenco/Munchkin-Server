@@ -43,17 +43,17 @@ public class Constante {
      * Races
      */
     public static final Race RACE_HUMAINE = new Humain();
-    public static final Race Race_Elfe = new Elfe();
-    public static final Race Race_Nain = new Nain();
-    public static final Race Race_Halfelin = new Halfelin();
+    public static final Race RACE_ELFE = new Elfe();
+    public static final Race RACE_NAIN = new Nain();
+    public static final Race RACE_HALFELIN = new Halfelin();
     
     /**
      * Classes
      */
-    public static final Classe Classe_Pretre = new Pretre();
-    public static final Classe Classe_Voleur = new Voleur();
-    public static final Classe Classe_Guerrier = new Guerrier();
-    public static final Classe Classe_Magicien = new Magicien();
+    public static final Classe CLASSE_PRETRE = new Pretre();
+    public static final Classe CLASSE_VOLEUR = new Voleur();
+    public static final Classe CLASSE_GUERRIER = new Guerrier();
+    public static final Classe CLASSE_MAGICIEN = new Magicien();
     
     public static final int CARTE_OBJET     = 1;
     public static final int CARTE_SORT      = 2;

@@ -77,4 +77,13 @@ public class Monstre extends Donjon {
 	public void setBonusPuissance(int bonusPuissance) {
 		this.bonusPuissance = bonusPuissance;
 	}
+
+        public Condition getCondition() {
+            return condition;
+        }
+
+        public void setCondition(Condition condition) {
+            this.condition = condition;
+        }
+
 }
