@@ -25,8 +25,7 @@ public class Serveur {
      public static boolean runningflag=true;
     private ServerSocket socket_ecoute;
     private Partie partie;
-    private  Thread thrd;
-    
+    private  Thread thrd;    
     private int nombreJoueur;
 
     /**
@@ -42,8 +41,7 @@ public class Serveur {
             while (true) {               
                Socket st = socket_ecoute.accept();                
                Joueur com= new Joueur(st, this,partie);
-               com.start();
-               
+               com.start();               
             }
         } catch (Exception e) {
             try {
@@ -55,19 +53,7 @@ public class Serveur {
         }
     }
     
-    private Thread newThread(){
-        Thread t= new Thread(new Runnable() {
-                        @Override
-                        public void run() {  
-                            Thread thisThread = Thread.currentThread();
-                            while (thrd == thisThread) {
-                                partie.run(nombreJoueur);
-                            }
-                            
-                        }
-                        });
-        return t;
-    }
+   
     
      private void stop() {
              thrd=null;
@@ -105,9 +91,8 @@ public class Serveur {
                     }
                     this.partie.sendInfosJoueursToAll();
                     if(this.partie.size()==this.nombreJoueur){
-                        thrd=newThread();
-                        thrd.start();
-                       
+                        thrd= new Thread(this.partie);  
+                       thrd.start();
                     }
                 }
                 else if(partie.size()== nombreJoueur){
@@ -128,9 +113,7 @@ public class Serveur {
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous etes deconnecte du serveur, a bientot !\n");
                 com.sendMessage(message1);
                 com.sendList(listeVide);
-                partie.remove(com);
-                if(thrd.isAlive())
-                   this.stop();
+                partie.remove(com);                
                 //partie.removeJoueurByName(msg.getNick_src());
                 Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
 
@@ -167,8 +150,8 @@ public class Serveur {
 
                 }
                 break;
-            case Message.QUESTION:
-            this.partie.answer(msg);
+            case Message.QUESTION:      
+            this.partie.answer(msg);             
             break;
            
             

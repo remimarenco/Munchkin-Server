@@ -7,29 +7,19 @@ import carte.Objet;
 import carte.Sort;
 import carte.Tresor;
 import communication.Message;
-import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.io.ByteArrayInputStream;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import joueur.Joueur;
 
 /**
  * 
  * @author Julien
  */
-public final class Partie extends ArrayList<Joueur>{
+public final class Partie extends ArrayList<Joueur> implements Runnable{
 	
     private Deck                deck;
     private Pioche              piocheTresor;
@@ -71,131 +61,7 @@ public final class Partie extends ArrayList<Joueur>{
 
     /**
      * 
-     */
-  synchronized public void run(int nbJoueur){
-        piocheDonjon.init(this.deck);
-        piocheTresor.init(this.deck);       
-        this.distribuer();
-        this.sendInfosJoueursToAll();
-        this.sendCartesJoueursToAll();
-        Iterator it = this.iterator();        
-        Carte cartePiochee;
-        
-        while(nbJoueur==this.size()){
-            while(it.hasNext()){
-                enCours = (Joueur) it.next();
-                
-                if(piocheDonjon.isEmpty()){
-                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
-                    piocheDonjon.setPioche(new ArrayList<Donjon> (defausseDonjon.getDefausse()));
-                    defausseDonjon.vider();
-                }
-                
-                if(piocheDonjon.isEmpty()){
-                    System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
-                    return;
-                }
-                
-                cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
-                if(cartePiochee == null){
-                    System.out.println("Problème lors du tirage dans la pioche donjon");
-                    return;
-                }
-                
-                System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
-                //envoi du message a tous les client connecté
-                this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
-                
-                
-                // === MONSTRE ===
-                if(cartePiochee.getClass().equals(Monstre.class))
-                {
-                    Combat combat = new Combat(this);
-                    combat.getCampGentil().add(enCours.getPersonnage());
-                    
-                    Monstre monstrePioche = (Monstre) cartePiochee;
-
-                    combat.getCampMechant().add(monstrePioche);
-                    
-                    System.out.println("Vous avez tiré le monstre :");
-                    System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
-                    System.out.println(monstrePioche.getDescription());
-
-                    /**
-                     * On applique la condition du monstre
-                     */
-                    this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
-
-                    System.out.println("Combattre ? (o/n)");
-                    this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
-                            + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
-                            + monstrePioche.getDescription() +"\n"
-                            +" Va-t il combattre ?\n");
-                    this.sendQuestionToEnCours("Combattre ?");
-                    this.answer=null;
-                    while( this.answer==null && this.size()==nbJoueur){}
-                    
-                    	
-	                    if(this.answer.equals("Yes")){
-	                        if(combat.combattre()){
-	                            System.out.println("Vous avez gagné !");
-                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
-	                        }else{
-	                            System.out.println("Vous avez perdu...");
-                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-                                    this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
-	                            monstrePioche.appliquerIncidentFacheux(enCours);
-	                        }
-	                    }else if(this.answer.equals("Non")){
-	                        if(combat.tenterDeguerpir()){
-	                            System.out.println("Vous avez réussi à déguérpir !");
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
-	                        }
-	                        else{
-                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
-	                        }
-	                    }
-	                    else
-	                    {
-	                    	System.out.println("Veuillez entrer une réponse correcte");
-	                    }
-                    // On boucle tant qu'il n'a pas donné de réponse
-                    
-	               monstrePioche.setBonusPuissance(0);
-                   this.defausseDonjon.ajouterCarte(cartePiochee);
-                   this.sendInfosJoueursToAll();
-                }
-                // ===============
-                
-                // ==== SORT ====
-                else if(cartePiochee.getClass().equals(Sort.class)){
-                    System.out.println("C'est un sort !!");
-                     this.sendMessageToAll("C'est un sort !!\n");
-                }
-                else if(cartePiochee.getClass().equals(Objet.class))
-                {
-                    Objet objet = (Objet) cartePiochee;
-                    objet.equiper(enCours);
-                    System.out.println("C'est un sort !!");
-                    this.sendMessageToAll("C'est un objet !!\n");
-
-                }
-
-
-                // ==============
-                
-                // On annule les bonus temporaires
-                this.enCours.getPersonnage().setBonusCapaciteFuite(0);
-                this.enCours.getPersonnage().setBonusPuissance(0);
-            }
-            it = this.iterator();
-        }
-    }
-    
+     */   
     
 //  synchronized public void run2(){
 //        piocheDonjon.init(this.deck);
@@ -528,13 +394,142 @@ public final class Partie extends ArrayList<Joueur>{
      }
              
      
-     public boolean answer(Message msg){          
-      this.answer=msg.getMessage();
+    public boolean answer(Message msg){
+      this.answer=msg.getMessage();      
       return true;     
-    }
+    }    
+ 
+   
 
-    public void run2() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    @Override
+    public void run() {
+       piocheDonjon.init(this.deck);
+        piocheTresor.init(this.deck);       
+        this.distribuer();
+        this.sendInfosJoueursToAll();
+        this.sendCartesJoueursToAll();
+        Iterator it = this.iterator();        
+        Carte cartePiochee;
+        
+        while(true){
+            while(it.hasNext()){
+                enCours = (Joueur) it.next();
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
+                    piocheDonjon.setPioche(new ArrayList<Donjon> (defausseDonjon.getDefausse()));
+                    defausseDonjon.vider();
+                }
+                
+                if(piocheDonjon.isEmpty()){
+                    System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
+                    return;
+                }
+                
+                cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
+                if(cartePiochee == null){
+                    System.out.println("Problème lors du tirage dans la pioche donjon");
+                    return;
+                }
+                
+                System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
+                //envoi du message a tous les client connecté
+                this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
+                
+                
+                // === MONSTRE ===
+                if(cartePiochee.getClass().equals(Monstre.class))
+                {
+                    Combat combat = new Combat(this);
+                    combat.getCampGentil().add(enCours.getPersonnage());
+                    
+                    Monstre monstrePioche = (Monstre) cartePiochee;
+
+                    combat.getCampMechant().add(monstrePioche);
+                    
+                    System.out.println("Vous avez tiré le monstre :");
+                    System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
+                    System.out.println(monstrePioche.getDescription());
+
+                    /**
+                     * On applique la condition du monstre
+                     */
+                    this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
+
+                    System.out.println("Combattre ? (o/n)");
+                    this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
+                            + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
+                            + monstrePioche.getDescription() +"\n"
+                            +" Va-t il combattre ?\n");
+                    this.sendQuestionToEnCours("Combattre ?");
+                    this.answer=null;
+                   
+                    while( this.answer==null ){
+                        try {
+                           Thread.currentThread().sleep(200);//sleep for 1000 ms
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }                    
+                    	
+	                    if(this.answer.equals("Yes")){
+	                        if(combat.combattre()){
+	                            System.out.println("Vous avez gagné !");
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
+	                        }else{
+	                            System.out.println("Vous avez perdu...");
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+                                    this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
+	                            monstrePioche.appliquerIncidentFacheux(enCours);
+	                        }
+	                    }else if(this.answer.equals("Non")){
+	                        if(combat.tenterDeguerpir()){
+	                            System.out.println("Vous avez réussi à déguérpir !");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
+	                        }
+	                        else{
+                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
+	                        }
+	                    }
+	                    else
+	                    {
+	                    	System.out.println("Veuillez entrer une réponse correcte");
+	                    }
+                    // On boucle tant qu'il n'a pas donné de réponse
+                    
+	               monstrePioche.setBonusPuissance(0);
+                   this.defausseDonjon.ajouterCarte(cartePiochee);
+                   this.sendInfosJoueursToAll();
+                }
+                // ===============
+                
+                // ==== SORT ====
+                else if(cartePiochee.getClass().equals(Sort.class)){
+                    System.out.println("C'est un sort !!");
+                     this.sendMessageToAll("C'est un sort !!\n");
+                }
+                else if(cartePiochee.getClass().equals(Objet.class))
+                {
+                    Objet objet = (Objet) cartePiochee;
+                    objet.equiper(enCours);
+                    System.out.println("C'est un sort !!");
+                    this.sendMessageToAll("C'est un objet !!\n");
+
+                }
+
+
+                // ==============
+                
+                // On annule les bonus temporaires
+                this.enCours.getPersonnage().setBonusCapaciteFuite(0);
+                this.enCours.getPersonnage().setBonusPuissance(0);
+            }
+            it = this.iterator();
+        }
     }
  
      

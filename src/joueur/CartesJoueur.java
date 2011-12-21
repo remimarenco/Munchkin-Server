@@ -51,9 +51,7 @@ public class CartesJoueur {
     public HashMap<String,String> generateInfos(){
         HashMap<String,String> map=new HashMap<String, String>();
         for(Carte c : this.cartes){
-            map.put("id", c.getId().toString());
-            map.put("nom", c.getNom());
-            map.put("description", c.getDescription());
+            map.put(c.getId().toString(), c.getId().toString());           
         }
         return map;
     }
