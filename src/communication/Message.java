@@ -25,6 +25,7 @@ public class Message {
         public static final int NICKEXIST=5;        
         public static final int QUESTION=7;
         public static final int INFO_JOUEUR=8;
+        public static final int CARTES_JOUEUR=9;
         private String nick_src=new String("");     
         private String nick_dest=new String("");    
         private String message=new String("");

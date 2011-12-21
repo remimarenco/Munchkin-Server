@@ -77,6 +77,7 @@ public final class Partie extends ArrayList<Joueur>{
         piocheTresor.init(this.deck);       
         this.distribuer();
         this.sendInfosJoueursToAll();
+        this.sendCartesJoueursToAll();
         Iterator it = this.iterator();        
         Carte cartePiochee;
         
@@ -516,6 +517,13 @@ public final class Partie extends ArrayList<Joueur>{
          for(Joueur j :this){
              for(Joueur j2 :this)
              j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
+         }
+     }
+     public void sendCartesJoueursToAll(){
+         for(Joueur j :this){
+             for(Joueur j2 :this)
+             j.sendMessage(new Message
+                     (Message.CARTES_JOUEUR, "Partie", j2.getName(), j2.getMain().generateInfos()));
          }
      }
              
