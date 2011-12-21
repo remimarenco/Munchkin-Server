@@ -153,6 +153,9 @@ public class Serveur {
             case Message.QUESTION:      
             this.partie.answer(msg);             
             break;
+            case Message.INTERVENTION:
+                this.partie.sendMessageToAll("Le joueur :" +msg.getNick_src()+" souhaite : "+msg.getMessage());
+                break;
            
             
         }
