@@ -25,6 +25,7 @@ public class Message {
         public static final int NICKEXIST=5;        
         public static final int QUESTION=7;
         public static final int INTERVENTION=8;
+        public static final int SOUND=9;
         public static final int INFO_JOUEUR=80;
         public static final int CARTES_JOUEUR=81;
         private String nick_src=new String("");     
@@ -113,11 +114,11 @@ public class Message {
 
                 if(type>DISCONNECT){                      
                     nick_dest=new String(in.readUTF());  
-                    if(type<INFO_JOUEUR && type!=INTERVENTION){
+                    if(type<INFO_JOUEUR && type!=INTERVENTION && type!=SOUND){
                     message=new String(in.readUTF());                  
                     color=(Color) ois.readObject();
                     }
-                    if(type==INTERVENTION)
+                    if(type==INTERVENTION || type==SOUND)
                         action=in.readInt();
                     if(type>=INFO_JOUEUR)
                         this.map=(HashMap<String,String>)ois.readObject();
@@ -143,11 +144,11 @@ public class Message {
                 out.writeUTF(nick_src);
                 if(type>DISCONNECT){
                     out.writeUTF(nick_dest);
-                    if(type<INFO_JOUEUR && type!=INTERVENTION){
+                    if(type<INFO_JOUEUR && type!=INTERVENTION && type!=SOUND){
                     out.writeUTF(message);                    
                     oos.writeObject(color);   
                     }
-                    if(type==INTERVENTION)
+                    if(type==INTERVENTION || type==SOUND)
                         out.writeInt(action);
                     if(type>=INFO_JOUEUR){
                         oos.writeObject(this.map);

@@ -392,6 +392,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                      (Message.CARTES_JOUEUR, "Partie", j2.getName(), j2.getMain().generateInfos()));
          }
      }
+     public void sendSongToAll(int constante){
+         for(Joueur j :this){
+             j.sendMessage(new Message(Message.SOUND, "Partie", j.getName(), constante));
+         }
+     }
+     
              
      
    
@@ -491,12 +497,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                     this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
 	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
+                                    this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
+                                            
 	                        }else{
 	                            System.out.println("Vous avez perdu...");
                                     this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+                                    //this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
                                     this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
-	                            monstrePioche.appliquerIncidentFacheux(enCours);
+                                    this.sendSongToAll(Constante.SOUND_COMBATPERDU);
+	                            
 	                        }
 	                    }else if(this.answer.equals("Non")){
 	                        if(combat.tenterDeguerpir()){
@@ -506,6 +516,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	                        else{
                                     this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
+                                    this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
 	                        }
 	                    }
 	                    else
