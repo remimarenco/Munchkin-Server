@@ -394,7 +394,20 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      }
              
      
-    public boolean answer(Message msg){
+   
+     public void intervenir(Message msg){
+         switch(msg.getAction()){
+             case Constante.ACTION_AIDER:
+                 break;
+             case Constante.ACTION_POSERCARTE:
+                 this.sendMessageToAll("Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
+                 break;
+             case Constante.ACTION_POURRIR:
+                 break;
+         }
+     }
+     
+     public boolean answer(Message msg){
       this.answer=msg.getMessage();      
       return true;     
     }    

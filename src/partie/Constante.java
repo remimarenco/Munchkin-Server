@@ -67,6 +67,15 @@ public class Constante {
     public static final int TAS_CHOISIR = 3;
     
     /**
+     * TYPE D'ACTION
+     */
+    
+    public static final int ACTION_POSERCARTE     = 1;
+    public static final int ACTION_AIDER      = 2;
+    public static final int ACTION_RACE      = 3;
+    public static final int ACTION_POURRIR    = 4;
+    
+    /**
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
     public static int nbAleatoire(int min, int max){

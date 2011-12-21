@@ -31,6 +31,7 @@ public class Message {
         private String nick_dest=new String("");    
         private String message=new String("");
         private int type;
+        private int action;
         private Color color;
         private HashMap<String,String> map;
         
@@ -59,6 +60,13 @@ public class Message {
             this.nick_src=nick_src;          
             this.nick_dest=nick_dest;        
             this.message=msg;
+            this.color=Color.BLACK;
+        }
+  public Message(int type,String nick_src,String nick_dest,int action){
+            this.type=type;            
+            this.nick_src=nick_src;          
+            this.nick_dest=nick_dest;        
+            this.action=action;
             this.color=Color.BLACK;
         }
  /**
@@ -105,10 +113,12 @@ public class Message {
 
                 if(type>DISCONNECT){                      
                     nick_dest=new String(in.readUTF());  
-                    if(type<INFO_JOUEUR){
+                    if(type<INFO_JOUEUR && type!=INTERVENTION){
                     message=new String(in.readUTF());                  
                     color=(Color) ois.readObject();
                     }
+                    if(type==INTERVENTION)
+                        action=in.readInt();
                     if(type>=INFO_JOUEUR)
                         this.map=(HashMap<String,String>)ois.readObject();
                 }
@@ -133,10 +143,12 @@ public class Message {
                 out.writeUTF(nick_src);
                 if(type>DISCONNECT){
                     out.writeUTF(nick_dest);
-                    if(type<INFO_JOUEUR){
+                    if(type<INFO_JOUEUR && type!=INTERVENTION){
                     out.writeUTF(message);                    
                     oos.writeObject(color);   
                     }
+                    if(type==INTERVENTION)
+                        out.writeInt(action);
                     if(type>=INFO_JOUEUR){
                         oos.writeObject(this.map);
                     }
@@ -171,6 +183,10 @@ public class Message {
 
     public HashMap<String, String> getMap() {
         return map;
+    }
+
+    public int getAction() {
+        return action;
     }
     
     

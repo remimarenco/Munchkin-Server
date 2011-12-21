@@ -154,7 +154,7 @@ public class Serveur {
             this.partie.answer(msg);             
             break;
             case Message.INTERVENTION:
-                this.partie.sendMessageToAll("Le joueur :" +msg.getNick_src()+" souhaite : "+msg.getMessage());
+                this.partie.intervenir(msg);
                 break;
            
             
