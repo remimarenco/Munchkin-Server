@@ -92,7 +92,7 @@ public class Serveur {
                     this.partie.sendInfosJoueursToAll();
                     if(this.partie.size()==this.nombreJoueur){
                         thrd= new Thread(this.partie);  
-                       thrd.start();
+                        thrd.start();
                     }
                 }
                 else if(partie.size()== nombreJoueur){

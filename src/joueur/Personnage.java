@@ -125,6 +125,7 @@ public class Personnage {
 		this.bonusPuissance = bonusPuissance;
 	}
         public int getPuissance(){
-            return 1;
+            int p= this.getNiveau() + this.getBonusPuissance();
+            return p;
         }
 }
