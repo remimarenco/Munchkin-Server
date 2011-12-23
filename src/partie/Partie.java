@@ -525,6 +525,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	               monstrePioche.setBonusPuissance(0);
                    this.defausseDonjon.ajouterCarte(cartePiochee);
                    this.sendInfosJoueursToAll();
+                   this.sendCartesJoueursToAll();
                 }
                 // ===============
                 
