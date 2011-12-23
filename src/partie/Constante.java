@@ -86,7 +86,7 @@ public class Constante {
      */
     public static int nbAleatoire(int min, int max){
         Random r = new Random();
-        int valeur = min + r.nextInt(max - min);
+        int valeur = min + r.nextInt(Math.abs(max - min));
         return valeur;
     }
     

@@ -385,11 +385,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
              j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
          }
      }
-     public void sendCartesJoueursToAll(){
+     public void sendCartesJeuxJoueursToAll(){
          for(Joueur j :this){
              for(Joueur j2 :this)
              j.sendMessage(new Message
-                     (Message.CARTES_JOUEUR, "Partie", j2.getName(), j2.getMain().generateInfos()));
+                     (Message.JEUX_JOUEUR, "Partie", j2.getName(), j2.getJeu().generateInfos()));
+         }
+     }
+      public void sendCartesMainToOwner(){
+         for(Joueur j :this){             
+             j.sendMessage(new Message
+                     (Message.MAIN_JOUEUR, "Partie", j.getName(), j.getMain().generateInfos()));
          }
      }
      public void sendSongToAll(int constante){
@@ -426,7 +432,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         piocheTresor.init(this.deck);       
         this.distribuer();
         this.sendInfosJoueursToAll();
-        this.sendCartesJoueursToAll();
+        this.sendCartesJeuxJoueursToAll();
+        this.sendCartesMainToOwner();
         Iterator it = this.iterator();        
         Carte cartePiochee;
         
@@ -525,7 +532,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	               monstrePioche.setBonusPuissance(0);
                    this.defausseDonjon.ajouterCarte(cartePiochee);
                    this.sendInfosJoueursToAll();
-                   this.sendCartesJoueursToAll();
+                   this.sendCartesJeuxJoueursToAll();
+                   this.sendCartesMainToOwner();
                 }
                 // ===============
                 

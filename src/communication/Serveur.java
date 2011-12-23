@@ -151,8 +151,8 @@ public class Serveur {
                 }
                 break;
             case Message.QUESTION:      
-            this.partie.answer(msg);             
-            break;
+                this.partie.answer(msg);             
+                break;
             case Message.INTERVENTION:
                 this.partie.intervenir(msg);
                 break;

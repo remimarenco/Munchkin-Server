@@ -27,7 +27,9 @@ public class Message {
         public static final int INTERVENTION=8;
         public static final int SOUND=9;
         public static final int INFO_JOUEUR=80;
-        public static final int CARTES_JOUEUR=81;
+        public static final int JEUX_JOUEUR=81;
+        public static final int MAIN_JOUEUR=82;
+        
         private String nick_src=new String("");     
         private String nick_dest=new String("");    
         private String message=new String("");
