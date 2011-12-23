@@ -1,9 +1,9 @@
 package carte;
 
-import comportement.classes.Condition;
-import comportement.classes.IncidentDeguerpir;
-import comportement.classes.IncidentFacheux;
-import comportement.classes.MonstreVaincu;
+import comportement.Condition;
+import comportement.IncidentDeguerpir;
+import comportement.IncidentFacheux;
+import comportement.MonstreVaincu;
 import joueur.Joueur;
 
 /**

@@ -1,11 +1,11 @@
 package carte;
 
-import comportement.classes.Condition;
-import comportement.classes.Equipement;
-import comportement.classes.IncidentDeguerpir;
-import comportement.classes.IncidentFacheux;
-import comportement.classes.MonstreVaincu;
-import comportement.classes.Sortilege;
+import comportement.Condition;
+import comportement.Equipement;
+import comportement.IncidentDeguerpir;
+import comportement.IncidentFacheux;
+import comportement.MonstreVaincu;
+import comportement.Sortilege;
 import joueur.Joueur;
 
 /**

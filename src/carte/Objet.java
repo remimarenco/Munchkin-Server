@@ -1,5 +1,5 @@
 package carte;
-import comportement.classes.Equipement;
+import comportement.Equipement;
 
 
 /**

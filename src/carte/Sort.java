@@ -1,5 +1,5 @@
 package carte;
-import comportement.classes.Sortilege;
+import comportement.Sortilege;
 
 /**
  * Classe Donjon.
