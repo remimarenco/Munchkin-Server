@@ -17,9 +17,16 @@ public class IncidentDeguerpir {
 
         public ArrayList<Action> tabAction;
 
-	public IncidentDeguerpir(ArrayList<Action> tab)
+	public IncidentDeguerpir(ArrayList<Action> tabAction)
         {
-                tabAction = tab;
+			try
+			{
+				this.tabAction = (ArrayList<Action>) tabAction.clone();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Aucune action dans la condition");
+			}
         }
 
         public String actionIncidentDeguerpir(Joueur joueurImpacte)

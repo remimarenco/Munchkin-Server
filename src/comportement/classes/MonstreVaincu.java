@@ -9,9 +9,16 @@ import comportement.Action;
 public class MonstreVaincu {
 	public ArrayList<Action> tabAction;
 	
-	public MonstreVaincu(ArrayList<Action> tab)
+	public MonstreVaincu(ArrayList<Action> tabAction)
         {
-                tabAction = tab;
+			try
+			{
+				this.tabAction = (ArrayList<Action>) tabAction.clone();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Aucune action dans la condition");
+			}
         }
 	
 	public String actionMonstreVaincu(Joueur joueurImpacte)

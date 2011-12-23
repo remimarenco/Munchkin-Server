@@ -16,8 +16,14 @@ public  class Equipement {
 	
 	
 	public Equipement(ArrayList<Action> tabAction) {
-		super();
-		this.tabAction = tabAction;
+		try
+		{
+			this.tabAction = (ArrayList<Action>) tabAction.clone();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Aucune action dans la condition");
+		}
 	}
 
 

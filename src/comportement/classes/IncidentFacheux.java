@@ -21,9 +21,16 @@ public class IncidentFacheux {
      * On définit les actions que va faire l'incident fâcheux
      * @param tab => Ensemble d'actions de l'incident fâcheux
      */
-    public IncidentFacheux(ArrayList<Action> tab)
+    public IncidentFacheux(ArrayList<Action> tabAction)
     {
-            this.tabAction = tab;
+    	try
+		{
+			this.tabAction = (ArrayList<Action>) tabAction.clone();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Aucune action dans la condition");
+		}
     }
 
     /**

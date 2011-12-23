@@ -494,7 +494,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	                    if(this.answer.equals("Yes")){
 	                        if(combat.combattre()){
 	                            System.out.println("Vous avez gagné !");
-                                    this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
 	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
                                     this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
@@ -502,8 +501,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	                        }else{
 	                            System.out.println("Vous avez perdu...");
                                     this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-                                    //this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
-                                    this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
 	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
                                     this.sendSongToAll(Constante.SOUND_COMBATPERDU);
 	                            

@@ -32,7 +32,7 @@ public class ModifPuissanceMonstre extends Action{
                 out += ", le bonus puissance attribué est de " + this.bonusPuissance;
                 
 
-                if(tabRace != null || !(tabRace.isEmpty()))
+                if(tabRace != null && !(tabRace.isEmpty()))
                 {
                     out += ", les races contre lesquelles ce bonus s'applique sont :";
                     for(Race race : tabRace)
@@ -48,7 +48,7 @@ public class ModifPuissanceMonstre extends Action{
 
                 
                 
-                if(tabClasse != null || !(tabClasse.isEmpty()))
+                if(tabClasse != null && !(tabClasse.isEmpty()))
                 {
                     out += ", les classes contre lesquelles ce bonus s'applique sont :";
                     for(Classe classe : tabClasse)
@@ -68,7 +68,7 @@ public class ModifPuissanceMonstre extends Action{
 		boolean accept=true;
 		boolean raceTrouve=false;
 		boolean classeTrouve=false;
-		if(tabRace != null || tabRace.isEmpty())
+		if(tabRace != null && tabRace.isEmpty())
 		{
 			for(Race race: tabRace)
 			{
@@ -79,7 +79,7 @@ public class ModifPuissanceMonstre extends Action{
 				accept=false;
 		}
 		
-		if(tabClasse != null || tabClasse.isEmpty())
+		if(tabClasse != null && tabClasse.isEmpty())
 		{
 			for(Classe classe: tabClasse)
 			{

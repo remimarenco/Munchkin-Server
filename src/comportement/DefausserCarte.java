@@ -53,12 +53,12 @@ public class DefausserCarte extends Action{
                 this.nbCarte = joueurImpacte.getJeu().getCartes().size();
         }
         
-        if(this.typeCarte == Constante.MAIN){
+        if(this.typeTas == Constante.MAIN){
             for(int i=0; i<this.nbCarte; i++){
                 c = joueurImpacte.getMain().getRandomCarte();
                 if(c != null) joueurImpacte.getMain().supprimerCarte(c);
             }
-        }else if(this.typeCarte == Constante.JEU){
+        }else if(this.typeTas == Constante.JEU){
             for(int i=0; i<this.nbCarte; i++){
                 c = joueurImpacte.getJeu().getRandomCarte();
                 if(c != null) joueurImpacte.getJeu().supprimerCarte(c);

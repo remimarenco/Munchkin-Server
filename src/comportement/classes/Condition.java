@@ -12,7 +12,14 @@ public class Condition {
 	private ArrayList<Action> tabAction;
 	public Condition(ArrayList<Action> tabAction)
 	{
-		this.tabAction = tabAction;
+		try
+		{
+			this.tabAction = (ArrayList<Action>) tabAction.clone();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Aucune action dans la condition");
+		}
 	}
 	
 	public String mettreCondition(Joueur joueurImpacte)

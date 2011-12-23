@@ -12,8 +12,14 @@ public class Sortilege {
     private ArrayList<Action> tabAction;
 
     public Sortilege(ArrayList<Action> tabAction) {
-        super();
-        this.tabAction = tabAction;
+    	try
+		{
+			this.tabAction = (ArrayList<Action>) tabAction.clone();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Aucune action dans la condition");
+		}
     }
 
     public String actionSortilege(Joueur joueurImpacte)
