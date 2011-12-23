@@ -4,25 +4,26 @@
  */
 package partie;
 
+import action.Action;
+import action.ChangerClasse;
+import action.ChangerNiveau;
+import action.ChangerRace;
+import action.DefausserCarte;
+import action.ModifDeguerpir;
+import action.ModifPuissanceMonstre;
+import action.ModifPuissancePersonnage;
+import action.PiocherCarte;
 import carte.Carte;
 import carte.Monstre;
 import carte.Objet;
 import carte.Sort;
-import comportement.Action;
-import comportement.ChangerClasse;
-import comportement.ChangerNiveau;
-import comportement.ChangerRace;
-import comportement.DefausserCarte;
-import comportement.ModifDeguerpir;
-import comportement.ModifPuissanceMonstre;
-import comportement.ModifPuissancePersonnage;
-import comportement.PiocherCarte;
-import comportement.classes.Condition;
-import comportement.classes.Equipement;
-import comportement.classes.IncidentDeguerpir;
-import comportement.classes.IncidentFacheux;
-import comportement.classes.MonstreVaincu;
-import comportement.classes.Sortilege;
+import comportement.Condition;
+import comportement.Equipement;
+import comportement.IncidentDeguerpir;
+import comportement.IncidentFacheux;
+import comportement.MonstreVaincu;
+import comportement.Sortilege;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
