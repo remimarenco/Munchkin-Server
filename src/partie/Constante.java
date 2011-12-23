@@ -81,12 +81,15 @@ public class Constante {
     public static final int SOUND_INCIDENTFACHEUX = 101;
     public static final int SOUND_COMBATGAGNE = 102;
     public static final int SOUND_COMBATPERDU = 103;
+    public static final int SOUND_MONSTREFORT = 104;
+    public static final int SOUND_MORT = 105;
+    public static final int SOUND_RIRES = 106;
     /**
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
     public static int nbAleatoire(int min, int max){
         Random r = new Random();
-        int valeur = min + r.nextInt(Math.abs(max - min));
+        int valeur = min + r.nextInt( (Math.abs(max - min)));
         return valeur;
     }
     

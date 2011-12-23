@@ -156,6 +156,9 @@ public class Serveur {
             case Message.INTERVENTION:
                 this.partie.intervenir(msg);
                 break;
+            case Message.SOUND:
+                this.partie.sendSongToAll(msg.getAction());
+                break;
            
             
         }

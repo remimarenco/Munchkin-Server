@@ -466,6 +466,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 // === MONSTRE ===
                 if(cartePiochee.getClass().equals(Monstre.class))
                 {
+                    this.sendSongToAll(Constante.SOUND_MONSTREFORT);
                     Combat combat = new Combat(this);
                     combat.getCampGentil().add(enCours.getPersonnage());
                     
