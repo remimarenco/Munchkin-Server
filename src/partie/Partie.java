@@ -398,6 +398,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                      (Message.MAIN_JOUEUR, "Partie", j.getName(), j.getMain().generateInfos()));
          }
      }
+     public void sendCarteEnCoursToAll(Carte carte){
+         for(Joueur j :this){             
+             j.sendMessage(new Message
+                     (Message.CARTE_EN_COURS, "Partie", j.getName(), carte.getId().toString()));
+         }
+     }
      public void sendSongToAll(int constante){
          for(Joueur j :this){
              j.sendMessage(new Message(Message.SOUND, "Partie", j.getName(), constante));
@@ -461,7 +467,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
                 //envoi du message a tous les client connecté
                 this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
-                
+                this.sendCarteEnCoursToAll(cartePiochee);
                 
                 // === MONSTRE ===
                 if(cartePiochee.getClass().equals(Monstre.class))
