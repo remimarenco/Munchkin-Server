@@ -39,6 +39,10 @@ public class Personnage {
     public boolean changerNiveau(int deltaNiveau){
         if(this.niveau + deltaNiveau < 1)
             this.setNiveau(1);
+        else if(this.niveau + deltaNiveau > 10)
+        {
+        	this.setNiveau(10);
+        }
         else
             this.setNiveau(this.niveau + deltaNiveau);
         

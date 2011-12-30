@@ -26,13 +26,13 @@ public class Defausse<T> {
     
 
     public boolean ajouterCarte(T c){
-        this.defausse.add(c);
-        return true;
+    	return this.defausse.add(c);
+        
     }
     
     public boolean supprimerCarte(T c){
-        this.defausse.remove(c);
-        return true;
+    	return this.defausse.remove(c);
+        
     }
     
     public void vider(){

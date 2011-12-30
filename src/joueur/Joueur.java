@@ -161,7 +161,7 @@ public class Joueur extends Thread {
     public boolean piocherCarte(Class typePioche){
         if(typePioche == Constante.DONJON){
             this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
-        }else if(typePioche == Constante.DONJON){
+        }else if(typePioche == Constante.TRESOR){
             this.main.ajouterCarte(this.partie.getPiocheTresor().tirerCarte());
         }else{
             System.out.println("Quelque chose a dû merder quelquepart...");

@@ -41,6 +41,11 @@ public class CartesJoueur {
     
     public Carte getRandomCarte(){
         int valeur = Constante.nbAleatoire(0, cartes.size());
+        // Si le joueur n'a plus de carte en main
+        if(cartes.size() == 0)
+        {
+        	return null;
+        }
         return cartes.get(valeur);
     }    
 

@@ -88,8 +88,12 @@ public class Constante {
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
     public static int nbAleatoire(int min, int max){
-        Random r = new Random();
-        int valeur = min + r.nextInt( (Math.abs(max - min)));
+    	int valeur;
+    	Random r = new Random();
+        if(max != min) // TODO : Vérifier si ok tout le temps
+        	valeur = min + r.nextInt(Math.abs(max - min));
+        else
+        	valeur = 0;
         return valeur;
     }
     

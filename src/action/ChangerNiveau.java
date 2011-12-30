@@ -46,14 +46,20 @@ public class ChangerNiveau extends Action {
                     out += " perds ";
             else if(niveau > 0)
                     out += " gagne ";
+            // Si le niveau est de 0
+            else
+            {
+            	out += "ne gagne aucun niveau";
+            	return out;
+            }
             joueurImpacte.getPersonnage().changerNiveau(niveau);
             if(niveau > 1 || niveau < -1)
             {
-            	out += niveau+" niveaux !!\n";
+            	out += Math.abs(niveau)+" niveaux !!\n";
             }
             else
             {
-            	out += niveau+" niveau !!\n";
+            	out += Math.abs(niveau)+" niveau !!\n";
             }
             out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
             return out;
