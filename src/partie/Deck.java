@@ -152,8 +152,7 @@ public final class Deck {
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
         actionDeguerpir.clear();
-        // TODO a faire comme il faut parce que la c'est a chier
-        actionDeguerpir.add(new DefausserCarte());
+        actionDeguerpir.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
         cartes.add(new Monstre(8, "Pit Bull", "Si vous ne pouvez le vaincre, vous pouvez le distraire(vous déguerpissez automatiquement) en lachant une baguette un baton ou une lance. Va chercher Médor!", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
@@ -249,7 +248,7 @@ public final class Deck {
         actionTabCondition.add(new ModifDeguerpir(+1000, null, Constante.SEXE_F, null, null));
         actionDeguerpir.clear();
         actionDeguerpir.add(new PiocherCarte(Constante.TRESOR, 1));
-        cartes.add(new Monstre(20, "Amazone", "N'attaque ni les joueur féminin, ni les joueur masculin qui ont changé de sexe, mais se content de leur donner un trésor", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 8));
+        cartes.add(new Monstre(20, "Amazone", "N'attaque ni les joueur féminin, ni les joueur masculin qui ont changé de sexe, mais se content de leur donner un trésor (fuir)", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 8));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX !!
@@ -268,7 +267,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
-        cartes.add(new Monstre(23, "Nez Flottant", "Si vous ne voulez pas combattre le Nez Flottant, achetez le avec un objet qui vaut au moins 200 pièces d'or. Il vous laissera partir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 10));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        cartes.add(new Monstre(23, "Nez Flottant", "Si vous ne voulez pas combattre le Nez Flottant, achetez le avec un objet. Il vous laissera partir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 10));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
@@ -330,14 +331,18 @@ public final class Deck {
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
-        cartes.add(new Monstre(30, "Tut-Tuuut-Ankh-Ammon", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 16));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new ChangerNiveau(-2, 3));
+        cartes.add(new Monstre(30, "Tut-Tuuut-Ankh-Ammon", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 16));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
-        cartes.add(new Monstre(31, "René Crophage et fils, dépanneurs en chirurgie", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 16));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new ChangerNiveau(-2, 3));
+        cartes.add(new Monstre(31, "René Crophage et fils, dépanneurs en chirurgie", "Ne poursuit aucun personnage de niveau 3 ou inférieur. Les autres perdent 2 niveaux mÃªme si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 16));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX 
@@ -371,7 +376,9 @@ public final class Deck {
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 5, null, null, null));
-        cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 20));
+        actionDeguerpir.clear();
+        actionDeguerpir.add(new ChangerNiveau(-2, 5));
+        cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 20));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
