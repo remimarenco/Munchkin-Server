@@ -259,7 +259,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     }
     
     /**
-     * Fonction permettant d'envoyer un message à tous joueurs sauf le courant
+     * Fonction permettant d'envoyer un message Ã  tous joueurs sauf le courant
      * @param txt
      */
     public void sendMessageToAllButCurrent(String txt){
@@ -325,7 +325,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                  break;
              case Constante.ACTION_POSERCARTE:
                  this.sendMessageToAllButCurrent("Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
-                 this.sendMessageToCurrent("Choisissez la carte à poser");
+                 this.sendMessageToCurrent("Choisissez la carte Ã  poser");
                  break;
              case Constante.ACTION_POURRIR:
                  break;
@@ -355,7 +355,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         	{
         		if(enCours.getPersonnage().getNiveau() >= 10)
         		{
-        			this.sendMessageToAll("La partie est terminée !!\n Le joueur "+enCours.getName()+" est passé niveau 10 !!");
+        			this.sendMessageToAll("La partie est terminÃ©e !!\n Le joueur "+enCours.getName()+" est passÃ© niveau 10 !!");
         			break;
         		}
         	}
@@ -364,30 +364,30 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         		System.out.println("Joueur en cours est null");
         	}
             while(it.hasNext()){
-            	// On veut savoir si la partie est terminée ou non
+            	// On veut savoir si la partie est terminÃ©e ou non
             	
                 enCours = (Joueur) it.next();
                 
                 if(piocheDonjon.isEmpty()){
-                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
+                    System.out.println("\n\n\n*****\nPlus rien dans la pioche, on rÃ©cupÃ¨re la dÃ©fausse !\n*****\n\n\n");
                     piocheDonjon.setPioche(new ArrayList<Donjon> (defausseDonjon.getDefausse()));
                     defausseDonjon.vider();
                 }
                 
                 if(piocheDonjon.isEmpty()){
-                    System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
+                    System.out.println("Apparemment, il y avait rien dans la dÃ©fausse... Du coup, ciao !");
                     return;
                 }
                 System.out.println("Vous ouvrez la porte du donjon...");
                 
                 cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
                 if(cartePiochee == null){
-                    System.out.println("Problème lors du tirage dans la pioche donjon");
+                    System.out.println("ProblÃ¨me lors du tirage dans la pioche donjon");
                     return;
                 }
                 
                 System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
-                //envoi du message a tous les client connecté
+                //envoi du message a tous les client connectÃ©
                 this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
                 this.sendCarteEnCoursToAll(cartePiochee);
                 
@@ -402,7 +402,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                     combat.getCampMechant().add(monstrePioche);
                     
-                    System.out.println("Vous avez tiré le monstre :");
+                    System.out.println("Vous avez tirÃ© le monstre :");
                     System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
                     System.out.println(monstrePioche.getDescription());
 
@@ -412,7 +412,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
 
                     System.out.println("Combattre ? (o/n)");
-                    this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
+                    this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tirÃ© le monstre : \n"
                             + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
                             + monstrePioche.getDescription() +"\n"
                             +" Va-t il combattre ?\n");
@@ -429,11 +429,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     	
 	                    if(this.answer.equals("Yes")){
 	                    	// Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
-	                    	// le nb de niveau gagné et les cartes trésors qu'il peut tirer
+	                    	// le nb de niveau gagnÃ© et les cartes trÃ©sors qu'il peut tirer
 	                        if(combat.combattre()){
-	                            System.out.println("Vous avez gagné !");
+	                            System.out.println("Vous avez gagnÃ© !");
 	                            this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagnÃ© le combat ! \n");
                                     this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
                                             
 	                        }else{
@@ -445,20 +445,20 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	                        }
 	                    }else if(this.answer.equals("Non")){
 	                        if(combat.tenterDeguerpir()){
-	                            System.out.println("Vous avez réussi à déguérpir !");
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
+	                            System.out.println("Vous avez rÃ©ussi Ã  dÃ©guÃ©rpir !");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " a rÃ©ussi a deguerpir ! \n");
 	                        }
 	                        else{
                                     this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
+	                            this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas rÃ©ussi a deguerpir ! \n");
                                     this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
 	                        }
 	                    }
 	                    else
 	                    {
-	                    	System.out.println("Veuillez entrer une réponse correcte");
+	                    	System.out.println("Veuillez entrer une rÃ©ponse correcte");
 	                    }
-                    // On boucle tant qu'il n'a pas donné de réponse
+                    // On boucle tant qu'il n'a pas donnÃ© de rÃ©ponse
                     
 	               monstrePioche.setBonusPuissance(0);
 	               this.defausseDonjon.ajouterCarte(monstrePioche);
