@@ -9,7 +9,7 @@ import joueur.Joueur;
 import partie.Constante;
 
 /**
- *
+ * Classe permettant de defausser un ou plusieurs cartes d'un type spécifique dans un tas spécifique
  * @author washi
  */
 public class DefausserCarte extends Action{
