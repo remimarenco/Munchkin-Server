@@ -27,7 +27,7 @@ public class ChangerNiveau extends Action {
             this.niveauMin=0;
     }
     
-    /
+    
     public ChangerNiveau(int niveau, int niveauMin)
     {
             this.niveau = niveau;

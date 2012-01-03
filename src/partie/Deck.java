@@ -451,7 +451,40 @@ public final class Deck {
         cartes.add(new Sort(70, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(71, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(94, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
-        // =============
+        
+        cartes.add(new Sort(94, "Potion de bravoure hystérique", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Cotion de Ponfusion", "A jouer pendant n'imquorte pel combat. Bonus de +3 accordé à un champ au coix. Usique unage.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Don de chips désintéressé au MJ", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Pillaaaaaaage !", "Tirez immédiatement trois nouvelles cartes de trésor. Elles sont tirées face cachée si vous avez tiré cette carte face cachée, et face visible dans le cas contraire.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Lampe merveilleuse", "Vous ne pouvez utiliser la Lampe qu'à votre tour. Elle invoque un génie qui fait disparaitre un seul monstre, même s'il était sur le point de vous attraper après un jet de Déguerpir raté. S'il était seul contre vous, vous prenez son trésor mais sans gagner de niveau. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Missile magique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Oh, les jolis ballons !", "A jouer pendant n'importe quel combat pour distraire l'ennemi. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Doppelganger", "Crée votre double, qui combat à vos côtés : votre force de combat est doublée. Vous ne pouvez utiliser Doppelganger que si vous êtes le seul joueur à participer au combat. Usage unique", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Baguette de sourcier", "Parcourez les défausses pour trouver la carte de votre choix. Prenez-la et défaussez la baguette de sourcier", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion d'amitié", "A jouer pendant n'importe quel combat. Défaussez tous les monstres combattus. Aucun trésor n'est gagné, mais vous pouvez piller la pièce. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion de transfert", "A jouer pendant n'importe quel combat. Un autre joueur de votre choix combat le ou les monstres. Il peut demander de l'aide normalement, et obtient le trésor et les niveaux s'il l'emporte. Le joueur qui combattait à l'origine reprend alors son tour, et peut piller la pièce, que le combat ait été remporté ou perdu. Usage unique", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion de sommeil", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion de polly-morphie", "Utilisable une seule fois, pendant le combat. Transforme n'importe quel monstre en joli perroquet appelé Polly, qui s'envole en abandonnant son trésor (Pas de gain de niveau). Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion acide, radioactivité et électricité", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Potion glaciale explosive", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Boisson énergisante éventée", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(94, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));
+        
+        
         // =============
         // =============
         
@@ -522,6 +555,39 @@ public final class Deck {
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
         cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
+        cartes.add(new Objet(92 ,"Cape d'ombre", "Réservé aux voleurs", null));
+        cartes.add(new Objet(92 ,"Epée (de) bâtard(e)", "Bonus de + 2", null));
+        cartes.add(new Objet(92 ,"Enorme rocher", "Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Targe d'inconscience suicidaire", "Bonus de + 2", null));
+        cartes.add(new Objet(92 ,"Gourdin de misogynie fracassante", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", null));
+        cartes.add(new Objet(92 ,"Epée de féminisme exacerbé", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", null));
+        cartes.add(new Objet(92 ,"Titre qui en jette vraiment grave", "Bonus de +3", null));
+        cartes.add(new Objet(92 ,"Masse d'arme de répartie piquante", "Réservé aux prêtres", null));
+        cartes.add(new Objet(92 ,"Dague de traitrise", "Réservé aux voleurs", null));
+        cartes.add(new Objet(92 ,"Bottes de déplacement frénétique", "", null));
+        cartes.add(new Objet(92 ,"Bouclier surdimensionné", "Réservé aux guerriers. Bonus de +4", null));
+        cartes.add(new Objet(92 ,"Armure de Mithril", "Interdites aux magiciens. Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Collants de force de géant", "Interdit aux guerriers. Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Marteau des rotules douloureuses", "Réservé aux nains. Bonus de + 4", null));
+        cartes.add(new Objet(92 ,"Armure trapue", "Réservé aux nains. Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Epée Karaoké", "Interdite aux voleurs. Bonus de + 2", null));
+        cartes.add(new Objet(92 ,"Bâton de napalm", "Réservé aux magiciens. Bonus de + 5", null));
+        cartes.add(new Objet(92 ,"Chapeau pointu de Thaumaturgie", "réservé aux magiciens. Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Bandanas de gros dur", "Réservé aux humains.\n Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Armure de cuir", "Bonus de + 1", null));
+        cartes.add(new Objet(92 ,"Casque de courage", "Bonus de + 1", null));
+        cartes.add(new Objet(92 ,"Armure de flammes", "Bonus de + 2", null));
+        cartes.add(new Objet(92 ,"Sandale de protection", "Les cartes de malédictions que vous tirez en défonçant les portes n'ont aucun effet. Les malédictions lancées sur vous par d'autres joueurs vous affectent cependant normalement.", null));
+        cartes.add(new Objet(92 ,"Armure gluante", "Bonus de + 1", null));
+        cartes.add(new Objet(92 ,"Genouillères perforantes", "Bonus de + 1", null));
+        cartes.add(new Objet(92 ,"Casque virilité ostentatoire", "Bonus de +1 +3 pour les elfes", null));
+        cartes.add(new Objet(92 ,"Tuba d'envoutement", "Ce délicat instrument subjugue vos ennemis vous conférant un bonus de +3 pour déguerpir. Si vous réussissez à fuir, tirez une carte Trésor face cachée", null));
+        cartes.add(new Objet(92 ,"Genouillères de séduction", "Interdit aux prêtres. Si vous demandez à quelqu'un d'un niveau supérieur au votre de vous aider à combattre un monstre, il ne peut ni refuser, ni exiger de paiement en retour. Vous ne pouvez pas gagner la partie si le monstre a été battu grâce à vos genouillères.", null));
+        cartes.add(new Objet(92 ,"Escabeau", "Réservé aux Hobbits. Bonus de +3", null));
+        cartes.add(new Objet(92 ,"Sandwich Chocolat-Moules-Anchois", "Réservé aux Humains. Bonus de + 3", null));
+        cartes.add(new Objet(92 ,"Hallebarde suisse multifonctions", "Réservé aux Humains.\n Bonus de + 4", null));
+        
+        
         // ==============
         // ==============
         // ==============
