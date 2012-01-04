@@ -18,8 +18,24 @@ public class ModifPuissanceMonstre extends Action{
 	public ModifPuissanceMonstre(ArrayList<Race> tabRace,
 			ArrayList<Classe> tabClasse, int bonusPuissance, Monstre monstre) {
 		super();
-		this.tabRace = tabRace;
-		this.tabClasse = tabClasse;
+		if(tabRace != null)
+		{
+			this.tabRace = (ArrayList<Race>) tabRace.clone();
+		}
+		else
+		{
+			this.tabRace = null;
+		}
+		
+		if(tabClasse != null)
+		{
+			this.tabClasse = (ArrayList<Classe>) tabClasse.clone();
+		}
+		else
+		{
+			this.tabClasse = null;
+		}
+		
 		this.bonusPuissance = bonusPuissance;
 		this.monstre = monstre;
 	}

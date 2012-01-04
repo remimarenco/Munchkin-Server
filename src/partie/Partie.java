@@ -334,9 +334,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
          }
      }
      
-             
-     
-   
      public void intervenir(Message msg){
          switch(msg.getAction()){
              case Constante.ACTION_AIDER:
