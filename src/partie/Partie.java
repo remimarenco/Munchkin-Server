@@ -270,6 +270,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         		j.sendMessage(msg);
         }
     }
+     /**
+     * Fonction permettant d'envoyer un message Ã  tous joueurs sauf le courant
+     * @param txt
+     */
+    public void sendMessageToAllButSender(String source ,String txt){
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
+        for(Joueur j : this)
+        {
+        	if(!j.equals(this.getJoueurByName(source)))
+        		j.sendMessage(msg);
+        }
+    }
     
     /**
      * Fonction permettant d'envoyer un message au joueur en cours
@@ -278,6 +290,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     public void sendMessageToCurrent(String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         enCours.sendMessage(msg);
+    }
+    
+     public void sendMessageBackToSender(String source,String txt){
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
+        this.getJoueurByName(source).sendMessage(msg);
     }
     
      public void sendQuestionToEnCours(String txt){
@@ -324,8 +341,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
              case Constante.ACTION_AIDER:
                  break;
              case Constante.ACTION_POSERCARTE:
-                 this.sendMessageToAllButCurrent("Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
-                 this.sendMessageToCurrent("Choisissez la carte Ã  poser");
+                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
+                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
                  break;
              case Constante.ACTION_POURRIR:
                  break;
