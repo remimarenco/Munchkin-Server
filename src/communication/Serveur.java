@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import joueur.Joueur;
+import partie.Deck;
 import partie.Partie;
 
 /**
@@ -150,6 +151,10 @@ public class Serveur {
                 break;
             case Message.INTERVENTION:
                 this.partie.intervenir(msg);
+                break;
+            case Message.POSER_CARTE:
+                Integer id= new Integer(msg.getMessage());
+                this.partie.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));                this.partie.sendCartesJeuxJoueursToAll();
                 break;
             case Message.SOUND:
                 this.partie.sendSongToAll(msg.getAction());

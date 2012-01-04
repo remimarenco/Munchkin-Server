@@ -53,6 +53,15 @@ public final class Deck {
     public static ArrayList<Carte> getCartes() {
         return cartes;
     }
+    
+    public static Carte getCardById(Integer id){
+        Carte ret=null;
+        for(Carte c : cartes)
+            if(c.getId().equals(id))
+                ret=c;
+        
+        return ret;
+    }
 
     /**
      * 

@@ -295,6 +295,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      public void sendMessageBackToSender(String source,String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         this.getJoueurByName(source).sendMessage(msg);
+        this.getJoueurByName(source).sendMessage(new Message(Message.INTERVENTION, "Partie"));
     }
     
      public void sendQuestionToEnCours(String txt){
