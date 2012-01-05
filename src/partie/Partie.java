@@ -337,14 +337,30 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      public void intervenir(Message msg){
          switch(msg.getAction()){
              case Constante.ACTION_AIDER:
+                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite aider le joueur "+this.enCours.getName());
+                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
                  break;
              case Constante.ACTION_POSERCARTE:
                  this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
                  this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
                  break;
              case Constante.ACTION_POURRIR:
+                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
+                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
                  break;
          }
+     }
+     
+     public void aider(Message msg){
+         
+     }
+     
+     public void pourrir(Message msg){
+         
+     }
+     
+     public void poserCarte(Message msg){
+         
      }
      
      public boolean answer(Message msg){

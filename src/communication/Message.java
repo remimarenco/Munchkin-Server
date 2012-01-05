@@ -34,9 +34,9 @@ public class Message {
         
         
         
-        private String nick_src=new String("");     
-        private String nick_dest=new String("");    
-        private String message=new String("");
+        private String nick_src="";     
+        private String nick_dest="";    
+        private String message="";
         private int type;
         private int action;
         private Color color;
@@ -116,12 +116,12 @@ public class Message {
             ObjectInputStream ois= new ObjectInputStream(in);
                 type=in.readInt();
                 
-                nick_src=new String(in.readUTF());
+                nick_src=in.readUTF();
 
                 if(type>DISCONNECT){                      
-                    nick_dest=new String(in.readUTF());  
+                    nick_dest=in.readUTF();  
                     if(type<INFO_JOUEUR && type!=INTERVENTION && type!=SOUND){
-                    message=new String(in.readUTF());                  
+                    message=in.readUTF();                  
                     color=(Color) ois.readObject();
                     }
                     if(type==INTERVENTION || type==SOUND)
