@@ -3,7 +3,6 @@ package partie;
 import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
-import carte.Objet;
 import carte.Sort;
 import carte.Tresor;
 import communication.Message;
@@ -38,8 +37,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         piocheDonjon    = new Pioche<Donjon>(Constante.DONJON);
         piocheTresor    = new Pioche<Tresor>(Constante.TRESOR);
         defausseDonjon  = new Defausse<Donjon>();
-        defausseTresor  = new Defausse<Tresor>();
-        //listeJoueurs    = new ArrayList<Joueur>();
+        defausseTresor  = new Defausse<Tresor>();       
         deck            = new Deck();
     }
     
@@ -55,8 +53,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.piocheTresor = piocheTresor;
         this.piocheDonjon = piocheDonjon;
         this.defausseTresor = defausseTresor;
-        this.defausseDonjon = defausseDonjon;
-        //this.listeJoueurs = listeJoueurs;
+        this.defausseDonjon = defausseDonjon;        
     }
 
     /**
@@ -452,7 +449,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                    
                     while( this.answer==null ){
                         try {
-                           Thread.currentThread().sleep(200);//sleep for 1000 ms
+                           Thread.currentThread().sleep(200);//sleep for 200 ms
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
                         }
