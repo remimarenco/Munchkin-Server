@@ -292,7 +292,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      public void sendMessageBackToSender(String source,String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         this.getJoueurByName(source).sendMessage(msg);
-        this.getJoueurByName(source).sendMessage(new Message(Message.INTERVENTION, "Partie"));
+        //this.getJoueurByName(source).sendMessage(new Message(Message.INTERVENTION, "Partie"));
     }
     
      public void sendQuestionToEnCours(String txt){
@@ -340,6 +340,15 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
              case Constante.ACTION_POSERCARTE:
                  this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
                  this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                 /**
+                  * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
+                  * Pour le moment on envoi juste une liste de carte au presque pif pour voir
+                  */
+                 this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                         this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
+                 
+                 
+                 
                  break;
              case Constante.ACTION_POURRIR:
                  this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
