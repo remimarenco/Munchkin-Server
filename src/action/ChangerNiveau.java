@@ -1,5 +1,7 @@
 package action;
 
+import java.util.ArrayList;
+import joueur.Classe;
 import joueur.Joueur;
 import partie.Constante;
 
@@ -14,6 +16,7 @@ public class ChangerNiveau extends Action {
      */
     int niveau;
     int niveauMin;
+    ArrayList<Classe> tabClasse;
 
     /**
      * Constructeur de l'action ChangerNiveau
@@ -25,13 +28,21 @@ public class ChangerNiveau extends Action {
     {
             this.niveau = niveau;
             this.niveauMin=0;
+            this.tabClasse=null;
     }
     
+    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse)
+    {
+            this.niveau = niveau;
+            this.tabClasse = tabClasse;
+            this.niveauMin=0;
+    }
     
     public ChangerNiveau(int niveau, int niveauMin)
     {
             this.niveau = niveau;
             this.niveauMin = niveauMin;
+            this.tabClasse=null;
     }
     /**
      * Action de ChangerNiveau
@@ -44,33 +55,48 @@ public class ChangerNiveau extends Action {
              * On affiche des informations différentes selon le gain ou la perte de niveau
              */
              String out = "";
+             boolean classeTrouve=false;
+             boolean accept=true;
              if(niveauMin<joueurImpacte.getPersonnage().getNiveau())
              {
-                 if(this.niveau == Constante.NB_PAR_DE){
-                     this.niveau = Constante.nbAleatoire(1, 6+1);
-                 }
+                if(tabClasse!=null)
+		{
+			for(Classe classe: tabClasse)
+			{
+				if(joueurImpacte.getPersonnage().getClasse().equals(classe))
+					classeTrouve=true;
+			}
+			if(!classeTrouve)
+				accept=false;
+		}
+                if(accept)
+                {
+                    if(this.niveau == Constante.NB_PAR_DE){
+                         this.niveau = Constante.nbAleatoire(1, 6+1);
+                     }
 
-                out += joueurImpacte.getName();
-                if(niveau < 0)
-                        out += " perds ";
-                else if(niveau > 0)
-                        out += " gagne ";
-                // Si le niveau est de 0
-                else
-                {
-                    out += "ne gagne aucun niveau";
-                    return out;
+                    out += joueurImpacte.getName();
+                    if(niveau < 0)
+                            out += " perds ";
+                    else if(niveau > 0)
+                            out += " gagne ";
+                    // Si le niveau est de 0
+                    else
+                    {
+                        out += "ne gagne aucun niveau";
+                        return out;
+                    }
+                    joueurImpacte.getPersonnage().changerNiveau(niveau);
+                    if(niveau > 1 || niveau < -1)
+                    {
+                        out += Math.abs(niveau)+" niveaux !!\n";
+                    }
+                    else
+                    {
+                        out += Math.abs(niveau)+" niveau !!\n";
+                    }
+                    out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
                 }
-                joueurImpacte.getPersonnage().changerNiveau(niveau);
-                if(niveau > 1 || niveau < -1)
-                {
-                    out += Math.abs(niveau)+" niveaux !!\n";
-                }
-                else
-                {
-                    out += Math.abs(niveau)+" niveau !!\n";
-                }
-                out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
              }
             return out;
     }

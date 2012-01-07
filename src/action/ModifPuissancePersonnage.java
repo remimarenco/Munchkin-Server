@@ -92,7 +92,7 @@ public class ModifPuissancePersonnage extends Action{
 			for(Classe classe: tabClasse)
 			{
 				if(joueurImpacte.getPersonnage().getClasse().equals(classe))
-					raceTrouve=true;
+					classeTrouve=true;
 			}
 			if(!classeTrouve)
 				accept=false;

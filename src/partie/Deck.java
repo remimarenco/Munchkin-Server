@@ -8,6 +8,7 @@ import action.Action;
 import action.ChangerClasse;
 import action.ChangerNiveau;
 import action.ChangerRace;
+import action.ChangerSexe;
 import action.DefausserCarte;
 import action.ModifDeguerpir;
 import action.ModifPuissanceMonstre;
@@ -409,6 +410,8 @@ public final class Deck {
         // =============
         // === SORTS ===
         // =============
+        
+        //TODO
         cartes.add(new Sort(36, "Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(37, "Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(38, "Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
@@ -417,7 +420,7 @@ public final class Deck {
         cartes.add(new Sort(41, "Bébé", "-5 au niveau du monstre(niveau minimum: 1). A jouer pendant le combat. Si le monstre est vaincu, tirez 1 cartes trésor en moins (minimum 1).", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(42, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(43, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
-        
+        //FIN_TODO
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-1));
         cartes.add(new Sort(44, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
@@ -428,11 +431,13 @@ public final class Deck {
         cartes.add(new Sort(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
         cartes.add(new Sort(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
+        //TODO
+        cartes.add(new Sort(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
+        //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
@@ -441,17 +446,31 @@ public final class Deck {
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 1, Constante.JEU));
         cartes.add(new Sort(55, "Malédiction! Commun des Mortels", "Défaussez toute carte de Race que vous avez en jeu et redevenez Humain.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        tabClasse.clear();
+        tabClasse.add(Constante.CLASSE_PRETRE);
+        actionTabMalediction.add(new ChangerNiveau(1));
         cartes.add(new Sort(56, "Intervention Divine!", "Vous devez jouer cette carte immédiatement. Tous les Prêtres gagnent immédiatement 1 niveau. Si cela permet à un joueur de terminer la partie, il est autorisé à se gausser grassement et sans pitié des autres joueurs.", new Sortilege(actionTabMalediction)));
         
         actionTabMalediction = new ArrayList<Action>();
+        //TODO
         cartes.add(new Sort(57, "Malédiction! Poulet sur la tête", "-1 à tous vos jets de dé. toute Malédiction ou Incident Fâcheux qui vous retire votre couvre-chef fera également disparaitre le poulet.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ChangerSexe());
         cartes.add(new Sort(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
+       //FIN_TODO
+        
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ChangerNiveau(-2));
         cartes.add(new Sort(62, "Malédiction! Canard de l'apocalypse", "Les aventuruers malins ne ramassent pas de canard dans les donjons. Perdez 2 niveaux", new Sortilege(actionTabMalediction)));
+        //TODO
         cartes.add(new Sort(63, "Malédiction! Miroir perfide", "Vous êtes maudit! Lors de votre prochain combat uniquement, vous n'obtiendrez aucun bonus de vos objets à l'exception de votre armure. Si vous utilisez un Anneau de Souhait avant votre prochain combat, la malédiction est levée.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(64, "Pause déjeuner", "A jouer pendant n'importe quel combat. Les monstres de cette pièce font la pause. Le joueur qui affronte le ou les monstres les défausse tous et tire immédiatement 2 cartes trésor", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
+        cartes.add(new Sort(64, "Pause déjeuner", "A jouer pendant n'importe quel combat. Les monstres de cette pièce font la pause. Le joueur qui affronte le ou les monstres les défausse tous et tire immédiatement 2 cartes trésor(fuir)", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(65, "Illusion", "A jouer pendant n'importe quel combat. Défaussez un monstre impliqué dans ce combat, ainsi que toutes les cartes jouées pour le modifier, et remplacez le par une carte par une carte de monstre tirée de votre main.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(66, "Tricheur!", "Vous pouvez posséder et utiliser les objets qui vous seraient normalement interdit par les règles. Posez cette carte a côté de l'objet que vous jouez de votre main ou que vous avez déja en jeu. Si vous perdez cette objet, cette carte est défaussée avec.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(67, "Tire moi de la!", "Jouez cette carte quand vous êtes en plein combat. Vous pouvez prendre un objet à n'importe quel autre joueur, à condition qu'il vous permette de gagner le combat alors que vous n'aviez aucune chance au moment ou vous jouez la carte. Vous pouvez défausser un de vos propres objets avant de prendre celui ci si vous le désirez", new Sortilege(actionTabMalediction)));
@@ -464,18 +483,31 @@ public final class Deck {
         cartes.add(new Sort(158, "Potion de bravoure hystérique", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(96, "Cotion de Ponfusion", "A jouer pendant n'imquorte pel combat. Bonus de +3 accordé à un champ au coix. Usique unage.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
+        //FIN_TODO
+        
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
         cartes.add(new Sort(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
+        
+        //TODO
         cartes.add(new Sort(99, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(100, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(101, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(102, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
+        //FIN_TODO
+        
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ChangerNiveau(1));
         cartes.add(new Sort(104, "Don de chips désintéressé au MJ", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(109, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
+         actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new PiocherCarte(Constante.TRESOR, 3));
         cartes.add(new Sort(110, "Pillaaaaaaage !", "Tirez immédiatement trois nouvelles cartes de trésor. Elles sont tirées face cachée si vous avez tiré cette carte face cachée, et face visible dans le cas contraire.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(111, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(112, "Lampe merveilleuse", "Vous ne pouvez utiliser la Lampe qu'à votre tour. Elle invoque un génie qui fait disparaitre un seul monstre, même s'il était sur le point de vous attraper après un jet de Déguerpir raté. S'il était seul contre vous, vous prenez son trésor mais sans gagner de niveau. Usage unique.", new Sortilege(actionTabMalediction)));
@@ -492,7 +524,7 @@ public final class Deck {
         cartes.add(new Sort(123, "Potion glaciale explosive", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(124, "Boisson énergisante éventée", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(125, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        
         
         // =============
         // =============
@@ -506,96 +538,96 @@ public final class Deck {
         cartes.add(new Objet(72, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_ELFE);
-        cartes.add(new Objet(73, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", null));
+        cartes.add(new Objet(73, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_ELFE);
-        cartes.add(new Objet(74, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", null));
+        cartes.add(new Objet(74, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_NAIN);
-        cartes.add(new Objet(75, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", null));
+        cartes.add(new Objet(75, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_NAIN);
-        cartes.add(new Objet(76, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", null));
+        cartes.add(new Objet(76, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_NAIN);
-        cartes.add(new Objet(77, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", null));
+        cartes.add(new Objet(77, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(78, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", null));
+        cartes.add(new Objet(78, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(79, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", null));
+        cartes.add(new Objet(79, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(80, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", null));
+        cartes.add(new Objet(80, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(81, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", null));
+        cartes.add(new Objet(81, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(82, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", null));
+        cartes.add(new Objet(82, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(83, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", null));
+        cartes.add(new Objet(83, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(84, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", null));
+        cartes.add(new Objet(84, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(85, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", null));
+        cartes.add(new Objet(85, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(86, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", null));
+        cartes.add(new Objet(86, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
-        cartes.add(new Objet(87, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", null));
+        cartes.add(new Objet(87, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
-        cartes.add(new Objet(88, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", null));
+        cartes.add(new Objet(88, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
-        cartes.add(new Objet(89, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", null));
+        cartes.add(new Objet(89, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(90, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
+        cartes.add(new Objet(90, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(91, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
+        cartes.add(new Objet(91, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", null));
-        cartes.add(new Objet(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", null));
-        cartes.add(new Objet(126 ,"Cape d'ombre", "Réservé aux voleurs. Bonus +4", null));
-        cartes.add(new Objet(127 ,"Epée (de) bâtard(e)", "Bonus de + 2", null));
-        cartes.add(new Objet(128 ,"Enorme rocher", "Bonus de + 3", null));
-        cartes.add(new Objet(129 ,"Targe d'inconscience suicidaire", "Bonus de + 2", null));
-        cartes.add(new Objet(130 ,"Gourdin de misogynie fracassante", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", null));
-        cartes.add(new Objet(131 ,"Epée de féminisme exacerbé", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", null));
-        cartes.add(new Objet(132 ,"Titre qui en jette vraiment grave", "Bonus de +3", null));
-        cartes.add(new Objet(133 ,"Masse d'arme de répartie piquante", "Réservé aux prêtres", null));
-        cartes.add(new Objet(134 ,"Dague de traitrise", "Réservé aux voleurs", null));
-        cartes.add(new Objet(135 ,"Bottes de déplacement frénétique", "", null));
-        cartes.add(new Objet(136 ,"Bouclier surdimensionné", "Réservé aux guerriers. Bonus de +4", null));
-        cartes.add(new Objet(137 ,"Armure de Mithril", "Interdites aux magiciens. Bonus de + 3", null));
-        cartes.add(new Objet(138 ,"Collants de force de géant", "Interdit aux guerriers. Bonus de + 3", null));
-        cartes.add(new Objet(139 ,"Marteau des rotules douloureuses", "Réservé aux nains. Bonus de + 4", null));
-        cartes.add(new Objet(140 ,"Armure trapue", "Réservé aux nains. Bonus de + 3", null));
-        cartes.add(new Objet(141 ,"Epée Karaoké", "Interdite aux voleurs. Bonus de + 2", null));
-        cartes.add(new Objet(142 ,"Bâton de napalm", "Réservé aux magiciens. Bonus de + 5", null));
-        cartes.add(new Objet(143 ,"Chapeau pointu de Thaumaturgie", "réservé aux magiciens. Bonus de + 3", null));
-        cartes.add(new Objet(144 ,"Bandanas de gros dur", "Réservé aux humains.\n Bonus de + 3", null));
-        cartes.add(new Objet(145 ,"Armure de cuir", "Bonus de + 1", null));
-        cartes.add(new Objet(146 ,"Casque de courage", "Bonus de + 1", null));
-        cartes.add(new Objet(147 ,"Armure de flammes", "Bonus de + 2", null));
-        cartes.add(new Objet(148 ,"Sandale de protection", "Les cartes de malédictions que vous tirez en défonçant les portes n'ont aucun effet. Les malédictions lancées sur vous par d'autres joueurs vous affectent cependant normalement.", null));
-        cartes.add(new Objet(149 ,"Armure gluante", "Bonus de + 1", null));
-        cartes.add(new Objet(150 ,"Genouillères perforantes", "Bonus de + 1", null));
-        cartes.add(new Objet(151 ,"Casque virilité ostentatoire", "Bonus de +1 +3 pour les elfes", null));
-        cartes.add(new Objet(152 ,"Tuba d'envoutement", "Ce délicat instrument subjugue vos ennemis vous conférant un bonus de +3 pour déguerpir. Si vous réussissez à fuir, tirez une carte Trésor face cachée", null));
-        cartes.add(new Objet(153 ,"Genouillères de séduction", "Interdit aux prêtres. Si vous demandez à quelqu'un d'un niveau supérieur au votre de vous aider à combattre un monstre, il ne peut ni refuser, ni exiger de paiement en retour. Vous ne pouvez pas gagner la partie si le monstre a été battu grâce à vos genouillères.", null));
-        cartes.add(new Objet(154 ,"Escabeau", "Réservé aux Hobbits. Bonus de +3", null));
-        cartes.add(new Objet(155 ,"Sandwich Chocolat-Moules-Anchois", "Réservé aux Humains. Bonus de + 3", null));
-        cartes.add(new Objet(156 ,"Hallebarde suisse multifonctions", "Réservé aux Humains.\n Bonus de + 4", null));
+        cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement)));
+        cartes.add(new Objet(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", new Equipement(actionEquipement)));
+        cartes.add(new Objet(126 ,"Cape d'ombre", "Réservé aux voleurs. Bonus +4", new Equipement(actionEquipement)));
+        cartes.add(new Objet(127 ,"Epée (de) bâtard(e)", "Bonus de + 2", new Equipement(actionEquipement)));
+        cartes.add(new Objet(128 ,"Enorme rocher", "Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(129 ,"Targe d'inconscience suicidaire", "Bonus de + 2", new Equipement(actionEquipement)));
+        cartes.add(new Objet(130 ,"Gourdin de misogynie fracassante", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", new Equipement(actionEquipement)));
+        cartes.add(new Objet(131 ,"Epée de féminisme exacerbé", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe", new Equipement(actionEquipement)));
+        cartes.add(new Objet(132 ,"Titre qui en jette vraiment grave", "Bonus de +3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(133 ,"Masse d'arme de répartie piquante", "Réservé aux prêtres", new Equipement(actionEquipement)));
+        cartes.add(new Objet(134 ,"Dague de traitrise", "Réservé aux voleurs", new Equipement(actionEquipement)));
+        cartes.add(new Objet(135 ,"Bottes de déplacement frénétique", "", new Equipement(actionEquipement)));
+        cartes.add(new Objet(136 ,"Bouclier surdimensionné", "Réservé aux guerriers. Bonus de +4", new Equipement(actionEquipement)));
+        cartes.add(new Objet(137 ,"Armure de Mithril", "Interdites aux magiciens. Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(138 ,"Collants de force de géant", "Interdit aux guerriers. Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(139 ,"Marteau des rotules douloureuses", "Réservé aux nains. Bonus de + 4", new Equipement(actionEquipement)));
+        cartes.add(new Objet(140 ,"Armure trapue", "Réservé aux nains. Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(141 ,"Epée Karaoké", "Interdite aux voleurs. Bonus de + 2", new Equipement(actionEquipement)));
+        cartes.add(new Objet(142 ,"Bâton de napalm", "Réservé aux magiciens. Bonus de + 5", new Equipement(actionEquipement)));
+        cartes.add(new Objet(143 ,"Chapeau pointu de Thaumaturgie", "réservé aux magiciens. Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(144 ,"Bandanas de gros dur", "Réservé aux humains.\n Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(145 ,"Armure de cuir", "Bonus de + 1", new Equipement(actionEquipement)));
+        cartes.add(new Objet(146 ,"Casque de courage", "Bonus de + 1", new Equipement(actionEquipement)));
+        cartes.add(new Objet(147 ,"Armure de flammes", "Bonus de + 2", new Equipement(actionEquipement)));
+        cartes.add(new Objet(148 ,"Sandale de protection", "Les cartes de malédictions que vous tirez en défonçant les portes n'ont aucun effet. Les malédictions lancées sur vous par d'autres joueurs vous affectent cependant normalement.", new Equipement(actionEquipement)));
+        cartes.add(new Objet(149 ,"Armure gluante", "Bonus de + 1", new Equipement(actionEquipement)));
+        cartes.add(new Objet(150 ,"Genouillères perforantes", "Bonus de + 1", new Equipement(actionEquipement)));
+        cartes.add(new Objet(151 ,"Casque virilité ostentatoire", "Bonus de +1 +3 pour les elfes", new Equipement(actionEquipement)));
+        cartes.add(new Objet(152 ,"Tuba d'envoutement", "Ce délicat instrument subjugue vos ennemis vous conférant un bonus de +3 pour déguerpir. Si vous réussissez à fuir, tirez une carte Trésor face cachée", new Equipement(actionEquipement)));
+        cartes.add(new Objet(153 ,"Genouillères de séduction", "Interdit aux prêtres. Si vous demandez à quelqu'un d'un niveau supérieur au votre de vous aider à combattre un monstre, il ne peut ni refuser, ni exiger de paiement en retour. Vous ne pouvez pas gagner la partie si le monstre a été battu grâce à vos genouillères.", new Equipement(actionEquipement)));
+        cartes.add(new Objet(154 ,"Escabeau", "Réservé aux Hobbits. Bonus de +3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(155 ,"Sandwich Chocolat-Moules-Anchois", "Réservé aux Humains. Bonus de + 3", new Equipement(actionEquipement)));
+        cartes.add(new Objet(156 ,"Hallebarde suisse multifonctions", "Réservé aux Humains.\n Bonus de + 4", new Equipement(actionEquipement)));
         
         
         // ==============
