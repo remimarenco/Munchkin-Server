@@ -12,7 +12,7 @@ import partie.Partie;
 
 /**
  * Un Joueur est un Thread de communication
- * @author Meg4mi
+ * @author Guillaume Renoult
  */
 public class Joueur extends Thread {
 	
@@ -20,36 +20,64 @@ public class Joueur extends Thread {
     private Jeu jeu;   
     private Personnage personnage;
     private Partie partie;
-    private Message msg=new Message();
-    private Object parent=null;
-    private DataInputStream in=null;
-    private DataOutputStream out=null;
+    
+    private Message msg          = new Message();
+    private Object parent        = null;
+    private DataInputStream in   = null;
+    private DataOutputStream out = null;
     
     
+    /**
+     * Constructeur
+     * @param st
+     * @param parent
+     * @param partie 
+     */
     public Joueur(Socket st,Object parent,Partie partie) {        
         initCommunication(st, parent);
-        this.main = new Main();
-        this.jeu = new Jeu();        
+        this.main       = new Main();
+        this.jeu        = new Jeu();        
         this.personnage = new Personnage();
-        this.partie=partie;
+        this.partie     = partie;
     }  
 
     
+    /**
+     * Constructeur
+     * @param main
+     * @param jeu
+     * @param personnage
+     * @param partie
+     * @param st
+     * @param parent 
+     */
     public Joueur(Main main, Jeu jeu, Personnage personnage,Partie partie,Socket st,Object parent) {
         initCommunication(st, parent);
-        this.main = main;
-        this.jeu = jeu;        
+        this.main       = main;
+        this.jeu        = jeu;        
         this.personnage = personnage;
-        this.partie=partie;
+        this.partie     = partie;
     }
 
+    
+    /**
+     * Constructeur
+     * @param main
+     * @param jeu
+     * @param nom
+     * @param personnage
+     * @param partie
+     * @param st
+     * @param parent 
+     */
     public Joueur(Main main, Jeu jeu, String nom, Personnage personnage, Partie partie,Socket st,Object parent) {
         initCommunication(st, parent);
-        this.main = main;
-        this.jeu = jeu;        
+        this.main       = main;
+        this.jeu        = jeu;        
         this.personnage = personnage;
-        this.partie = partie;
+        this.partie     = partie;
     }
+    
     
     /**
      * Methode d'initialisation pour le thread et les communications reseaux
@@ -59,14 +87,15 @@ public class Joueur extends Thread {
     private void initCommunication(Socket st,Object parent){
         try{
         this.parent=parent;
-        in=new DataInputStream(st.getInputStream());
-        out= new DataOutputStream(st.getOutputStream());
+            in  = new DataInputStream(st.getInputStream());
+            out = new DataOutputStream(st.getOutputStream());
         }
         catch(Exception e){
             System.exit(1);
         }
     }
   
+    
     /**
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
@@ -75,6 +104,7 @@ public class Joueur extends Thread {
         new Message(Message.LISTE,"admin","General",list).write(out);
     }
 
+    
     /**
      * Envoi un message via le socket via la methode write
      * @param message
@@ -85,6 +115,7 @@ public class Joueur extends Thread {
         return true;
     }   
    
+    
     /**
      * Methode run du thread;
      */
@@ -93,7 +124,7 @@ public class Joueur extends Thread {
         boolean test = true;
         try{
             while(test){
-                this.msg=new Message();//Important pour distinguer les messages
+                this.msg = new Message();   //Important pour distinguer les messages
                 if(msg.read(in)){
                     if(parent instanceof Serveur)
                         ((Serveur)parent).interpretMessage(msg,this);    
@@ -112,32 +143,66 @@ public class Joueur extends Thread {
     }
     
     
-	
-    
+    /**
+     * Retourne le jeu d'un joueur
+     * @return 
+     */
     public Jeu getJeu() {
         return jeu;
     }
 
+    
+    /**
+     * Défini le jeu d'un joueur
+     * @param jeu 
+     */
     public void setJeu(Jeu jeu) {
         this.jeu = jeu;
     }
 
+    
+    /**
+     * Retourne la main d'un joueur
+     * @return 
+     */
     public Main getMain() {
         return main;
     }
 
+    
+    /**
+     * Défini la main d'un joueur
+     * @param main 
+     */
     public void setMain(Main main) {
         this.main = main;
     }
 
+    
+    /**
+     * Retourne le personne d'un joueur
+     * @return 
+     */
     public Personnage getPersonnage() {
         return personnage;
     }
 
+    
+    /**
+     * Défini le personnage d'un joueur
+     * @param personnage 
+     */
     public void setPersonnage(Personnage personnage) {
         this.personnage = personnage;
     }
     
+    
+    /**
+     * Défausse une carte d'un joueur
+     * @param c
+     * @return 
+     */
+    // TODO : Vérifier que ce soit bien la place de cette méthode
     public boolean defausserCarte(Carte c){
         this.jeu.supprimerCarte(c);
         
@@ -152,11 +217,23 @@ public class Joueur extends Thread {
         return true;
     }
     
+    
+    /**
+     * Ajoute une carte au jeu d'un joueur
+     * @param c
+     * @return 
+     */
     public boolean equiperCarte(Carte c){
         this.jeu.ajouterCarte(c);
         return true;
     }
     
+    
+    /**
+     * Pioche une carte & l'ajoute dans la main d'un joueur
+     * @param typePioche : type de pioche (DONJON ou TRESOR)
+     * @return boolean : la pioche s'est bien passée ou non
+     */ 
     public boolean piocherCarte(Class typePioche){
         if(typePioche == Constante.DONJON){
             this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
@@ -169,6 +246,11 @@ public class Joueur extends Thread {
         return true;
     }
     
+    
+    /**
+     * Génère les infos du joueur à envoyer aux clients
+     * @return 
+     */
     public HashMap<String,String> generateInfos(){
         HashMap<String,String> map=new HashMap<String, String>();
         map.put("Nom", this.getName());

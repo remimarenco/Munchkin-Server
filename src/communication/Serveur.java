@@ -19,10 +19,10 @@ import partie.Partie;
  */
 public class Serveur {
     
-    public static boolean runningflag=true;
+    public static boolean runningflag = true;
     private ServerSocket socket_ecoute;
     private Partie partie;
-    private  Thread thrd;    
+    private Thread thrd;    
     private int nombreJoueur;
 
     /**
@@ -32,9 +32,9 @@ public class Serveur {
      */
     public Serveur(int port,int nombreJoueur) {
         try {
-            socket_ecoute = new ServerSocket(port);            
-            this.nombreJoueur=nombreJoueur;
-            this.partie=new Partie();
+            socket_ecoute       = new ServerSocket(port);            
+            this.nombreJoueur   = nombreJoueur;
+            this.partie         = new Partie();
             while (true) {               
                Socket st = socket_ecoute.accept();                
                Joueur com= new Joueur(st, this,partie);
@@ -53,7 +53,7 @@ public class Serveur {
 
 
     private void stop() {
-        thrd=null;      
+        thrd = null;      
     }
     
     /**
@@ -71,9 +71,9 @@ public class Serveur {
                     
                     //partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
-                    Message message = new Message(Message.MESSAGE, "admin", "Partie", text);
+                    Message message  = new Message(Message.MESSAGE, "admin", "Partie",    text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
-                    Message message3 = new Message(message.MESSAGE,"admin","Partie","La partie est pleine, elle demarre ! \n");
+                    Message message3 = new Message(Message.MESSAGE, "admin", "Partie",    "La partie est pleine, elle demarre ! \n");
                     String list = this.partie.getListe();
                     System.out.println(list);
                     for(Joueur j : this.partie){

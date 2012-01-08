@@ -1,6 +1,10 @@
 package joueur;
 
 public class Classe {
+    
+    /**
+     * Constructeur
+     */
     public Classe() {
 
     }

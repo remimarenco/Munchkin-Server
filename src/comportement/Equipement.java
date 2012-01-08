@@ -12,8 +12,13 @@ import joueur.Personnage;
 
 
 public  class Equipement {
+    
     private ArrayList<Action> tabAction;
 
+    /**
+     * Constructeur
+     * @param tabAction : ensemble d'action 
+     */
     public Equipement(ArrayList<Action> tabAction) {
         try{
             this.tabAction = (ArrayList<Action>) tabAction.clone();
@@ -22,9 +27,14 @@ public  class Equipement {
         }
     }
 
+    /**
+     * Equipe un joueur
+     * @param joueurImpacte : le joueur a équiper
+     * @return out : texte résumant l'action
+     */
     public String equipe(Joueur joueurImpacte){
         String out = "";
-
+        
         if(tabAction != null){
             out += "--- Equipement ---\n";
             out += "Un equipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
@@ -34,7 +44,7 @@ public  class Equipement {
         } else {
            out += "Aucun equipement !\n";
         }
-
+        
         return out;
     }	
 }

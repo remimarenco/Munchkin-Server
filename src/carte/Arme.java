@@ -12,6 +12,7 @@ public class Arme extends Tresor {
     /**
      * Constructeur de la classe Arme.
      * Permet de renseigner les paramètres de la classe Trésor ainsi que l'équipement engendré
+     * @param id
      * @param nom
      * @param description
      * @param equipement

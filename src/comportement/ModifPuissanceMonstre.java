@@ -18,39 +18,48 @@ public class ModifPuissanceMonstre /*extends Action*/{
     public ModifPuissanceMonstre(ArrayList<Race> tabRace,
                     ArrayList<Classe> tabClasse, int bonusPuissance, Monstre monstre) {
         super();
-        this.tabRace = tabRace;
-        this.tabClasse = tabClasse;
+        this.tabRace        = tabRace;
+        this.tabClasse      = tabClasse;
         this.bonusPuissance = bonusPuissance;
-        this.monstre = monstre;
+        this.monstre        = monstre;
     }
 
     //@Override
+    /**
+     * Modification de la puissance d'un monstre
+     * @param joueurImpacte : joueur contre lequel se bat le monstre
+     * @return out : texte résumant l'action
+     */
     public String action(Joueur joueurImpacte) {
-        String out = "";
+        String out              = "";
+        boolean accept          = true;
+        boolean raceTrouve      = false;
+        boolean classeTrouve    = false;
+        
         out += "On passe dans une action de modification de puissance de monstre :\n";
         out += "Le monstre impliqué est "+monstre.getNom();
         out += ", le bonus puissance attribué est de " + this.bonusPuissance;
+        
         out += ", les classes contre lesquelles ce bonus s'applique sont :";
         for(Race race : tabRace)
             out += " " + race.toString();
+        
         out += ", les races contre lesquelles ce bonus s'applique sont :";
         for(Classe classe : tabClasse)
             out += " " + classe.toString();
+        
         out += "\n";
-
-        boolean accept=true;
-        boolean raceTrouve=false;
-        boolean classeTrouve=false;
-        if(tabRace!=null) {
-            for(Race race: tabRace)
+        
+        if(tabRace!=null) {                 // Si des races ont été définies
+            for(Race race: tabRace)         // On regarde si celle du perso s'y trouve
                 if(joueurImpacte.getPersonnage().getRace().equals(race))
                     raceTrouve=true;
             if(!raceTrouve)
                 accept=false;
         }
 		
-        if(tabClasse!=null){
-            for(Classe classe: tabClasse)
+        if(tabClasse!=null){                // Si des classes ont été définies
+            for(Classe classe: tabClasse)   // On regarde si celle du perso s'y trouve
                 if(joueurImpacte.getPersonnage().getClasse().equals(classe))
                     raceTrouve=true;
             if(!classeTrouve)
@@ -61,5 +70,4 @@ public class ModifPuissanceMonstre /*extends Action*/{
             monstre.setPuissance(monstre.getPuissance()+bonusPuissance);
         return out;	
     }
-
 }

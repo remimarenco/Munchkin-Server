@@ -15,6 +15,13 @@ public class ModifPuissanceMonstre extends Action{
     private int bonusPuissance;
     private Monstre monstre;
 	
+    /**
+     * Constructeur
+     * @param tabRace
+     * @param tabClasse
+     * @param bonusPuissance
+     * @param monstre 
+     */
     public ModifPuissanceMonstre(ArrayList<Race> tabRace,
 			ArrayList<Classe> tabClasse, int bonusPuissance, Monstre monstre) {
         super();
@@ -32,12 +39,18 @@ public class ModifPuissanceMonstre extends Action{
         this.monstre = monstre;
     }
 
+    /**
+     * Action modifiant la puissance d'un monstre
+     * @param joueurImpacte : joueur contre lequel se bat le monstre
+     * @return out : texte résumant l'action
+     */
     @Override
     public String action(Joueur joueurImpacte) {
-        String out = "";
-        boolean accept=true;
-        boolean raceTrouve=false;
-        boolean classeTrouve=false;
+        
+        String out              = "";
+        boolean accept          = true;
+        boolean raceTrouve      = false;
+        boolean classeTrouve    = false;
 		
         out += "On passe dans une action de modification de puissance de monstre :\n";
         out += "Le monstre impliqué est "+monstre.getNom();
@@ -45,10 +58,8 @@ public class ModifPuissanceMonstre extends Action{
     
         if(tabRace != null && !(tabRace.isEmpty())){
             out += ", les races contre lesquelles ce bonus s'applique sont :";
-            for(Race race : tabRace){
-                out += " ";
-                out += race.toString();
-            }
+            for(Race race : tabRace)
+                out += " " + race.toString();
         }else{
             out += " , aucune race n'est concernée par ce bonus";
         }
@@ -65,23 +76,23 @@ public class ModifPuissanceMonstre extends Action{
         }
         System.out.println(out);
 
-        if(tabRace != null && tabRace.isEmpty()){
-            for(Race race: tabRace)
+        if(tabRace != null && !tabRace.isEmpty()){      // Si des races sont spécifiées  
+            for(Race race: tabRace)                     // On regarde si celle du joueur est concernée
                 if(joueurImpacte.getPersonnage().getRace().equals(race))
                     raceTrouve=true;
             if(!raceTrouve)
                 accept=false;
         }
 		
-        if(tabClasse != null && tabClasse.isEmpty()){
-            for(Classe classe: tabClasse)
-                    if(joueurImpacte.getPersonnage().getClasse().equals(classe))
-                            raceTrouve=true;
+        if(tabClasse != null && !tabClasse.isEmpty()){  // Si des classes sont spécifiées  
+            for(Classe classe: tabClasse)               // On regarde si celle du joueur est concernée
+                if(joueurImpacte.getPersonnage().getClasse().equals(classe))
+                    raceTrouve=true;
             if(!classeTrouve)
                     accept=false;
         }
 		
-        if (accept)
+        if(accept)
             monstre.setPuissance(monstre.getPuissance()+bonusPuissance);
         return out;	
     }

@@ -10,7 +10,11 @@ import joueur.Joueur;
 public class MonstreVaincu {
     
     public ArrayList<Action> tabAction;
-	
+    
+    /**
+     * Constructeur
+     * @param tabAction 
+     */
     public MonstreVaincu(ArrayList<Action> tabAction){
         try {
             this.tabAction = (ArrayList<Action>) tabAction.clone();
@@ -19,7 +23,14 @@ public class MonstreVaincu {
         }
     }
 	
+    
+    /**
+     * Action lorsqu'un monstre est vaincu
+     * @param joueurImpacte : joueur ayant vaincu le monstre
+     * @return 
+     */
     public String actionMonstreVaincu(Joueur joueurImpacte) {
+        
         String out = "";
 
         if(tabAction == null) {
@@ -29,8 +40,7 @@ public class MonstreVaincu {
             out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
             for(Action action : tabAction)
                 out += action.action(joueurImpacte);
-            out += "\n";
-            out += "--- Fin de monstre vaincu ---";
+            out += "\n--- Fin de monstre vaincu ---";
         }
         out += "\n";    
         return out;

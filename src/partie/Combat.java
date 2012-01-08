@@ -5,42 +5,71 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import joueur.Personnage;
 
+/**
+ * Combat entre un perso & un monstre
+ * @author Julien Rouvier
+ */
 public class Combat {
+    
     private ArrayList<Personnage> CampGentil;
     private ArrayList<Object> CampMechant;
     private Partie partie;
 
+    /**
+     * Constructeur
+     * @param partie : partie dans laquelle à lieu le combat 
+     */
     public Combat(Partie partie) {
         this.partie = partie;
-        CampGentil= new ArrayList<Personnage>();
-        CampMechant= new ArrayList<Object>();
+        CampGentil  = new ArrayList<Personnage>();
+        CampMechant = new ArrayList<Object>();
     }
 
+    /**
+     * Constructeur
+     */
     public Combat() {
     }
-
     
     
+    /**
+     * Retourne le camps gentil (camps du perso)
+     * @return 
+     */
     public ArrayList<Personnage> getCampGentil() {
         return CampGentil;
     }
 
+    
+    /**
+     * Retourne le camps méchant (camps du monstre)
+     * @return 
+     */
     public ArrayList<Object> getCampMechant() {
         return CampMechant;
     }
     
     
+    /**
+     * Tenter de déguerpir du combat
+     * @return 
+     */
     public boolean tenterDeguerpir() {
     	// Le camp gentil tente de déguerpir
-    	for(Personnage gentil : CampGentil)
-    	{
+    	for(Personnage gentil : CampGentil){
     		gentil.deguerpir();
     	}
         return true;
     }    
     
     
+    /**
+     * Combat à proprement parlé
+     * Vérification des puissances des 2 camps pour voir lequel l'emporte
+     * @return 
+     */
     public boolean combattre(){
+        
         int puissanceGentil = 0;
         int puissanceMechant = 0;
         
@@ -75,9 +104,9 @@ public class Combat {
             }
         }
         
-        if(puissanceGentil >= puissanceMechant)
+        if(puissanceGentil >= puissanceMechant) // Le camps gentil (du perso) a gagné
             return true;
-        else 
+        else                                    // Le camps méchant (du monstre) a gagné
             return false;
     }
 }

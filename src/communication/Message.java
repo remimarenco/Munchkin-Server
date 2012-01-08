@@ -18,91 +18,126 @@ import java.util.HashMap;
 public class Message {
     
     
-    public static final int CONNECT=0;
-    public static final int DISCONNECT=1;
-    public static final int MESSAGE=2;
-    public static final int LISTE=3;       
-    public static final int NICKEXIST=5;        
-    public static final int QUESTION=7;
-    public static final int INTERVENTION=8;
-    public static final int SOUND=9;
-    public static final int CARTE_EN_COURS=10;        
-    public static final int INFO_JOUEUR=80;
-    public static final int JEUX_JOUEUR=81;
-    public static final int MAIN_JOUEUR=82;
-    public static final int CARTES_JOUABLES=83;
+    public static final int CONNECT         = 0;
+    public static final int DISCONNECT      = 1;
+    public static final int MESSAGE         = 2;
+    public static final int LISTE           = 3;       
+    public static final int NICKEXIST       = 5;        
+    public static final int QUESTION        = 7;
+    public static final int INTERVENTION    = 8;
+    public static final int SOUND           = 9;
+    public static final int CARTE_EN_COURS  = 10;        
+    public static final int INFO_JOUEUR     = 80;
+    public static final int JEUX_JOUEUR     = 81;
+    public static final int MAIN_JOUEUR     = 82;
+    public static final int CARTES_JOUABLES = 83;
             
-    private String nick_src="";     
-    private String nick_dest="";    
-    private String message="";
-    private String idCard=new String();
+    private String nick_src     = "";     
+    private String nick_dest    = "";    
+    private String message      = "";
+    private String idCard       = new String();
+    
     private int type;
     private int action;
     private Color color;
     private HashMap<String,String> map;
     
+    /**
+     * Constructeur par défaut
+     */
     public Message(){}
 
+    
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src 
+     */
     public Message(int type,String nick_src){
-        this.type=type;
-        this.nick_src=nick_src;           
+        this.type       = type;
+        this.nick_src   = nick_src;           
     }
   
+    
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest 
+     */
     public Message(int type,String nick_src,String nick_dest){
-        this.type=type;
-        this.nick_src=nick_src; 
-        this.nick_dest=nick_dest;
+        this.type       = type;
+        this.nick_src   = nick_src; 
+        this.nick_dest  = nick_dest;
     }
     
      /**
-      * 
+      * Constructeur
       * @param type
       * @param nick_src
       * @param nick_dest
       * @param msg 
       */
     public Message(int type,String nick_src,String nick_dest,String msg){
-        this.type=type;            
-        this.nick_src=nick_src;          
-        this.nick_dest=nick_dest;        
-        this.message=msg;
-        this.color=Color.BLACK;
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.message    = msg;
+        this.color      = Color.BLACK;
     }
     
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest
+     * @param action 
+     */
     public Message(int type,String nick_src,String nick_dest,int action){
-        this.type=type;            
-        this.nick_src=nick_src;          
-        this.nick_dest=nick_dest;        
-        this.action=action;
-        this.color=Color.BLACK;
-        this.idCard=new String();
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.action     = action;
+        this.color      = Color.BLACK;
+        this.idCard     = new String();
     }
     
-   public Message(int type,String nick_src,String nick_dest,int action,String idCard){
-        this.type=type;            
-        this.nick_src=nick_src;          
-        this.nick_dest=nick_dest;        
-        this.action=action;
-        this.color=Color.BLACK;
-        this.idCard=idCard;
+    
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest
+     * @param action
+     * @param idCard 
+     */
+    public Message(int type,String nick_src,String nick_dest,int action,String idCard){
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.action     = action;
+        this.color      = Color.BLACK;
+        this.idCard     = idCard;
     }
    
-   /**
-    * 
-    * @param type
-    * @param nick_src
-    * @param nick_dest
-    * @param map 
-    */
+    
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest
+     * @param map 
+     */
     public Message(int type,String nick_src,String nick_dest,HashMap<String,String> map){
-        this.type=type;            
-        this.nick_src=nick_src;          
-        this.nick_dest=nick_dest;        
-        this.map=map;            
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.map        = map;            
     }
     
+    
    /**
-    * 
+    * Constructeur
     * @param type
     * @param nick_src
     * @param nick_dest
@@ -110,12 +145,13 @@ public class Message {
     * @param color 
     */
    public Message(int type,String nick_src,String nick_dest,String msg,Color color){
-        this.type=type;            
-        this.nick_src=nick_src;           
-        this.color=color;        
-        this.nick_dest=nick_dest;       
-        this.message=msg;
+        this.type       = type;            
+        this.nick_src   = nick_src;           
+        this.color      = color;        
+        this.nick_dest  = nick_dest;       
+        this.message    = msg;
    }
+   
 
    /**
     * Methode qui lit un message qui arrive sur le socket
@@ -124,21 +160,21 @@ public class Message {
     */
     public boolean read(DataInputStream in) {
         try{
-            ObjectInputStream ois= new ObjectInputStream(in);
-            type=in.readInt();        
-            nick_src=in.readUTF();
+            ObjectInputStream ois = new ObjectInputStream(in);
+            type     = in.readInt();        
+            nick_src = in.readUTF();
 
-            if(type>DISCONNECT){                      
+            if(type > DISCONNECT){                      
                 nick_dest=in.readUTF();  
-                if(type<INFO_JOUEUR && type!=INTERVENTION && type!=SOUND){
+                if(type < INFO_JOUEUR && type != INTERVENTION && type != SOUND){
                     message=in.readUTF();                  
                     color=(Color) ois.readObject();
                 }
-                if(type==INTERVENTION || type==SOUND)
-                    action=in.readInt();
-                if(type==INTERVENTION)
-                    idCard=in.readUTF();
-                if(type>=INFO_JOUEUR)
+                if(type == INTERVENTION || type==SOUND)
+                    action = in.readInt();
+                if(type == INTERVENTION)
+                    idCard = in.readUTF();
+                if(type >= INFO_JOUEUR)
                     this.map=(HashMap<String,String>)ois.readObject();
             }    
             return true;

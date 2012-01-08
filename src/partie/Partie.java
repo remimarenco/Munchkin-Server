@@ -51,8 +51,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * @param listeJoueurs 
      */
     public Partie(Pioche<Tresor> piocheTresor, Pioche<Donjon> piocheDonjon, Defausse<Tresor> defausseTresor, Defausse<Donjon> defausseDonjon, ArrayList<Joueur> listeJoueurs) {
-        this.piocheTresor = piocheTresor;
-        this.piocheDonjon = piocheDonjon;
+        this.piocheTresor   = piocheTresor;
+        this.piocheDonjon   = piocheDonjon;
         this.defausseTresor = defausseTresor;
         this.defausseDonjon = defausseDonjon;        
     }
@@ -88,97 +88,109 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     
     /**
-     * 
-     * @return 
+     * Début d'un tour
+     * @return boolean
      */
     public boolean commencerTour(){
         Donjon enJeu = (Donjon) piocheDonjon.tirerCarte();
         return true;
     }
 
+    
     /**
-     * 
+     * Retourne la défausse des cartes donjon
      * @return 
      */
     public Defausse getDefausseDonjon() {
         return defausseDonjon;
     }
 
+    
     /**
-     * 
+     * Défini la défausse des cartes donjon
      * @param defausseDonjon 
      */
     public void setDefausseDonjon(Defausse defausseDonjon) {
         this.defausseDonjon = defausseDonjon;
     }
 
+    
     /**
-     * 
+     * Retourne la défausse des cartes trésor
      * @return 
      */
     public Defausse getDefausseTresor() {
         return defausseTresor;
     }
 
+    
     /**
-     * 
+     * Défini la défausse des cartes trésor
      * @param defausseTresor 
      */
     public void setDefausseTresor(Defausse defausseTresor) {
         this.defausseTresor = defausseTresor;
     }
     
+    
     /**
-     * 
+     * Retourne la liste des joueurs de la partie
      * @return 
      */
+    // TODO : Vérifier que la méthode est utile, puisque la liste des joueur est la partie elle même
     public ArrayList<Joueur> getListeJoueurs() {
         return this;
     }
 
-   
+    
     /**
-     * 
+     * Retourne la pioche de carte donjon
      * @return 
      */
     public Pioche<Donjon> getPiocheDonjon() {
         return piocheDonjon;
     }
     
+    
     /**
-     * 
+     * Défini la pioche des cartes donjon
      * @param piocheDonjon 
      */
     public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
         this.piocheDonjon = piocheDonjon;
     }
     
+    
     /**
-     * 
+     * Défini la pioche des cartes trésor
      * @param piocheTresor 
      */
     public void setPiocheTresor(Pioche<Tresor> piocheTresor) {
         this.piocheTresor = piocheTresor;
     }
 
+    
     /**
-     * 
+     * Retourne la pioche des cartes trésor
      * @return 
      */
     public Pioche<Tresor> getPiocheTresor() {
         return piocheTresor;
     }
 
+    
     /**
      * 
      * @return 
      */
+    // TODO : A quoi sert cette méthode ??
     public boolean choixCombat(){
         return true;
     }
     
+    
     /**
-     * 
+     * Supprime un joueur grâce à son nom
      * @param name 
      */
     public void removeJoueurByName(String name){
@@ -187,6 +199,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.remove(j);
     }
     
+    
+    /**
+     * Retourne un joueur grâce à son nom
+     */
     public Joueur getJoueurByName(String name){
         Joueur ret = null;
         for(Joueur j : this)
@@ -195,8 +211,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return ret;
     }
     
+    
     /**
-     * 
+     * Verifie qu'un login est disponible dans la partie
      * @param log
      * @return 
      */
@@ -214,8 +231,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return k;
     }
     
+    
     /**
-     * 
+     * Renvoi la liste de nom des joueurs
      * @return 
      */
     public String getListe(){
@@ -224,6 +242,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             liste+=get(i).getName() + ";";
         return liste;
     }
+    
     
     /**
      * 
@@ -245,11 +264,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return j;
     }
     
+    
+    /**
+     * Envoi un message à l'ensemble des joueurs de la partie
+     * @param txt 
+     */
     public void sendMessageToAll(String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.RED);
         for(Joueur j : this)
             j.sendMessage(msg);
     }
+    
     
     /**
      * Fonction permettant d'envoyer un message Ã  tous joueurs sauf le courant
@@ -262,6 +287,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     j.sendMessage(msg);
     }
     
+    
      /**
      * Fonction permettant d'envoyer un message Ã  tous joueurs sauf le courant
      * @param txt
@@ -273,6 +299,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 j.sendMessage(msg);
     }
     
+    
     /**
      * Fonction permettant d'envoyer un message au joueur en cours
      * @param txt
@@ -282,46 +309,85 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         enCours.sendMessage(msg);
     }
     
-     public void sendMessageBackToSender(String source,String txt){
+    
+    /**
+     * 
+     * @param source
+     * @param txt 
+     */
+    public void sendMessageBackToSender(String source,String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         this.getJoueurByName(source).sendMessage(msg);        
     }
     
-     public void sendQuestionToEnCours(String txt){
+    
+    /**
+     * 
+     * @param txt 
+     */
+    public void sendQuestionToEnCours(String txt){
         Message msg=new Message(Message.QUESTION,"Partie",this.enCours.getName(),txt);
         this.enCours.sendMessage(msg);
     }
-     
-     public void sendInfosJoueursToAll(){
+    
+    
+    /**
+     * 
+     */
+    public void sendInfosJoueursToAll(){
          for(Joueur j :this)
              for(Joueur j2 :this)
                 j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
      }
-     
-     public void sendCartesJeuxJoueursToAll(){
+    
+    
+    /**
+     * 
+     */
+    public void sendCartesJeuxJoueursToAll(){
         for(Joueur j :this)
             for(Joueur j2 :this)
                 j.sendMessage(new Message
                        (Message.JEUX_JOUEUR, "Partie", j2.getName(), j2.getJeu().generateInfos()));
      }
-      public void sendCartesMainToOwner(){
+    
+    
+    /**
+     * 
+     */
+    public void sendCartesMainToOwner(){
          for(Joueur j :this)             
              j.sendMessage(new Message
                      (Message.MAIN_JOUEUR, "Partie", j.getName(), j.getMain().generateInfos()));
      }
-      
-     public void sendCarteEnCoursToAll(Carte carte){
+    
+    
+    /**
+     * 
+     * @param carte 
+     */
+    public void sendCarteEnCoursToAll(Carte carte){
          for(Joueur j :this)             
              j.sendMessage(new Message
                      (Message.CARTE_EN_COURS, "Partie", j.getName(), carte.getId().toString()));
      }
-     
-     public void sendSongToAll(int constante){
+    
+    
+    /**
+     * 
+     * @param constante 
+     */
+    public void sendSongToAll(int constante){
          for(Joueur j :this)
              j.sendMessage(new Message(Message.SOUND, "Partie", j.getName(), constante));
      }
-     
-     public void intervenir(Message msg){
+    
+    
+    /**
+     * 
+     * @param msg 
+     */
+    public void intervenir(Message msg){
          switch(msg.getAction()){
             case Constante.ACTION_AIDER:
                  if(!msg.getIdCard().equals("")){
@@ -364,26 +430,48 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 break;
             }
      }
+    
+    /**
+     * 
+     * @param msg 
+     */
+    public void aider(Message msg){
+
+    }
+    
+    
+    /**
+     * 
+     * @param msg 
+     */
+    public void pourrir(Message msg){
+
+    }
      
-     public void aider(Message msg){
-         
-     }
-     
-     public void pourrir(Message msg){
-         
-     }
-     
-     public void poserCarte(Message msg){
-         
-     }
-     
+    
+    /**
+     * 
+     * @param msg 
+     */
+    public void poserCarte(Message msg){
+
+    }
+    
+    
+    /**
+     * 
+     * @param msg
+     * @return 
+     */
     public boolean answer(Message msg){
         this.answer=msg.getMessage();      
         return true;     
     }    
  
    
-
+    /**
+     * 
+     */
     @Override
     public void run() {
     	// TODO : Phases du tour de jeu
@@ -415,6 +503,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         }
     }
 
+    
+    /**
+     * 
+     */
     private void init() {
         piocheDonjon.init(this.deck);
         piocheTresor.init(this.deck);       
@@ -424,6 +516,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.sendCartesMainToOwner();
     }
 
+    
+    /**
+     * 
+     */
     private void tour() {
         Iterator it = this.iterator(); 
         Carte cartePiochee;
@@ -549,7 +645,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         }
         it = this.iterator();	
     }
-	
+
+    
     /**
      * Méthode permettant de tester si la pioche est vide ou pleine
      */
@@ -576,7 +673,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             }
         }
     }
-	
+
+    
     /**
      * Méthode appelée lorsque la partie est terminée
      */
@@ -584,7 +682,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         // TODO Fin de partie
         this.SendDebugMessage("La partie est terminée !!");
     }
-	
+
+    
     /**
      * Méthode permettant d'envoyer un message de debug (sur out) + à tous les joueurs
      * @param string : Message à envoyer
@@ -593,7 +692,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             System.out.println(string);
             this.sendMessageToAll(string);
     }
-	
+
+    
     /**
      * Méthode appelée pour tester si la partie est terminée
      * @return Vrai : La partie est terminée, 

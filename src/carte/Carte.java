@@ -14,40 +14,9 @@ import joueur.Joueur;
  */
 public abstract class Carte {
     
-    /**
-     * id de la carte, permettant de la référencer côté seriveur et client
-     */
-    protected Integer id = 0;
+    protected Integer id;           // id de la carte, reference sur serveur et client
     protected String nom;
-    
-    /**
-     * Description de la carte, correspondante à la réalité
-     */
-    protected String description;
-
-    public  Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    protected String description;   // Description de la carte, correspondante à la réalité
 
     /**
      * IncidentFacheux d'une carte => valable seulement si c'est un monstre
@@ -91,6 +60,7 @@ public abstract class Carte {
      */
     protected IncidentDeguerpir incidentDeguerpir;
 
+    
     /**
      * Constructeur de la carte
      * @param id de la carte
@@ -103,26 +73,31 @@ public abstract class Carte {
         this.id = id;
     }
     
-    /*
-     public int getType(){
-    
-    public int getType(){
-        return type;
+    public  Integer getId() {
+        return id;
     }
-     */
-    
-    /**
-     * Méthode de test de toutes les méthodes d'actions
-     */
-    /*
-     public void action(Joueur joueurImpacte){
-        appliquerCondition(joueurImpacte);
-        appliquerIncidentFacheux(joueurImpacte);
-        appliquerSortilege(joueurImpacte);
-        equiper(joueurImpacte);
-    }
-    */
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
     /**
      * Permet de modifier le comportement equipement d'une carte objet
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
@@ -132,6 +107,7 @@ public abstract class Carte {
         this.equipement = equipement;
     }
 
+    
     /**
      * Permet de modifier le comportement incidentFacheux d'une carte monstre
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
@@ -141,6 +117,7 @@ public abstract class Carte {
         this.incidentFacheux = incidentFacheux;
     }
 
+    
     /**
      * Permet de lancer le comportement incidentFacheux d'une carte monstre
      * TODO : Changer retour String

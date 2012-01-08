@@ -2,7 +2,12 @@ package joueur;
 
 import partie.Constante;
 
+/**
+ * Personnage : entité participant aux combats, etc...
+ * @author Julien Rouvier
+ */
 public class Personnage {
+    
     private int     niveau;
     private int     sexe;
     private boolean aChangeSexe;
@@ -13,7 +18,19 @@ public class Personnage {
     private Classe  classe;
     private int     bonusPuissance;
 	
+    // TODO : Vérifier la pertinence & l'utilité des constructeurs
     
+    /**
+     * Constructeur
+     * @param niveau
+     * @param sexe
+     * @param aChangeSexe
+     * @param capaciteFuite
+     * @param bonusCapaciteFuite
+     * @param nbEquipement
+     * @param puissance
+     * @param bonusPuissance 
+     */
     public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
         this.niveau         	= niveau;
         this.sexe           	= sexe;
@@ -27,15 +44,29 @@ public class Personnage {
         this.classe = null;
     }
         
+    
+    /**
+     * Constructeur
+     */
     public Personnage() {
-        super();
         this.niveau = 1;
     }
 
+    
+    /**
+     * Constructeur
+     * @param name 
+     */
     public Personnage(String name) {
         super();
     }
 
+    
+    /**
+     * Changement du niveau du personnage
+     * @param deltaNiveau : delta de modification du niveau (-2, +1, etc..)
+     * @return 
+     */
     public boolean changerNiveau(int deltaNiveau){
         if(this.niveau + deltaNiveau < 1)
             this.setNiveau(1);
@@ -46,87 +77,185 @@ public class Personnage {
         return true;
     }
     
+    
+    /**
+     * Renvoi le niveau du personnage
+     * @return niveau : le niveau du personnage
+     */
     public int getNiveau() {
         return niveau;
     }
 
+    
+    /**
+     * Défini le niveau du personnage
+     * @param niveau 
+     */
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
 
+    
+    /**
+     * Retourne la capacité de fuite
+     * @return capaciteFuite
+     */
     public int getCapaciteFuite() {
         return capaciteFuite;
     }
 
+    
+    /**
+     * Défini la capacité de fuite du perso
+     * @param capaciteFuite 
+     */
+    public void setCapaciteFuite(int capaciteFuite) {
+        this.capaciteFuite = capaciteFuite;
+    }
+    
+    
+    /**
+     * Retourne le nombre d'équipement (??)
+     * @return nbEquipement
+     */
     public int getNbEquipement() {
         return nbEquipement;
     }
 
-    public void setCapaciteFuite(int capaciteFuite) {
-        this.capaciteFuite = capaciteFuite;
-    }
-
+    
+    /**
+     * Défini le nombre d'équipement du perso
+     * @param nbEquipement 
+     */
     public void setNbEquipement(int nbEquipement) {
         this.nbEquipement = nbEquipement;
     }
 
+    
+    /**
+     * Défini le sexe du perso
+     * @param sexe 
+     */
     public void setSexe(int sexe) {
         this.sexe = sexe;
     }
     
+    
+    /**
+     * Renvoi le sexe du perso
+     * @return sexe (Constante.SEXE_M ou Constante.Sexe_F)
+     */
     public int getSexe() {
         return sexe;
     }
     
+    
+    /**
+     * Vérifie si le personnage a déjà changé de sexe
+     * @return 
+     */
     public boolean isaChangeSexe() {
         return aChangeSexe;
     }
     
     
+    /**
+     * Indique que le personnage a changé de sexe
+     * @param aChangeSexe 
+     */
     public void setaChangeSexe(boolean aChangeSexe) {
         this.aChangeSexe = aChangeSexe;
     }
 
+    
+    /**
+     * Retourne la race du perso
+     * @return 
+     */
     public Race getRace() {
         return race;
     }
 
+    
+    /**
+     * Défini la race du perso
+     * @param race 
+     */
     public void setRace(Race race) {
         this.race = race;
         // On modifie le personnage selon la race
         race.modifPersonnage(this);
     }
 
+    
+    /**
+     * Retourne la classe du perso
+     * @return 
+     */
     public Classe getClasse() {
         return classe;
     }
 
+    
+    /**
+     * Défini la classe du perso
+     * @param classe 
+     */
     public void setClasse(Classe classe) {
         this.classe = classe;
     }
 
+    
+    /**
+     * Méthode de déguerpissage du perso
+     */
+    // TODO : vérifier la pertinence & l'utilité de cette méthode
     public void deguerpir() {
         // TODO Auto-generated method stub
-
     }    
 
+    
+    /**
+     * Renvoi le bonus en capacité de fuite du perso
+     * @return 
+     */
     public int getBonusCapaciteFuite() {
         return bonusCapaciteFuite;
     }
 
+    
+    /**
+     * Défini le bonus en capacité de fuite du perso
+     * @param bonusCapaciteFuite 
+     */
     public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
         this.bonusCapaciteFuite = bonusCapaciteFuite;
     }
 
+    
+    /**
+     * Retourne le bonus de puissance du perso
+     * @return 
+     */
     public int getBonusPuissance() {
         return bonusPuissance;
     }
 
+    
+    /**
+     * Défini le bonus de puissance du perso
+     * @param bonusPuissance 
+     */
     public void setBonusPuissance(int bonusPuissance) {
         this.bonusPuissance = bonusPuissance;
     }
+    
+    
+    /**
+     * Retourne la puissance du perso
+     * @return 
+     */
     public int getPuissance(){
-        int p= this.getNiveau() + this.getBonusPuissance();
-        return p;
+        return this.getNiveau() + this.getBonusPuissance();
     }
 }

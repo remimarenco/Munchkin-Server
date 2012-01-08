@@ -14,6 +14,13 @@ public class ModifPuissancePersonnage extends Action{
     private boolean bNiveau=true;
     private boolean bObjet=true;
 	
+    
+    /**
+     * Constructeur
+     * @param tabRace
+     * @param tabClasse
+     * @param bonusPuissance 
+     */
     public ModifPuissancePersonnage(ArrayList<Race> tabRace, ArrayList<Classe> tabClasse,
                 int bonusPuissance) {
         super();
@@ -22,23 +29,37 @@ public class ModifPuissancePersonnage extends Action{
         this.bonusPuissance = bonusPuissance;
     }
 	
+    
+    /**
+     * Constructeur
+     * @param tabRace
+     * @param tabClasse
+     * @param bonusPuissance
+     * @param bNiveau
+     * @param bObjet 
+     */
     public ModifPuissancePersonnage(ArrayList<Race> tabRace, ArrayList<Classe> tabClasse,
                 int bonusPuissance, boolean bNiveau, boolean bObjet) {
         super();
-        this.tabRace = tabRace;
-        this.tabClasse = tabClasse;
+        this.tabRace        = tabRace;
+        this.tabClasse      = tabClasse;
         this.bonusPuissance = bonusPuissance;
-        this.bNiveau = bNiveau;
-        this.bObjet = bObjet;
+        this.bNiveau        = bNiveau;
+        this.bObjet         = bObjet;
     }
 
+    /**
+     * Méthode modifiant la puissance d'un personnage
+     * @param joueurImpacte
+     * @return 
+     */
     @Override
     public String action(Joueur joueurImpacte) {
-        int puissanceObjet;
-        int niveauJoueur;
-        boolean raceTrouve=false;
-        boolean classeTrouve=false;
-        boolean accept=true;
+        int puissanceObjet      = 0;
+        int niveauJoueur        = 0;
+        boolean raceTrouve      = false;
+        boolean classeTrouve    = false;
+        boolean accept          = true;
 
         String out = "";
         out += "On passe dans une action de modification de puissance de personnage :\n";
@@ -66,20 +87,18 @@ public class ModifPuissancePersonnage extends Action{
 
         out += "\n";
 		
-        if(tabRace!=null){
-            for(Race race: tabRace){
+        if(tabRace!=null){                  // Si des races ont été spécifiées
+            for(Race race: tabRace)         // On regarde si celle du perso en fait parti
                 if(joueurImpacte.getPersonnage().getRace().equals(race))
                     raceTrouve=true;
-            }
             if(!raceTrouve)
                 accept=false;
         }
 		
-        if(tabClasse!=null){
-            for(Classe classe: tabClasse){
+        if(tabClasse!=null){                // Si des classes ont été spécifiées
+            for(Classe classe: tabClasse)   // On regarde si celle du perso en fait parti
                 if(joueurImpacte.getPersonnage().getClasse().equals(classe))
                     classeTrouve=true;
-            }
             if(!classeTrouve)
                 accept=false;
         }

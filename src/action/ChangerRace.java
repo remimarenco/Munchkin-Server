@@ -10,14 +10,23 @@ import joueur.Race;
  */
 public class ChangerRace extends Action {
     
+    /**
+     * Constructeur par défaut
+     * @param race : nouvelle race
+     */
     public ChangerRace(Race race) {
-            // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
+    /**
+     * Action permettant le changement de race
+     * @param joueurImpacte : joueur qui subit le changement de race
+     * @return out : texte résumant l'action 
+     */
     @Override
     public String action(Joueur joueurImpacte) {
-            // TODO Auto-generated method stub
-            String out = "";
-            return out;
+        // TODO Auto-generated method stub
+        String out = "Non implémenté";
+        return out;
     }
 }

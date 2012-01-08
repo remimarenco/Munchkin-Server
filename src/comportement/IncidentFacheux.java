@@ -12,15 +12,12 @@ import joueur.Joueur;
  */
 public class IncidentFacheux {
 
-    /**
-     * Vecteur d'action. Permet de définir un ensemble d'action à effectuer sur un incident fâcheux
-     */
-    public ArrayList<Action> tabAction;
+    public ArrayList<Action> tabAction; // Esemble d'action à effectuer sur un incident fâcheux
 
     /**
-     * Constructeur de la classe.
+     * Constructeur
      * On définit les actions que va faire l'incident fâcheux
-     * @param tab => Ensemble d'actions de l'incident fâcheux
+     * @param tab : Ensemble d'actions de l'incident fâcheux
      */
     public IncidentFacheux(ArrayList<Action> tabAction)
     {
@@ -32,6 +29,7 @@ public class IncidentFacheux {
         }
     }
 
+    
     /**
      * Application de l'ensemble des actions de l'incident fâcheux sur le joueur
      * @param joueurImpacte
@@ -50,7 +48,6 @@ public class IncidentFacheux {
         } else {
             out += "Aucune incident fâcheux !!\n";
         }
-
         return out;
     }
 }

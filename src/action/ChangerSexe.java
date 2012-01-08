@@ -5,29 +5,38 @@ import joueur.Joueur;
 import partie.Constante;
 
 /**
- * Classe permettant de définir l'action d'un changement de niveau
+ * Classe permettant de définir l'action d'un changement de sexe
  * @author Rémi Marenco
  */
 public class ChangerSexe extends Action {
 
+    /**
+     * Constructeur par défaut
+     */
     public ChangerSexe() {
 
     }
     
+    /**
+     * Action permettant le changement de sexe
+     * @param joueurImpacte : le joueur qui subit le changement de sexe
+     * @return out : texte résumant l'action
+     */
     public String action(Joueur joueurImpacte) {
         String out = "";
         int sexe;
         
-        out += joueurImpacte.getName();
+        out += joueurImpacte.getName() + " se transforme en";
         sexe=joueurImpacte.getPersonnage().getSexe();
         if(sexe==Constante.SEXE_M){
             joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
-            out += " se transforme en femme!";
+            out += " femme!";
         }
         else{
             joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
-            out += " se transforme en homme!";
+            out += " homme!";
         }
+        
         joueurImpacte.getPersonnage().setaChangeSexe(true);
         return out;
     }
