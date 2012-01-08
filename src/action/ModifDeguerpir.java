@@ -91,6 +91,15 @@ public class ModifDeguerpir extends Action{
 		{
 			for(Classe classe: tabClasse)
 			{
+				// TODO : Bug Huissier(Puissance : 6)
+				// N'attaque pas les voleurs (entres confrères...). Un voleur qui rencontre un huissier peut choisir de défausser deux cartes trésors et en tirer deux nouvelles
+				// Exception in thread "Thread-4" java.lang.NullPointerException
+					// at action.ModifDeguerpir.action(ModifDeguerpir.java:94)
+					// at comportement.Condition.mettreCondition(Condition.java:39)
+					// at carte.Carte.appliquerCondition(Carte.java:175)
+					// at partie.Partie.tour(Partie.java:461)
+					// at partie.Partie.run(Partie.java:407)
+					// at java.lang.Thread.run(Unknown Source)
 				if(joueurImpacte.getPersonnage().getClasse().equals(classe))
 					raceTrouve=true;
 			}

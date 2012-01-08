@@ -38,4 +38,8 @@ public class Defausse<T> {
     public void vider(){
         defausse.clear();
     }
+
+	public boolean isEmpty() {
+		return defausse.isEmpty();
+	}
 }
