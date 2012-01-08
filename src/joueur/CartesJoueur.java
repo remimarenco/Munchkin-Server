@@ -60,4 +60,15 @@ public class CartesJoueur {
         }
         return map;
     }
+    
+    public HashMap<String,String> generateFalseInfos(){
+        int i=1;
+        HashMap<String,String> map=new HashMap<String, String>();
+        for(Carte c : this.cartes){
+            if(i%2 ==1)
+            map.put(c.getId().toString(), c.getId().toString());  
+            i++;
+        }
+        return map;
+    }
 }

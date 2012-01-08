@@ -151,14 +151,7 @@ public class Serveur {
                 break;
             case Message.INTERVENTION:
                 this.partie.intervenir(msg);
-                break;
-            case Message.POSER_CARTE:
-                Integer id= new Integer(msg.getMessage());
-                this.partie.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
-                this.partie.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
-                this.partie.sendCartesJeuxJoueursToAll();
-                this.partie.sendCartesMainToOwner();
-                break;
+                break;           
             case Message.SOUND:
                 this.partie.sendSongToAll(msg.getAction());
                 break;

@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jeu.Main;
 import joueur.Joueur;
 
 /**
@@ -291,8 +292,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
      public void sendMessageBackToSender(String source,String txt){
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
-        this.getJoueurByName(source).sendMessage(msg);
-        //this.getJoueurByName(source).sendMessage(new Message(Message.INTERVENTION, "Partie"));
+        this.getJoueurByName(source).sendMessage(msg);        
     }
     
      public void sendQuestionToEnCours(String txt){
@@ -334,25 +334,46 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      public void intervenir(Message msg){
          switch(msg.getAction()){
              case Constante.ACTION_AIDER:
-                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite aider le joueur "+this.enCours.getName());
-                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                 if(!msg.getIdCard().equals("")){
+                     
+                 }
+                 else{
+                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite aider le joueur "+this.enCours.getName());
+                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                 }
                  break;
              case Constante.ACTION_POSERCARTE:
-                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
-                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
-                 /**
-                  * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
-                  * Pour le moment on envoi juste une liste de carte au presque pif pour voir
-                  */
-                 this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-                         this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
+                 if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
+                    Integer id= new Integer(msg.getIdCard());
+                    this.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
+                    this.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
+                    this.sendCartesJeuxJoueursToAll();
+                    this.sendCartesMainToOwner(); 
+                 }                     
+                 else{ //LE joueur informe qu'il veut poser une carte
+                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
+                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                     /**
+                      * TODO
+                      * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
+                      * Pour le moment on envoi juste une liste de carte modifier on envoi une carte sur 
+                      * deux de la main du joueur grace a la methode generateFalseInfo
+                      */                     
+                     
+                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                           this.getJoueurByName(msg.getNick_src()).getMain().generateFalseInfos()));
                  
-                 
+                 }
                  
                  break;
              case Constante.ACTION_POURRIR:
-                 this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
-                 this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                 if(!msg.getIdCard().equals("")){
+                     
+                 }
+                 else{
+                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
+                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                 }
                  break;
          }
      }

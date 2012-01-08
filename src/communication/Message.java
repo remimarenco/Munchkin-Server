@@ -26,8 +26,7 @@ public class Message {
         public static final int QUESTION=7;
         public static final int INTERVENTION=8;
         public static final int SOUND=9;
-        public static final int CARTE_EN_COURS=10;
-        public static final int POSER_CARTE=11;
+        public static final int CARTE_EN_COURS=10;        
         public static final int INFO_JOUEUR=80;
         public static final int JEUX_JOUEUR=81;
         public static final int MAIN_JOUEUR=82;
@@ -39,6 +38,7 @@ public class Message {
         private String nick_src="";     
         private String nick_dest="";    
         private String message="";
+        private String idCard=new String();
         private int type;
         private int action;
         private Color color;
@@ -77,6 +77,15 @@ public class Message {
             this.nick_dest=nick_dest;        
             this.action=action;
             this.color=Color.BLACK;
+            this.idCard=new String();
+        }
+   public Message(int type,String nick_src,String nick_dest,int action,String idCard){
+            this.type=type;            
+            this.nick_src=nick_src;          
+            this.nick_dest=nick_dest;        
+            this.action=action;
+            this.color=Color.BLACK;
+            this.idCard=idCard;
         }
  /**
   * 
@@ -128,6 +137,8 @@ public class Message {
                     }
                     if(type==INTERVENTION || type==SOUND)
                         action=in.readInt();
+                    if(type==INTERVENTION)
+                        idCard=in.readUTF();
                     if(type>=INFO_JOUEUR)
                         this.map=(HashMap<String,String>)ois.readObject();
                 }
@@ -158,6 +169,8 @@ public class Message {
                     }
                     if(type==INTERVENTION || type==SOUND)
                         out.writeInt(action);
+                    if(type==INTERVENTION)
+                        out.writeUTF(idCard);
                     if(type>=INFO_JOUEUR){
                         oos.writeObject(this.map);
                     }
@@ -173,6 +186,11 @@ public class Message {
     public int getType() {
        return this.type;
     }
+
+    public String getIdCard() {
+        return idCard;
+    }
+    
 
     public String getMessage() {
         return this.message;
