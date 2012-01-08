@@ -48,13 +48,10 @@ public class PiocherCarte extends Action {
         else
             out += " pioche "+nbCarte+" carte dans la pioche ";
 
-        if(type_pioche == Constante.DONJON)
-        {
+        if(type_pioche == Constante.DONJON){
             out += "donjon";
             joueurImpacte.piocherCarte(Constante.DONJON);
-        }
-        else
-        {
+        } else {
             out += "trésor";
             joueurImpacte.piocherCarte(Constante.TRESOR);
         }

@@ -10,32 +10,25 @@ import partie.Constante;
  */
 public class ChangerSexe extends Action {
 
-    public ChangerSexe()
-    {
+    public ChangerSexe() {
 
     }
     
     public String action(Joueur joueurImpacte) {
-        /**
-         * On affiche des informations différentes selon le gain ou la perte de niveau
-         */
-         String out = "";
-         int sexe;
-         out += joueurImpacte.getName();
-         sexe=joueurImpacte.getPersonnage().getSexe();
-         if(sexe==Constante.SEXE_M)
-         {
-             joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
-             out += " se transforme en femme!";
-         }
-         else
-         {
-             joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
-             out += " se transforme en homme!";
-         }
-         joueurImpacte.getPersonnage().setaChangeSexe(true);
-
-         return out;
+        String out = "";
+        int sexe;
+        
+        out += joueurImpacte.getName();
+        sexe=joueurImpacte.getPersonnage().getSexe();
+        if(sexe==Constante.SEXE_M){
+            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
+            out += " se transforme en femme!";
+        }
+        else{
+            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
+            out += " se transforme en homme!";
+        }
+        joueurImpacte.getPersonnage().setaChangeSexe(true);
+        return out;
     }
-
 }

@@ -1,7 +1,5 @@
 package carte;
 
-import partie.Constante;
-
 /**
  * Classe Donjon permettant de référencer les cartes donjon
  * @author Rémi Marenco

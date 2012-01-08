@@ -13,25 +13,18 @@ public class Sortilege {
     private ArrayList<Action> tabAction;
 
     public Sortilege(ArrayList<Action> tabAction) {
-    	try
-		{
-			this.tabAction = (ArrayList<Action>) tabAction.clone();
-		}
-		catch(Exception e)
-		{
-			System.out.println("Aucune action dans le sort");
-		}
+    	try {
+            this.tabAction = (ArrayList<Action>) tabAction.clone();
+        } catch(Exception e) {
+            System.out.println("Aucune action dans le sort");
+        }
     }
 
-    public String actionSortilege(Joueur joueurImpacte)
-    {
+    public String actionSortilege(Joueur joueurImpacte){
         String out = "";
-        if(tabAction == null)
-        {
+        if(tabAction == null){
             out += "Aucune sortilège à appliquer";
-        }
-        else
-        {
+        } else {
             out += "----- Sortilège -----\n";
             out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
             for(Action action : tabAction)
@@ -40,7 +33,6 @@ public class Sortilege {
             out += "--- Fin sortilège ---";
         }
         out += "\n";
-
         return out;
     }
 }

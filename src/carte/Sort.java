@@ -18,7 +18,4 @@ public class Sort extends Donjon {
 		super(id,nom, description);
 		this.sortilege = sortilege;
 	}
-
-        
-
 }

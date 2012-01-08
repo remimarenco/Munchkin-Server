@@ -24,14 +24,12 @@ public class IncidentFacheux {
      */
     public IncidentFacheux(ArrayList<Action> tabAction)
     {
-    	try
-		{
-			this.tabAction = (ArrayList<Action>) tabAction.clone();
-		}
-		catch(Exception e)
-		{
-			System.out.println("Aucune action dans l'incident fâcheux");
-		}
+    	try {
+            this.tabAction = (ArrayList<Action>) tabAction.clone();
+        }
+        catch(Exception e){
+            System.out.println("Aucune action dans l'incident fâcheux");
+        }
     }
 
     /**
@@ -47,18 +45,12 @@ public class IncidentFacheux {
             out += "Un incident facheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
             out += "Il y a " + tabAction.size();
             for(Action action : tabAction)
-            {
-                out += "\nAction : !";
-                out += action.action(joueurImpacte);
-            }
+                out += "\nAction : !" + action.action(joueurImpacte);
             out += "--- Fin d'incident facheux ---\n";
-        }
-        else
-        {
+        } else {
             out += "Aucune incident fâcheux !!\n";
         }
 
         return out;
     }
-
 }

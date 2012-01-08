@@ -16,30 +16,23 @@ import joueur.Joueur;
  */
 public class IncidentDeguerpir {
 
-        public ArrayList<Action> tabAction;
+    public ArrayList<Action> tabAction;
 
-	public IncidentDeguerpir(ArrayList<Action> tabAction)
-        {
-			try
-			{
-				this.tabAction = (ArrayList<Action>) tabAction.clone();
-			}
-			catch(Exception e)
-			{
-				System.out.println("Aucune action dans l'incident deguerpir");
-			}
+    public IncidentDeguerpir(ArrayList<Action> tabAction) {
+        try {
+                this.tabAction = (ArrayList<Action>) tabAction.clone();
+        } catch(Exception e){
+                System.out.println("Aucune action dans l'incident deguerpir");
         }
+    }
 
-        public String actionIncidentDeguerpir(Joueur joueurImpacte)
-	{
-            String out = "";
-            out += "--- Incident de fuite ---\n";
-            out += "Le joueur a fuit mais a subit l'incident suivant " + joueurImpacte.getName() + " :\n";
-            for(Action action : tabAction)
-            {
-                    out += action.action(joueurImpacte);
-            }
-            out += "--- Fin de monstre vaincu ---\n";
-            return out;
-        }
+    public String actionIncidentDeguerpir(Joueur joueurImpacte){
+        String out = "";
+        out += "--- Incident de fuite ---\n";
+        out += "Le joueur a fuit mais a subit l'incident suivant " + joueurImpacte.getName() + " :\n";
+        for(Action action : tabAction)
+            out += action.action(joueurImpacte);
+        out += "--- Fin de monstre vaincu ---\n";
+        return out;
+    }
 }

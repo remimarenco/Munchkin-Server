@@ -9,8 +9,6 @@ public class Jeu extends CartesJoueur{
     public boolean ajouterCarte(Carte c) {
         if(super.ajouterCarte(c)){
             // Appliquer la classe, la race, etc...
-            
-            
             return true;
         }else{
             return false;
@@ -26,7 +24,5 @@ public class Jeu extends CartesJoueur{
 
     public ArrayList<Carte> getJeu() {
         return this.cartes;
-    }    
-    
-    
+    }
 }

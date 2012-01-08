@@ -39,7 +39,7 @@ public class Defausse<T> {
         defausse.clear();
     }
 
-	public boolean isEmpty() {
-		return defausse.isEmpty();
-	}
+    public boolean isEmpty() {
+        return defausse.isEmpty();
+    }
 }

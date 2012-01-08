@@ -9,6 +9,7 @@ import comportement.Equipement;
  * @author Rémi Marenco
  */
 public class Objet extends Tresor {
+    
     /**
      * Constructeur de la classe objet.
      * Permet de renseigner les paramètres de la classe Trésor ainsi que l'équipement
@@ -21,5 +22,4 @@ public class Objet extends Tresor {
         super(id,nom, description);
         this.equipement = equipement;
     }
-
 }

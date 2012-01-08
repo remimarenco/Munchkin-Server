@@ -90,20 +90,19 @@ public class Joueur extends Thread {
      */
     @Override
     synchronized  public void run(){
-        boolean test=true;
+        boolean test = true;
         try{
             while(test){
                 this.msg=new Message();//Important pour distinguer les messages
                 if(msg.read(in)){
-                    if(parent instanceof Serveur){
-                        ((Serveur)parent).interpretMessage(msg,this);
-                    }                
+                    if(parent instanceof Serveur)
+                        ((Serveur)parent).interpretMessage(msg,this);    
                 }
                 else if(!msg.read(in)){
-                        Message message=new Message(Message.DISCONNECT,this.getName());                                       
-                        ((Serveur)parent).interpretMessage(message,this);                   
-                        this.interrupt();
-                        test=false;                   
+                    Message message=new Message(Message.DISCONNECT,this.getName());                                       
+                    ((Serveur)parent).interpretMessage(message,this);                   
+                    this.interrupt();
+                    test=false;                   
                 }
             }
         }

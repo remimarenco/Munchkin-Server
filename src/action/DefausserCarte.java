@@ -69,6 +69,4 @@ public class DefausserCarte extends Action{
 
         return out;
     }
-    
-    
 }

@@ -54,9 +54,8 @@ public class Pioche<T> {
          */
         while(it.hasNext()){
             c = (Carte) it.next();
-            if(c.getClass().getSuperclass().equals(this.typePioche)){
+            if(c.getClass().getSuperclass().equals(this.typePioche))
                 this.pioche.add((T) c);
-            }
         }
     }
 }

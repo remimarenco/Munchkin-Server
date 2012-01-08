@@ -3,15 +3,14 @@ package joueur;
 public class Humain extends Race
 {
 
-	@Override
-	public boolean deguerpir() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean deguerpir() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void modifPersonnage(Personnage personnage) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void modifPersonnage(Personnage personnage) {
+        // TODO Auto-generated method stub
+    }
 }

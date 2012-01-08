@@ -60,32 +60,33 @@ public class Monstre extends Donjon {
         return puissance;
     }
 
+    @Override
     public String getNom() {
         return nom;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
-	public void setPuissance(int puissance) {
-		this.puissance = puissance;
-	}
+    public void setPuissance(int puissance) {
+        this.puissance = puissance;
+    }
 
-	public int getBonusPuissance() {
-		return bonusPuissance;
-	}
+    public int getBonusPuissance() {
+        return bonusPuissance;
+    }
 
-	public void setBonusPuissance(int bonusPuissance) {
-		this.bonusPuissance = bonusPuissance;
-	}
+    public void setBonusPuissance(int bonusPuissance) {
+        this.bonusPuissance = bonusPuissance;
+    }
 
-        public Condition getCondition() {
-            return condition;
-        }
+    public Condition getCondition() {
+        return condition;
+    }
 
-        public void setCondition(Condition condition) {
-            this.condition = condition;
-        }
-
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
 }

@@ -19,6 +19,7 @@ public abstract class Carte {
      */
     protected Integer id = 0;
     protected String nom;
+    
     /**
      * Description de la carte, correspondante à la réalité
      */
@@ -48,32 +49,34 @@ public abstract class Carte {
         this.description = description;
     }
 
-    
-    
     /**
      * IncidentFacheux d'une carte => valable seulement si c'est un monstre
      * Résultat du design pattern Strategy
      * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected IncidentFacheux incidentFacheux;
+
     /**
      * Equipement d'une carte => valable seulement si c'est un objet
      * Résultat du design pattern Strategy
      * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Equipement equipement;
+
     /**
      * Sortilege d'une carte => valable seulement si c'est un Sort
      * Résultat du design pattern Strategy
      * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Sortilege sortilege;
+
     /**
      * Condition d'une carte => valable seulement si c'est un monstre
      * Résultat du design pattern Strategy
      * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Condition condition;
+
     /**
      * MonstreVaincu d'une carte => valable seulement si c'est un
      * Résultat du design pattern Strategy
@@ -209,8 +212,7 @@ public abstract class Carte {
      * @return this.nom
      */
     @Override
-    public String toString()
-    {
+    public String toString(){
         return this.nom;
     }
 }

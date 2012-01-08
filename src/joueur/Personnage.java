@@ -4,14 +4,14 @@ import partie.Constante;
 
 public class Personnage {
     private int     niveau;
-    private int    sexe;
+    private int     sexe;
     private boolean aChangeSexe;
     private int     capaciteFuite;
-    private int		bonusCapaciteFuite;
+    private int     bonusCapaciteFuite;
     private int     nbEquipement;
     private Race    race;
-    private Classe	classe;
-    private int		bonusPuissance;
+    private Classe  classe;
+    private int     bonusPuissance;
 	
     
     public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
@@ -40,12 +40,9 @@ public class Personnage {
         if(this.niveau + deltaNiveau < 1)
             this.setNiveau(1);
         else if(this.niveau + deltaNiveau > 10)
-        {
-        	this.setNiveau(10);
-        }
+            this.setNiveau(10);
         else
             this.setNiveau(this.niveau + deltaNiveau);
-        
         return true;
     }
     
@@ -90,46 +87,46 @@ public class Personnage {
         this.aChangeSexe = aChangeSexe;
     }
 
-	public Race getRace() {
-		return race;
-	}
+    public Race getRace() {
+        return race;
+    }
 
-	public void setRace(Race race) {
-		this.race = race;
-		// On modifie le personnage selon la race
-		race.modifPersonnage(this);
-	}
+    public void setRace(Race race) {
+        this.race = race;
+        // On modifie le personnage selon la race
+        race.modifPersonnage(this);
+    }
 
-	public Classe getClasse() {
-		return classe;
-	}
+    public Classe getClasse() {
+        return classe;
+    }
 
-	public void setClasse(Classe classe) {
-		this.classe = classe;
-	}
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
 
-	public void deguerpir() {
-		// TODO Auto-generated method stub
-		
-	}    
+    public void deguerpir() {
+        // TODO Auto-generated method stub
 
-	public int getBonusCapaciteFuite() {
-		return bonusCapaciteFuite;
-	}
+    }    
 
-	public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
-		this.bonusCapaciteFuite = bonusCapaciteFuite;
-	}
+    public int getBonusCapaciteFuite() {
+        return bonusCapaciteFuite;
+    }
 
-	public int getBonusPuissance() {
-		return bonusPuissance;
-	}
+    public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
+        this.bonusCapaciteFuite = bonusCapaciteFuite;
+    }
 
-	public void setBonusPuissance(int bonusPuissance) {
-		this.bonusPuissance = bonusPuissance;
-	}
-        public int getPuissance(){
-            int p= this.getNiveau() + this.getBonusPuissance();
-            return p;
-        }
+    public int getBonusPuissance() {
+        return bonusPuissance;
+    }
+
+    public void setBonusPuissance(int bonusPuissance) {
+        this.bonusPuissance = bonusPuissance;
+    }
+    public int getPuissance(){
+        int p= this.getNiveau() + this.getBonusPuissance();
+        return p;
+    }
 }
