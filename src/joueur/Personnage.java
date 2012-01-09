@@ -16,9 +16,7 @@ public class Personnage {
     private int     nbEquipement;
     private Race    race;
     private Classe  classe;
-    private int     bonusPuissance;
-	
-    // TODO : Vérifier la pertinence & l'utilité des constructeurs
+    private int     bonusPuissance;  
     
     /**
      * Constructeur
@@ -43,23 +41,7 @@ public class Personnage {
         this.race = Constante.RACE_HUMAINE;
         this.classe = null;
     }
-        
-    
-    /**
-     * Constructeur
-     */
-    public Personnage() {
-        this.niveau = 1;
-    }
-
-    
-    /**
-     * Constructeur
-     * @param name 
-     */
-    public Personnage(String name) {
-        super();
-    }
+   
 
     
     /**

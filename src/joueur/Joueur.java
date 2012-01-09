@@ -25,6 +25,7 @@ public class Joueur extends Thread {
     private Object parent        = null;
     private DataInputStream in   = null;
     private DataOutputStream out = null;
+    private int sexe             = Constante.SEXE_M;
     
     
     /**
@@ -37,7 +38,7 @@ public class Joueur extends Thread {
         initCommunication(st, parent);
         this.main       = new Main();
         this.jeu        = new Jeu();        
-        this.personnage = new Personnage();
+        this.personnage = new Personnage(1, sexe, false, 5, 0, 0, 0, 0);
         this.partie     = partie;
     }  
 

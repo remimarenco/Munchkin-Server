@@ -78,7 +78,7 @@ public class ModifPuissanceMonstre extends Action{
 
         if(tabRace != null && !tabRace.isEmpty()){      // Si des races sont spécifiées  
             for(Race race: tabRace)                     // On regarde si celle du joueur est concernée
-                if(joueurImpacte.getPersonnage().getRace().equals(race))
+                if(joueurImpacte.getPersonnage().getRace().toString().equals(race.toString()))
                     raceTrouve=true;
             if(!raceTrouve)
                 accept=false;
@@ -86,7 +86,7 @@ public class ModifPuissanceMonstre extends Action{
 		
         if(tabClasse != null && !tabClasse.isEmpty()){  // Si des classes sont spécifiées  
             for(Classe classe: tabClasse)               // On regarde si celle du joueur est concernée
-                if(joueurImpacte.getPersonnage().getClasse().equals(classe))
+                if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
                     raceTrouve=true;
             if(!classeTrouve)
                     accept=false;
