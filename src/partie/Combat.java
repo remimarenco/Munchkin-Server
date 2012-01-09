@@ -14,7 +14,7 @@ import joueur.Personnage;
 public class Combat {
     
     private ArrayList<Personnage> CampGentil;
-    private ArrayList<Object> CampMechant;
+    private ArrayList<Monstre> CampMechant;
     private Partie partie;
 
     /**
@@ -24,7 +24,7 @@ public class Combat {
     public Combat(Partie partie) {
         this.partie = partie;
         CampGentil  = new ArrayList<Personnage>();
-        CampMechant = new ArrayList<Object>();
+        CampMechant = new ArrayList<Monstre>();
     }
 
     /**
@@ -47,7 +47,7 @@ public class Combat {
      * Retourne le camps méchant (camps du monstre)
      * @return 
      */
-    public ArrayList<Object> getCampMechant() {
+    public ArrayList<Monstre> getCampMechant() {
         return CampMechant;
     }
     

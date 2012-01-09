@@ -8,11 +8,13 @@ import carte.Tresor;
 import communication.Message;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import joueur.Joueur;
+import joueur.Personnage;
 
 /**
  * 
@@ -574,15 +576,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                     }
                 } else if(this.answer.equals("Non")){
-                    /*if(combat.tenterDeguerpir()){
-                        System.out.println("Vous avez réussi Ã  déguèrpir !");
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
-                    }
-                    else{
-                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
-                        this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
-                    }*/
+                    deguerpir(combat);
                 }
                 else {
                     System.out.println("Veuillez entrer une réponse correcte");
@@ -687,5 +681,53 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             System.out.println("Joueur en cours est null");
     	}
         return false;
+    }
+
+    private void sendMessageToPlayer(String txt, Personnage personnage) {
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
+        for(Joueur j : this){
+            // On test si le joueur a bien le personnage passé en paramètre
+            if(j.getPersonnage().equals(personnage)){
+                j.sendMessage(msg);
+            }
+        }
+    }
+
+    private void sendMessageToAllButPlayer(String txt, Personnage personnage) {
+        Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
+        for(Joueur j : this){
+            // On test si le joueur n'a pas le personnage passé en paramètre
+            if(!j.getPersonnage().equals(personnage)){
+                j.sendMessage(msg);
+            }
+        }
+    }
+
+    /**
+     * Méthode permettant de faire le déroulement de la phase déguerpir
+     * @param combat
+     */
+    private void deguerpir(Combat combat) {
+        HashMap<Boolean, ArrayList<Personnage>> dicoFuite;
+
+        dicoFuite = combat.tenterDeguerpir();
+
+        // Les joueurs qui ont réussi à fuir sont tranquilles
+        for(Personnage persoReussi : dicoFuite.get(Boolean.TRUE))
+        {
+            sendMessageToPlayer("Vous avez réussi à déguerpir !", persoReussi);
+        }
+
+        // Les joueurs qui n'ont pas réussi à fuir se prennent des incident fâcheux
+        for(Personnage persoEchec : dicoFuite.get(Boolean.FALSE))
+        {
+            sendMessageToPlayer("Vous n'avez pas réussi à déguerpir !", persoEchec);
+            sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
+            for(Monstre monstre : combat.getCampMechant()){
+                this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours));
+            }
+            
+            this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
+        }
     }
 }
