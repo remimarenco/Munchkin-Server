@@ -25,8 +25,7 @@ public class Message {
     public static final int INFO_JOUEUR       = 80;
     public static final int JEUX_JOUEUR       = 81;
     public static final int MAIN_JOUEUR       = 82;
-    public static final int INFO_CAMPGENTIL   = 83;
-    public static final int INFO_CAMPMECHANT  = 84; 
+    public static final int INFO_CAMPS        = 83;    
     public static final int CARTE_CAMPGENTIL  = 85; 
     public static final int CARTE_CAMPMECHANT = 86; 
     public static final int CARTES_JOUABLES   = 87;

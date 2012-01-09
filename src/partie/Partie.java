@@ -321,6 +321,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
      }
     
+        /**
+     * 
+     */
+    public void sendInfosCampsToAll(Combat c){
+         for(Joueur j :this)            
+            j.sendMessage(new Message(Message.INFO_CAMPS, "Partie", j.getName(), c.generateInfos()));
+     }
+    
     
     /**
      * // TODO : Commenter
@@ -562,6 +570,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 System.out.println("Vous avez tiré le monstre :");
                 System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
                 System.out.println(monstrePioche.getDescription());
+                this.sendInfosCampsToAll(combat);
 
                 /**
                  * On applique la condition du monstre

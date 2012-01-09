@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import joueur.Personnage;
 
 
@@ -51,7 +52,26 @@ public class Combat {
     public ArrayList<Monstre> getCampMechant() {
         return CampMechant;
     }
-    
+    /**
+     * Retourne le total de puissance du camp gentil
+     * @return 
+     */
+    public String getPuissanceCampGentil(){    
+        Integer total=0;
+        for(Personnage p : CampGentil)
+            total+=p.getPuissance();        
+        return total.toString();
+    }
+      /**
+     * Retourne le total de puissance du camp mechant
+     * @return 
+     */
+    public String getPuissanceCampMechant(){    
+        Integer total=0;
+        for(Monstre p : CampMechant)
+            total+=p.getPuissance();        
+        return total.toString();
+    }
     
     /**
      * Méthode permettant de savoir si les personnages d'un combat ont réussi à déguerpir
@@ -128,5 +148,19 @@ public class Combat {
             return true;
         else                                    // Le camps méchant (du monstre) a gagné
             return false;
+    }
+    
+    public HashMap<String,String> generateInfos(){
+        LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();        
+        map.put("Camp Gentil", getPuissanceCampGentil());
+        for(Personnage p : CampGentil)
+            map.put(p.getNom(),String.valueOf(p.getPuissance()));
+        
+        map.put("Camp Mechant", getPuissanceCampMechant());
+        for(Monstre m : CampMechant)
+            map.put(m.getNom(),String.valueOf(m.getPuissance()));
+        
+        
+        return map;
     }
 }

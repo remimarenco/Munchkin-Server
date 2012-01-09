@@ -244,6 +244,12 @@ public class Joueur extends Thread {
     }
     
     
+   public void setNom(String name){
+       super.setName(name);
+       this.personnage.setNom(name);
+   }
+    
+    
     /**
      * Génère les infos du joueur à envoyer aux clients
      * @return 

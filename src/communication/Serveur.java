@@ -44,14 +44,6 @@ public class Serveur {
             }
         }
     }
-
-
-    /**
-     * // TODO : Commenter
-     */
-    private void stop() {
-        thrd = null;      
-    }
     
     /**
      * Methode appelé par le serveur lors de la reception d'un message.
@@ -66,7 +58,7 @@ public class Serveur {
         switch (msg.getType()) {
             case Message.CONNECT:
                 if (this.partie.LoginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
-                    com.setName(msg.getNick_src());
+                    com.setNom(msg.getNick_src());
                     this.partie.add(com);
                     
                     //partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));

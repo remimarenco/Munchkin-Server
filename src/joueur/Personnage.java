@@ -19,7 +19,7 @@ public class Personnage {
     private int     puissanceObjet;
     private int     bonusPuissance;
     private int     capaciteEquipement;
-    
+    private String  nom;
     /**
      * Constructeur
      * @param niveau
@@ -31,7 +31,7 @@ public class Personnage {
      * @param puissance
      * @param bonusPuissance 
      */
-    public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissanceObjet, int bonusPuissance) {
+    public Personnage(int niveau, int sexe,boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissanceObjet, int bonusPuissance) {
         this.niveau         	= niveau;
         this.sexe           	= sexe;
         this.aChangeSexe    	= aChangeSexe;
@@ -40,9 +40,9 @@ public class Personnage {
         this.nbEquipement   	= nbEquipement;
         this.bonusPuissance 	= 0;
         this.puissanceObjet     = puissanceObjet;
-        this.race = Constante.RACE_HUMAINE;
-        this.classe = null;
-        this.capaciteEquipement=7;
+        this.race               = Constante.RACE_HUMAINE;
+        this.classe             = null;
+        this.capaciteEquipement = 7;        
     }
    
 
@@ -70,6 +70,16 @@ public class Personnage {
     public int getNiveau() {
         return niveau;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getNom() {
+        return nom;
+    }
+    
+    
 
     
     /**
@@ -283,6 +293,10 @@ public class Personnage {
      */
     public void setCapaciteEquipement(int capaciteEquipement) {
         this.capaciteEquipement = capaciteEquipement;
+    }
+
+    void setNom(String name) {
+        this.nom=name;
     }
     
 }
