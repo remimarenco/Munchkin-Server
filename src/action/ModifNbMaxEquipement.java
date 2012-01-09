@@ -26,7 +26,7 @@ public class ModifNbMaxEquipement extends Action{
      * @return 
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
 
         String out = "";
         out += "On modifie le nombre maximum d'objet portés par un joueur :\n";

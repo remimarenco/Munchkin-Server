@@ -30,12 +30,12 @@ public class ComportementDefausserCarte {
      * @param joueurImpacte
      * @return 
      */
-    public String DefausserCarte(Joueur joueurImpacte){
+    public String DefausserCarte(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
         out += "--- Defausser carte ---\n";
         out += "Le joueur défausse une carte\n";
         for(Action action : tabAction)
-            out += action.action(joueurImpacte);
+            out += action.action(joueurImpacte, nomPhase, joueurEnCours);
         out += "--- Fin Defausser Carte ---\n";
         return out;
     }

@@ -42,7 +42,7 @@ public class DefausserCarte extends Action{
      * @return out : texte résumant l'action
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out = "";
         Carte c = null;
         CartesJoueur tas;

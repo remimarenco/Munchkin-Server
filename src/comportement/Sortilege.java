@@ -31,8 +31,9 @@ public class Sortilege {
      * Action lors d'un sortilège
      * @param joueurImpacte : joueur recevant le sortilège
      * @return out : texte résumant l'action
+     *         nomPhase : StackTraceElement permettant de situer la phase dans laquelle nous sommes
      */
-    public String actionSortilege(Joueur joueurImpacte){
+    public String actionSortilege(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
         if(tabAction == null){
             out += "Aucune sortilège à appliquer";
@@ -40,7 +41,7 @@ public class Sortilege {
             out += "----- Sortilège -----\n";
             out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
             for(Action action : tabAction)
-                out += action.action(joueurImpacte);
+                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
             out += "\n";
             out += "--- Fin sortilège ---";
         }

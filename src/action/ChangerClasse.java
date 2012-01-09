@@ -27,7 +27,7 @@ public class ChangerClasse extends Action{
      * @return out : texte résumant l'action
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
         joueurImpacte.getPersonnage().setClasse(this.classe);
         out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();

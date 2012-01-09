@@ -21,7 +21,7 @@ public class ChangerSexe extends Action {
      * @param joueurImpacte : le joueur qui subit le changement de sexe
      * @return out : texte résumant l'action
      */
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out = "";
         int sexe;
         

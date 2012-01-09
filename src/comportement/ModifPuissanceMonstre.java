@@ -39,7 +39,7 @@ public class ModifPuissanceMonstre /*extends Action*/{
      * @param joueurImpacte : joueur contre lequel se bat le monstre
      * @return out : texte résumant l'action
      */
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out              = "";
         boolean accept          = true;
         boolean raceTrouve      = false;

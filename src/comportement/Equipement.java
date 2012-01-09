@@ -31,14 +31,14 @@ public  class Equipement {
      * @param joueurImpacte : le joueur a équiper
      * @return out : texte résumant l'action
      */
-    public String equipe(Joueur joueurImpacte){
+    public String equipe(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
         
         if(tabAction != null){
             out += "--- Equipement ---\n";
             out += "Un équipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
             for(Action action : tabAction)
-                out += action.action(joueurImpacte);
+                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
             out += "--- Fin d'equipement ---\n";
         } else {
            out += "Aucun equipement !\n";

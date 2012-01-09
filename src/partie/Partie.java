@@ -485,22 +485,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * // TODO : Commenter
      */
     @Override
-    public void run() {
-    	// TODO : Phases du tour de jeu
-	    	// Ouvrir une porte : Tirer carte Donjon 
-		    	// => Si Monstre => Combat ou Déguerpir
-		    	// => Si Sort => Agit sur le joueur si possible => Défaussée
-		    	// => Autre type => Jouer ou mettre dans main
-    		// Chercher la bagarre (pas dans specs)
-    			// Jouer un monstre de la main
-    			// Combattre
-    		// Piller la pièce
-    			// Tué monstre ou pas rencontré monstre => Tirer deuxième carte paquet donjon
-    			// Sinon pas le droit
-    		// Charité
-    			// Trop de cartes en main => Défausse
-    	// Deguerpir
-    	
+    public void run() {    	
         // Initialisation de la partie       
         init();
         
@@ -533,32 +518,34 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * // TODO : Commenter
      */
     private void tour() {
-        Iterator it = this.iterator(); 
-        Carte cartePiochee;
+        // TODO : Phases du tour de jeu
+	    	
+    		// Chercher la bagarre (pas dans specs)
+    			// Jouer un monstre de la main
+    			// Combattre
+    		// Piller la pièce
+    			// Tué monstre ou pas rencontré monstre => Tirer deuxième carte paquet donjon
+    			// Sinon pas le droit
+    		// Charité
+    			// Trop de cartes en main => Défausse
+    	// Deguerpir
+        Iterator it = this.iterator();
+        Carte cartePiochee = null;
         // Pour chaque joueur
         while(it.hasNext()){            	
             enCours = (Joueur) it.next();
 
+            // On test si la piocheDonjon et la piocheTresor est vide
             testPioche(piocheDonjon);
             testPioche(piocheTresor);
 
-            System.out.println("Vous ouvrez la porte du donjon...");
-
-            cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
-
-            if(cartePiochee == null){
-                System.out.println("Problème lors du tirage dans la pioche donjon");
-                return;
-            }
-
-            System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
-            //envoi du message a tous les client connectÃ©
-            this.sendMessageToAll("Le joueur : " +enCours.getName() + " pioche une carte ! : \n");
-            this.sendCarteEnCoursToAll(cartePiochee);
+            this.sendMessageToAll("Vous ouvrez la porte du donjon...");
+            cartePiochee = phaseOuvrirPorte();
 
             // === MONSTRE ===
             if(cartePiochee.getClass().equals(Monstre.class))
             {
+                ChercherLaBagarre();
                 this.sendSongToAll(Constante.SOUND_MONSTREFORT);
                 Combat combat = new Combat(this);
                 combat.getCampGentil().add(enCours.getPersonnage());
@@ -575,7 +562,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 /**
                  * On applique la condition du monstre
                  */
-                this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
+                this.sendMessageToAll(monstrePioche.appliquerCondition(enCours, null, null));
 
                 System.out.println("Combattre ? (o/n)");
                 this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
@@ -597,12 +584,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     // le nb de niveau gagnÃ© et les cartes trÃ©sors qu'il peut tirer
                     if(combat.combattre()){
                         System.out.println("Vous avez gagné !");
-                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
+                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours, null, null));
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
                         this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
                     } else {
                         System.out.println("Vous avez perdu...");
-                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
+                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours, null, null));
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
                         this.sendSongToAll(Constante.SOUND_COMBATPERDU);
 
@@ -633,7 +620,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.sendMessageToCurrent(sort.getDescription());
 
                 this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-                this.sendMessageToAll(sort.appliquerSortilege(enCours));
+                this.sendMessageToAll(sort.appliquerSortilege(enCours, null, null));
             }
 
             // ==============
@@ -641,7 +628,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // On annule les bonus temporaires
             this.enCours.getPersonnage().setBonusCapaciteFuite(0);
             this.enCours.getPersonnage().setBonusPuissance(0);
-        }
+            }
         it = this.iterator();	
     }
 
@@ -762,9 +749,42 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             sendMessageToPlayer("Vous n'avez pas réussi à déguerpir !", persoEchec);
             sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
             for(Monstre monstre : combat.getCampMechant()){
-                this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours));
+                this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, null, null));
             }
             this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
         }
+    }
+
+
+    // Ouvrir une porte : Tirer carte Donjon
+		    	// => Si Monstre => Chercher la bagarre
+		    	// => Si Sort => Agit sur le joueur si possible => Défaussée
+		    	// => Autre type => Jouer ou mettre dans main
+    private Carte phaseOuvrirPorte() {
+        Carte cartePiochee;
+
+        cartePiochee = (Carte) piocheDonjon.tirerCarte();
+
+        if(cartePiochee == null){
+            System.out.println("Problème lors du tirage dans la pioche donjon");
+            return null;
+        }
+
+        System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
+        //envoi du message a tous les client connectÃ©
+        this.sendMessageToAll(enCours.getName() + " pioche une carte ! : \n");
+        this.sendCarteEnCoursToAll(cartePiochee);
+
+        if(cartePiochee.getClass().equals(Sort.class))
+        {
+            cartePiochee = (Sort) cartePiochee;
+            cartePiochee.appliquerSortilege(enCours, new Exception().getStackTrace(), enCours);
+        }
+
+        return cartePiochee;
+    }
+
+    private void ChercherLaBagarre() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

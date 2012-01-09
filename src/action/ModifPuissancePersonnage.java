@@ -58,7 +58,7 @@ public class ModifPuissancePersonnage extends Action{
      * @return 
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         int puissanceObjet      = 0;
         int niveauJoueur        = 0;
         boolean raceTrouve      = false;

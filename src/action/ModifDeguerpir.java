@@ -40,7 +40,7 @@ public class ModifDeguerpir extends Action{
      * @return out : texte résumant l'action
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out              = "";
         boolean accept          = true;
         boolean raceTrouve      = false;

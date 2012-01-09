@@ -59,7 +59,7 @@ public class ChangerNiveau extends Action {
      * @param joueurImpacte : le joueur qui subit le changement de niveau
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         
         String out              = "";
         boolean classeTrouve    = true;

@@ -161,9 +161,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerIncidentFacheux(Joueur joueurImpacte){
+    public String appliquerIncidentFacheux(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         if(this.incidentFacheux != null)
-            return this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
+            return this.incidentFacheux.actionIncidentFacheux(joueurImpacte, nomPhase, joueurEnCours);
         else
             return "Cette carte n'a pas d'incident facheux\n";
     }
@@ -173,9 +173,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public String equiper(Joueur joueurImpacte){
+    public String equiper(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         if(this.equipement != null)
-            return equipement.equipe(joueurImpacte);
+            return equipement.equipe(joueurImpacte, nomPhase, joueurEnCours);
         else
             return "Cette carte n'a pas d'équipement\n";
     }
@@ -185,9 +185,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerCondition(Joueur joueurImpacte){
+    public String appliquerCondition(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         if(this.condition != null)
-            return this.condition.mettreCondition(joueurImpacte);
+            return this.condition.mettreCondition(joueurImpacte, nomPhase, joueurEnCours);
         else
             return "Cette carte n'a pas de condition\n";
     }
@@ -195,11 +195,14 @@ public abstract class Carte {
     /**
      * Permet de lancer le comportement Sortilege d'une carte monstre
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
+     * TODO : Faire un hashmap de cibles/destinations => Personnages + Monstres
+     * ex   : Joueur A lance le sortilège qui s'applique à tous les personnages sauf lui
+     * ex 2 : Joueur B lance le sortilège qui s'applique à tous les monstres en jeu
      * @param joueurImpacte
      */
-    public String appliquerSortilege(Joueur joueurImpacte){
+    public String appliquerSortilege(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         if(this.sortilege != null)
-            return this.sortilege.actionSortilege(joueurImpacte);
+            return this.sortilege.actionSortilege(joueurImpacte, nomPhase, joueurEnCours);
         else
             return "Cette carte n'a pas de malus\n";
     }
@@ -209,10 +212,10 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerMonstreVaincu(Joueur joueurImpacte){
+    public String appliquerMonstreVaincu(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
     	if(this.monstreVaincu != null)
-            out += this.monstreVaincu.actionMonstreVaincu(joueurImpacte);
+            out += this.monstreVaincu.actionMonstreVaincu(joueurImpacte, nomPhase, joueurEnCours);
         else
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;

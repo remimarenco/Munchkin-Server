@@ -32,7 +32,7 @@ public class MonstreVaincu {
      * @param joueurImpacte : joueur ayant vaincu le monstre
      * @return 
      */
-    public String actionMonstreVaincu(Joueur joueurImpacte) {
+    public String actionMonstreVaincu(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         
         String out = "";
 
@@ -42,7 +42,7 @@ public class MonstreVaincu {
             out += "--- Monstre Vaincu ---\n";
             out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
             for(Action action : tabAction)
-                out += action.action(joueurImpacte);
+                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
             out += "\n--- Fin de monstre vaincu ---";
         }
         out += "\n";    

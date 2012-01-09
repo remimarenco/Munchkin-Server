@@ -11,7 +11,7 @@ public abstract class Action {
      * Méthode abstraite permettant de lancer l'action
      * @param joueurImpacte : Joueur recevant l'action
      */
-    public abstract String action(Joueur joueurImpacte);
+    public abstract String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours);
     
     // TODO : Avoir une implémentation de l'action du type :
     // String action(Joueur joueurDestinateur, ArrayList<Joueur> joueursDestinataires)

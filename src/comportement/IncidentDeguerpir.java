@@ -30,12 +30,12 @@ public class IncidentDeguerpir {
      * @param joueurImpacte
      * @return 
      */
-    public String actionIncidentDeguerpir(Joueur joueurImpacte){
+    public String actionIncidentDeguerpir(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
-            out += action.action(joueurImpacte);
+            out += action.action(joueurImpacte, nomPhase, joueurEnCours);
         out += "--- Fin d'incident fuite ---\n";
         return out;
     }

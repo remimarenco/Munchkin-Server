@@ -25,7 +25,7 @@ public class ChangerRace extends Action {
      * @return out : texte résumant l'action 
      */
     @Override
-    public String action(Joueur joueurImpacte) {
+    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
         joueurImpacte.getPersonnage().setRace(this.race);
         out += " à la race " + joueurImpacte.getPersonnage().getRace();

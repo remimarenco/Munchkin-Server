@@ -31,7 +31,7 @@ public class Condition {
      * @param joueurImpacte : joueur sur lequel s'applique la condition
      * @return out : texte résumant l'action
      */
-    public String mettreCondition(Joueur joueurImpacte){
+    public String mettreCondition(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
         String out = "";
 
         if(tabAction == null){
@@ -40,7 +40,7 @@ public class Condition {
             out += "--- Condition ---\n";
             out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
             for(Action action : tabAction)
-                out += action.action(joueurImpacte);
+                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
             out += "\n--- Fin de condition ---\n";
         }
         return out;
