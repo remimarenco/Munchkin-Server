@@ -370,7 +370,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      */
     public void intervenir(Message msg){
          switch(msg.getAction()){
-            case Constante.ACTION_AIDER:
+             case Constante.ACTION_DEFAUSSER:
+                 if(!msg.getIdCard().equals("")){
+                     Integer id= new Integer(msg.getIdCard());
+                     //this.getJoueurByName(msg.getNick_src()).Deck.getCardById(id);
+                 }
+                 else{
+                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
+                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");
+                 }
+                 break;
+             case Constante.ACTION_AIDER:
                  if(!msg.getIdCard().equals("")){
                      
                  } else {
