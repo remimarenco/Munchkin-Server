@@ -16,15 +16,15 @@ public abstract class Race {
 
     
     /**
-     * // TODO : Commenter
+     * Modifie un personnage en fonction des spécificités de la race
      * @param personnage 
      */
     public abstract void modifPersonnage(Personnage personnage);
 
     
     /**
-     * // TODO : Commenter
-     * @return 
+     * Comportement lors d'un appel à println
+     * @return String : le nom de la race
      */
     @Override
     public String toString(){

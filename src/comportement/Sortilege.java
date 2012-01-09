@@ -6,7 +6,7 @@ import joueur.Joueur;
 
 
 /**
- * // TODO : Commenter
+ * Ensemble d'actions lancées par un sort // TODO : Vérifier
  * @author Julien Rouvier
  */
 public class Sortilege {

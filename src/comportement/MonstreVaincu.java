@@ -6,7 +6,7 @@ import joueur.Joueur;
 
 
 /**
- * // TODO : Commenter
+ * Applique un ensemble d'action lorsqu'un monstre est vaincu
  * @author Julien Rouvier
  */
 public class MonstreVaincu {

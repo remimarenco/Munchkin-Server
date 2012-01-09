@@ -6,7 +6,7 @@ import joueur.Joueur;
 
 
 /**
- * // TODO : Commenter
+ * Incident qui intervient lorqu'un personnage déguerpit d'un combat
  * @author Simon Grabit
  */
 public class IncidentDeguerpir {

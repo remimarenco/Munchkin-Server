@@ -2,7 +2,7 @@ package joueur;
 
 
 /**
- * // TODO : Commenter
+ * Race Humain pour un personnage
  * @author Julien Rouvier
  */
 public class Humain extends Race

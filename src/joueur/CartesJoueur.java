@@ -3,11 +3,10 @@ package joueur;
 import carte.Carte;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import partie.Constante;
 
 /**
- * // TODO : Commenter
+ * Un ensemble de cartes pour les joueurs (main ou jeu)
  * @author Julien Rouvier
  */
 public class CartesJoueur {
@@ -80,9 +79,9 @@ public class CartesJoueur {
 
     
     /**
-     * // TODO : Commenter
-     * @param c
-     * @return 
+     * Regarde si une carte appartient au tas
+     * @param c : la carte que l'on cherche
+     * @return boolean : true si la carte est trouvée, false sinon
      */
     public boolean contains(Carte c){
         return this.cartes.contains(c);
@@ -103,24 +102,7 @@ public class CartesJoueur {
     
     
     /**
-     * 
-     * @return 
-     */
-    // TODO : A supprimer
-    public HashMap<String,String> generateFalseInfos(){
-        int i=1;
-        HashMap<String,String> map=new HashMap<String, String>();
-        for(Carte c : this.cartes){
-            if(i%2 ==1)
-                map.put(c.getId().toString(), c.getId().toString());  
-            i++;
-        }
-        return map;
-    }
-    
-    
-    /**
-     * // TODO : Commenter
+     * Retourne l'ensemble des cartes qu'un joueur peut poser (passer de sa main à son jeu)
      * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont
      * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
      * @return 

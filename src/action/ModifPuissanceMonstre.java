@@ -9,7 +9,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * // TODO : Commenter
+ * Modifie la puissance d'un monstre
  * @author Julien Rouvier
  */
 public class ModifPuissanceMonstre extends Action{

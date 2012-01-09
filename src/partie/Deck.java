@@ -33,19 +33,21 @@ import joueur.Race;
 
 
 /**
- * // TODO : Commenter
+ * Ensemble de toutes les cartes du jeu Munchkin
+ * Permet de pouvoir accéder à toutes les cartes quelque soit l'endroit ou elles
+ * se trouvent (main ou jeu de n'importe quel joueur, pioches, défausses)
  * @author Julien Rouvier
  */
 public final class Deck {
     private static ArrayList<Carte> cartes;
 
     /**
-     * // TODO : Commenter
+     * Constructeur
      */
     public Deck() {
         cartes = new ArrayList<Carte>();
-        this.load();
-        cartes = melanger();
+        this.load();            // Créé l'ensemble des cartes du jeu
+        cartes = melanger();    // Mélange les cartes
     }
 
     
@@ -62,12 +64,12 @@ public final class Deck {
     
     
     /**
-     * // TODO : Commenter
-     * @param id
-     * @return 
+     * Renvoit une carte à partir de son ID
+     * @param id : ID de la carte recherchée
+     * @return Carte : la carte recherchée, null si introuvable
      */
     public static Carte getCardById(Integer id){
-        Carte ret=null;
+        Carte ret = null;
         for(Carte c : cartes)
             if(c.getId().equals(id))
                 ret=c;
@@ -77,8 +79,8 @@ public final class Deck {
     
     
     /**
-     * // TODO : Commenter
-     * @return 
+     * Mélange l'ensemble des cartes du deck
+     * @return ArrayList : ensemble des cartes mélangées
      */
     public static ArrayList melanger(){
         ArrayList nouvelle = new ArrayList(cartes);

@@ -1,14 +1,14 @@
 package jeu;
 
 /**
- * // TODO : Commenter
+ * Classe principale
  * @author Guillaume Renoult
  */
 public class Main {
     
     /**
-     * // TODO : Commenter
-     * @param args 
+     * Méthode lançant l'interface graphique du serveur
+     * @param args : paramètre passés à l'application lors de son appel
      */
     public static void main(String[] args) {
         ServeurVue serV = new ServeurVue();

@@ -145,8 +145,9 @@ public class Combat {
     }
     
     /**
-     * // TODO : A commenter
-     * @return 
+     * Génère les infos du combat : qui se trouve dans quel camps, avec les 
+     * puissances associées
+     * @return HashMap : ensembles des infos du combat
      */
     public HashMap<String,String> generateInfos(){
         LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();        

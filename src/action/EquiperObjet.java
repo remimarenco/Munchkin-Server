@@ -11,7 +11,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * // TODO : Commenter
+ * Action permettant d'équiper un personnage avec un objet
  * @author Simon Grabit
  */
 public class EquiperObjet extends Action{
@@ -36,9 +36,9 @@ public class EquiperObjet extends Action{
 
     
     /**
-     * // TODO : Commenter
-     * @param joueurImpacte
-     * @return 
+     * Equipe un joueur avec un objet
+     * @param joueurImpacte : Joueur à équiper
+     * @return out : texte résumant l'action
      */
     @Override
     public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {

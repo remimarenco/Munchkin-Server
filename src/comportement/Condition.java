@@ -5,7 +5,7 @@ import action.Action;
 import joueur.Joueur;
 
 /**
- * // TODO : Commenter
+ * Contient une liste d'action qui ne sont applicables que sous certaines conditions // TODO : Vérifier si correct
  * @author Julien Rouvier
  */
 public class Condition {
@@ -14,8 +14,8 @@ public class Condition {
     
     
     /**
-     * // TODO : Commenter
-     * @param tabAction 
+     * Constructeur
+     * @param tabAction : ensemble d'actions 
      */
     public Condition(ArrayList<Action> tabAction){
         try{

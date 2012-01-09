@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * // TODO : Commenter
+ * Pioche de cartes (pioche tresor ou donjon)
  * @author Julien Rouvier
  */
 public class Pioche<T> {
@@ -14,8 +14,8 @@ public class Pioche<T> {
     protected Class typePioche;
     
     /**
-     * // TODO : Commenter
-     * @param typePioche 
+     * Constructeur
+     * @param typePioche : la classe des cartes qui vont se trouver dans la pioche (trésor ou donjon) 
      */
     public Pioche(Class typePioche) {
         pioche          = new ArrayList<T>();
@@ -37,7 +37,7 @@ public class Pioche<T> {
     
     
     /**
-     * // TODO : Commenter
+     * Tire la première carte de la pioche
      * @return 
      */
     public T tirerCarte(){
@@ -51,8 +51,8 @@ public class Pioche<T> {
     
     
     /**
-     * // TODO : Commenter
-     * @return 
+     * Vérifie si la pioche est vide
+     * @return boolean : true si la pioche est vide, false sinon
      */
     public boolean isEmpty(){
         return this.pioche.isEmpty();
@@ -60,7 +60,9 @@ public class Pioche<T> {
     
     
     /**
-     * // TODO : Commenter
+     * Initialisation de la pioche
+     * Prend dans le deck toutes les cartes dont la classe correspond à la 
+     * classe de la pioche (trésor ou donjon)
      * @param deck 
      */
     public void init(Deck deck){
@@ -68,9 +70,7 @@ public class Pioche<T> {
         Iterator it             = cartes.iterator();
         Carte c;
 
-        /**
-         * On ajoute la carte dans la pioche seulement si elle appartient à un type de pioche (Donjon ou Trésor)
-         */
+        // On ajoute la carte dans la pioche seulement si elle appartient à un type de pioche (Donjon ou Trésor)
         while(it.hasNext()){
             c = (Carte) it.next();
             if(c.getClass().getSuperclass().equals(this.typePioche))

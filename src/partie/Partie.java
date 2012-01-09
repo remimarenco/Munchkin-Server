@@ -17,7 +17,9 @@ import joueur.Joueur;
 import joueur.Personnage;
 
 /**
- * // TODO : Commenter
+ * Classe principale du jeu.
+ * Gére l'ensemble du déroulement de la partie.
+ * Cette classe est à la fois une liste de joueur & un thread   // TODO : A vérifier
  * @author Julien Rouvier
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
@@ -32,7 +34,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private String           answer;
 
     /**
-     * // TODO : Commenter
+     * Constructeur
      */
     public Partie(){
         piocheDonjon   = new Pioche<Donjon>(Constante.DONJON);
@@ -43,7 +45,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     }
     
     /**
-     * // TODO : Commenter
+     * Constructeur
      * @param piocheTresor
      * @param piocheDonjon
      * @param defausseTresor
@@ -96,7 +98,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Distribue les cartes aux joueurs au début de la partie
      */
     public void distribuer(){
         Iterator it = this.iterator();
@@ -257,7 +259,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
      * @param source
      * @param txt 
      */
@@ -268,7 +270,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Envoi une question au joueur en cours (celui dont c'est le tour de jouer)
      * @param txt 
      */
     public void sendQuestionToEnCours(String txt){
@@ -278,7 +280,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Envoi les infos de chaque joueurs à tous les joueurs
      */
     public void sendInfosJoueursToAll(){
          for(Joueur j :this)
@@ -286,7 +288,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 j.sendMessage(new Message(Message.INFO_JOUEUR, "Partie", j2.getName(), j2.generateInfos()));
      }
     
-        /**
+    /**
      * 
      */
     public void sendInfosCampsToAll(Combat c){
@@ -296,7 +298,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Envoi le jeu de chaque joueur à tous les joueurs
      */
     public void sendCartesJeuxJoueursToAll(){
         for(Joueur j :this)
@@ -307,7 +309,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Envoi les cartes de la main à son propriétaire
      */
     public void sendCartesMainToOwner(){
          for(Joueur j :this)             
@@ -328,7 +330,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Envoi un son à tous les joueurs
      * @param constante 
      */
     public void sendSongToAll(int constante){
@@ -338,40 +340,38 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Intervention d'un joueur dans un combat
      * @param msg 
      */
     public void intervenir(Message msg){
-         switch(msg.getAction()){
-             case Constante.ACTION_DEFAUSSER:
-                 if(!msg.getIdCard().equals("")){
-                     Integer id = new Integer(msg.getIdCard());
-                     this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
-                     this.sendCartesJeuxJoueursToAll();
-                     this.sendCartesMainToOwner();                    
-                 }
-                 else{
-                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
-                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");
-                      /**
+        switch(msg.getAction()){
+            case Constante.ACTION_DEFAUSSER:
+                if(!msg.getIdCard().equals("")){
+                    Integer id = new Integer(msg.getIdCard());
+                    this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
+                    this.sendCartesJeuxJoueursToAll();
+                    this.sendCartesMainToOwner();                    
+                } else {
+                    this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");
+                   /**
                     * TODO
-                    * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
-                    * Pour le moment on envoi juste une liste de carte modifier on envoi une carte sur 
-                    * deux de la main du joueur grace a la methode generateFalseInfo
-                    */                     
-
+                    * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut défausser.
+                    * Pour le moment on envoi l'ensemble des cartes de la main
+                    * TODO 2 : Le joueur ne peut-il pas se défausser de la carte qu'il veut ???
+                    */
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-                    this.getJoueurByName(msg.getNick_src()).getMain().generateFalseInfos()));
-                 }
-                 break;
-             case Constante.ACTION_AIDER:
-                 if(!msg.getIdCard().equals("")){
+                    this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
+                }
+                break;
+            case Constante.ACTION_AIDER:
+                if(!msg.getIdCard().equals("")){
                      
-                 } else {
-                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite aider "+this.enCours.getName());
-                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
-                 }
-                 break;
+                } else {
+                    this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite aider "+this.enCours.getName());
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
+                }
+                break;
             case Constante.ACTION_POSERCARTE:
                 if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
                     Integer id= new Integer(msg.getIdCard());
@@ -382,12 +382,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 } else {   //Le joueur informe qu'il veut poser une carte
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");
-                    /**
-                    * TODO
-                    * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
-                    * Pour le moment on envoi juste une liste de carte modifier on envoi une carte sur 
-                    * deux de la main du joueur grace a la methode generateFalseInfo
-                    */                     
+                    
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
                                 this.getJoueurByName(msg.getNick_src()).getMain().getCartesPosables()));
 
@@ -406,7 +401,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      }
     
     /**
-     * // TODO : Commenter
+     * Aider un joueur dans un combat
      * @param msg 
      */
     public void aider(Message msg){
@@ -415,7 +410,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Pourrir un joueur dans un combat
      * @param msg 
      */
     public void pourrir(Message msg){
@@ -424,9 +419,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      
     
     /**
-     * // TODO : Commenter
+     * Poser une carte (transfert de la main au jeu)
      * @param msg 
      */
+    // TODO : Vérifier l'utilité de la méthode
     public void poserCarte(Message msg){
 
     }
@@ -464,20 +460,20 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     
     /**
-     * // TODO : Commenter
+     * Initialisation de la partie
      */
     private void init() {
-        piocheDonjon.init(this.deck);
-        piocheTresor.init(this.deck);       
-        this.distribuer();
-        this.sendInfosJoueursToAll();
-        this.sendCartesJeuxJoueursToAll();
-        this.sendCartesMainToOwner();
+        piocheDonjon.init(this.deck);       // Les cartes donjon sont mises dans la pioche donjon
+        piocheTresor.init(this.deck);       // Les cartes trésor sont mises dans la pioche trésor
+        this.distribuer();                  // Distribution des cartes aux joueurs (4 de chaque)
+        this.sendInfosJoueursToAll();       // Echanges des infos joueurs
+        this.sendCartesJeuxJoueursToAll();  // Echanges des jeux des joueurs
+        this.sendCartesMainToOwner();       // Envoi sa main à chaque joueur
     }
 
     
     /**
-     * // TODO : Commenter
+     * Un tour de jeu d'un joueur
      */
     private void tour() {
         // TODO : Phases du tour de jeu

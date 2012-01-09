@@ -9,7 +9,7 @@ public class Elfe extends Race {
 
     
     /**
-     * Comportement pour la modif du personnage
+     * Modifie un personnage en fonction des spécificités de la race
      * @param personnage 
      */
     @Override

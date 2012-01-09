@@ -7,7 +7,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * // TODO : Commenter
+ * Modifie la capacité qu'ont les personnage à déguerpir
  * @author Julien Rouvier
  */
 public class ModifDeguerpir extends Action{

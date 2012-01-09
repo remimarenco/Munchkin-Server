@@ -16,7 +16,8 @@ import joueur.Voleur;
 import java.util.Random;
 
 /**
- * // TODO : Commenter
+ * Ensemble de constante utilisées dans l'ensemble du code.
+ * Contient également des méthodes pouvant être utilisées dans différentes classes
  * @author Julien Rouvier
  */
 public class Constante {

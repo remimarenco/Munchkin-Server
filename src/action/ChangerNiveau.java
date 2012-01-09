@@ -22,9 +22,9 @@ public class ChangerNiveau extends Action {
      * @param niveau : le delta de changement de niveau
      */
     public ChangerNiveau(int niveau){
-        this.niveau     = niveau;
-        this.niveauMin  = 0;
-        this.tabClasse  = null;
+        this.niveau    = niveau;
+        this.niveauMin = 0;
+        this.tabClasse = null;
     }
     
     /**
@@ -35,9 +35,9 @@ public class ChangerNiveau extends Action {
      * @param tabClasse : tableau des classe impactée par le changement
      */
     public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse){
-        this.niveau     = niveau;
-        this.tabClasse  = tabClasse;
-        this.niveauMin  = 0;
+        this.niveau    = niveau;
+        this.tabClasse = tabClasse;
+        this.niveauMin = 0;
     }
     
     /**
@@ -48,9 +48,9 @@ public class ChangerNiveau extends Action {
      * @param niveauMin : niveau minimum
      */
     public ChangerNiveau(int niveau, int niveauMin){
-        this.niveau     = niveau;
-        this.niveauMin  = niveauMin;
-        this.tabClasse  = null;
+        this.niveau    = niveau;
+        this.niveauMin = niveauMin;
+        this.tabClasse = null;
     }
     
     /**

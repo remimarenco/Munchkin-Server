@@ -7,7 +7,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * // TODO : Commenter
+ * Modifie la puissance d'un personnage
  * @author Julien Rouvier
  */
 public class ModifPuissancePersonnage extends Action{

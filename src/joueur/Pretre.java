@@ -2,7 +2,7 @@ package joueur;
 
 
 /**
- * // TODO : Commenter
+ * Classe Prêtre pour un personnage
  * @author Julien Rouvier
  */
 public class Pretre extends Classe{
