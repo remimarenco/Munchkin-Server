@@ -726,7 +726,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             for(Monstre monstre : combat.getCampMechant()){
                 this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours));
             }
-            
             this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
         }
     }

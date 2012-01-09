@@ -197,7 +197,11 @@ public class Personnage {
     // TODO : vérifier la pertinence & l'utilité de cette méthode
     public Boolean deguerpir() {
         // TODO : A implémenter, lancer le dé, comparer avec bonus + capacite
-        return true;
+        int resultatDe = Constante.nbAleatoire(1, 7);
+        if((capaciteFuite + bonusCapaciteFuite) >= resultatDe){
+            return true;
+        }
+        return false;
     }    
 
     
