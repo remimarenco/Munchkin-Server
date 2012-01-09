@@ -227,6 +227,17 @@ public class Joueur extends Thread {
     }
     
     
+    public boolean defausserCarte(Carte c){
+        if(this.getMain().contains(c)){
+            return this.getMain().supprimerCarte(c);
+        }else if(this.getJeu().contains(c)){
+            return this.getJeu().supprimerCarte(c);
+        }else{
+            return false;
+        }
+    }
+    
+    
     /**
      * Génère les infos du joueur à envoyer aux clients
      * @return 

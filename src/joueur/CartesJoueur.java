@@ -79,6 +79,10 @@ public class CartesJoueur {
     }
     
     
+    public boolean contains(Carte c){
+        return this.cartes.contains(c);
+    }
+    
     /**
      * Prépare les données pour envoi au client
      * @return HashMap<String,String> infos sur les cartes 
