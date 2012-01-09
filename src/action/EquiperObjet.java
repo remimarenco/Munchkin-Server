@@ -42,11 +42,10 @@ public class EquiperObjet extends Action{
      */
     @Override
     public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        String out              = "";
-        
-        boolean accept          = true;
-        boolean raceTrouve      = false;
-        boolean classeTrouve    = false;
+        String out           = "";
+        boolean accept       = true;
+        boolean raceTrouve   = false;
+        boolean classeTrouve = false;
 	
         out += "Le joueur "+ joueurImpacte.getName() +"s'équipe d'un objet :\n";
         out += "Le bonus déguerpir est de " + bonusDeguerpir + ", la puissance est de "+ bonusPuissance;

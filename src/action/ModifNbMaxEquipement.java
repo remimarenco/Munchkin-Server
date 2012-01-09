@@ -1,10 +1,6 @@
 package action;
 
-import java.util.ArrayList;
-
-import joueur.Classe;
 import joueur.Joueur;
-import joueur.Race;
 
 public class ModifNbMaxEquipement extends Action{
 

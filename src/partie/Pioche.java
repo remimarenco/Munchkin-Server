@@ -18,26 +18,22 @@ public class Pioche<T> {
      * @param typePioche 
      */
     public Pioche(Class typePioche) {
-        pioche  = new ArrayList<T>();
+        pioche          = new ArrayList<T>();
         this.typePioche = typePioche;
     }
     
     
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public ArrayList<T> getPioche() {
         return pioche;
     }
 
-    /**
-     * // TODO : Commenter
-     * @param pioche 
-     */
     public void setPioche(ArrayList<T> pioche) {
         this.pioche = pioche;
     }
+    // ================================== //
+    
     
     
     /**
@@ -69,7 +65,7 @@ public class Pioche<T> {
      */
     public void init(Deck deck){
         ArrayList<Carte> cartes = Deck.getCartes();
-        Iterator it = cartes.iterator();
+        Iterator it             = cartes.iterator();
         Carte c;
 
         /**

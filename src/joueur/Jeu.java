@@ -9,6 +9,15 @@ import java.util.ArrayList;
  */
 public class Jeu extends CartesJoueur{
     
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public ArrayList<Carte> getJeu() {
+        return this.cartes;
+    }
+    // ================================== //
+    
+    
+    
     /**
      * Ajout d'une carte dans le jeu
      * @param c
@@ -35,13 +44,5 @@ public class Jeu extends CartesJoueur{
           
        } 
        return false;
-    }
-
-    /**
-     * Retourne l'ensemble des cartes du jeu
-     * @return 
-     */
-    public ArrayList<Carte> getJeu() {
-        return this.cartes;
     }
 }

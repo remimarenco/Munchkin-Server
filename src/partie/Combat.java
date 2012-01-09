@@ -19,6 +19,7 @@ public class Combat {
     private ArrayList<Monstre> CampMechant;
     private Partie partie;
 
+    
     /**
      * Constructeur
      * @param partie : partie dans laquelle à lieu le combat 
@@ -29,6 +30,7 @@ public class Combat {
         CampMechant = new ArrayList<Monstre>();
     }
 
+    
     /**
      * Constructeur
      */
@@ -36,42 +38,42 @@ public class Combat {
     }
     
     
-    /**
-     * Retourne le camps gentil (camps du perso)
-     * @return 
-     */
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public ArrayList<Personnage> getCampGentil() {
         return CampGentil;
     }
 
-    
-    /**
-     * Retourne le camps méchant (camps du monstre)
-     * @return 
-     */
     public ArrayList<Monstre> getCampMechant() {
         return CampMechant;
     }
+    // ================================== //
+    
+    
+    
     /**
-     * Retourne le total de puissance du camp gentil
+     * 
      * @return 
      */
     public String getPuissanceCampGentil(){    
-        Integer total=0;
+        Integer total = 0;
         for(Personnage p : CampGentil)
-            total+=p.getPuissance();        
+            total += p.getPuissance();        
         return total.toString();
     }
-      /**
+    
+    
+    /**
      * Retourne le total de puissance du camp mechant
      * @return 
      */
     public String getPuissanceCampMechant(){    
-        Integer total=0;
+        Integer total = 0;
         for(Monstre p : CampMechant)
-            total+=p.getPuissance();        
+            total += p.getPuissance();        
         return total.toString();
     }
+    
     
     /**
      * Méthode permettant de savoir si les personnages d'un combat ont réussi à déguerpir
@@ -80,25 +82,21 @@ public class Combat {
     public HashMap<Boolean, ArrayList<Personnage>> tenterDeguerpir() {
         // Tableaux de personnage qui ont réussi ou non
         ArrayList<Personnage> reussi = new ArrayList<Personnage>();
-        ArrayList<Personnage> echec = new ArrayList<Personnage>();
+        ArrayList<Personnage> echec  = new ArrayList<Personnage>();
 
         // HashMap permettant de répartir les personnages qui ont réussi ou non
         HashMap<Boolean, ArrayList<Personnage>> dico = new HashMap<Boolean, ArrayList<Personnage>>();
+        
         // Assignation des tableaux au HashMap
         dico.put(Boolean.TRUE, reussi);
         dico.put(Boolean.FALSE, echec);
 
         // Parcourt des personnages du campGentil, assignation dans les tableaux
-    	for(Personnage gentil : CampGentil){
+    	for(Personnage gentil : CampGentil)
             if(gentil.deguerpir())
-            {
                 reussi.add(gentil);
-            }
             else
-            {
                 echec.add(gentil);
-            }
-    	}
         return dico;
     }    
     
@@ -110,11 +108,10 @@ public class Combat {
      */
     public boolean combattre(){
         
-        int puissanceGentil = 0;
+        int puissanceGentil  = 0;
         int puissanceMechant = 0;
-        
-        Iterator itGentil = CampGentil.iterator();
-        Iterator itMechant = CampMechant.iterator();
+        Iterator itGentil    = CampGentil.iterator();
+        Iterator itMechant   = CampMechant.iterator();
         
         while(itGentil.hasNext()){
             Object obj = itGentil.next();
@@ -143,13 +140,14 @@ public class Combat {
                 return false;
             }
         }
-        
-        if(puissanceGentil >= puissanceMechant) // Le camps gentil (du perso) a gagné
-            return true;
-        else                                    // Le camps méchant (du monstre) a gagné
-            return false;
+
+        return (puissanceGentil >= puissanceMechant); // True si camps gentil gagne
     }
     
+    /**
+     * // TODO : A commenter
+     * @return 
+     */
     public HashMap<String,String> generateInfos(){
         LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();        
         map.put("Camp Gentil", getPuissanceCampGentil());
@@ -159,7 +157,6 @@ public class Combat {
         map.put("Camp Mechant", getPuissanceCampMechant());
         for(Monstre m : CampMechant)
             map.put(m.getNom(),String.valueOf(m.getPuissance()));
-        
         
         return map;
     }

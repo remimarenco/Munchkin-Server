@@ -33,6 +33,15 @@ public class CartesJoueur {
     public CartesJoueur() {
         cartes = new ArrayList<Carte>();
     }
+
+    
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public ArrayList<Carte> getCartes() {
+        return cartes;
+    }
+    // ================================== //
+    
     
     
     /**
@@ -69,15 +78,6 @@ public class CartesJoueur {
         return cartes.get(valeur);
     }    
 
-    
-    /**
-     * Renvoi l'ensemble des cartes du tas
-     * @return ArrayList<Carte> : les cartes du tas
-     */
-    public ArrayList<Carte> getCartes() {
-        return cartes;
-    }
-    
     
     /**
      * // TODO : Commenter

@@ -31,8 +31,8 @@ public class DefausserCarte extends Action{
      */
     public DefausserCarte(int typeCarte, int nbCarte, int typeTas) {
         this.typeCarte = typeCarte;
-        this.nbCarte = nbCarte;
-        this.typeTas = typeTas;
+        this.nbCarte   = nbCarte;
+        this.typeTas   = typeTas;
     }
 
     
@@ -44,7 +44,7 @@ public class DefausserCarte extends Action{
     @Override
     public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         String out = "";
-        Carte c = null;
+        Carte c    = null;
         CartesJoueur tas;
         int valeur;
         
@@ -80,10 +80,8 @@ public class DefausserCarte extends Action{
             throw new UnsupportedOperationException("Problème lors du choix du tas de défausse");
         
         // Supprime le nombre de cartes souhaité du tas
-        for(int i=0; i<this.nbCarte; i++){
-            c = tas.getRandomCarte();
-            if(c != null) tas.supprimerCarte(c);
-        }
+        for(int i=0; i<this.nbCarte; i++)
+            if((c = tas.getRandomCarte()) != null) tas.supprimerCarte(c);
         
         return out;
     }

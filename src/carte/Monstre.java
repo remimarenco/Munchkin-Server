@@ -31,77 +31,31 @@ public class Monstre extends Donjon {
         this.incidentDeguerpir  = incidentDeguerpir;
         this.puissance          = puissance;
     }
+
     
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public int getPuissance() {
         return puissance;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    @Override
-    public String getNom() {
-        return nom;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @param puissance 
-     */
     public void setPuissance(int puissance) {
         this.puissance = puissance;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
     public int getBonusPuissance() {
         return bonusPuissance;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @param bonusPuissance 
-     */
     public void setBonusPuissance(int bonusPuissance) {
         this.bonusPuissance = bonusPuissance;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
     public Condition getCondition() {
         return condition;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @param condition 
-     */
     public void setCondition(Condition condition) {
         this.condition = condition;
     }
+    // ================================== //
 }

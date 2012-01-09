@@ -19,8 +19,7 @@ public class Classe {
      * @return 
      */
     @Override
-    public String toString()
-    {
+    public String toString(){
         return this.getClass().toString();
     }
 }

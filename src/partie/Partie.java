@@ -22,25 +22,24 @@ import joueur.Personnage;
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
 	
-    private Deck                deck;
-    private Pioche<Tresor>      piocheTresor;
-    private Pioche<Donjon>      piocheDonjon;
-    private Defausse<Tresor>    defausseTresor;
-    private Defausse<Donjon>    defausseDonjon;
-    //private ArrayList<Joueur>   listeJoueurs;
-    private Joueur              enCours;
-    private Color               Color;
-    private String              answer;
+    private Deck             deck;
+    private Pioche<Tresor>   piocheTresor;
+    private Pioche<Donjon>   piocheDonjon;
+    private Defausse<Tresor> defausseTresor;
+    private Defausse<Donjon> defausseDonjon;
+    private Joueur           enCours;
+    private Color            Color;
+    private String           answer;
 
     /**
      * // TODO : Commenter
      */
     public Partie(){
-        piocheDonjon    = new Pioche<Donjon>(Constante.DONJON);
-        piocheTresor    = new Pioche<Tresor>(Constante.TRESOR);
-        defausseDonjon  = new Defausse<Donjon>();
-        defausseTresor  = new Defausse<Tresor>();       
-        deck            = new Deck();
+        piocheDonjon   = new Pioche<Donjon>(Constante.DONJON);
+        piocheTresor   = new Pioche<Tresor>(Constante.TRESOR);
+        defausseDonjon = new Defausse<Donjon>();
+        defausseTresor = new Defausse<Tresor>();       
+        deck           = new Deck();
     }
     
     /**
@@ -58,6 +57,44 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.defausseDonjon = defausseDonjon;        
     }
 
+    
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public Defausse getDefausseDonjon() {
+        return defausseDonjon;
+    }
+
+    public void setDefausseDonjon(Defausse defausseDonjon) {
+        this.defausseDonjon = defausseDonjon;
+    }
+
+    public Defausse getDefausseTresor() {
+        return defausseTresor;
+    }
+
+    public void setDefausseTresor(Defausse defausseTresor) {
+        this.defausseTresor = defausseTresor;
+    }
+
+    public Pioche<Donjon> getPiocheDonjon() {
+        return piocheDonjon;
+    }
+    
+    public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
+        this.piocheDonjon = piocheDonjon;
+    }
+    
+    public void setPiocheTresor(Pioche<Tresor> piocheTresor) {
+        this.piocheTresor = piocheTresor;
+    }
+
+    public Pioche<Tresor> getPiocheTresor() {
+        return piocheTresor;
+    }
+    // ================================== //
+    
+    
+    
     /**
      * // TODO : Commenter
      */
@@ -96,79 +133,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         Donjon enJeu = (Donjon) piocheDonjon.tirerCarte();
         return true;
     }
-
     
-    /**
-     * Retourne la défausse des cartes donjon
-     * @return 
-     */
-    public Defausse getDefausseDonjon() {
-        return defausseDonjon;
-    }
-
-    
-    /**
-     * Défini la défausse des cartes donjon
-     * @param defausseDonjon 
-     */
-    public void setDefausseDonjon(Defausse defausseDonjon) {
-        this.defausseDonjon = defausseDonjon;
-    }
-
-    
-    /**
-     * Retourne la défausse des cartes trésor
-     * @return 
-     */
-    public Defausse getDefausseTresor() {
-        return defausseTresor;
-    }
-
-    
-    /**
-     * Défini la défausse des cartes trésor
-     * @param defausseTresor 
-     */
-    public void setDefausseTresor(Defausse defausseTresor) {
-        this.defausseTresor = defausseTresor;
-    }
-
-    
-    /**
-     * Retourne la pioche de carte donjon
-     * @return 
-     */
-    public Pioche<Donjon> getPiocheDonjon() {
-        return piocheDonjon;
-    }
-    
-    
-    /**
-     * Défini la pioche des cartes donjon
-     * @param piocheDonjon 
-     */
-    public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
-        this.piocheDonjon = piocheDonjon;
-    }
-    
-    
-    /**
-     * Défini la pioche des cartes trésor
-     * @param piocheTresor 
-     */
-    public void setPiocheTresor(Pioche<Tresor> piocheTresor) {
-        this.piocheTresor = piocheTresor;
-    }
-
-    
-    /**
-     * Retourne la pioche des cartes trésor
-     * @return 
-     */
-    public Pioche<Tresor> getPiocheTresor() {
-        return piocheTresor;
-    }
-
     
     /**
      * Supprime un joueur grâce à son nom
@@ -231,12 +196,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * @return 
      */
     public Integer getCommunication(String nick_dest){
-        int i=0;
-        int j=0;
+        int i = 0;
+        int j = 0;
         while(i<this.size()){
             if(this.get(i).getName().equals(nick_dest)){
-                j=i;
-                i=this.size() +1;
+                j = i;
+                i = this.size() +1;
             }else{
                 i++;
                 j--;
@@ -265,7 +230,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
         for(Joueur j : this)
             if(!j.equals(enCours))
-                    j.sendMessage(msg);
+                j.sendMessage(msg);
     }
     
     
@@ -337,7 +302,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         for(Joueur j :this)
             for(Joueur j2 :this)
                 j.sendMessage(new Message
-                       (Message.JEUX_JOUEUR, "Partie", j2.getName(), j2.getJeu().generateInfos()));
+                            (Message.JEUX_JOUEUR, "Partie", j2.getName(), j2.getJeu().generateInfos()));
      }
     
     
@@ -347,7 +312,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     public void sendCartesMainToOwner(){
          for(Joueur j :this)             
              j.sendMessage(new Message
-                     (Message.MAIN_JOUEUR, "Partie", j.getName(), j.getMain().generateInfos()));
+                            (Message.MAIN_JOUEUR, "Partie", j.getName(), j.getMain().generateInfos()));
      }
     
     
@@ -358,7 +323,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     public void sendCarteEnCoursToAll(Carte carte){
          for(Joueur j :this)             
              j.sendMessage(new Message
-                     (Message.CARTE_EN_COURS, "Partie", j.getName(), carte.getId().toString()));
+                            (Message.CARTE_EN_COURS, "Partie", j.getName(), carte.getId().toString()));
      }
     
     
@@ -380,7 +345,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
          switch(msg.getAction()){
              case Constante.ACTION_DEFAUSSER:
                  if(!msg.getIdCard().equals("")){
-                     Integer id= new Integer(msg.getIdCard());
+                     Integer id = new Integer(msg.getIdCard());
                      this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
                      this.sendCartesJeuxJoueursToAll();
                      this.sendCartesMainToOwner();                    
@@ -423,9 +388,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     * Pour le moment on envoi juste une liste de carte modifier on envoi une carte sur 
                     * deux de la main du joueur grace a la methode generateFalseInfo
                     */                     
-
-                    
-                    
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
                                 this.getJoueurByName(msg.getNick_src()).getMain().getCartesPosables()));
 
@@ -476,7 +438,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * @return 
      */
     public boolean answer(Message msg){
-        this.answer=msg.getMessage();      
+        this.answer = msg.getMessage();      
         return true;     
     }    
  
@@ -704,12 +666,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      */
     private void sendMessageToPlayer(String txt, Personnage personnage) {
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
-        for(Joueur j : this){
+        for(Joueur j : this)
             // On test si le joueur a bien le personnage passé en paramètre
-            if(j.getPersonnage().equals(personnage)){
+            if(j.getPersonnage().equals(personnage))
                 j.sendMessage(msg);
-            }
-        }
     }
     
     
@@ -720,12 +680,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      */
     private void sendMessageToAllButPlayer(String txt, Personnage personnage) {
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
-        for(Joueur j : this){
+        for(Joueur j : this)
             // On test si le joueur n'a pas le personnage passé en paramètre
-            if(!j.getPersonnage().equals(personnage)){
+            if(!j.getPersonnage().equals(personnage))
                 j.sendMessage(msg);
-            }
-        }
     }
 
     /**
@@ -739,18 +697,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
         // Les joueurs qui ont réussi à fuir sont tranquilles
         for(Personnage persoReussi : dicoFuite.get(Boolean.TRUE))
-        {
             sendMessageToPlayer("Vous avez réussi à déguerpir !", persoReussi);
-        }
 
         // Les joueurs qui n'ont pas réussi à fuir se prennent des incident fâcheux
-        for(Personnage persoEchec : dicoFuite.get(Boolean.FALSE))
-        {
+        for(Personnage persoEchec : dicoFuite.get(Boolean.FALSE)){
             sendMessageToPlayer("Vous n'avez pas réussi à déguerpir !", persoEchec);
             sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
-            for(Monstre monstre : combat.getCampMechant()){
+            for(Monstre monstre : combat.getCampMechant())
                 this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, null, null));
-            }
             this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
         }
     }

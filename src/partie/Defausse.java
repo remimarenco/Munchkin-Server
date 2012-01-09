@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Defausse<T> {
     
-    protected ArrayList<T> defausse= new ArrayList<T>();
+    protected ArrayList<T> defausse = new ArrayList<T>();
 
     /**
      * Constructeur
@@ -20,22 +20,17 @@ public class Defausse<T> {
     }
 
     
-    /**
-     * Retourne les carte de la défausse
-     * @return 
-     */
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public ArrayList<T> getDefausse() {
         return defausse;
     }
 
-    
-    /**
-     * Défini les cartes de la défausse
-     * @param defausse 
-     */
     public void setDefausse(ArrayList<T> defausse) {
         this.defausse = defausse;
     }
+    // ================================== //
+    
     
     
     /**

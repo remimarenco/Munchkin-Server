@@ -7,6 +7,8 @@ import joueur.Joueur;
  * @author Rémi Marenco
  */
 public abstract class Action {
+    
+    
     /**
      * Méthode abstraite permettant de lancer l'action
      * @param joueurImpacte : Joueur recevant l'action

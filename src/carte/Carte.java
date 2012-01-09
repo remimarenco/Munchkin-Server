@@ -83,78 +83,43 @@ public abstract class Carte {
         this.id = id;
     }
     
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
+    
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public  Integer getId() {
         return id;
     }
 
-    /**
-     * // TODO : Commenter
-     * @param id 
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
     public String getNom() {
         return nom;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @param nom 
-     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
     public String getDescription() {
         return description;
     }
 
-    
-    /**
-     * // TODO : Commenter
-     * @param description 
-     */
     public void setDescription(String description) {
         this.description = description;
     }
     
-    
-    /**
-     * Permet de modifier le comportement equipement d'une carte objet
-     * TODO : Vérifier si c'est toujours applicable => Voir au dessus
-     * @param equipement
-     */
     public void setEquipement(Equipement equipement) {
         this.equipement = equipement;
     }
 
-    
-    /**
-     * Permet de modifier le comportement incidentFacheux d'une carte monstre
-     * TODO : Vérifier si c'est toujours applicable => Voir au dessus
-     * @param incidentFacheux
-     */
     public void setIncidentFacheux(IncidentFacheux incidentFacheux) {
         this.incidentFacheux = incidentFacheux;
     }
-
+    // ================================== //
+    
+    
     
     /**
      * Permet de lancer le comportement incidentFacheux d'une carte monstre

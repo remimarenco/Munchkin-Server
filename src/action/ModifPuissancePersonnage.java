@@ -59,11 +59,11 @@ public class ModifPuissancePersonnage extends Action{
      */
     @Override
     public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        int puissanceObjet      = 0;
-        int niveauJoueur        = 0;
-        boolean raceTrouve      = false;
-        boolean classeTrouve    = false;
-        boolean accept          = true;
+        int puissanceObjet   = 0;
+        int niveauJoueur     = 0;
+        boolean raceTrouve   = false;
+        boolean classeTrouve = false;
+        boolean accept       = true;
 
         String out = "";
         out += "On passe dans une action de modification de puissance de personnage :\n";
@@ -75,9 +75,8 @@ public class ModifPuissancePersonnage extends Action{
             for(Race race : tabRace)
                 out += (" " + race.toString());
         }
-        else{
+        else
             out += "Aucun classe pour ce bonus";
-        }
 
         if(tabClasse != null){
             out += ", les classes pour lesquelles ce bonus s'applique sont :";
@@ -85,9 +84,8 @@ public class ModifPuissancePersonnage extends Action{
                 out += " " + classe.toString();
                     
         }
-        else{
+        else
             out += "Aucune classe pour ce bonus";
-        }
 
         out += "\n";
 		
@@ -121,6 +119,7 @@ public class ModifPuissancePersonnage extends Action{
 		
         if(accept)
             joueurImpacte.getPersonnage().setBonusPuissance(joueurImpacte.getPersonnage().getBonusPuissance()+bonusPuissance);
+        
         return out;
     }
 }

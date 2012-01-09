@@ -26,8 +26,8 @@ public class Objet extends Tresor {
      */
     public Objet(int id,String nom, String description, Equipement equipement, UtiliserCarte utiliser, ComportementDefausserCarte defausser) {
         super(id,nom, description);
-        this.equipement = equipement;
-        this.utiliserCarte = utiliser;
+        this.equipement     = equipement;
+        this.utiliserCarte  = utiliser;
         this.defausserCarte = defausser;
     }
 }

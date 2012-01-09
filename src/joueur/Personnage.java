@@ -45,7 +45,108 @@ public class Personnage {
         this.capaciteEquipement = 7;        
     }
    
+    
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public int getNiveau() {
+        return niveau;
+    }
 
+    public String getNom() {
+        return nom;
+    }
+        
+    public void setNom(String name) {
+        this.nom=name;
+    }
+    
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+
+    public int getCapaciteFuite() {
+        return capaciteFuite;
+    }
+
+    public void setCapaciteFuite(int capaciteFuite) {
+        this.capaciteFuite = capaciteFuite;
+    }
+    
+    public int getNbEquipement() {
+        return nbEquipement;
+    }
+
+    public void setNbEquipement(int nbEquipement) {
+        this.nbEquipement = nbEquipement;
+    }
+
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }
+    
+    public int getSexe() {
+        return sexe;
+    }
+    
+    public boolean isaChangeSexe() {
+        return aChangeSexe;
+    }
+    
+    public void setaChangeSexe(boolean aChangeSexe) {
+        this.aChangeSexe = aChangeSexe;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+        race.modifPersonnage(this); // On modifie le personnage selon la race
+    }
+
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+    
+    public int getBonusCapaciteFuite() {
+        return bonusCapaciteFuite;
+    }
+
+    public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
+        this.bonusCapaciteFuite = bonusCapaciteFuite;
+    }
+
+    public int getBonusPuissance() {
+        return bonusPuissance;
+    }
+
+    public void setBonusPuissance(int bonusPuissance) {
+        this.bonusPuissance = bonusPuissance;
+    }
+    
+    public int getPuissanceObjet() {
+        return puissanceObjet;
+    }
+
+    public void setPuissanceObjet(int puissanceObjet) {
+        this.puissanceObjet = puissanceObjet;
+    }
+
+    public int getCapaciteEquipement() {
+        return capaciteEquipement;
+    }
+
+    public void setCapaciteEquipement(int capaciteEquipement) {
+        this.capaciteEquipement = capaciteEquipement;
+    }
+    // ================================== //
+    
+    
     
     /**
      * Changement du niveau du personnage
@@ -61,144 +162,6 @@ public class Personnage {
             this.setNiveau(this.niveau + deltaNiveau);
         return true;
     }
-    
-    
-    /**
-     * Renvoi le niveau du personnage
-     * @return niveau : le niveau du personnage
-     */
-    public int getNiveau() {
-        return niveau;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public String getNom() {
-        return nom;
-    }
-    
-    
-
-    
-    /**
-     * Défini le niveau du personnage
-     * @param niveau 
-     */
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
-
-    
-    /**
-     * Retourne la capacité de fuite
-     * @return capaciteFuite
-     */
-    public int getCapaciteFuite() {
-        return capaciteFuite;
-    }
-
-    
-    /**
-     * Défini la capacité de fuite du perso
-     * @param capaciteFuite 
-     */
-    public void setCapaciteFuite(int capaciteFuite) {
-        this.capaciteFuite = capaciteFuite;
-    }
-    
-    
-    /**
-     * Retourne le nombre d'équipement (??)
-     * @return nbEquipement
-     */
-    public int getNbEquipement() {
-        return nbEquipement;
-    }
-
-    
-    /**
-     * Défini le nombre d'équipement du perso
-     * @param nbEquipement 
-     */
-    public void setNbEquipement(int nbEquipement) {
-        this.nbEquipement = nbEquipement;
-    }
-
-    
-    /**
-     * Défini le sexe du perso
-     * @param sexe 
-     */
-    public void setSexe(int sexe) {
-        this.sexe = sexe;
-    }
-    
-    
-    /**
-     * Renvoi le sexe du perso
-     * @return sexe (Constante.SEXE_M ou Constante.Sexe_F)
-     */
-    public int getSexe() {
-        return sexe;
-    }
-    
-    
-    /**
-     * Vérifie si le personnage a déjà changé de sexe
-     * @return 
-     */
-    public boolean isaChangeSexe() {
-        return aChangeSexe;
-    }
-    
-    
-    /**
-     * Indique que le personnage a changé de sexe
-     * @param aChangeSexe 
-     */
-    public void setaChangeSexe(boolean aChangeSexe) {
-        this.aChangeSexe = aChangeSexe;
-    }
-
-    
-    /**
-     * Retourne la race du perso
-     * @return 
-     */
-    public Race getRace() {
-        return race;
-    }
-
-    
-    /**
-     * Défini la race du perso
-     * @param race 
-     */
-    public void setRace(Race race) {
-        this.race = race;
-        // On modifie le personnage selon la race
-        race.modifPersonnage(this);
-    }
-
-    
-    /**
-     * Retourne la classe du perso
-     * @return 
-     */
-    public Classe getClasse() {
-        return classe;
-    }
-
-    
-    /**
-     * Défini la classe du perso
-     * @param classe 
-     */
-    public void setClasse(Classe classe) {
-        this.classe = classe;
-    }
 
     
     /**
@@ -206,49 +169,12 @@ public class Personnage {
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
     public Boolean deguerpir() {
-        // TODO : A implémenter, lancer le dé, comparer avec bonus + capacite
         int resultatDe = Constante.nbAleatoire(1, 7);
         if((capaciteFuite + bonusCapaciteFuite) >= resultatDe){
             return true;
         }
         return false;
     }    
-
-    
-    /**
-     * Renvoi le bonus en capacité de fuite du perso
-     * @return 
-     */
-    public int getBonusCapaciteFuite() {
-        return bonusCapaciteFuite;
-    }
-
-    
-    /**
-     * Défini le bonus en capacité de fuite du perso
-     * @param bonusCapaciteFuite 
-     */
-    public void setBonusCapaciteFuite(int bonusCapaciteFuite) {
-        this.bonusCapaciteFuite = bonusCapaciteFuite;
-    }
-
-    
-    /**
-     * Retourne le bonus de puissance du perso
-     * @return 
-     */
-    public int getBonusPuissance() {
-        return bonusPuissance;
-    }
-
-    
-    /**
-     * Défini le bonus de puissance du perso
-     * @param bonusPuissance 
-     */
-    public void setBonusPuissance(int bonusPuissance) {
-        this.bonusPuissance = bonusPuissance;
-    }
     
     
     /**
@@ -258,45 +184,4 @@ public class Personnage {
     public int getPuissance(){
         return this.getNiveau() + this.getPuissanceObjet();
     }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public int getPuissanceObjet() {
-        return puissanceObjet;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @param puissanceObjet 
-     */
-    public void setPuissanceObjet(int puissanceObjet) {
-        this.puissanceObjet = puissanceObjet;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public int getCapaciteEquipement() {
-        return capaciteEquipement;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @param capaciteEquipement 
-     */
-    public void setCapaciteEquipement(int capaciteEquipement) {
-        this.capaciteEquipement = capaciteEquipement;
-    }
-
-    void setNom(String name) {
-        this.nom=name;
-    }
-    
 }

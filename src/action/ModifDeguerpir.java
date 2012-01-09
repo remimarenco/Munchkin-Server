@@ -11,7 +11,8 @@ import joueur.Race;
  * @author Julien Rouvier
  */
 public class ModifDeguerpir extends Action{
-    private Integer bonusDeguerpir=0;
+    
+    private Integer bonusDeguerpir;
     private Integer niveauMax;
     private Integer sexe;
     private ArrayList<Race> tabRace;
@@ -84,15 +85,15 @@ public class ModifDeguerpir extends Action{
                 accept=false;
         }
 		
-        if(tabClasse!=null){                                        // Si un tableau de classe est défini
+        if(tabClasse != null){                                        // Si un tableau de classe est défini
             for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
-                if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
+                if(joueurImpacte.getPersonnage().getClasse() != null && joueurImpacte.getPersonnage().getClasse().equals(classe))
                                 raceTrouve=true;
                 if(!classeTrouve)
                         accept=false;
         }
 		
-        if(accept==true)    // Si toutes les conditions sont réunies, on applique la modif
+        if(accept == true)    // Si toutes les conditions sont réunies, on applique la modif
             joueurImpacte.getPersonnage().setBonusCapaciteFuite(joueurImpacte.getPersonnage().getBonusCapaciteFuite()+bonusDeguerpir);
         return out;
     }

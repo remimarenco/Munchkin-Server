@@ -51,10 +51,10 @@ public class ModifPuissanceMonstre extends Action{
     @Override
     public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
         
-        String out              = "";
-        boolean accept          = true;
-        boolean raceTrouve      = false;
-        boolean classeTrouve    = false;
+        String out           = "";
+        boolean accept       = true;
+        boolean raceTrouve   = false;
+        boolean classeTrouve = false;
 		
         out += "On passe dans une action de modification de puissance de monstre :\n";
         out += "Le monstre impliqué est "+monstre.getNom();

@@ -152,6 +152,43 @@ public class Message {
         this.message    = msg;
    }
    
+   
+   
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public int getType() {
+       return this.type;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public String getNick_src() {
+        return this.nick_src;
+    }
+
+    public String getNick_dest() {
+        return this.nick_dest;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public HashMap<String, String> getMap() {
+        return map;
+    }
+
+    public int getAction() {
+        return action;
+    }
+    // ================================== //
+    
+    
 
    /**
     * Methode qui lit un message qui arrive sur le socket
@@ -161,8 +198,8 @@ public class Message {
     public boolean read(DataInputStream in) {
         try{
             ObjectInputStream ois = new ObjectInputStream(in);
-            type     = in.readInt();        
-            nick_src = in.readUTF();
+            type                  = in.readInt();        
+            nick_src              = in.readUTF();
 
             if(type > DISCONNECT){                      
                 nick_dest=in.readUTF();  
@@ -214,76 +251,5 @@ public class Message {
         catch(Exception e){
             return false;
         }
-    }
-
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public int getType() {
-       return this.type;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public String getIdCard() {
-        return idCard;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public String getMessage() {
-        return this.message;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public String getNick_src() {
-        return this.nick_src;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public String getNick_dest() {
-        return this.nick_dest;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public HashMap<String, String> getMap() {
-        return map;
-    }
-
-    
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
-    public int getAction() {
-        return action;
     }
 }

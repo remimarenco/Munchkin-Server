@@ -81,6 +81,35 @@ public class Joueur extends Thread {
     }
     
     
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public Personnage getPersonnage() {
+        return personnage;
+    }
+
+    public void setPersonnage(Personnage personnage) {
+        this.personnage = personnage;
+    }
+    // ================================== // 
+    
+    
+    
     /**
      * Methode d'initialisation pour le thread et les communications reseaux
      * @param st
@@ -88,9 +117,9 @@ public class Joueur extends Thread {
      */
     private void initCommunication(Socket st,Object parent){
         try{
-        this.parent=parent;
-            in  = new DataInputStream(st.getInputStream());
-            out = new DataOutputStream(st.getOutputStream());
+            this.parent = parent;
+            in          = new DataInputStream(st.getInputStream());
+            out         = new DataOutputStream(st.getOutputStream());
         }
         catch(Exception e){
             System.exit(1);
@@ -144,60 +173,6 @@ public class Joueur extends Thread {
         }
     }
     
-    
-    /**
-     * Retourne le jeu d'un joueur
-     * @return 
-     */
-    public Jeu getJeu() {
-        return jeu;
-    }
-
-    
-    /**
-     * Défini le jeu d'un joueur
-     * @param jeu 
-     */
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
-    }
-
-    
-    /**
-     * Retourne la main d'un joueur
-     * @return 
-     */
-    public Main getMain() {
-        return main;
-    }
-
-    
-    /**
-     * Défini la main d'un joueur
-     * @param main 
-     */
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
-    
-    /**
-     * Retourne le personne d'un joueur
-     * @return 
-     */
-    public Personnage getPersonnage() {
-        return personnage;
-    }
-
-    
-    /**
-     * Défini le personnage d'un joueur
-     * @param personnage 
-     */
-    public void setPersonnage(Personnage personnage) {
-        this.personnage = personnage;
-    }
-        
     
     /**
      * Ajoute une carte au jeu d'un joueur

@@ -34,6 +34,7 @@ public class ModifPuissanceMonstre /*extends Action*/{
         this.monstre        = monstre;
     }
 
+    
     /**
      * Modification de la puissance d'un monstre
      * @param joueurImpacte : joueur contre lequel se bat le monstre

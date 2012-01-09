@@ -48,14 +48,24 @@ public final class Deck {
         cartes = melanger();
     }
 
-    /**
-     * // TODO : Commenter
-     * @return 
-     */
+    
+    
+    // ===== ACCESSEURS & MUTATEURS ===== //
     public static ArrayList<Carte> getCartes() {
         return cartes;
     }
     
+    public static void setCartes(ArrayList<Carte> cartes) {
+        Deck.cartes = cartes;
+    }
+    // ================================== //
+    
+    
+    /**
+     * // TODO : Commenter
+     * @param id
+     * @return 
+     */
     public static Carte getCardById(Integer id){
         Carte ret=null;
         for(Carte c : cartes)
@@ -64,14 +74,7 @@ public final class Deck {
         
         return ret;
     }
-
-    /**
-     * // TODO : Commenter
-     * @param cartes 
-     */
-    public static void setCartes(ArrayList<Carte> cartes) {
-        Deck.cartes = cartes;
-    }
+    
     
     /**
      * // TODO : Commenter
@@ -83,6 +86,7 @@ public final class Deck {
         return nouvelle; 
     }
 
+    
     /**
      * Permet de charger les cartes dans la piocheDonjon.
      * On définit :
@@ -867,7 +871,7 @@ public final class Deck {
 			Classe classe) {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerClasse(classe));
-	}
+    }
 
     
     /**
@@ -898,7 +902,6 @@ public final class Deck {
 
         if(defausserCarte != null)
             actionTabIncident.add(defausserCarte);
-
     }
 
     
