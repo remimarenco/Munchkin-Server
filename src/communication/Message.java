@@ -14,19 +14,23 @@ import java.util.HashMap;
 public class Message {
     
     
-    public static final int CONNECT         = 0;
-    public static final int DISCONNECT      = 1;
-    public static final int MESSAGE         = 2;
-    public static final int LISTE           = 3;       
-    public static final int NICKEXIST       = 5;        
-    public static final int QUESTION        = 7;
-    public static final int INTERVENTION    = 8;
-    public static final int SOUND           = 9;
-    public static final int CARTE_EN_COURS  = 10;        
-    public static final int INFO_JOUEUR     = 80;
-    public static final int JEUX_JOUEUR     = 81;
-    public static final int MAIN_JOUEUR     = 82;
-    public static final int CARTES_JOUABLES = 83;
+    public static final int CONNECT           = 0;
+    public static final int DISCONNECT        = 1;
+    public static final int MESSAGE           = 2;
+    public static final int LISTE             = 3;       
+    public static final int NICKEXIST         = 5;        
+    public static final int QUESTION          = 7;
+    public static final int INTERVENTION      = 8;
+    public static final int SOUND             = 9;
+    public static final int CARTE_EN_COURS    = 10;        
+    public static final int INFO_JOUEUR       = 80;
+    public static final int JEUX_JOUEUR       = 81;
+    public static final int MAIN_JOUEUR       = 82;
+    public static final int INFO_CAMPGENTIL   = 83;
+    public static final int INFO_CAMPMECHANT  = 84; 
+    public static final int CARTE_CAMPGENTIL  = 85; 
+    public static final int CARTE_CAMPMECHANT = 86; 
+    public static final int CARTES_JOUABLES   = 87;
             
     private String nick_src     = "";     
     private String nick_dest    = "";    

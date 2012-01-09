@@ -373,11 +373,22 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
              case Constante.ACTION_DEFAUSSER:
                  if(!msg.getIdCard().equals("")){
                      Integer id= new Integer(msg.getIdCard());
-                     //this.getJoueurByName(msg.getNick_src()).Deck.getCardById(id);
+                     this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
+                     this.sendCartesJeuxJoueursToAll();
+                     this.sendCartesMainToOwner();                    
                  }
                  else{
                      this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
                      this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");
+                      /**
+                    * TODO
+                    * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
+                    * Pour le moment on envoi juste une liste de carte modifier on envoi une carte sur 
+                    * deux de la main du joueur grace a la methode generateFalseInfo
+                    */                     
+
+                    this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                    this.getJoueurByName(msg.getNick_src()).getMain().generateFalseInfos()));
                  }
                  break;
              case Constante.ACTION_AIDER:
