@@ -89,6 +89,8 @@ public final class Deck {
      * à  instancier
      * - On ajout à  ce vecteur
      */
+    // TODO : Dans l'idéal, cette grosse méthode moche devrait être remplacée
+    // par un chargement depuis un XML... Je dis ça je dis rien...
     private void load(){        
         /**
          * Permet de référencer les actions de la carte

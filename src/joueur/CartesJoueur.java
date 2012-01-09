@@ -96,11 +96,11 @@ public class CartesJoueur {
     }
     
     
-    // TODO : A supprimer
     /**
      * 
      * @return 
      */
+    // TODO : A supprimer
     public HashMap<String,String> generateFalseInfos(){
         int i=1;
         HashMap<String,String> map=new HashMap<String, String>();

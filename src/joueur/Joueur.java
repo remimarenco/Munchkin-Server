@@ -195,28 +195,7 @@ public class Joueur extends Thread {
     public void setPersonnage(Personnage personnage) {
         this.personnage = personnage;
     }
-    
-    
-    /**
-     * Défausse une carte d'un joueur
-     * @param c
-     * @return 
-     */
-    // TODO : Vérifier que ce soit bien la place de cette méthode
-    public boolean defausserCarte(Carte c){
-        this.jeu.supprimerCarte(c);
         
-        if(c.getClass().getName().equals("Donjon")){
-            
-        }else if(c.getClass().getName().equals("Tresor")){
-            
-        }else{
-            return false;
-        }
-        
-        return true;
-    }
-    
     
     /**
      * Ajoute une carte au jeu d'un joueur

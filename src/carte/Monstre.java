@@ -33,59 +33,75 @@ public class Monstre extends Donjon {
         this.puissance = puissance;
     }
     
-    /*
-     * Déjà implémentée dans Carte
-    public boolean appliquerCondition(Joueur joueurImpacte)
-    {
-    	this.condition.mettreCondition(joueurImpacte);
-    	return true;
-    }
-    */
-    /* Déjà implémentée dans Carte
-     * public boolean appliquerIncidentsFacheux(Joueur joueurImpacte){
-        this.incidentFacheux.actionIncidentFacheux(joueurImpacte);
-        return true;
-    } */
-    
-    /*
-     * Déjà implémentée dans Carte
-    public boolean appliquerMonstreVaincu(Joueur joueurImpacte)
-    {
-    	this.monstreVaincu.actionMonstreVaincu(joueurImpacte);
-    	return true;
-    }
-    */
-
+    /**
+     * 
+     * @return 
+     */
     public int getPuissance() {
         return puissance;
     }
 
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String getNom() {
         return nom;
     }
 
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String getDescription() {
         return description;
     }
 
+    
+    /**
+     * 
+     * @param puissance 
+     */
     public void setPuissance(int puissance) {
         this.puissance = puissance;
     }
 
+    
+    /**
+     * 
+     * @return 
+     */
     public int getBonusPuissance() {
         return bonusPuissance;
     }
 
+    
+    /**
+     * 
+     * @param bonusPuissance 
+     */
     public void setBonusPuissance(int bonusPuissance) {
         this.bonusPuissance = bonusPuissance;
     }
 
+    
+    /**
+     * 
+     * @return 
+     */
     public Condition getCondition() {
         return condition;
     }
 
+    
+    /**
+     * 
+     * @param condition 
+     */
     public void setCondition(Condition condition) {
         this.condition = condition;
     }

@@ -11,9 +11,10 @@ import partie.Partie;
  * @author Meg4mi
  */
 public class Guillaume {
+    
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-	ServeurVue serV= new ServeurVue();
+        ServeurVue serV= new ServeurVue();
         serV.setVisible(true);
     }
+    
 }

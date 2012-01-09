@@ -14,7 +14,7 @@ public class ChangerClasse extends Action{
      * @param classe : Nouvelle classe
      */
     public ChangerClasse(Classe classe) {
-        // TODO Auto-generated constructor stub
+        // TODO : A implémenter
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ChangerClasse extends Action{
      * @param joueurImpacte : le joueur dont on veut changer la classe
      */
     public String action(Joueur joueurImpacte) {
-        // TODO Auto-generated method stub
+        // TODO : A implémenter
         return "action non implémentée";
     }
 }

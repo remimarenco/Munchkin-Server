@@ -211,7 +211,7 @@ public class Personnage {
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
     public void deguerpir() {
-        // TODO Auto-generated method stub
+        // TODO : A implémenter
     }    
 
     

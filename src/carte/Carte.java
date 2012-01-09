@@ -120,7 +120,6 @@ public abstract class Carte {
     
     /**
      * Permet de lancer le comportement incidentFacheux d'une carte monstre
-     * TODO : Changer retour String
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
@@ -133,7 +132,6 @@ public abstract class Carte {
 
     /**
      * Permet de lancer le comportement equipement d'une carte objet
-     * TODO : Changer retour String
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
@@ -146,7 +144,6 @@ public abstract class Carte {
 
     /**
      * Permet de lancer le comportement condition d'une carte monstre
-     * TODO : Changer retour String
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
@@ -159,7 +156,6 @@ public abstract class Carte {
 
     /**
      * Permet de lancer le comportement Sortilege d'une carte monstre
-     * TODO : Changer retour String
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */

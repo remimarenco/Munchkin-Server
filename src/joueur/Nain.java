@@ -9,7 +9,7 @@ public class Nain extends Race {
      */
     @Override
     public boolean deguerpir() {
-        // TODO Auto-generated method stub
+        // TODO : A implémenter
         return false;
     }
 
@@ -19,7 +19,7 @@ public class Nain extends Race {
      */
     @Override
     public void modifPersonnage(Personnage personnage) {
-        // TODO Auto-generated method stub	
+        // TODO : A implémenter
     }
 
 }

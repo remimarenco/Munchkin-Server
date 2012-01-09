@@ -15,7 +15,7 @@ public class ChangerRace extends Action {
      * @param race : nouvelle race
      */
     public ChangerRace(Race race) {
-        // TODO Auto-generated constructor stub
+        // TODO : A implémenter
     }
 
     /**
@@ -25,7 +25,7 @@ public class ChangerRace extends Action {
      */
     @Override
     public String action(Joueur joueurImpacte) {
-        // TODO Auto-generated method stub
+        // TODO : A implémenter
         String out = "Non implémenté";
         return out;
     }

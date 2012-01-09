@@ -91,7 +91,7 @@ public class ChangerNiveau extends Action {
             }
 
             joueurImpacte.getPersonnage().changerNiveau(niveau);
-            if(Math.abs(niveau) > 1)
+            if(niveau > 1 || niveau < -1)
                 out += Math.abs(niveau)+" niveaux !!\n";
             else
                 out += Math.abs(niveau)+" niveau !!\n";

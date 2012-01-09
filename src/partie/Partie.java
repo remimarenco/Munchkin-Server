@@ -131,16 +131,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     public void setDefausseTresor(Defausse defausseTresor) {
         this.defausseTresor = defausseTresor;
     }
-    
-    
-    /**
-     * Retourne la liste des joueurs de la partie
-     * @return 
-     */
-    // TODO : Vérifier que la méthode est utile, puisque la liste des joueur est la partie elle même
-    public ArrayList<Joueur> getListeJoueurs() {
-        return this;
-    }
 
     
     /**
@@ -178,16 +168,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return piocheTresor;
     }
 
-    
-    /**
-     * 
-     * @return 
-     */
-    // TODO : A quoi sert cette méthode ??
-    public boolean choixCombat(){
-        return true;
-    }
-    
     
     /**
      * Supprime un joueur grâce à son nom
@@ -494,7 +474,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         
         while(true){
             // Si la partie est terminée, on stop le jeu
-            if(PartieTerminée()) {
+            if(PartieTerminee()) {
                 // TODO Faire ce qu'il se passe en fin de partie
                 finPartie();
                 break;
@@ -651,7 +631,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * Méthode permettant de tester si la pioche est vide ou pleine
      */
     private void testPioche(Pioche pioche) {
-        // TODO Auto-generated method stub
         Defausse defausse;
         // Si la pioche passée en paramètre est vide, on récupère la défausse
         if(pioche.isEmpty())
@@ -667,7 +646,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 pioche.setPioche(new ArrayList<Pioche>(defausse.getDefausse()));
                 defausse.vider();
             } else {
-            	System.out.println("Apparemment, il y avait rien dans la dÃ©fausse... Du coup, ciao !");
+            	System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
             	// TODO : Vérifier si la partie est terminée
             	finPartie();
             }
@@ -699,10 +678,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * @return Vrai : La partie est terminée, 
      * Faux : La partie n'est pas terminée
      */
-    private boolean PartieTerminée() {
+    private boolean PartieTerminee() {
         if(enCours != null){
             if(enCours.getPersonnage().getNiveau() >= 10){
-                this.sendMessageToAll("La partie est terminÃ©e !!\n Le joueur "+enCours.getName()+" est passÃ© niveau 10 !!");
+                this.sendMessageToAll("La partie est terminée !!\n Le joueur "+enCours.getName()+" est passé niveau 10 !!");
                 return true;
             }
     	} else {
