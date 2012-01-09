@@ -574,7 +574,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                     }
                 } else if(this.answer.equals("Non")){
-                    if(combat.tenterDeguerpir()){
+                    /*if(combat.tenterDeguerpir()){
                         System.out.println("Vous avez réussi Ã  déguèrpir !");
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
                     }
@@ -582,7 +582,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                         this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
                         this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
-                    }
+                    }*/
                 }
                 else {
                     System.out.println("Veuillez entrer une réponse correcte");
