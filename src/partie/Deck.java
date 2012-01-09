@@ -638,18 +638,37 @@ public final class Deck {
         
     }
 
+    
+    /**
+     * 
+     * @param actionEquipement
+     * @param race 
+     */
     private void nouvelEquipementRace(ArrayList<Action> actionEquipement,
 			Race race) {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerRace(race));
 	}
     
+    
+    /**
+     * 
+     * @param actionEquipement
+     * @param classe 
+     */
     private void nouvelEquipementClasse(ArrayList<Action> actionEquipement,
 			Classe classe) {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerClasse(classe));
 	}
 
+    
+    /**
+     * 
+     * @param actionTabMonstreVaincu
+     * @param piocherCarte
+     * @param changerNiveau 
+     */
     private void nouvellesActionsMonstreVaincu(ArrayList<Action> actionTabMonstreVaincu, PiocherCarte piocherCarte, ChangerNiveau changerNiveau){
         actionTabMonstreVaincu.clear();
         if(piocherCarte != null)
@@ -658,6 +677,13 @@ public final class Deck {
         actionTabMonstreVaincu.add(changerNiveau);
     }
     
+    
+    /**
+     * 
+     * @param actionTabIncident
+     * @param changerNiveau
+     * @param defausserCarte 
+     */
     private void nouvellesActionsIncidentFacheux(ArrayList<Action> actionTabIncident, ChangerNiveau changerNiveau, DefausserCarte defausserCarte){
         actionTabIncident.clear();
         if(changerNiveau != null)
@@ -668,6 +694,13 @@ public final class Deck {
 
     }
 
+    
+    /**
+     * 
+     * @param actionTabCondition
+     * @param tabClasse
+     * @param tabRace 
+     */
     private void resetCondition(ArrayList<Action> actionTabCondition, ArrayList<Classe> tabClasse, ArrayList<Race> tabRace){
        actionTabCondition.clear();
        tabClasse.clear();

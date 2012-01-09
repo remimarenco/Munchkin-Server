@@ -1,20 +1,17 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jeu;
 
-import partie.Partie;
-
-
-
+/**
+ *
+ * @author Guillaume Renoult
+ */
 public class Main {
-
-    /**
-     * @param args
-     */
+    
     public static void main(String[] args) {
-        Partie p=new Partie();
-//        p.run();
-        //p.run2();
+        ServeurVue serV= new ServeurVue();
+        serV.setVisible(true);
     }
-		
-		
 }
-
