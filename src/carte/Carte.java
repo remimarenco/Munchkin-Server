@@ -1,11 +1,14 @@
 package carte;
 
+import action.DefausserCarte;
+import comportement.ComportementDefausserCarte;
 import comportement.Condition;
 import comportement.Equipement;
 import comportement.IncidentDeguerpir;
 import comportement.IncidentFacheux;
 import comportement.MonstreVaincu;
 import comportement.Sortilege;
+import comportement.UtiliserCarte;
 import joueur.Joueur;
 
 
@@ -22,45 +25,51 @@ public abstract class Carte {
     /**
      * IncidentFacheux d'une carte => valable seulement si c'est un monstre
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected IncidentFacheux incidentFacheux;
 
     /**
      * Equipement d'une carte => valable seulement si c'est un objet
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Equipement equipement;
 
     /**
      * Sortilege d'une carte => valable seulement si c'est un Sort
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Sortilege sortilege;
 
     /**
      * Condition d'une carte => valable seulement si c'est un monstre
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected Condition condition;
 
     /**
-     * MonstreVaincu d'une carte => valable seulement si c'est un
+     * MonstreVaincu d'une carte
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected MonstreVaincu monstreVaincu;
 
     /**
-     * IncidentDeguerpir d'une carte => valable seulement si c'est un
+     * IncidentDeguerpir d'une carte
      * Résultat du design pattern Strategy
-     * TODO : Réfléchir si toujours d'actualité (Classe mère connait fille)
      */
     protected IncidentDeguerpir incidentDeguerpir;
+    
+    /**
+     * Utilisation de compétence d'une carte
+     * Résultat du design pattern Strategy
+     */
+    protected UtiliserCarte utiliserCarte;
 
+    /**
+     * Appliquer effet de la défausse d'une carte
+     * Résultat du design pattern Strategy
+     */
+    protected ComportementDefausserCarte defausserCarte;
+    
     
     /**
      * Constructeur de la carte
