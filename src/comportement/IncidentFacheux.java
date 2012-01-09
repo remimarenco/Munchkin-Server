@@ -39,12 +39,12 @@ public class IncidentFacheux {
         String out = "";
         if(tabAction != null || !(tabAction.isEmpty()))
         {
-            out += "--- Incident facheux ---\n";
-            out += "Un incident facheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+            out += "--- Incident fâcheux ---\n";
+            out += "Un incident fâcheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
             out += "Il y a " + tabAction.size();
             for(Action action : tabAction)
                 out += "\nAction : !" + action.action(joueurImpacte);
-            out += "--- Fin d'incident facheux ---\n";
+            out += "--- Fin d'incident fâcheux ---\n";
         } else {
             out += "Aucune incident fâcheux !!\n";
         }

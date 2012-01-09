@@ -24,6 +24,6 @@ public class ChangerClasse extends Action{
      */
     public String action(Joueur joueurImpacte) {
         // TODO : A implémenter
-        return "action non implémentée";
+        return "Action non implémentée";
     }
 }

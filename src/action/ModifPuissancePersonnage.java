@@ -11,8 +11,8 @@ public class ModifPuissancePersonnage extends Action{
     private ArrayList<Race> tabRace;
     private ArrayList<Classe> tabClasse;
     private int bonusPuissance;
-    private boolean bNiveau=true;
-    private boolean bObjet=true;
+    private boolean bNiveau = true;
+    private boolean bObjet  = true;
 	
     
     /**
@@ -24,8 +24,8 @@ public class ModifPuissancePersonnage extends Action{
     public ModifPuissancePersonnage(ArrayList<Race> tabRace, ArrayList<Classe> tabClasse,
                 int bonusPuissance) {
         super();
-        this.tabRace = tabRace;
-        this.tabClasse = tabClasse;
+        this.tabRace        = tabRace;
+        this.tabClasse      = tabClasse;
         this.bonusPuissance = bonusPuissance;
     }
 	

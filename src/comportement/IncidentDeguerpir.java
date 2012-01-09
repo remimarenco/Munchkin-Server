@@ -26,7 +26,7 @@ public class IncidentDeguerpir {
         try {
                 this.tabAction = (ArrayList<Action>) tabAction.clone();
         } catch(Exception e){
-                System.out.println("Aucune action dans l'incident deguerpir");
+                System.out.println("Aucune action dans l'incident déguerpir");
         }
     }
 
@@ -41,7 +41,7 @@ public class IncidentDeguerpir {
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
             out += action.action(joueurImpacte);
-        out += "--- Fin de monstre vaincu ---\n";
+        out += "--- Fin d'incident fuite ---\n";
         return out;
     }
 }

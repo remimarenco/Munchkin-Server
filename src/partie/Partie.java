@@ -373,8 +373,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                  if(!msg.getIdCard().equals("")){
                      
                  } else {
-                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite aider le joueur "+this.enCours.getName());
-                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite aider "+this.enCours.getName());
+                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
                  }
                  break;
             case Constante.ACTION_POSERCARTE:
@@ -385,8 +385,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.sendCartesJeuxJoueursToAll();
                     this.sendCartesMainToOwner(); 
                 } else {   //Le joueur informe qu'il veut poser une carte
-                    this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite poser une carte");
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                    this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");
                     /**
                     * TODO
                     * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut jouer.
@@ -405,7 +405,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 }
                 else{
                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte Ã  poser");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
                 }
                 break;
             }
@@ -515,7 +515,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             cartePiochee = (Carte) piocheDonjon.tirerCarte(); 
 
             if(cartePiochee == null){
-                System.out.println("ProblÃ¨me lors du tirage dans la pioche donjon");
+                System.out.println("Problème lors du tirage dans la pioche donjon");
                 return;
             }
 
@@ -535,7 +535,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                 combat.getCampMechant().add(monstrePioche);
 
-                System.out.println("Vous avez tirÃ© le monstre :");
+                System.out.println("Vous avez tiré le monstre :");
                 System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
                 System.out.println(monstrePioche.getDescription());
 
@@ -545,7 +545,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.sendMessageToAll(monstrePioche.appliquerCondition(enCours));
 
                 System.out.println("Combattre ? (o/n)");
-                this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tirÃ© le monstre : \n"
+                this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
                         + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
                         + monstrePioche.getDescription() +"\n"
                         +" Va-t il combattre ?\n");
@@ -563,9 +563,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
                     // le nb de niveau gagnÃ© et les cartes trÃ©sors qu'il peut tirer
                     if(combat.combattre()){
-                        System.out.println("Vous avez gagnÃ© !");
+                        System.out.println("Vous avez gagné !");
                         this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagnÃ© le combat ! \n");
+                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
                         this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
                     } else {
                         System.out.println("Vous avez perdu...");
@@ -576,17 +576,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     }
                 } else if(this.answer.equals("Non")){
                     if(combat.tenterDeguerpir()){
-                        System.out.println("Vous avez rÃ©ussi Ã  dÃ©guÃ©rpir !");
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " a rÃ©ussi a deguerpir ! \n");
+                        System.out.println("Vous avez réussi Ã  déguèrpir !");
+                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " a réussi a deguerpir ! \n");
                     }
                     else{
                         this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas rÃ©ussi a deguerpir ! \n");
+                        this.sendMessageToAll("Le joueur : " +enCours.getName() + " n'a pas réussi a deguerpir ! \n");
                         this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
                     }
                 }
                 else {
-                    System.out.println("Veuillez entrer une rÃ©ponse correcte");
+                    System.out.println("Veuillez entrer une réponse correcte");
                 }
                 monstrePioche.setBonusPuissance(0);
                 this.defausseDonjon.ajouterCarte(monstrePioche);
@@ -635,7 +635,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         // Si la pioche passée en paramètre est vide, on récupère la défausse
         if(pioche.isEmpty())
         {
-            System.out.println("\n\n\n*****\nPlus rien dans la pioche, on rÃ©cupÃ¨re la dÃ©fausse !\n*****\n\n\n");
+            System.out.println("\n\n\n*****\nPlus rien dans la pioche, on récupère la défausse !\n*****\n\n\n");
             if(pioche.equals(piocheDonjon))
                     defausse = defausseDonjon;
             else

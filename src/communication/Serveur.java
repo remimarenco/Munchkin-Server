@@ -92,20 +92,20 @@ public class Serveur {
                     Message mesg = new Message(Message.MESSAGE, "admin", "Partie","La partie est pleine !\n");
                     com.sendMessage(mesg);
                 }else{
-                    Message message = new Message(Message.NICKEXIST, "admin", "Partie", "Ce pseudo est deja utilise, veuillez choisir un autre ! \n");
+                    Message message = new Message(Message.NICKEXIST, "admin", "Partie", "Ce pseudo est déjà utilisé, veuillez en choisir un autre ! \n");
                     com.sendMessage(message);
                 }
                 break;
             case Message.DISCONNECT:
                 String listeVide = new String("");
                 com.setName(msg.getNick_src());
-                Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous etes deconnecte du serveur, a bientot !\n");
+                Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);
                 com.sendList(listeVide);
                 partie.remove(com);                
                 
                 //partie.removeJoueurByName(msg.getNick_src());
-                Message message2 = new Message(Message.MESSAGE, "admin", "deconnexion", msg.getNick_src());
+                Message message2 = new Message(Message.MESSAGE, "admin", "déconnexion", msg.getNick_src());
 
                 Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !\n");
                 String list2 = partie.getListe();

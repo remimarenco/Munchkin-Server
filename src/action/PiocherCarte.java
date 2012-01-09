@@ -18,8 +18,8 @@ public class PiocherCarte extends Action {
      * @param nbCarte : Nombre de cartes à piocher sur l'action
      */
     public PiocherCarte(Class type_pioche,int nbCarte){
-        this.nbCarte        = nbCarte;
-        this.type_pioche    = type_pioche;
+        this.nbCarte     = nbCarte;
+        this.type_pioche = type_pioche;
     }
 
     /**

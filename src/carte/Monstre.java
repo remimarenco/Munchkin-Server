@@ -26,11 +26,11 @@ public class Monstre extends Donjon {
      */
     public Monstre(int id,String nom, String description, Condition condition, IncidentFacheux incidentFacheux, MonstreVaincu monstreVaincu, IncidentDeguerpir incidentDeguerpir, int puissance) {
         super(id,nom, description);
-        this.condition = condition;
-        this.incidentFacheux = incidentFacheux;
-        this.monstreVaincu = monstreVaincu;
-        this.incidentDeguerpir = incidentDeguerpir;
-        this.puissance = puissance;
+        this.condition          = condition;
+        this.incidentFacheux    = incidentFacheux;
+        this.monstreVaincu      = monstreVaincu;
+        this.incidentDeguerpir  = incidentDeguerpir;
+        this.puissance          = puissance;
     }
     
     /**
