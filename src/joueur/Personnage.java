@@ -16,7 +16,9 @@ public class Personnage {
     private int     nbEquipement;
     private Race    race;
     private Classe  classe;
-    private int     bonusPuissance;  
+    private int     puissanceObjet;
+    private int     bonusPuissance;
+    private int     capaciteEquipement;
     
     /**
      * Constructeur
@@ -29,7 +31,7 @@ public class Personnage {
      * @param puissance
      * @param bonusPuissance 
      */
-    public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissance, int bonusPuissance) {
+    public Personnage(int niveau, int sexe, boolean aChangeSexe, int capaciteFuite, int bonusCapaciteFuite, int nbEquipement, int puissanceObjet, int bonusPuissance) {
         this.niveau         	= niveau;
         this.sexe           	= sexe;
         this.aChangeSexe    	= aChangeSexe;
@@ -37,9 +39,10 @@ public class Personnage {
         this.bonusCapaciteFuite	= 0;
         this.nbEquipement   	= nbEquipement;
         this.bonusPuissance 	= 0;
-        		
+        this.puissanceObjet     = puissanceObjet;
         this.race = Constante.RACE_HUMAINE;
         this.classe = null;
+        this.capaciteEquipement=7;
     }
    
 
@@ -239,6 +242,23 @@ public class Personnage {
      * @return 
      */
     public int getPuissance(){
-        return this.getNiveau() + this.getBonusPuissance();
+        return this.getNiveau() + this.getPuissanceObjet();
     }
+
+    public int getPuissanceObjet() {
+        return puissanceObjet;
+    }
+
+    public void setPuissanceObjet(int puissanceObjet) {
+        this.puissanceObjet = puissanceObjet;
+    }
+
+    public int getCapaciteEquipement() {
+        return capaciteEquipement;
+    }
+
+    public void setCapaciteEquipement(int capaciteEquipement) {
+        this.capaciteEquipement = capaciteEquipement;
+    }
+    
 }
