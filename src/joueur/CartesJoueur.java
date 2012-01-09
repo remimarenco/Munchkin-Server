@@ -8,7 +8,7 @@ import partie.Constante;
 
 /**
  *
- * @author washi
+ * @author Julien Rouvier
  */
 public class CartesJoueur {
     

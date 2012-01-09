@@ -10,7 +10,7 @@ import partie.Partie;
 
 /**
  * 
- * @author Meg4mi
+ * @author Guillaume Renoult
  */
 public class Serveur {
     

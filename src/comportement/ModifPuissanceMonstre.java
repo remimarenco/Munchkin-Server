@@ -6,6 +6,10 @@ import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
 
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class ModifPuissanceMonstre /*extends Action*/{
 
     private ArrayList<Race> tabRace;

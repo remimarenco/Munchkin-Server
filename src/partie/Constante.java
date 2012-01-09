@@ -17,7 +17,7 @@ import java.util.Random;
 
 /**
  *
- * @author Julien
+ * @author Julien Rouvier
  */
 public class Constante {
     

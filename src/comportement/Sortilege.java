@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import action.Action;
 import joueur.Joueur;
 
+
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class Sortilege {
     
     private ArrayList<Action> tabAction;

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import action.Action;
 import joueur.Joueur;
 
-
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class Condition {
     
     private ArrayList<Action> tabAction;

@@ -7,7 +7,7 @@ import joueur.Joueur;
 
 /**
  *
- * @author simon.grabit
+ * @author Simon Grabit
  */
 public class IncidentDeguerpir {
 

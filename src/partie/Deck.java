@@ -29,7 +29,7 @@ import joueur.Race;
 
 /**
  * 
- * @author Julien
+ * @author Julien Rouvier
  */
 public final class Deck {
     private static ArrayList<Carte> cartes;

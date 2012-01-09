@@ -9,7 +9,7 @@ import communication.Serveur;
 
 /**
  *
- * @author Meg4mi
+ * @author Guillaume Renoult
  */
 public class ServeurVue extends javax.swing.JFrame {
 

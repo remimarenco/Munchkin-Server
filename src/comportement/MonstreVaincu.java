@@ -5,6 +5,10 @@ import action.Action;
 import joueur.Joueur;
 
 
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class MonstreVaincu {
     
     public ArrayList<Action> tabAction;

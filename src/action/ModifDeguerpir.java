@@ -6,6 +6,10 @@ import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
 
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class ModifDeguerpir extends Action{
     private Integer bonusDeguerpir=0;
     private Integer niveauMax;

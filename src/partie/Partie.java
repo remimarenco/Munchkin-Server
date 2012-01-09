@@ -18,7 +18,7 @@ import joueur.Personnage;
 
 /**
  * 
- * @author Julien
+ * @author Julien Rouvier
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
 	
@@ -700,6 +700,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return false;
     }
 
+    
+    /**
+     * 
+     * @param txt
+     * @param personnage 
+     */
     private void sendMessageToPlayer(String txt, Personnage personnage) {
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         for(Joueur j : this){
@@ -709,7 +715,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             }
         }
     }
-
+    
+    
+    /**
+     * 
+     * @param txt
+     * @param personnage 
+     */
     private void sendMessageToAllButPlayer(String txt, Personnage personnage) {
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
         for(Joueur j : this){

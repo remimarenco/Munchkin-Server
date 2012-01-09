@@ -12,7 +12,7 @@ import joueur.Race;
 
 /**
  *
- * @author simon.grabit
+ * @author Simon Grabit
  */
 public class EquiperObjet extends Action{
     

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Défausse
- * @author washi
+ * @author Julien Rouvier
  * @param <T> : classe du type de carte (DONJON ou TRESOR) de la défausse 
  */
 public class Defausse<T> {

@@ -1,5 +1,10 @@
 package joueur;
 
+
+/**
+ * 
+ * @author Julien Rouvier
+ */
 public class Humain extends Race
 {
 

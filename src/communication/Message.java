@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author user
+ * @author Guillaume Renoult
  */
 public class Message {
     

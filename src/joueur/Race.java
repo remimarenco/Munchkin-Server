@@ -1,8 +1,9 @@
 package joueur;
 
+
 /**
  * Classe abstraite étendue par toutes les races
- * @author washi
+ * @author Julien Rouvier
  */
 public abstract class Race {
 	

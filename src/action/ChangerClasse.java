@@ -5,7 +5,7 @@ import joueur.Joueur;
 
 /**
  * Classe permettant de gérer la modification de la classe
- * @author marenco-r
+ * @author Rémi Marenco
  */
 public class ChangerClasse extends Action{
     
