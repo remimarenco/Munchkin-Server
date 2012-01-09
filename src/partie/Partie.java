@@ -32,6 +32,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private Joueur           enCours;
     private Color            Color;
     private String           answer;
+    private int				 phaseTour;
 
     /**
      * Constructeur
@@ -520,7 +521,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 /**
                  * On applique la condition du monstre
                  */
-                this.sendMessageToAll(monstrePioche.appliquerCondition(enCours, null, null));
+                this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
 
                 System.out.println("Combattre ? (o/n)");
                 this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
@@ -542,12 +543,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     // le nb de niveau gagnÃ© et les cartes trÃ©sors qu'il peut tirer
                     if(combat.combattre()){
                         System.out.println("Vous avez gagné !");
-                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(enCours, null, null));
+                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
                         this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
                     } else {
                         System.out.println("Vous avez perdu...");
-                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(enCours, null, null));
+                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
                         this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
                         this.sendSongToAll(Constante.SOUND_COMBATPERDU);
 
@@ -567,7 +568,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // ===============
 
             // ==== SORT ====
-            else if(cartePiochee.getClass().equals(Sort.class)){
+            /* Déjà géré dans OuvrirPorte();
+             else if(cartePiochee.getClass().equals(Sort.class)){
                 Sort sort = (Sort) cartePiochee;
                 //System.out.println("C'est un sort !!");
                 //this.sendMessageToAll("C'est un sort !!\n");
@@ -578,8 +580,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.sendMessageToCurrent(sort.getDescription());
 
                 this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-                this.sendMessageToAll(sort.appliquerSortilege(enCours, null, null));
+                this.sendMessageToAll(sort.appliquerSortilege(enCours, new ArrayList(){{add(enCours);}}, null, this.phaseTour, enCours));
             }
+            */
 
             // ==============
 
@@ -700,7 +703,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             sendMessageToPlayer("Vous n'avez pas réussi à déguerpir !", persoEchec);
             sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
             for(Monstre monstre : combat.getCampMechant())
-                this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, null, null));
+                this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
             this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
         }
     }
@@ -711,6 +714,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		    	// => Si Sort => Agit sur le joueur si possible => Défaussée
 		    	// => Autre type => Jouer ou mettre dans main
     private Carte phaseOuvrirPorte() {
+    	this.phaseTour = Constante.OUVRIR_PORTE;
         Carte cartePiochee;
 
         cartePiochee = (Carte) piocheDonjon.tirerCarte();
@@ -728,7 +732,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         if(cartePiochee.getClass().equals(Sort.class))
         {
             cartePiochee = (Sort) cartePiochee;
-            cartePiochee.appliquerSortilege(enCours, new Exception().getStackTrace(), enCours);
+            this.sendMessageToAll("C'est un sort !!\n");
+            this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
+            this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
+
+            this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
+            this.sendMessageToCurrent(cartePiochee.getDescription());
+
+            this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
+            this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+            
         }
 
         return cartePiochee;

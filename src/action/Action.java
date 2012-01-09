@@ -1,5 +1,8 @@
 package action;
 
+import java.util.ArrayList;
+
+import partie.Combat;
 import joueur.Joueur;
 
 /**
@@ -11,9 +14,10 @@ public abstract class Action {
     
     /**
      * Méthode abstraite permettant de lancer l'action
+     * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), dépend d'une phase d'un tour (ou pas), dépend d'un tour (ou pas)
      * @param joueurImpacte : Joueur recevant l'action
      */
-    public abstract String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours);
+    public abstract String action(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours);
     
     // TODO : Avoir une implémentation de l'action du type :
     // String action(Joueur joueurDestinateur, ArrayList<Joueur> joueursDestinataires)

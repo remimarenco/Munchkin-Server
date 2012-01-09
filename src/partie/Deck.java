@@ -853,31 +853,29 @@ public final class Deck {
 
     
     /**
-     * // TODO : Commenter
+     * Méthode permettant de vider le tableau d'initialisation des incidents et de le remplir avec une nouvelle race
      * @param actionEquipement
      * @param race 
      */
-    private void nouvelEquipementRace(ArrayList<Action> actionEquipement,
-			Race race) {
+    private void nouvelEquipementRace(ArrayList<Action> actionEquipement, Race race) {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerRace(race));
 	}
     
     
     /**
-     * // TODO : Commenter
+     * Méthode permettant de vider le tableau d'initialisation des equipements classes et de le remplir avec une nouvelle classe
      * @param actionEquipement
      * @param classe 
      */
-    private void nouvelEquipementClasse(ArrayList<Action> actionEquipement,
-			Classe classe) {
+    private void nouvelEquipementClasse(ArrayList<Action> actionEquipement, Classe classe) {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerClasse(classe));
     }
 
     
     /**
-     * // TODO : Commenter
+     * Méthode permettant de vider le tableau d'initialisation des monstres vaincus et de le remplir avec les nouveaux paramètres
      * @param actionTabMonstreVaincu
      * @param piocherCarte
      * @param changerNiveau 
@@ -892,7 +890,7 @@ public final class Deck {
     
     
     /**
-     * // TODO : Commenter
+     * Méthode permettant de vider le tableau d'initialisation des incidents et de le remplir avec les nouveaux paramètres
      * @param actionTabIncident
      * @param changerNiveau
      * @param defausserCarte 
@@ -908,7 +906,7 @@ public final class Deck {
 
     
     /**
-     * // TODO : Commenter
+     * Méthode permettant de vider les tableaux utilisés dans l'initialisation des conditions
      * @param actionTabCondition
      * @param tabClasse
      * @param tabRace 

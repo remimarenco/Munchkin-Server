@@ -1,6 +1,8 @@
 package comportement;
 
 import java.util.ArrayList;
+
+import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
@@ -30,12 +32,12 @@ public class UtiliserCarte {
      * @param joueurImpacte
      * @return 
      */
-    public String UtiliserCarte(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String UtiliserCarte(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         out += "--- Utiliser carte ---\n";
         out += "Le joueur utilise la compétence d'une carte\n";
         for(Action action : tabAction)
-            out += action.action(joueurImpacte, nomPhase, joueurEnCours);
+            out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         out += "--- Fin Utiliser Carte ---\n";
         return out;
     }

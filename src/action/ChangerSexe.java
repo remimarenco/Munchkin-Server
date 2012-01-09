@@ -1,6 +1,9 @@
 package action;
 
+import java.util.ArrayList;
+
 import joueur.Joueur;
+import partie.Combat;
 import partie.Constante;
 
 /**
@@ -20,24 +23,31 @@ public class ChangerSexe extends Action {
      * Action permettant le changement de sexe
      * @param joueurImpacte : le joueur qui subit le changement de sexe
      * @return out : texte résumant l'action
-     */
-    @Override
-    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        String out = "";
+     */    
+    // TODO : Description méthode + PROTECTION NULL
+	@Override
+	public String action(Joueur joueurDestinateur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		
+		String out = "";
         int sexe;
         
-        out += joueurImpacte.getName() + " se transforme en";
-        sexe=joueurImpacte.getPersonnage().getSexe();
-        if(sexe==Constante.SEXE_M){
-            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
-            out += " femme!";
-        }
-        else{
-            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
-            out += " homme!";
+        for(Joueur joueurImpacte : joueurDestinataire){
+	        out += joueurImpacte.getName() + " se transforme en";
+	        sexe=joueurImpacte.getPersonnage().getSexe();
+	        if(sexe==Constante.SEXE_M){
+	            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
+	            out += " femme!";
+	        }
+	        else{
+	            joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
+	            out += " homme!";
+	        }
+	        
+	        joueurImpacte.getPersonnage().setaChangeSexe(true);
         }
         
-        joueurImpacte.getPersonnage().setaChangeSexe(true);
         return out;
-    }
+	}
 }

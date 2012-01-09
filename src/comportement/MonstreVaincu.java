@@ -1,6 +1,8 @@
 package comportement;
 
 import java.util.ArrayList;
+
+import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
@@ -32,7 +34,7 @@ public class MonstreVaincu {
      * @param joueurImpacte : joueur ayant vaincu le monstre
      * @return 
      */
-    public String actionMonstreVaincu(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
+    public String actionMonstreVaincu(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours) {
         
         String out = "";
 
@@ -40,9 +42,11 @@ public class MonstreVaincu {
             out += "Aucune condition sur ce monstre\n";
         } else {
             out += "--- Monstre Vaincu ---\n";
-            out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-            for(Action action : tabAction)
-                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
+            for(Joueur joueurImpacte : joueurDestinataire){
+	            out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+	            for(Action action : tabAction)
+	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            }
             out += "\n--- Fin de monstre vaincu ---";
         }
         out += "\n";    

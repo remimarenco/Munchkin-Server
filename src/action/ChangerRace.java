@@ -1,5 +1,8 @@
 package action;
 
+import java.util.ArrayList;
+
+import partie.Combat;
 import joueur.Joueur;
 import joueur.Race;
 
@@ -24,11 +27,18 @@ public class ChangerRace extends Action {
      * @param joueurImpacte : joueur qui subit le changement de race
      * @return out : texte résumant l'action 
      */
-    @Override
-    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        String out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
-        joueurImpacte.getPersonnage().setRace(this.race);
-        out += " à la race " + joueurImpacte.getPersonnage().getRace();
+    // TODO : Description méthode + PROTECTION NULL
+	@Override
+	public String action(Joueur joueurDestinateur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		
+		String out = "";
+		for(Joueur joueurImpacte : joueurDestinataire){
+			out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
+	        joueurImpacte.getPersonnage().setRace(this.race);
+	        out += " à la race " + joueurImpacte.getPersonnage().getRace();
+		}
         return out;
-    }
+	}
 }

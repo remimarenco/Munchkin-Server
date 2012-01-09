@@ -1,6 +1,8 @@
 package comportement;
 
 import java.util.ArrayList;
+
+import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
@@ -30,12 +32,12 @@ public class IncidentDeguerpir {
      * @param joueurImpacte
      * @return 
      */
-    public String actionIncidentDeguerpir(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String actionIncidentDeguerpir(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
-            out += action.action(joueurImpacte, nomPhase, joueurEnCours);
+            out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         out += "--- Fin d'incident fuite ---\n";
         return out;
     }

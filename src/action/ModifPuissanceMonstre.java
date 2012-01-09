@@ -2,6 +2,8 @@ package action;
 
 import java.util.ArrayList;
 
+import partie.Combat;
+
 import carte.Monstre;
 
 import joueur.Classe;
@@ -47,11 +49,13 @@ public class ModifPuissanceMonstre extends Action{
      * Action modifiant la puissance d'un monstre
      * @param joueurImpacte : joueur contre lequel se bat le monstre
      * @return out : texte résumant l'action
-     */
-    @Override
-    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        
-        String out           = "";
+     */    
+    // TODO : Description méthode + PROTECTION NULL
+	@Override
+	public String action(Joueur joueurDestinateur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out           = "";
         boolean accept       = true;
         boolean raceTrouve   = false;
         boolean classeTrouve = false;
@@ -60,6 +64,8 @@ public class ModifPuissanceMonstre extends Action{
         out += "Le monstre impliqué est "+monstre.getNom();
         out += ", le bonus puissance attribué est de " + this.bonusPuissance;
     
+        for(Joueur joueurImpacte : joueurDestinataire)
+        {
         if(tabRace != null && !(tabRace.isEmpty())){
             out += ", les races contre lesquelles ce bonus s'applique sont :";
             for(Race race : tabRace)
@@ -97,7 +103,8 @@ public class ModifPuissanceMonstre extends Action{
         }
 		
         if(accept)
-            monstre.setPuissance(monstre.getPuissance()+bonusPuissance);
+        	monstre.setPuissance(monstre.getPuissance()+bonusPuissance);	
+        }
         return out;	
-    }
+	}
 }

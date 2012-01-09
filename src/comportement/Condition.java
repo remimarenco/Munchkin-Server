@@ -1,6 +1,8 @@
 package comportement;
 
 import java.util.ArrayList;
+
+import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
@@ -31,17 +33,19 @@ public class Condition {
      * @param joueurImpacte : joueur sur lequel s'applique la condition
      * @return out : texte résumant l'action
      */
-    public String mettreCondition(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String mettreCondition(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
 
         if(tabAction == null){
             out += "Aucune condition sur ce monstre\n";
         } else {
             out += "--- Condition ---\n";
-            out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
-            for(Action action : tabAction)
-                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
-            out += "\n--- Fin de condition ---\n";
+            for(Joueur joueurImpacte : joueurDestinataire){
+	            out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
+	            for(Action action : tabAction)
+	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	            out += "\n--- Fin de condition ---\n";
+            }
         }
         return out;
     }

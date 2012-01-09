@@ -84,6 +84,14 @@ public class Constante {
     public static final int SOUND_RIRES           = 106;
     
     /**
+     * Constante Phase d'un tour
+     */
+    public static final int OUVRIR_PORTE = 0;
+    public static final int CHERCHER_LA_BAGARRE = 1;
+    public static final int PILLER_LA_PIECE = 2;
+    public static final int CHARITE_SIOUPLAIT = 3;
+    
+    /**
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
     public static int nbAleatoire(int min, int max){

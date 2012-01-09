@@ -1,6 +1,8 @@
 package comportement;
 
 import java.util.ArrayList;
+
+import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
@@ -31,15 +33,18 @@ public  class Equipement {
      * @param joueurImpacte : le joueur a équiper
      * @return out : texte résumant l'action
      */
-    public String equipe(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String equipe(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         
         if(tabAction != null){
             out += "--- Equipement ---\n";
-            out += "Un équipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-            for(Action action : tabAction)
-                out += action.action(joueurImpacte, nomPhase, joueurEnCours);
-            out += "--- Fin d'equipement ---\n";
+            
+            for(Joueur joueurImpacte : joueurDestinataire){
+	            out += "Un équipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+	            for(Action action : tabAction)
+	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	            out += "--- Fin d'equipement ---\n";
+            }
         } else {
            out += "Aucun equipement !\n";
         }

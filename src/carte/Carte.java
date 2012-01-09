@@ -1,5 +1,8 @@
 package carte;
 
+import java.util.ArrayList;
+
+import partie.Combat;
 import action.DefausserCarte;
 import comportement.ComportementDefausserCarte;
 import comportement.Condition;
@@ -126,9 +129,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerIncidentFacheux(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String appliquerIncidentFacheux(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.incidentFacheux != null)
-            return this.incidentFacheux.actionIncidentFacheux(joueurImpacte, nomPhase, joueurEnCours);
+            return this.incidentFacheux.actionIncidentFacheux(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'incident facheux\n";
     }
@@ -138,9 +141,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public String equiper(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String equiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.equipement != null)
-            return equipement.equipe(joueurImpacte, nomPhase, joueurEnCours);
+            return equipement.equipe(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'équipement\n";
     }
@@ -150,9 +153,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerCondition(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String appliquerCondition(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.condition != null)
-            return this.condition.mettreCondition(joueurImpacte, nomPhase, joueurEnCours);
+            return this.condition.mettreCondition(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de condition\n";
     }
@@ -165,9 +168,9 @@ public abstract class Carte {
      * ex 2 : Joueur B lance le sortilège qui s'applique à tous les monstres en jeu
      * @param joueurImpacte
      */
-    public String appliquerSortilege(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String appliquerSortilege(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.sortilege != null)
-            return this.sortilege.actionSortilege(joueurImpacte, nomPhase, joueurEnCours);
+            return this.sortilege.actionSortilege(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de malus\n";
     }
@@ -177,10 +180,10 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerMonstreVaincu(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours){
+    public String appliquerMonstreVaincu(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
     	if(this.monstreVaincu != null)
-            out += this.monstreVaincu.actionMonstreVaincu(joueurImpacte, nomPhase, joueurEnCours);
+            out += this.monstreVaincu.actionMonstreVaincu(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;

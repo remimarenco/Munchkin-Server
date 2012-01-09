@@ -2,6 +2,8 @@ package comportement;
 
 import action.Action;
 import java.util.ArrayList;
+
+import partie.Combat;
 import joueur.Joueur;
 
 
@@ -33,17 +35,21 @@ public class IncidentFacheux {
      * Application de l'ensemble des actions de l'incident fâcheux sur le joueur
      * @param joueurImpacte
      */
-    public String actionIncidentFacheux(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours)
+    public String actionIncidentFacheux(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours)
     {
         String out = "";
         if(tabAction != null || !(tabAction.isEmpty()))
         {
             out += "--- Incident fâcheux ---\n";
-            out += "Un incident fâcheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-            out += "Il y a " + tabAction.size();
-            for(Action action : tabAction)
-                out += "\nAction : !" + action.action(joueurImpacte, nomPhase, joueurEnCours);
-            out += "--- Fin d'incident fâcheux ---\n";
+            
+            for(Joueur joueurImpacte : joueurDestinataire)
+            {
+	            out += "Un incident fâcheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
+	            out += "Il y a " + tabAction.size();
+	            for(Action action : tabAction)
+	                out += "\nAction : !" + action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            }
+	        out += "--- Fin d'incident fâcheux ---\n";
         } else {
             out += "Aucune incident fâcheux !!\n";
         }

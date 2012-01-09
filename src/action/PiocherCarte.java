@@ -1,6 +1,9 @@
 package action;
 
+import java.util.ArrayList;
+
 import joueur.Joueur;
+import partie.Combat;
 import partie.Constante;
 
 
@@ -29,23 +32,30 @@ public class PiocherCarte extends Action {
      * @param joueurImpacte : Le joueur qui va piocher les cartes
      * @return out : texte résumant l'action
      */
-    @Override
-    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        String out = "";
-        out += "Le joueur " + joueurImpacte.getName();
-        
-        if(nbCarte > 1)
-            out += " pioche "+nbCarte+" cartes dans la pioche ";
-        else
-            out += " pioche "+nbCarte+" carte dans la pioche ";
-
-        if(type_pioche == Constante.DONJON){
-            out += "donjon";
-            joueurImpacte.piocherCarte(Constante.DONJON);
-        } else {
-            out += "trésor";
-            joueurImpacte.piocherCarte(Constante.TRESOR);
-        }
+    // TODO : Description méthode + PROTECTION NULL
+	@Override
+	public String action(Joueur joueurDestinateur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		
+		String out = "";
+		
+		for(Joueur joueurImpacte : joueurDestinataire){
+	        out += "Le joueur " + joueurImpacte.getName();
+	        
+	        if(nbCarte > 1)
+	            out += " pioche "+nbCarte+" cartes dans la pioche ";
+	        else
+	            out += " pioche "+nbCarte+" carte dans la pioche ";
+	
+	        if(type_pioche == Constante.DONJON){
+	            out += "donjon";
+	            joueurImpacte.piocherCarte(Constante.DONJON);
+	        } else {
+	            out += "trésor";
+	            joueurImpacte.piocherCarte(Constante.TRESOR);
+	        }
+		}
         return out;
-    }
+	}
 }

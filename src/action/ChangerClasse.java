@@ -1,5 +1,8 @@
 package action;
 
+import java.util.ArrayList;
+
+import partie.Combat;
 import joueur.Classe;
 import joueur.Joueur;
 
@@ -27,11 +30,17 @@ public class ChangerClasse extends Action{
      * @param joueurImpacte : le joueur dont on veut changer la classe
      * @return out : texte résumant l'action
      */
-    @Override
-    public String action(Joueur joueurImpacte, java.lang.StackTraceElement[] nomPhase, Joueur joueurEnCours) {
-        String out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
-        joueurImpacte.getPersonnage().setClasse(this.classe);
-        out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();
+    // TODO : Description méthode + PROTECTION NULL
+	@Override
+	public String action(Joueur joueurDestinateur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out = "";
+		for(Joueur joueurImpacte : joueurDestinataire){
+			out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
+	        joueurImpacte.getPersonnage().setClasse(this.classe);
+	        out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();
+		}
         return out;
-    }
+	}
 }
