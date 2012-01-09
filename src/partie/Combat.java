@@ -2,6 +2,8 @@ package partie;
 
 import carte.Monstre;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Iterator;
 import joueur.Personnage;
 
@@ -51,15 +53,32 @@ public class Combat {
     
     
     /**
-     * Tenter de déguerpir du combat
-     * @return 
+     * Méthode permettant de savoir si les personnages d'un combat ont réussi à déguerpir
+     * @return HashMap contenant Vrai et Faux. Vrai et Faux sont les clés de tableau de personnage
      */
-    public boolean tenterDeguerpir() {
-    	// Le camp gentil tente de déguerpir
+    public HashMap<Boolean, ArrayList<Personnage>> tenterDeguerpir() {
+        // Tableaux de personnage qui ont réussi ou non
+        ArrayList<Personnage> reussi = new ArrayList<Personnage>();
+        ArrayList<Personnage> echec = new ArrayList<Personnage>();
+
+        // HashMap permettant de répartir les personnages qui ont réussi ou non
+        HashMap<Boolean, ArrayList<Personnage>> dico = new HashMap<Boolean, ArrayList<Personnage>>();
+        // Assignation des tableaux au HashMap
+        dico.put(Boolean.TRUE, reussi);
+        dico.put(Boolean.FALSE, echec);
+
+        // Parcourt des personnages du campGentil, assignation dans les tableaux
     	for(Personnage gentil : CampGentil){
-    		gentil.deguerpir();
+            if(gentil.deguerpir())
+            {
+                reussi.add(gentil);
+            }
+            else
+            {
+                echec.add(gentil);
+            }
     	}
-        return true;
+        return dico;
     }    
     
     

@@ -192,8 +192,9 @@ public class Personnage {
      * Méthode de déguerpissage du perso
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
-    public void deguerpir() {
-        // TODO : A implémenter
+    public Boolean deguerpir() {
+        // TODO : A implémenter, lancer le dé, comparer avec bonus + capacite
+        return true;
     }    
 
     
