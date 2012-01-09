@@ -785,6 +785,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     }
 
     private void ChercherLaBagarre() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        //throw new UnsupportedOperationException("Not yet implemented");
     }
 }
