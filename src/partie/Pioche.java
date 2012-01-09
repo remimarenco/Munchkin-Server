@@ -1,15 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package partie;
+
 import carte.Carte;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  *
- * @author user
+ * @author Julien Rouvier
  */
 public class Pioche<T> {
     

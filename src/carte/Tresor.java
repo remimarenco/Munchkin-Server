@@ -1,8 +1,5 @@
 package carte;
 
-import partie.Constante;
-
-
 /**
  * Classe Trésor.
  * Hérite de la classe Carte.

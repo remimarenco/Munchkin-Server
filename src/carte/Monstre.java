@@ -4,7 +4,6 @@ import comportement.Condition;
 import comportement.IncidentDeguerpir;
 import comportement.IncidentFacheux;
 import comportement.MonstreVaincu;
-import joueur.Joueur;
 
 /**
  * Classe Monstre.

@@ -1,7 +1,6 @@
 package joueur;
 
 import carte.Carte;
-import java.util.HashMap;
 
 /**
  * Main d'un joueur

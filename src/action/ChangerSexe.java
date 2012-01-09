@@ -1,6 +1,5 @@
 package action;
 
-import java.util.ArrayList;
 import joueur.Joueur;
 import partie.Constante;
 

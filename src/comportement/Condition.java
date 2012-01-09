@@ -1,13 +1,9 @@
 package comportement;
 
 import java.util.ArrayList;
-import java.util.Vector;
-
 import action.Action;
-
-
 import joueur.Joueur;
-import joueur.Personnage;
+
 
 public class Condition {
     

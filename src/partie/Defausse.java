@@ -2,8 +2,6 @@ package partie;
 
 import java.util.ArrayList;
 
-import carte.Carte;
-import java.util.Iterator;
 
 /**
  * Défausse

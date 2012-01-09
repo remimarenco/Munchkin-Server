@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * ServeurVue.java
  *
  * Created on 11 déc. 2011, 15:05:12
@@ -145,6 +140,7 @@ this.dispose();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new ServeurVue().setVisible(true);
             }

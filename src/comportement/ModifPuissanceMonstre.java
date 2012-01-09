@@ -1,9 +1,7 @@
 package comportement;
 
 import java.util.ArrayList;
-
 import carte.Monstre;
-
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;

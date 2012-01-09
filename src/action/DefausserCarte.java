@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package action;
 
 import carte.Carte;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import joueur.CartesJoueur;
 import joueur.Joueur;
 import partie.Constante;

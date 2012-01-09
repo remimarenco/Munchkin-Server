@@ -5,7 +5,7 @@ import joueur.Race;
 
 /**
  * Classe permettant de modifier la race d'un joueur
- * @author marenco-r
+ * @author Rémi Marenco
  *
  */
 public class ChangerRace extends Action {

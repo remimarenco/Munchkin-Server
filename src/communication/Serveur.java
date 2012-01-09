@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package communication;
 
 import java.io.IOException;
@@ -10,7 +6,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import joueur.Joueur;
-import partie.Deck;
 import partie.Partie;
 
 /**
@@ -97,7 +92,7 @@ public class Serveur {
                 }
                 break;
             case Message.DISCONNECT:
-                String listeVide = new String("");
+                String listeVide = "";
                 com.setName(msg.getNick_src());
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);

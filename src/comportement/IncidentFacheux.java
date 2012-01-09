@@ -1,7 +1,6 @@
 package comportement;
 
 import action.Action;
-
 import java.util.ArrayList;
 import joueur.Joueur;
 
