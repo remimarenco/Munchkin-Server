@@ -17,7 +17,7 @@ import partie.Partie;
 public class Joueur extends Thread {
 	
     private Main main;
-    private Jeu jeu;   
+    private Jeu jeu;
     private Personnage personnage;
     private Partie partie;
     
@@ -227,6 +227,11 @@ public class Joueur extends Thread {
     }
     
     
+    /**
+     * Defausse d'une carte dans la main ou dans le jeu (en fonction de où on la trouve)
+     * @param c : la carte à rechercher
+     * @return 
+     */
     public boolean defausserCarte(Carte c){
         if(this.getMain().contains(c)){
             return this.getMain().supprimerCarte(c);

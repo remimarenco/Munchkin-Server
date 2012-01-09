@@ -609,27 +609,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                 this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
                 this.sendMessageToCurrent(sort.getDescription());
-                this.sendMessageToCurrent("Qu'allez vous faire ?");
-                this.sendMessageToCurrent("Pour l'utiliser maintenant, appuyez sur le bouton Utiliser, sinon (TODO)\n");
 
-                this.sendQuestionToEnCours("Utiliser ?");
-                this.answer=null;
-
-                while( this.answer==null )
-                    try {
-                       Thread.currentThread().sleep(200);//sleep for 200 ms
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-                    }                 
-
-                if(this.answer.equals("Yes")){
-                    this.sendMessageToAllButCurrent("Il utilise la carte !! Tremblez, pauvres fous !\n");
-                    this.sendMessageToCurrent("Vous avez choisi d'utiliser la carte sur vous (TODO : choix personne)!\n");
-                    this.sendMessageToAll(sort.appliquerSortilege(enCours));
-                }else{
-                    // TODO : que se passe-t-il si on utilise pas le sort tout de suite ?
-                }
-                
+                this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
+                this.sendMessageToAll(sort.appliquerSortilege(enCours));
             }
 
             // ==============

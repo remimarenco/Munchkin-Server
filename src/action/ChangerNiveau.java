@@ -61,7 +61,7 @@ public class ChangerNiveau extends Action {
     @Override
     public String action(Joueur joueurImpacte) {
         String out              = "";
-        boolean classeTrouve    = false;
+        boolean classeTrouve    = true;
         
         // Si le joueur est en dessous ou pile au niveau min & qu'on veut lui enlever des niveaux
         if(niveauMin >= joueurImpacte.getPersonnage().getNiveau() && this.niveau < 0){
@@ -69,11 +69,12 @@ public class ChangerNiveau extends Action {
         }
         
         if(tabClasse != null){
+            classeTrouve = false;
             for(Classe classe: tabClasse)
                 if(joueurImpacte.getPersonnage().getClasse().equals(classe))
                     classeTrouve=true;
         }
-
+        
         if(classeTrouve){
             // Si le nombre de niveau doit se choisir par dé...
             if(this.niveau == Constante.NB_PAR_DE)  
