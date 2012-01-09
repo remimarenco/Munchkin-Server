@@ -14,7 +14,6 @@ import comportement.MonstreVaincu;
 public class Monstre extends Donjon {
     protected int puissance;
     protected int bonusPuissance;
-    // TODO : Comportement monstre vaincu
 
     /**
      * Constructeur de la classe Monstre. Hérite de la classe Donjon

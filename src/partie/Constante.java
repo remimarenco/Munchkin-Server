@@ -87,7 +87,7 @@ public class Constante {
     public static int nbAleatoire(int min, int max){
     	int valeur;
     	Random r = new Random();
-        if(max != min) // TODO : Vérifier si ok tout le temps
+        if(max != min)
             valeur = min + r.nextInt(Math.abs(max - min));
         else
             valeur = 0;

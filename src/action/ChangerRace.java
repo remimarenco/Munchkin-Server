@@ -10,12 +10,14 @@ import joueur.Race;
  */
 public class ChangerRace extends Action {
     
+    protected Race race;
+    
     /**
      * Constructeur par défaut
      * @param race : nouvelle race
      */
     public ChangerRace(Race race) {
-        // TODO : A implémenter
+        this.race = race;
     }
 
     /**
@@ -25,8 +27,9 @@ public class ChangerRace extends Action {
      */
     @Override
     public String action(Joueur joueurImpacte) {
-        // TODO : A implémenter
-        String out = "Non implémenté";
+        String out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
+        joueurImpacte.getPersonnage().setRace(this.race);
+        out += " à la race " + joueurImpacte.getPersonnage().getRace();
         return out;
     }
 }

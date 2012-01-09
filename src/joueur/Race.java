@@ -13,12 +13,6 @@ public abstract class Race {
 
     }
 
-    /**
-     * 
-     * @return 
-     */
-    public abstract boolean deguerpir();
-
     
     /**
      * 
