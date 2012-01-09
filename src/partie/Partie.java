@@ -416,8 +416,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     * deux de la main du joueur grace a la methode generateFalseInfo
                     */                     
 
+                    
+                    
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-                    this.getJoueurByName(msg.getNick_src()).getMain().generateFalseInfos()));
+                                this.getJoueurByName(msg.getNick_src()).getMain().getCartesPosables()));
 
                 }
                 break;
@@ -489,7 +491,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     			// Sinon pas le droit
     		// Charité
     			// Trop de cartes en main => Défausse
-    	// TODO : Deguerpir
+    	// Deguerpir
     	
         // Initialisation de la partie       
         init();
@@ -637,6 +639,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     /**
      * Méthode permettant de tester si la pioche est vide ou pleine
+     * Si une pioche est vide, on tente de la remplacer par la défausse du même type (DONJON ou TRESOR)
+     * @param pioche : la pioche à tester
      */
     private void testPioche(Pioche pioche) {
         Defausse defausse;

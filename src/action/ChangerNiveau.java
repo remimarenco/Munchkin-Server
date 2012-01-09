@@ -37,7 +37,7 @@ public class ChangerNiveau extends Action {
     public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse){
         this.niveau     = niveau;
         this.tabClasse  = tabClasse;
-        this.niveauMin  =0;
+        this.niveauMin  = 0;
     }
     
     /**

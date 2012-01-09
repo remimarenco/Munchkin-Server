@@ -111,4 +111,17 @@ public class CartesJoueur {
         }
         return map;
     }
+    
+    
+    /**
+     * 
+     * @return 
+     */
+    public HashMap<String,String> getCartesPosables(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        for(Carte c : this.cartes)
+            if(c.getClass().getSimpleName().equals("Objet"))
+                map.put(c.getId().toString(), c.getId().toString());
+        return map;
+    }
 }
