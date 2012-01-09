@@ -9,7 +9,7 @@ import joueur.Joueur;
 public abstract class Action {
     /**
      * Méthode abstraite permettant de lancer l'action
-     * @param joueurImpacte => Joueur recevant l'action
+     * @param joueurImpacte : Joueur recevant l'action
      */
     public abstract String action(Joueur joueurImpacte);
     

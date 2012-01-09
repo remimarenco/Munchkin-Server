@@ -10,6 +10,7 @@ import java.util.HashMap;
 import partie.Constante;
 import partie.Partie;
 
+
 /**
  * Un Joueur est un Thread de communication
  * @author Guillaume Renoult

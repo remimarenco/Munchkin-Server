@@ -1,6 +1,7 @@
 package carte;
 import comportement.Equipement;
 
+
 /**
  * Classe Arme.
  * Hérite de Tresor.
@@ -8,6 +9,7 @@ import comportement.Equipement;
  * @author Rémi Marenco
  */
 public class Arme extends Tresor {
+
     
     /**
      * Constructeur de la classe Arme.

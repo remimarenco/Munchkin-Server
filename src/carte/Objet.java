@@ -10,6 +10,7 @@ import comportement.Equipement;
  */
 public class Objet extends Tresor {
     
+    
     /**
      * Constructeur de la classe objet.
      * Permet de renseigner les paramètres de la classe Trésor ainsi que l'équipement

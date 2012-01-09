@@ -13,7 +13,6 @@ import java.util.HashMap;
  */
 public class Message {
     
-    
     public static final int CONNECT           = 0;
     public static final int DISCONNECT        = 1;
     public static final int MESSAGE           = 2;
@@ -71,6 +70,7 @@ public class Message {
         this.nick_dest  = nick_dest;
     }
     
+    
      /**
       * Constructeur
       * @param type
@@ -85,6 +85,7 @@ public class Message {
         this.message    = msg;
         this.color      = Color.BLACK;
     }
+    
     
     /**
      * Constructeur
@@ -216,34 +217,73 @@ public class Message {
         }
     }
 
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public int getType() {
        return this.type;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getIdCard() {
         return idCard;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getMessage() {
         return this.message;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getNick_src() {
         return this.nick_src;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getNick_dest() {
         return this.nick_dest;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public Color getColor() {
         return color;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public HashMap<String, String> getMap() {
         return map;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public int getAction() {
         return action;
     }

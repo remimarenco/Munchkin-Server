@@ -16,14 +16,14 @@ public abstract class Race {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param personnage 
      */
     public abstract void modifPersonnage(Personnage personnage);
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     @Override

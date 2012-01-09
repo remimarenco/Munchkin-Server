@@ -2,7 +2,7 @@ package joueur;
 
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class Classe {
@@ -14,6 +14,10 @@ public class Classe {
 
     }
 
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     @Override
     public String toString()
     {

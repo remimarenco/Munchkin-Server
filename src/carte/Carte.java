@@ -8,6 +8,7 @@ import comportement.MonstreVaincu;
 import comportement.Sortilege;
 import joueur.Joueur;
 
+
 /**
  * Classe carte permettant de gérer toutes les cartes du jeu
  * @author Guillaume Renoult
@@ -73,26 +74,54 @@ public abstract class Carte {
         this.id = id;
     }
     
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public  Integer getId() {
         return id;
     }
 
+    /**
+     * // TODO : Commenter
+     * @param id 
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getNom() {
         return nom;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @param nom 
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public String getDescription() {
         return description;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @param description 
+     */
     public void setDescription(String description) {
         this.description = description;
     }

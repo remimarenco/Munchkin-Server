@@ -17,7 +17,7 @@ import joueur.Joueur;
 import joueur.Personnage;
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
@@ -33,7 +33,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private String              answer;
 
     /**
-     * 
+     * // TODO : Commenter
      */
     public Partie(){
         piocheDonjon    = new Pioche<Donjon>(Constante.DONJON);
@@ -44,7 +44,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     }
     
     /**
-     * 
+     * // TODO : Commenter
      * @param piocheTresor
      * @param piocheDonjon
      * @param defausseTresor
@@ -59,7 +59,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     }
 
     /**
-     * 
+     * // TODO : Commenter
      */
     public void distribuer(){
         Iterator it = this.iterator();
@@ -226,7 +226,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param nick_dest
      * @return 
      */
@@ -292,7 +292,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param source
      * @param txt 
      */
@@ -303,7 +303,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param txt 
      */
     public void sendQuestionToEnCours(String txt){
@@ -313,7 +313,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      */
     public void sendInfosJoueursToAll(){
          for(Joueur j :this)
@@ -323,7 +323,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      */
     public void sendCartesJeuxJoueursToAll(){
         for(Joueur j :this)
@@ -334,7 +334,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      */
     public void sendCartesMainToOwner(){
          for(Joueur j :this)             
@@ -344,7 +344,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param carte 
      */
     public void sendCarteEnCoursToAll(Carte carte){
@@ -355,7 +355,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param constante 
      */
     public void sendSongToAll(int constante){
@@ -365,7 +365,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param msg 
      */
     public void intervenir(Message msg){
@@ -436,7 +436,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      }
     
     /**
-     * 
+     * // TODO : Commenter
      * @param msg 
      */
     public void aider(Message msg){
@@ -445,7 +445,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param msg 
      */
     public void pourrir(Message msg){
@@ -454,7 +454,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      
     
     /**
-     * 
+     * // TODO : Commenter
      * @param msg 
      */
     public void poserCarte(Message msg){
@@ -463,7 +463,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param msg
      * @return 
      */
@@ -474,7 +474,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
  
    
     /**
-     * 
+     * // TODO : Commenter
      */
     @Override
     public void run() {
@@ -509,7 +509,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     
     /**
-     * 
+     * // TODO : Commenter
      */
     private void init() {
         piocheDonjon.init(this.deck);
@@ -522,7 +522,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     
     /**
-     * 
+     * // TODO : Commenter
      */
     private void tour() {
         Iterator it = this.iterator(); 
@@ -702,7 +702,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param txt
      * @param personnage 
      */
@@ -718,7 +718,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param txt
      * @param personnage 
      */

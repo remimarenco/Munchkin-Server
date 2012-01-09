@@ -13,6 +13,7 @@ public  class Equipement {
     
     private ArrayList<Action> tabAction;
 
+    
     /**
      * Constructeur
      * @param tabAction : ensemble d'action 

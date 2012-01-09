@@ -6,13 +6,14 @@ import joueur.Joueur;
 
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class Sortilege {
     
     private ArrayList<Action> tabAction;
 
+    
     /**
      * Constructeur
      * @param tabAction 
@@ -25,6 +26,7 @@ public class Sortilege {
         }
     }
 
+    
     /**
      * Action lors d'un sortilège
      * @param joueurImpacte : joueur recevant le sortilège

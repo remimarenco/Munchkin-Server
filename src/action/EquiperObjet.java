@@ -11,7 +11,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- *
+ * // TODO : Commenter
  * @author Simon Grabit
  */
 public class EquiperObjet extends Action{
@@ -20,6 +20,7 @@ public class EquiperObjet extends Action{
     private ArrayList<Classe> tabClasse;
     boolean aChangeSexe;
     int bonusPuissance, bonusDeguerpir, poids;
+   
     /**
      * Constructeur
      */
@@ -33,6 +34,12 @@ public class EquiperObjet extends Action{
         this.poids          = poids;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @param joueurImpacte
+     * @return 
+     */
     @Override
     public String action(Joueur joueurImpacte) {
         String out              = "";

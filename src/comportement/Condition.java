@@ -5,13 +5,18 @@ import action.Action;
 import joueur.Joueur;
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class Condition {
     
     private ArrayList<Action> tabAction;
     
+    
+    /**
+     * // TODO : Commenter
+     * @param tabAction 
+     */
     public Condition(ArrayList<Action> tabAction){
         try{
             this.tabAction = (ArrayList<Action>) tabAction.clone();

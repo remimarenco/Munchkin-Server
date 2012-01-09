@@ -12,6 +12,7 @@ import comportement.MonstreVaincu;
  * @author Rémi Marenco
  */
 public class Monstre extends Donjon {
+    
     protected int puissance;
     protected int bonusPuissance;
 
@@ -32,7 +33,7 @@ public class Monstre extends Donjon {
     }
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     public int getPuissance() {
@@ -41,7 +42,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     @Override
@@ -51,7 +52,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     @Override
@@ -61,7 +62,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param puissance 
      */
     public void setPuissance(int puissance) {
@@ -70,7 +71,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     public int getBonusPuissance() {
@@ -79,7 +80,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param bonusPuissance 
      */
     public void setBonusPuissance(int bonusPuissance) {
@@ -88,7 +89,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     public Condition getCondition() {
@@ -97,7 +98,7 @@ public class Monstre extends Donjon {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param condition 
      */
     public void setCondition(Condition condition) {

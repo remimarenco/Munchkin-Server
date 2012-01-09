@@ -9,7 +9,7 @@ import joueur.Joueur;
 import partie.Partie;
 
 /**
- * 
+ * // TODO : Commenter
  * @author Guillaume Renoult
  */
 public class Serveur {
@@ -46,7 +46,9 @@ public class Serveur {
     }
 
 
-
+    /**
+     * // TODO : Commenter
+     */
     private void stop() {
         thrd = null;      
     }
@@ -58,6 +60,9 @@ public class Serveur {
      * @param com 
      */
     public void interpretMessage(Message msg, Joueur com) {
+        
+        // TODO : Commenter le contenu !!
+        
         switch (msg.getType()) {
             case Message.CONNECT:
                 if (this.partie.LoginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {

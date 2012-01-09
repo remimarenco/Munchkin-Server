@@ -3,6 +3,7 @@ package action;
 import joueur.Joueur;
 import partie.Constante;
 
+
 /**
  * Classe permettant de faire une action de piocher une carte donjon ou trésor
  * @author Rémi Marenco
@@ -22,6 +23,7 @@ public class PiocherCarte extends Action {
         this.type_pioche = type_pioche;
     }
 
+    
     /**
      * Action d'une carte qui va faire piocher un joueur dans un type de pioche un nombre de cartes
      * @param joueurImpacte : Le joueur qui va piocher les cartes

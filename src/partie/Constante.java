@@ -16,7 +16,7 @@ import joueur.Voleur;
 import java.util.Random;
 
 /**
- *
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class Constante {

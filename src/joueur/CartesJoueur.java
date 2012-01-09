@@ -7,7 +7,7 @@ import java.util.Random;
 import partie.Constante;
 
 /**
- *
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class CartesJoueur {
@@ -79,9 +79,15 @@ public class CartesJoueur {
     }
     
     
+    /**
+     * // TODO : Commenter
+     * @param c
+     * @return 
+     */
     public boolean contains(Carte c){
         return this.cartes.contains(c);
     }
+    
     
     /**
      * Prépare les données pour envoi au client
@@ -114,7 +120,9 @@ public class CartesJoueur {
     
     
     /**
-     * 
+     * // TODO : Commenter
+     * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont
+     * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
      * @return 
      */
     public HashMap<String,String> getCartesPosables(){

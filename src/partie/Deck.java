@@ -27,15 +27,16 @@ import java.util.Collections;
 import joueur.Classe;
 import joueur.Race;
 
+
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public final class Deck {
     private static ArrayList<Carte> cartes;
 
     /**
-     * 
+     * // TODO : Commenter
      */
     public Deck() {
         cartes = new ArrayList<Carte>();
@@ -44,7 +45,7 @@ public final class Deck {
     }
 
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     public static ArrayList<Carte> getCartes() {
@@ -61,7 +62,7 @@ public final class Deck {
     }
 
     /**
-     * 
+     * // TODO : Commenter
      * @param cartes 
      */
     public static void setCartes(ArrayList<Carte> cartes) {
@@ -69,7 +70,7 @@ public final class Deck {
     }
     
     /**
-     * 
+     * // TODO : Commenter
      * @return 
      */
     public static ArrayList melanger(){
@@ -636,7 +637,7 @@ public final class Deck {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param actionEquipement
      * @param race 
      */
@@ -648,7 +649,7 @@ public final class Deck {
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param actionEquipement
      * @param classe 
      */
@@ -660,7 +661,7 @@ public final class Deck {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param actionTabMonstreVaincu
      * @param piocherCarte
      * @param changerNiveau 
@@ -675,7 +676,7 @@ public final class Deck {
     
     
     /**
-     * 
+     * // TODO : Commenter
      * @param actionTabIncident
      * @param changerNiveau
      * @param defausserCarte 
@@ -692,7 +693,7 @@ public final class Deck {
 
     
     /**
-     * 
+     * // TODO : Commenter
      * @param actionTabCondition
      * @param tabClasse
      * @param tabRace 

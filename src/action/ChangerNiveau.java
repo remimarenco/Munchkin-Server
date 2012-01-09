@@ -60,6 +60,7 @@ public class ChangerNiveau extends Action {
      */
     @Override
     public String action(Joueur joueurImpacte) {
+        
         String out              = "";
         boolean classeTrouve    = true;
         

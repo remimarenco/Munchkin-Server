@@ -5,29 +5,45 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class Pioche<T> {
     
     protected ArrayList<T> pioche;
-    //protected int type;
     protected Class typePioche;
     
+    /**
+     * // TODO : Commenter
+     * @param typePioche 
+     */
     public Pioche(Class typePioche) {
         pioche  = new ArrayList<T>();
         this.typePioche = typePioche;
     }
     
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public ArrayList<T> getPioche() {
         return pioche;
     }
 
+    /**
+     * // TODO : Commenter
+     * @param pioche 
+     */
     public void setPioche(ArrayList<T> pioche) {
         this.pioche = pioche;
     }
     
     
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public T tirerCarte(){
         if(pioche.isEmpty())
             return null;
@@ -37,10 +53,20 @@ public class Pioche<T> {
         return ret;
     }
     
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public boolean isEmpty(){
         return this.pioche.isEmpty();
     }
     
+    
+    /**
+     * // TODO : Commenter
+     * @param deck 
+     */
     public void init(Deck deck){
         ArrayList<Carte> cartes = Deck.getCartes();
         Iterator it = cartes.iterator();

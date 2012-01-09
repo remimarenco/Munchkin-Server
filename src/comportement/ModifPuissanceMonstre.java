@@ -7,7 +7,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class ModifPuissanceMonstre /*extends Action*/{
@@ -17,6 +17,14 @@ public class ModifPuissanceMonstre /*extends Action*/{
     private int bonusPuissance;
     private Monstre monstre;
 	
+    
+    /**
+     * // TODO : Commenter
+     * @param tabRace
+     * @param tabClasse
+     * @param bonusPuissance
+     * @param monstre 
+     */
     public ModifPuissanceMonstre(ArrayList<Race> tabRace,
                     ArrayList<Classe> tabClasse, int bonusPuissance, Monstre monstre) {
         super();
@@ -26,7 +34,6 @@ public class ModifPuissanceMonstre /*extends Action*/{
         this.monstre        = monstre;
     }
 
-    //@Override
     /**
      * Modification de la puissance d'un monstre
      * @param joueurImpacte : joueur contre lequel se bat le monstre

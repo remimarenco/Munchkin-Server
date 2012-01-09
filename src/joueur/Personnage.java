@@ -249,18 +249,38 @@ public class Personnage {
         return this.getNiveau() + this.getPuissanceObjet();
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public int getPuissanceObjet() {
         return puissanceObjet;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @param puissanceObjet 
+     */
     public void setPuissanceObjet(int puissanceObjet) {
         this.puissanceObjet = puissanceObjet;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @return 
+     */
     public int getCapaciteEquipement() {
         return capaciteEquipement;
     }
 
+    
+    /**
+     * // TODO : Commenter
+     * @param capaciteEquipement 
+     */
     public void setCapaciteEquipement(int capaciteEquipement) {
         this.capaciteEquipement = capaciteEquipement;
     }

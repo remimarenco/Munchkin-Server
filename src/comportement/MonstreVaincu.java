@@ -6,12 +6,13 @@ import joueur.Joueur;
 
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class MonstreVaincu {
     
     public ArrayList<Action> tabAction;
+    
     
     /**
      * Constructeur

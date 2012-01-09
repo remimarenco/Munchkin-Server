@@ -7,7 +7,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * 
+ * // TODO : Commenter
  * @author Julien Rouvier
  */
 public class ModifPuissancePersonnage extends Action{
@@ -106,7 +106,9 @@ public class ModifPuissancePersonnage extends Action{
             if(!classeTrouve)
                 accept=false;
         }
-		
+	
+        // TODO : Commenter, expliciter ce qu'est bNiveau & bObjet
+        
         if(!bNiveau){
             niveauJoueur=joueurImpacte.getPersonnage().getNiveau();
             this.bonusPuissance -= niveauJoueur;
