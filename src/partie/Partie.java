@@ -602,12 +602,24 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.sendMessageToCurrent("Qu'allez vous faire ?");
                 this.sendMessageToCurrent("Pour l'utiliser maintenant, appuyez sur le bouton Utiliser, sinon (TODO)\n");
 
-                //TODO : Gestion du clic sur le bouton intervention et du choix de ne pas utiliser le sort maintenant
-                // On fait l'utilisation
-                this.sendMessageToAllButCurrent("Il utilise la carte !! Tremblez, pauvres fous !\n");
-                this.sendMessageToCurrent("Vous avez choisi d'utiliser la carte sur vous (TODO : choix personne)!\n");
+                this.sendQuestionToEnCours("Utiliser ?");
+                this.answer=null;
 
-                this.sendMessageToAll(sort.appliquerSortilege(enCours));
+                while( this.answer==null )
+                    try {
+                       Thread.currentThread().sleep(200);//sleep for 200 ms
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                    }                 
+
+                if(this.answer.equals("Yes")){
+                    this.sendMessageToAllButCurrent("Il utilise la carte !! Tremblez, pauvres fous !\n");
+                    this.sendMessageToCurrent("Vous avez choisi d'utiliser la carte sur vous (TODO : choix personne)!\n");
+                    this.sendMessageToAll(sort.appliquerSortilege(enCours));
+                }else{
+                    // TODO : que se passe-t-il si on utilise pas le sort tout de suite ?
+                }
+                
             }
 
             // ==============
@@ -635,12 +647,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     defausse = defausseTresor;
             
             if(defausse.isEmpty()){
-            	// TODO : Vérification fonctionnement de cette ligne
                 pioche.setPioche(new ArrayList<Pioche>(defausse.getDefausse()));
                 defausse.vider();
             } else {
             	System.out.println("Apparemment, il y avait rien dans la défausse... Du coup, ciao !");
-            	// TODO : Vérifier si la partie est terminée
             	finPartie();
             }
         }
