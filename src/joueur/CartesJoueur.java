@@ -114,4 +114,32 @@ public class CartesJoueur {
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
     }
+    /**
+     * Retourne l'ensemble des cartes qu'un joueur peut jouer pour AIDER un autre joueur(passer de sa main à son jeu)
+     * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont
+     * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
+     * @return
+     */
+    public HashMap<String,String> getCartesJouablePourAide(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        for(Carte c : this.cartes)
+            if(c.getClass().getSimpleName().equals("Objet"))
+                map.put(c.getId().toString(), c.getId().toString());
+        return map;
+    }
+    /**
+     * Retourne l'ensemble des cartes qu'un joueur peut jouer pour POURRIR un autre joueur(passer de sa main à son jeu)
+     * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont
+     * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
+     * @return
+     */
+    public HashMap<String,String> getCartesJouablePourPourrir(){
+        HashMap<String,String> map=new HashMap<String, String>();
+        for(Carte c : this.cartes)
+            if(c.getClass().getSimpleName().equals("Objet"))
+                map.put(c.getId().toString(), c.getId().toString());
+        return map;
+    }
+
+
 }

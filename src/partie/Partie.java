@@ -367,10 +367,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 break;
             case Constante.ACTION_AIDER:
                 if(!msg.getIdCard().equals("")){
-                     
+                    Integer id = new Integer(msg.getIdCard());
                 } else {
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite aider "+this.enCours.getName());
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à utiliser pour AIDER le joueur : "+this.enCours.getName());
+                    this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                                this.getJoueurByName(msg.getNick_src()).getMain().getCartesJouablePourAide()));
                 }
                 break;
             case Constante.ACTION_POSERCARTE:
@@ -391,11 +393,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 break;
             case Constante.ACTION_POURRIR:
                 if(!msg.getIdCard().equals("")){
-                     
+                    Integer id = new Integer(msg.getIdCard());
                 }
                 else{
                     this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à poser");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à utiliser pour POURRIR le joueur : "+this.enCours.getName());
+                    this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                                this.getJoueurByName(msg.getNick_src()).getMain().getCartesJouablePourPourrir()));
                 }
                 break;
             }
