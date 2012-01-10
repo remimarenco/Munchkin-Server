@@ -53,6 +53,7 @@ public class Constante {
     public static final Classe CLASSE_VOLEUR   = new Voleur();
     public static final Classe CLASSE_GUERRIER = new Guerrier();
     public static final Classe CLASSE_MAGICIEN = new Magicien();
+    public static final Classe CLASSE_AUCUNE   = null;
     
     public static final int CARTE_OBJET  = 1;
     public static final int CARTE_SORT   = 2;
@@ -90,7 +91,13 @@ public class Constante {
     public static final int CHERCHER_LA_BAGARRE = 1;
     public static final int PILLER_LA_PIECE = 2;
     public static final int CHARITE_SIOUPLAIT = 3;
-    
+
+    /**
+     * Constantes de gestion des joueurs impliqués
+     */
+    public static final int TOUS_JOUEURS = 0;
+    public static final int AUCUN_JOUEUR = 0;
+
     /**
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
