@@ -8,10 +8,11 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
- *
+ * // TODO : A commenter
  * @author Guillaume Renoult
  */
 public class Message {
+    
     
     public static final int CONNECT           = 0;
     public static final int DISCONNECT        = 1;
@@ -22,6 +23,8 @@ public class Message {
     public static final int INTERVENTION      = 8;
     public static final int SOUND             = 9;
     public static final int CARTE_EN_COURS    = 10;        
+    public static final int CHOIXCAMP         = 11;        
+    public static final int CHOIXJOUEUR       = 12;        
     public static final int INFO_JOUEUR       = 80;
     public static final int JEUX_JOUEUR       = 81;
     public static final int MAIN_JOUEUR       = 82;
@@ -30,10 +33,10 @@ public class Message {
     public static final int CARTE_CAMPMECHANT = 86; 
     public static final int CARTES_JOUABLES   = 87;
             
-    private String nick_src     = "";     
-    private String nick_dest    = "";    
-    private String message      = "";
-    private String idCard       = new String();
+    private String nick_src  = "";     
+    private String nick_dest = "";    
+    private String message   = "";
+    private String idCard    = new String();
     
     private int type;
     private int action;
@@ -69,7 +72,6 @@ public class Message {
         this.nick_dest  = nick_dest;
     }
     
-    
      /**
       * Constructeur
       * @param type
@@ -84,7 +86,6 @@ public class Message {
         this.message    = msg;
         this.color      = Color.BLACK;
     }
-    
     
     /**
      * Constructeur
@@ -152,43 +153,6 @@ public class Message {
         this.message    = msg;
    }
    
-   
-   
-    // ===== ACCESSEURS & MUTATEURS ===== //
-    public int getType() {
-       return this.type;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public String getNick_src() {
-        return this.nick_src;
-    }
-
-    public String getNick_dest() {
-        return this.nick_dest;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public HashMap<String, String> getMap() {
-        return map;
-    }
-
-    public int getAction() {
-        return action;
-    }
-    // ================================== //
-    
-    
 
    /**
     * Methode qui lit un message qui arrive sur le socket
@@ -198,8 +162,8 @@ public class Message {
     public boolean read(DataInputStream in) {
         try{
             ObjectInputStream ois = new ObjectInputStream(in);
-            type                  = in.readInt();        
-            nick_src              = in.readUTF();
+            type     = in.readInt();        
+            nick_src = in.readUTF();
 
             if(type > DISCONNECT){                      
                 nick_dest=in.readUTF();  
@@ -251,5 +215,37 @@ public class Message {
         catch(Exception e){
             return false;
         }
+    }
+
+    public int getType() {
+       return this.type;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public String getNick_src() {
+        return this.nick_src;
+    }
+
+    public String getNick_dest() {
+        return this.nick_dest;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public HashMap<String, String> getMap() {
+        return map;
+    }
+
+    public int getAction() {
+        return action;
     }
 }

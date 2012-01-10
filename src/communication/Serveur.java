@@ -135,6 +135,10 @@ public class Serveur {
             case Message.SOUND:
                 this.partie.sendSongToAll(msg.getAction());
                 break;
+            case Message.CHOIXCAMP:               
+                break;
+            case Message.CHOIXJOUEUR:                
+                break;
         }
     }
 }

@@ -268,6 +268,24 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.BLUE);
         this.getJoueurByName(source).sendMessage(msg);        
     }
+       /**
+     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
+     * @param source
+     * @param txt 
+     */
+    public void sendQuestionChoixJoueurBackTo(String source,String txt){
+        Message msg=new Message(Message.CHOIXJOUEUR,"Partie","Partie",txt,Color.BLUE);
+        this.getJoueurByName(source).sendMessage(msg);        
+    }
+       /**
+     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
+     * @param source
+     * @param txt 
+     */
+    public void sendQuestionChoixCAMPSBackTo(String source,String txt){
+        Message msg=new Message(Message.CHOIXCAMP,"Partie","Partie",txt,Color.BLUE);
+        this.getJoueurByName(source).sendMessage(msg);        
+    }
     
     
     /**
