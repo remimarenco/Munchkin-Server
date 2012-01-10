@@ -14,6 +14,15 @@ public class Humain extends Race
      */
     @Override
     public void modifPersonnage(Personnage personnage) {
-        // TODO : A implémenter
+
+    }
+    
+    /**
+     * Perd les attribut offerts par la race
+     * @param personnage 
+     */
+    @Override
+    public void defausserRace(Personnage personnage) {
+
     }
 }

@@ -42,7 +42,7 @@ public class Personnage {
         this.puissanceObjet     = puissanceObjet;
         this.race               = Constante.RACE_HUMAINE;
         this.classe             = null;
-        this.capaciteEquipement = 7;        
+        this.capaciteEquipement = 6;        
     }
    
     
@@ -101,6 +101,7 @@ public class Personnage {
     }
 
     public void setRace(Race race) {
+        race.defausserRace(this);
         this.race = race;
         race.modifPersonnage(this); // On modifie le personnage selon la race
     }

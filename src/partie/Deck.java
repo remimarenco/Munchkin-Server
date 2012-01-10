@@ -545,11 +545,6 @@ public final class Deck {
         // ==============
         // === OBJETS ===
         // ==============
-        actionEquipement.clear();
-        actionEquipement.add(new EquiperObjet(null, null, false, 0, 1, 1));
-        actionDefausser.clear();
-        actionDefausser.add(new EquiperObjet(null, null, false, 0, -1, -1));
-        actionDefausser.add(new ChangerNiveau(1));
         nouvelEquipementRace(actionEquipement, Constante.RACE_ELFE);
         cartes.add(new Objet(72, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
@@ -558,11 +553,7 @@ public final class Deck {
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_ELFE);
         cartes.add(new Objet(74, "Elfe", "+1 pour déguerpir/ Vous gagnez un niveau pour chaque monstre que vous avez aidé à tuer.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
-        
-        actionEquipement.clear();
-        actionEquipement.add(new ModifNbMaxEquipement(1));
-        actionDefausser.clear();
-        actionEquipement.add(new ModifNbMaxEquipement(-1));
+
         nouvelEquipementRace(actionEquipement, Constante.RACE_NAIN);
         cartes.add(new Objet(75, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
@@ -601,9 +592,10 @@ public final class Deck {
         
         actionEquipement.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 1, 0, 0));
+        actionEquipement.add(new ChangerClasse(Constante.CLASSE_GUERRIER));
         actionDefausser.clear();
-        actionEquipement.add(new EquiperObjet(null, null, false, -1, 0, 0));
-        nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
+        actionDefausser.add(new EquiperObjet(null, null, false, -1, 0, 0));
+        //actionDefausser.add(new ChangerClasse(Constante.CLASSE));
         cartes.add(new Objet(87, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
