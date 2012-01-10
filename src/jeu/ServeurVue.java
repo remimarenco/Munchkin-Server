@@ -108,9 +108,7 @@ public class ServeurVue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:       
      th=new Thread(){
-
             @Override
             public void run() {                
                  Serveur serv= new Serveur(8767,Integer.parseInt(jComboBox1.getSelectedItem().toString())); 
@@ -120,8 +118,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     th.start();
     this.jLabel2.setVisible(true);
     this.jComboBox1.setEnabled(false);
-    this.jButton1.setEnabled(false); 
-    
+    this.jButton1.setEnabled(false);   
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

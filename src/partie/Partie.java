@@ -19,7 +19,7 @@ import joueur.Personnage;
 /**
  * Classe principale du jeu.
  * Gére l'ensemble du déroulement de la partie.
- * Cette classe est à la fois une liste de joueur & un thread   // TODO : A vérifier
+ * Cette classe est à la fois une liste de joueur & un thread
  * @author Julien Rouvier
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
@@ -194,9 +194,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Cette methode permet de renvoyer l'index du Thread joueur
      * @param nick_dest
-     * @return 
+     * @return -1 si le Joueur n'existe pas (en cas de deco)
      */
     public Integer getCommunication(String nick_dest){
         int i = 0;
@@ -260,7 +260,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
+     * Renvoi un message à l'utilisateur qui a initié l'echange
      * @param source
      * @param txt 
      */
@@ -269,7 +269,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.getJoueurByName(source).sendMessage(msg);        
     }
        /**
-     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
+     * Envoi un message à l'utilisateur indiquer par son nom 
      * @param source
      * @param txt 
      */
@@ -278,7 +278,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.getJoueurByName(source).sendMessage(msg);        
     }
        /**
-     * Renvoi un message à l'utilisateur qui l'a lui même envoyé // TODO : A vérifier
+     * Envoi un message à l'utilisateur indiquer par son nom 
      * @param source
      * @param txt 
      */
@@ -338,7 +338,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Cette Methode permet d'envoyer la carte en cours, a tous les joueurs connectés
      * @param carte 
      */
     public void sendCarteEnCoursToAll(Carte carte){
@@ -436,7 +436,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     
     
     /**
-     * // TODO : Commenter
+     * Methode qui est appelé par le serveur lorsque la reponse attendu est reçu
+     * Permet de débloquer la partie lorsque celle ci attends la reponse d'un joueur
      * @param msg
      * @return 
      */
@@ -447,7 +448,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
  
    
     /**
-     * // TODO : Commenter
+     * Methode run du thread Partie
      */
     @Override
     public void run() {    	
