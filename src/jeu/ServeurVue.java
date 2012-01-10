@@ -111,8 +111,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         
     };
     th.start();
-    
-   
+    this.jButton1.setEnabled(false); 
     
 }//GEN-LAST:event_jButton1ActionPerformed
 

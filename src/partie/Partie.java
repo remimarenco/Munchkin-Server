@@ -354,27 +354,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.sendCartesMainToOwner();                    
                 } else {
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");
-                   /**
-                    * TODO
-                    * Ici on va executer un algo qui va regarder les cartes du joueur et lui renvoyer les cartes qu'il peut défausser.
-                    * Pour le moment on envoi l'ensemble des cartes de la main
-                    * TODO 2 : Le joueur ne peut-il pas se défausser de la carte qu'il veut ???
-                    */
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");                   
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
                     this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
                 }
-                break;
-            case Constante.ACTION_AIDER:
-                if(!msg.getIdCard().equals("")){
-                    Integer id = new Integer(msg.getIdCard());
-                } else {
-                    this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite aider "+this.enCours.getName());
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à utiliser pour AIDER le joueur : "+this.enCours.getName());
-                    this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-                                this.getJoueurByName(msg.getNick_src()).getMain().getCartesJouablePourAide()));
-                }
-                break;
+                break;           
             case Constante.ACTION_POSERCARTE:
                 if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
                     Integer id= new Integer(msg.getIdCard());
@@ -391,7 +375,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                 }
                 break;
-            case Constante.ACTION_POURRIR:
+            case Constante.ACTION_INTERVENIR:
                 if(!msg.getIdCard().equals("")){
                     Integer id = new Integer(msg.getIdCard());
                 }

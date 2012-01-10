@@ -1,6 +1,7 @@
 package joueur;
 
 import carte.Carte;
+import carte.Monstre;
 import java.util.ArrayList;
 import java.util.HashMap;
 import partie.Constante;
@@ -123,7 +124,7 @@ public class CartesJoueur {
     public HashMap<String,String> getCartesJouablePourAide(){
         HashMap<String,String> map=new HashMap<String, String>();
         for(Carte c : this.cartes)
-            if(c.getClass().getSimpleName().equals("Objet"))
+            if(c instanceof Monstre)
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
     }
