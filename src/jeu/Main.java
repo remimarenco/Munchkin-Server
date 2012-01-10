@@ -13,5 +13,7 @@ public class Main {
     public static void main(String[] args) {
         ServeurVue serV = new ServeurVue();
         serV.setVisible(true);
+        while(serV.isVisible());
+        System.exit(0);
     }
 }
