@@ -1,5 +1,8 @@
 package jeu;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Classe principale
  * @author Guillaume Renoult
@@ -13,7 +16,12 @@ public class Main {
     public static void main(String[] args) {
         ServeurVue serV = new ServeurVue();
         serV.setVisible(true);
-        while(serV.isVisible());
+        while(serV.isVisible()){try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
         System.exit(0);
     }
 }
