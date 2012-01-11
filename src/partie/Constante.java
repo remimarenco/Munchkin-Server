@@ -77,12 +77,41 @@ public class Constante {
      /**
      * Constante Son
      */
-    public static final int SOUND_INCIDENTFACHEUX = 101;
-    public static final int SOUND_COMBATGAGNE     = 102;
-    public static final int SOUND_COMBATPERDU     = 103;
-    public static final int SOUND_MONSTREFORT     = 104;
-    public static final int SOUND_MORT            = 105;
-    public static final int SOUND_RIRES           = 106;
+    public static final ConstanteSon SOUND_INCIDENTFACHEUX = new ConstanteSon(000,005);
+    public static final int SOUND_INCIDENTFACHEUX000    = 000;
+    public static final int SOUND_INCIDENTFACHEUX001    = 001;
+    public static final int SOUND_INCIDENTFACHEUX002    = 002;
+    public static final int SOUND_INCIDENTFACHEUX003    = 003;
+    public static final int SOUND_INCIDENTFACHEUX004    = 004;
+    public static final int SOUND_INCIDENTFACHEUX005    = 005;
+    
+    public static final ConstanteSon SOUND_DEGUERPIR = new ConstanteSon(100,105);
+    public static final int SOUND_DEGUERPIR100          = 100;
+    public static final int SOUND_DEGUERPIR101          = 101;
+    public static final int SOUND_DEGUERPIR102          = 102;
+    public static final int SOUND_DEGUERPIR103          = 103;
+    public static final int SOUND_DEGUERPIR104          = 104;
+    public static final int SOUND_DEGUERPIR105          = 105;
+    
+    public static final ConstanteSon SOUND_MONSTRE = new ConstanteSon(200,203);
+    public static final int SOUND_MONSTRE200            = 200;
+    public static final int SOUND_MONSTRE201            = 201;
+    public static final int SOUND_MONSTRE202            = 202;
+    public static final int SOUND_MONSTRE203            = 203;
+    
+    public static final ConstanteSon SOUND_SORT = new ConstanteSon(400,401);
+    public static final int SOUND_SORT400               = 400;
+    public static final int SOUND_SORT401               = 401;
+    
+    public static final ConstanteSon SOUND_VICTOIRE = new ConstanteSon(500,1505);
+    public static final int SOUND_VICTOIRE500           = 500;
+    public static final int SOUND_VICTOIRE501           = 501;
+    public static final int SOUND_VICTOIRE502           = 502;
+    public static final int SOUND_VICTOIRE503           = 503;
+    public static final int SOUND_VICTOIRE504           = 504;
+    public static final int SOUND_VICTOIRE505           = 505;
+    
+    public static final int SOUND_RIRES           = 999;
     
     /**
      * Constante Phase d'un tour
@@ -121,4 +150,20 @@ public class Constante {
         return valeur;
     }
     
+    /**
+     * Génère un nombre aléatoire entre min inclus et max exlus
+     */
+    public static int jouerSon(ConstanteSon son){
+    	return nbAleatoire(son.debutSon, son.finSon + 1);
+    }
+
+    private static class ConstanteSon {
+        int debutSon;
+        int finSon;
+        
+        public ConstanteSon(int debutSon, int finSon) {
+            this.debutSon = debutSon;
+            this.finSon = finSon;
+        }
+    }
 }

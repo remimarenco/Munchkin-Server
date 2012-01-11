@@ -647,7 +647,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
             for(Monstre monstre : combat.getCampMechant())
                 this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-            this.sendSongToAll(Constante.SOUND_INCIDENTFACHEUX);
+            this.sendSongToAll(Constante.jouerSon(Constante.SOUND_DEGUERPIR));
         }
     }
 
@@ -694,7 +694,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
     private void ChercherLaBagarre(Monstre monstrePioche) {
         this.phaseTour = Constante.CHERCHER_LA_BAGARRE;
-        this.sendSongToAll(Constante.SOUND_MONSTREFORT);
         Combat combat = new Combat(this);
         
         combat.getCampGentil().add(enCours.getPersonnage());
@@ -704,6 +703,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
         System.out.println(monstrePioche.getDescription());
         this.sendInfos();
+        this.sendSongToAll(Constante.jouerSon(Constante.SOUND_MONSTRE));
 
         /**
          * On applique la condition du monstre
@@ -764,7 +764,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         System.out.println("Vous avez gagné !");
         this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
         this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
-        this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
+        this.sendSongToAll(Constante.jouerSon(Constante.SOUND_VICTOIRE));
     }
 
     /**
@@ -775,7 +775,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         System.out.println("Vous avez perdu...");
         this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
         this.sendMessageToAll("Le joueur : " + enCours.getName() + "  a perdu le combat ! \n");
-        this.sendSongToAll(Constante.SOUND_COMBATPERDU);
+        this.sendSongToAll(Constante.jouerSon(Constante.SOUND_INCIDENTFACHEUX));
     }
 
     /**
