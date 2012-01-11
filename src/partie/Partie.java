@@ -3,6 +3,7 @@ package partie;
 import carte.Carte;
 import carte.Donjon;
 import carte.Monstre;
+import carte.Objet;
 import carte.Sort;
 import carte.Tresor;
 import communication.Message;
@@ -399,6 +400,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     Integer id= new Integer(msg.getIdCard());
                     this.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
                     this.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
+                    // Activation de la carte
+                    appliquerCartePoseMain(Deck.getCardById(id));
+                    
                     this.sendCartesJeuxJoueursToAll();
                     this.sendCartesMainToOwner(); 
                 } else {   //Le joueur informe qu'il veut poser une carte
@@ -528,66 +532,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // === MONSTRE ===
             if(cartePiochee.getClass().equals(Monstre.class))
             {
-                ChercherLaBagarre();
-                this.sendSongToAll(Constante.SOUND_MONSTREFORT);
-                combat = new Combat(this);
-                combat.getCampGentil().add(enCours.getPersonnage());
-
-                Monstre monstrePioche = (Monstre) cartePiochee;
-
-                combat.getCampMechant().add(monstrePioche);
-
-                System.out.println("Vous avez tiré le monstre :");
-                System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
-                System.out.println(monstrePioche.getDescription());
-                this.sendInfosCampsToAll(combat);
-
-                /**
-                 * On applique la condition du monstre
-                 */
-                this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
-
-                System.out.println("Combattre ? (o/n)");
-                this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
-                        + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
-                        + monstrePioche.getDescription() +"\n"
-                        +" Va-t il combattre ?\n");
-                this.sendQuestionToEnCours("Combattre ?");
-                this.answer=null;
-
-                while( this.answer==null )
-                    try {
-                       Thread.currentThread().sleep(200);//sleep for 200 ms
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-                    }                 
-
-                if(this.answer.equals("Yes")){
-                    // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
-                    // le nb de niveau gagné et les cartes trésors qu'il peut tirer
-                    if(combat.combattre()){
-                        System.out.println("Vous avez gagné !");
-                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
-                        this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
-                    } else {
-                        System.out.println("Vous avez perdu...");
-                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
-                        this.sendSongToAll(Constante.SOUND_COMBATPERDU);
-
-                    }
-                } else if(this.answer.equals("Non")){
-                    deguerpir(combat);
-                }
-                else {
-                    System.out.println("Veuillez entrer une réponse correcte");
-                }
-                monstrePioche.setBonusPuissance(0);
-                this.defausseDonjon.ajouterCarte(monstrePioche);
-                this.sendInfosJoueursToAll();
-                this.sendCartesJeuxJoueursToAll();
-                this.sendCartesMainToOwner();
+                ChercherLaBagarre((Monstre)cartePiochee);
             }
             // ===============
 
@@ -771,7 +716,72 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return cartePiochee;
     }
 
-    private void ChercherLaBagarre() {
-        //throw new UnsupportedOperationException("Not yet implemented");
+    private void ChercherLaBagarre(Monstre monstrePioche) {
+        this.sendSongToAll(Constante.SOUND_MONSTREFORT);
+                Combat combat = new Combat(this);
+                combat.getCampGentil().add(enCours.getPersonnage());
+
+                combat.getCampMechant().add(monstrePioche);
+
+                System.out.println("Vous avez tiré le monstre :");
+                System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
+                System.out.println(monstrePioche.getDescription());
+                this.sendInfosCampsToAll(combat);
+
+                /**
+                 * On applique la condition du monstre
+                 */
+                this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+
+                System.out.println("Combattre ? (o/n)");
+                this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
+                        + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
+                        + monstrePioche.getDescription() +"\n"
+                        +" Va-t il combattre ?\n");
+                this.sendQuestionToEnCours("Combattre ?");
+                this.answer=null;
+
+                while( this.answer==null )
+                    try {
+                       Thread.currentThread().sleep(200);//sleep for 200 ms
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                if(this.answer.equals("Yes")){
+                    // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
+                    // le nb de niveau gagné et les cartes trésors qu'il peut tirer
+                    if(combat.combattre()){
+                        System.out.println("Vous avez gagné !");
+                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
+                        this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
+                    } else {
+                        System.out.println("Vous avez perdu...");
+                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
+                        this.sendSongToAll(Constante.SOUND_COMBATPERDU);
+
+                    }
+                } else if(this.answer.equals("Non")){
+                    deguerpir(combat);
+                }
+                else {
+                    System.out.println("Veuillez entrer une réponse correcte");
+                }
+                monstrePioche.setBonusPuissance(0);
+                this.defausseDonjon.ajouterCarte(monstrePioche);
+                this.sendInfosJoueursToAll();
+                this.sendCartesJeuxJoueursToAll();
+                this.sendCartesMainToOwner();
+    }
+
+    private void appliquerCartePoseMain(Carte cardById) {
+        if(cardById.getClass().equals(Objet.class))
+        {
+            Carte carteObjet = (Objet) cardById;
+            this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
+            this.SendDebugMessage(carteObjet.equiper(this.enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, this.enCours));
+        }
     }
 }
