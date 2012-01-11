@@ -77,13 +77,6 @@ public class Constante {
      /**
      * Constante Son
      */
-    public static final ConstanteSon SOUND_INCIDENTFACHEUX = new ConstanteSon(000,005);
-    public static final int SOUND_INCIDENTFACHEUX000    = 000;
-    public static final int SOUND_INCIDENTFACHEUX001    = 001;
-    public static final int SOUND_INCIDENTFACHEUX002    = 002;
-    public static final int SOUND_INCIDENTFACHEUX003    = 003;
-    public static final int SOUND_INCIDENTFACHEUX004    = 004;
-    public static final int SOUND_INCIDENTFACHEUX005    = 005;
     
     public static final ConstanteSon SOUND_DEGUERPIR = new ConstanteSon(100,105);
     public static final int SOUND_DEGUERPIR100          = 100;
@@ -98,7 +91,15 @@ public class Constante {
     public static final int SOUND_MONSTRE201            = 201;
     public static final int SOUND_MONSTRE202            = 202;
     public static final int SOUND_MONSTRE203            = 203;
-    
+
+    public static final ConstanteSon SOUND_INCIDENTFACHEUX = new ConstanteSon(300,305);
+    public static final int SOUND_INCIDENTFACHEUX000    = 300;
+    public static final int SOUND_INCIDENTFACHEUX001    = 301;
+    public static final int SOUND_INCIDENTFACHEUX002    = 302;
+    public static final int SOUND_INCIDENTFACHEUX003    = 303;
+    public static final int SOUND_INCIDENTFACHEUX004    = 304;
+    public static final int SOUND_INCIDENTFACHEUX005    = 305;
+
     public static final ConstanteSon SOUND_SORT = new ConstanteSon(400,401);
     public static final int SOUND_SORT400               = 400;
     public static final int SOUND_SORT401               = 401;
