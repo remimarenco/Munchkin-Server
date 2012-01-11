@@ -401,10 +401,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
                     this.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
                     // Activation de la carte
-                    appliquerCartePoseMain(Deck.getCardById(id));
-                    
+                    appliquerCartePoseMainSurJoueur(this.getJoueurByName(msg.getNick_src()),Deck.getCardById(id));                
                     this.sendCartesJeuxJoueursToAll();
                     this.sendCartesMainToOwner(); 
+                    this.sendInfosJoueursToAll();
                 } else {   //Le joueur informe qu'il veut poser une carte
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");
@@ -776,12 +776,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 this.sendCartesMainToOwner();
     }
 
-    private void appliquerCartePoseMain(Carte cardById) {
+    private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
         if(cardById.getClass().equals(Objet.class))
-        {
-            Carte carteObjet = (Objet) cardById;
+        {   
+            final Joueur j=joueur;
             this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
-            this.SendDebugMessage(carteObjet.equiper(this.enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, this.enCours));
+            this.SendDebugMessage(cardById.equiper(j, new ArrayList<Joueur>(){{add(j);}}, null, this.phaseTour, this.enCours));
         }
     }
 }
