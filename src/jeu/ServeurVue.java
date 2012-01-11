@@ -111,7 +111,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
      th=new Thread(){
             @Override
             public void run() {                
-                 Serveur serv= new Serveur(80,Integer.parseInt(jComboBox1.getSelectedItem().toString())); 
+                 Serveur serv= new Serveur(8767,Integer.parseInt(jComboBox1.getSelectedItem().toString())); 
             }
         
     };
