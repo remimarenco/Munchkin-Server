@@ -5,7 +5,7 @@ package joueur;
  * La classe d'un personnage
  * @author Julien Rouvier
  */
-public class Classe {
+public abstract class Classe {
     
     /**
      * Constructeur
@@ -13,7 +13,9 @@ public class Classe {
     public Classe() {
 
     }
-
+    
+    public abstract void utiliserCapacite();
+    
     /**
      * Comportement lors d'un appel à println
      * @return String : le nom de la classe

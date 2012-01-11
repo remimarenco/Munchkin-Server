@@ -97,7 +97,17 @@ public class Constante {
      */
     public static final int TOUS_JOUEURS = 0;
     public static final int AUCUN_JOUEUR = 0;
-
+    
+    /**
+     * Constantes de sorts de classe
+     */
+    public static final int MAGICIEN_SORT_DE_VOL = 0;
+    public static final int MAGICIEN_SORT_DE_CHARME = 1;
+    public static final int PRETRE_RESURRECTION = 0;
+    public static final int PRETRE_RENVOIE = 1;
+    public static final int VOLEUR_POIGNARDER = 0;
+    public static final int VOLEUR_VOL_A_LA_TIRE = 1;
+    
     /**
      * Génère un nombre aléatoire entre min inclus et max exlus
      */
