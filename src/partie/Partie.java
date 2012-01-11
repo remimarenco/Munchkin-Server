@@ -33,6 +33,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private Color            Color;
     private String           answer;
     private int              phaseTour;
+    private Combat           combat;
 
     /**
      * Constructeur
@@ -377,6 +378,22 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
                 }
                 break;           
+            case Constante.ACTION_DESEQUIPER:
+                if(!msg.getIdCard().equals("")){
+                    Integer id = new Integer(msg.getIdCard());
+                    final Joueur j= this.getJoueurByName(msg.getNick_src());                    
+                    Deck.getCardById(id).desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);                    
+                    this.getJoueurByName(msg.getNick_src()).getJeu().supprimerCarte(Deck.getCardById(id));
+                    this.sendCartesJeuxJoueursToAll();
+                    this.sendCartesMainToOwner();
+                    this.sendInfosJoueursToAll();
+                } else {
+                    this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite se desequiper d'une carte ! ");
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Désequiper");                   
+                    this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+                    this.getJoueurByName(msg.getNick_src()).getJeu().generateInfos()));
+                }
+                break;           
             case Constante.ACTION_POSERCARTE:
                 if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
                     Integer id= new Integer(msg.getIdCard());
@@ -513,7 +530,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             {
                 ChercherLaBagarre();
                 this.sendSongToAll(Constante.SOUND_MONSTREFORT);
-                Combat combat = new Combat(this);
+                combat = new Combat(this);
                 combat.getCampGentil().add(enCours.getPersonnage());
 
                 Monstre monstrePioche = (Monstre) cartePiochee;

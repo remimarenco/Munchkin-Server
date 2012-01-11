@@ -147,6 +147,17 @@ public abstract class Carte {
         else
             return "Cette carte n'a pas d'équipement\n";
     }
+    /**
+     * Permet de lancer le comportement de desequipement d'une carte objet
+     * TODO : Vérifier si c'est toujours applicable => Voir au dessus
+     * @param equipement
+     */
+    public String desequiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+        if(this.defausserCarte != null)
+            return defausserCarte.defausserCarte(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+        else
+            return "Cette carte n'a pas de comportement defausser carte\n";
+    }
 
     /**
      * Permet de lancer le comportement condition d'une carte monstre
