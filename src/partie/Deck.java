@@ -273,7 +273,7 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(Constante.NB_PAR_DE), null);
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-Constante.NB_PAR_DE), null);
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(21, "3872 Orques", "+6 contre les nains en raison d'une rancune obscure, certes, mais millénaire", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 10);
         tabRace.add(Constante.RACE_NAIN);
