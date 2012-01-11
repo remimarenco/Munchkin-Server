@@ -32,7 +32,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private Joueur           enCours;
     private Color            Color;
     private String           answer;
-    private int				 phaseTour;
+    private int              phaseTour;
 
     /**
      * Constructeur
@@ -547,7 +547,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                 if(this.answer.equals("Yes")){
                     // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
-                    // le nb de niveau gagnÃ© et les cartes trÃ©sors qu'il peut tirer
+                    // le nb de niveau gagné et les cartes trésors qu'il peut tirer
                     if(combat.combattre()){
                         System.out.println("Vous avez gagné !");
                         this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
@@ -723,7 +723,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private Carte phaseOuvrirPorte() {
     	this.phaseTour = Constante.OUVRIR_PORTE;
         Carte cartePiochee;
-
+        
         cartePiochee = (Carte) piocheDonjon.tirerCarte();
 
         if(cartePiochee == null){
@@ -736,8 +736,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.sendMessageToAll(enCours.getName() + " pioche une carte ! : \n");
         this.sendCarteEnCoursToAll(cartePiochee);
 
-        if(cartePiochee.getClass().equals(Sort.class))
-        {
+        if(cartePiochee.getClass().equals(Sort.class)){
             cartePiochee = (Sort) cartePiochee;
             this.sendMessageToAll("C'est un sort !!\n");
             this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");

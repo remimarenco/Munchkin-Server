@@ -25,12 +25,11 @@ public class Jeu extends CartesJoueur{
      */
     @Override
     public boolean ajouterCarte(Carte c) {
-        if(super.ajouterCarte(c)){
+        if(super.ajouterCarte(c))
             // TODO : Appliquer la classe, la race, etc...
             return true;
-        }else{
+        else
             return false;
-        }
     }
     
     

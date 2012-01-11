@@ -61,7 +61,7 @@ public class ChangerNiveau extends Action {
      */
     // TODO : Description méthode + PROTECTION NULL
 	@Override
-	public String action(Joueur joueurDestinateur,
+	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
 			int phaseTour, Joueur joueurTourEnCours) {
 		

@@ -34,7 +34,7 @@ public class MonstreVaincu {
      * @param joueurImpacte : joueur ayant vaincu le monstre
      * @return 
      */
-    public String actionMonstreVaincu(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours) {
+    public String actionMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours) {
         
         String out = "";
 
@@ -45,7 +45,7 @@ public class MonstreVaincu {
             for(Joueur joueurImpacte : joueurDestinataire){
 	            out += "Une action monstre vaincu vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
 	            for(Action action : tabAction)
-	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	                out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
             }
             out += "\n--- Fin de monstre vaincu ---";
         }

@@ -32,12 +32,12 @@ public class ComportementDefausserCarte {
      * @param joueurImpacte
      * @return 
      */
-    public String DefausserCarte(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String DefausserCarte(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         out += "--- Defausser carte ---\n";
         out += "Le joueur défausse une carte\n";
         for(Action action : tabAction)
-            out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         out += "--- Fin Defausser Carte ---\n";
         return out;
     }

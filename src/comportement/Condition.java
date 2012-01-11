@@ -33,7 +33,7 @@ public class Condition {
      * @param joueurImpacte : joueur sur lequel s'applique la condition
      * @return out : texte résumant l'action
      */
-    public String mettreCondition(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String mettreCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
 
         if(tabAction == null){
@@ -43,7 +43,7 @@ public class Condition {
             for(Joueur joueurImpacte : joueurDestinataire){
 	            out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
 	            for(Action action : tabAction)
-	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	                out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
 	            out += "\n--- Fin de condition ---\n";
             }
         }

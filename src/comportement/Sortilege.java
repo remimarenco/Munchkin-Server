@@ -1,19 +1,18 @@
 package comportement;
 
 import java.util.ArrayList;
-
 import partie.Combat;
 import action.Action;
 import joueur.Joueur;
 
 
 /**
- * Ensemble d'actions lancées par un sort // TODO : Vérifier
+ * Ensemble d'actions lancées par un sort
  * @author Julien Rouvier
  */
 public class Sortilege {
-    
-    private ArrayList<Action> tabAction;
+
+    private ArrayList<Action> tabAction;    // Ensemble des actions du sort
 
     
     /**
@@ -22,6 +21,7 @@ public class Sortilege {
      */
     public Sortilege(ArrayList<Action> tabAction) {
     	try {
+            // Enregistre une copie du tableau d'action dans le sortilège
             this.tabAction = (ArrayList<Action>) tabAction.clone();
         } catch(Exception e) {
             System.out.println("Aucune action dans le sort");
@@ -35,17 +35,17 @@ public class Sortilege {
      * @return out : texte résumant l'action
      *         nomPhase : StackTraceElement permettant de situer la phase dans laquelle nous sommes
      */
-    public String actionSortilege(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String actionSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         if(tabAction == null){
             out += "Aucune sortilège à appliquer";
         } else {
             out += "----- Sortilège -----\n";
             for(Joueur joueurImpacte : joueurDestinataire){
-	            out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
-	            for(Action action : tabAction)
-	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
-	            out += "\n";
+                out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
+                for(Action action : tabAction)
+                    out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+                out += "\n";
             }
             out += "--- Fin sortilège ---";
         }

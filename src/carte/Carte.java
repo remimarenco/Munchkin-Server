@@ -129,9 +129,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerIncidentFacheux(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerIncidentFacheux(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.incidentFacheux != null)
-            return this.incidentFacheux.actionIncidentFacheux(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.incidentFacheux.actionIncidentFacheux(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'incident facheux\n";
     }
@@ -141,9 +141,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public String equiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String equiper(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.equipement != null)
-            return equipement.equipe(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return equipement.equipe(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'équipement\n";
     }
@@ -153,9 +153,9 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerCondition(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.condition != null)
-            return this.condition.mettreCondition(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.condition.mettreCondition(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de condition\n";
     }
@@ -168,9 +168,9 @@ public abstract class Carte {
      * ex 2 : Joueur B lance le sortilège qui s'applique à tous les monstres en jeu
      * @param joueurImpacte
      */
-    public String appliquerSortilege(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.sortilege != null)
-            return this.sortilege.actionSortilege(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.sortilege.actionSortilege(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de malus\n";
     }
@@ -180,10 +180,10 @@ public abstract class Carte {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerMonstreVaincu(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
     	if(this.monstreVaincu != null)
-            out += this.monstreVaincu.actionMonstreVaincu(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += this.monstreVaincu.actionMonstreVaincu(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;

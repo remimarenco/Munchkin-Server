@@ -853,8 +853,8 @@ public final class Deck {
     	actionEquipement.clear();
         actionEquipement.add(new ChangerRace(race));
 	}
-    
-    
+
+
     /**
      * Méthode permettant de vider le tableau d'initialisation des equipements classes et de le remplir avec une nouvelle classe
      * @param actionEquipement
@@ -865,7 +865,7 @@ public final class Deck {
         actionEquipement.add(new ChangerClasse(classe));
     }
 
-    
+
     /**
      * Méthode permettant de vider le tableau d'initialisation des monstres vaincus et de le remplir avec les nouveaux paramètres
      * @param actionTabMonstreVaincu

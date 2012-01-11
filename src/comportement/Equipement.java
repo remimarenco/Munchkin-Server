@@ -33,7 +33,7 @@ public  class Equipement {
      * @param joueurImpacte : le joueur a équiper
      * @return out : texte résumant l'action
      */
-    public String equipe(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String equipe(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         
         if(tabAction != null){
@@ -42,7 +42,7 @@ public  class Equipement {
             for(Joueur joueurImpacte : joueurDestinataire){
 	            out += "Un équipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
 	            for(Action action : tabAction)
-	                out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	                out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
 	            out += "--- Fin d'equipement ---\n";
             }
         } else {

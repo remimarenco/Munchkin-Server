@@ -9,7 +9,7 @@ import joueur.Joueur;
 
 /**
  *
- * @author simon.grabit
+ * @author Simon Grabit
  */
 public class UtiliserCarte {
 
@@ -32,12 +32,12 @@ public class UtiliserCarte {
      * @param joueurImpacte
      * @return 
      */
-    public String UtiliserCarte(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String UtiliserCarte(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         out += "--- Utiliser carte ---\n";
         out += "Le joueur utilise la compétence d'une carte\n";
         for(Action action : tabAction)
-            out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         out += "--- Fin Utiliser Carte ---\n";
         return out;
     }

@@ -60,74 +60,74 @@ public class ModifPuissancePersonnage extends Action{
      * @return 
      */
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurDestinateur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
-		
-		int puissanceObjet   = 0;
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+                    int phaseTour, Joueur joueurTourEnCours) {
+
+        int puissanceObjet   = 0;
         int niveauJoueur     = 0;
         boolean raceTrouve   = false;
         boolean classeTrouve = false;
         boolean accept       = true;
 
         String out = "";
-        
+
         for(Joueur joueurImpacte : joueurDestinataire) {
-	        out += "On passe dans une action de modification de puissance de personnage :\n";
-	        out += "Le joueur impliqué est "+joueurImpacte.getName();
-	        out += ", le bonus puissance attribué est de " + this.bonusPuissance;
-	
-	        if(tabRace != null){
-	            out += ", les races pour lesquelles ce bonus s'applique sont :";
-	            for(Race race : tabRace)
-	                out += (" " + race.toString());
-	        }
-	        else
-	            out += "Aucun classe pour ce bonus";
-	
-	        if(tabClasse != null){
-	            out += ", les classes pour lesquelles ce bonus s'applique sont :";
-	            for(Classe classe : tabClasse)
-	                out += " " + classe.toString();
-	                    
-	        }
-	        else
-	            out += "Aucune classe pour ce bonus";
-	
-	        out += "\n";
-			
-	        if(tabRace!=null){                  // Si des races ont été spécifiées
-	            for(Race race: tabRace)         // On regarde si celle du perso en fait parti
-	                if(joueurImpacte.getPersonnage().getRace().equals(race))
-	                    raceTrouve=true;
-	            if(!raceTrouve)
-	                accept=false;
-	        }
-			
-	        if(tabClasse!=null){                // Si des classes ont été spécifiées
-	            for(Classe classe: tabClasse)   // On regarde si celle du perso en fait parti
-	                if(joueurImpacte.getPersonnage().getClasse().equals(classe))
-	                    classeTrouve=true;
-	            if(!classeTrouve)
-	                accept=false;
-	        }
-		
-	        // TODO : Commenter, expliciter ce qu'est bNiveau & bObjet
-	        
-	        if(!bNiveau){
-	            niveauJoueur=joueurImpacte.getPersonnage().getNiveau();
-	            this.bonusPuissance -= niveauJoueur;
-	        }
-	        
-	        if(!bObjet){
-	            puissanceObjet=joueurImpacte.getPersonnage().getPuissance()-joueurImpacte.getPersonnage().getNiveau();
-	            this.bonusPuissance -= puissanceObjet;
-	        }
-			
-	        if(accept)
-	            joueurImpacte.getPersonnage().setBonusPuissance(joueurImpacte.getPersonnage().getBonusPuissance()+bonusPuissance);
+            out += "On passe dans une action de modification de puissance de personnage :\n";
+            out += "Le joueur impliqué est "+joueurImpacte.getName();
+            out += ", le bonus puissance attribué est de " + this.bonusPuissance;
+
+            if(tabRace != null){
+                out += ", les races pour lesquelles ce bonus s'applique sont :";
+                for(Race race : tabRace)
+                    out += (" " + race.toString());
+            }
+            else
+                out += "Aucun classe pour ce bonus";
+
+            if(tabClasse != null){
+                out += ", les classes pour lesquelles ce bonus s'applique sont :";
+                for(Classe classe : tabClasse)
+                    out += " " + classe.toString();
+
+            }
+            else
+                out += "Aucune classe pour ce bonus";
+
+            out += "\n";
+
+            if(tabRace!=null){                  // Si des races ont été spécifiées
+                for(Race race: tabRace)         // On regarde si celle du perso en fait parti
+                    if(joueurImpacte.getPersonnage().getRace().equals(race))
+                        raceTrouve=true;
+                if(!raceTrouve)
+                    accept=false;
+            }
+
+            if(tabClasse!=null){                // Si des classes ont été spécifiées
+                for(Classe classe: tabClasse)   // On regarde si celle du perso en fait parti
+                    if(joueurImpacte.getPersonnage().getClasse().equals(classe))
+                        classeTrouve=true;
+                if(!classeTrouve)
+                    accept=false;
+            }
+
+            // TODO : Commenter, expliciter ce qu'est bNiveau & bObjet
+
+            if(!bNiveau){
+                niveauJoueur=joueurImpacte.getPersonnage().getNiveau();
+                this.bonusPuissance -= niveauJoueur;
+            }
+
+            if(!bObjet){
+                puissanceObjet=joueurImpacte.getPersonnage().getPuissance()-joueurImpacte.getPersonnage().getNiveau();
+                this.bonusPuissance -= puissanceObjet;
+            }
+
+            if(accept)
+                joueurImpacte.getPersonnage().setBonusPuissance(joueurImpacte.getPersonnage().getBonusPuissance()+bonusPuissance);
         }
         return out;
-	}
-}
+    }
+}       

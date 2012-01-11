@@ -32,12 +32,12 @@ public class IncidentDeguerpir {
      * @param joueurImpacte
      * @return 
      */
-    public String actionIncidentDeguerpir(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String actionIncidentDeguerpir(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
-            out += action.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         out += "--- Fin d'incident fuite ---\n";
         return out;
     }
