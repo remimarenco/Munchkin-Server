@@ -20,6 +20,7 @@ public class Personnage {
     private int     bonusPuissance;
     private int     capaciteEquipement;
     private String  nom;
+    private int     maxCartes;
     /**
      * Constructeur
      * @param niveau
@@ -42,12 +43,18 @@ public class Personnage {
         this.puissanceObjet     = puissanceObjet;
         this.race               = Constante.RACE_HUMAINE;
         this.classe             = null;
-        this.capaciteEquipement = 6;        
+        this.capaciteEquipement = 6;
+        this.maxCartes          = 5;
     }
    
     
     
     // ===== ACCESSEURS & MUTATEURS ===== //
+    public int getMaxCartes()
+    {
+        return maxCartes;
+    }
+
     public int getNiveau() {
         return niveau;
     }

@@ -141,6 +141,4 @@ public class CartesJoueur {
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
     }
-
-
 }

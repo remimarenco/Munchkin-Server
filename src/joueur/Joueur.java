@@ -247,4 +247,27 @@ public class Joueur extends Thread {
         return map;
     }
 
+    /**
+     * Méthode permettant de vérifier la main
+     * @return renvoi un entier correspond au nombre de cartes en trop dans la main
+     */
+    public int verifieMain() {
+        // On retourne la soustraction de la taille avec le nombre de carte max
+        int deltaCarte = 0;
+        try{
+            deltaCarte = main.cartes.size() - personnage.getMaxCartes();
+        }
+        catch(Exception ex){
+            System.out.println("Une erreur a été détectée dans "+ex.getStackTrace().toString()+".\n voici le détail : "+ex.getMessage());
+        }
+        if(deltaCarte < 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return deltaCarte;
+        }
+    }
+
 }

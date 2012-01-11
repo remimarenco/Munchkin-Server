@@ -501,12 +501,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * Un tour de jeu d'un joueur
      */
     private void tour() {
-        // TODO : Phases du tour de jeu
-    		// Piller la pièce
-    			// Tué monstre ou pas rencontré monstre => Tirer deuxième carte paquet donjon
-    			// Sinon pas le droit
-    		// Charité
-    			// Trop de cartes en main => Défausse
     	// Deguerpir
         Iterator it = this.iterator();
         Carte cartePiochee = null;
@@ -525,8 +519,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             if(cartePiochee.getClass().equals(Monstre.class))
             {
                 // On cherche la bagarre, si on a gagné, on pille la pièce
+                this.sendMessageToAll("Au combat !!");
                 if(ChercherLaBagarre((Monstre)cartePiochee))
                 {
+                    this.sendMessageToAll("Vous pillez la pièce !");
                     PillerLaPiece();
                 }
             }
@@ -662,6 +658,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		    	// => Si Sort => Agit sur le joueur si possible => Défaussée
 		    	// => Autre type => Jouer ou mettre dans main
     private Carte phaseOuvrirPorte() {
+        this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_OUVRIR_PORTE);
     	this.phaseTour = Constante.PHASE_OUVRIR_PORTE;
         Carte cartePiochee;
         
@@ -723,7 +720,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      */
     private boolean ChercherLaBagarre(Monstre monstrePioche) {
         boolean gagne = true;
-
+        this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_CHERCHER_LA_BAGARRE);
         this.phaseTour = Constante.PHASE_CHERCHER_LA_BAGARRE;
         combat = new Combat(this);
         
@@ -851,15 +848,59 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         
     }
 
-
+    /**
+     * Phase de pillage de la piece, on pioche une carte et on change la phaseTour
+     */
     private void PillerLaPiece() {
+        this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_PILLER_LA_PIECE);
         this.phaseTour = Constante.PHASE_PILLER_LA_PIECE;
         // On pioche une carte du donjon
-        
+        enCours.piocherCarte(Constante.DONJON);
     }
 
+    /**
+     * TODO : Faire la charite
+     */
     private void Charite() {
+        this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
         this.phaseTour = Constante.PHASE_CHARITE_SIOUPLAIT;
-        // On vérifie la main du joueur, on défausse
+        int nbCartesADefausser = 0;
+        // On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser
+        // TODO :
+        if((nbCartesADefausser = enCours.verifieMain()) > 0)
+        {
+            // On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
+            // Oui c'est fait exprès pour etre le plus flexible possible
+            // On récupère la carte choisie par l'utilisateur que l'on veut défausser
+            Carte carteADefausser = demandeDefausseCarte();
+            try{
+                if(carteADefausser != null)
+                {
+                    // On la supprime de sa main
+                    if(enCours.getMain().supprimerCarte(carteADefausser))
+                    {
+                        this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" a été correctement supprimé de la main");
+                    }
+                    else
+                    {
+                       this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" n'a pas été correctement supprimé de la main !!!");
+                       throw new Exception();
+                    }
+                }
+                // Si la carte est null, il y a eu une erreur
+                else{
+                    throw new Exception();
+                }
+            }
+            catch(Exception ex){
+                Exception e = new Exception();
+                this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
+            }
+        }
+    }
+
+    // TODO : Demander au joueur de defausser une carte de sa main, renvoi la carte à défausser.
+    private Carte demandeDefausseCarte() {
+        return null;
     }
 }
