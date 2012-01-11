@@ -641,8 +641,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         dicoFuite = combat.tenterDeguerpir();
 
         // Les joueurs qui ont réussi à fuir sont tranquilles
-        for(Personnage persoReussi : dicoFuite.get(Boolean.TRUE))
+        for(Personnage persoReussi : dicoFuite.get(Boolean.TRUE)){
             sendMessageToPlayer("Vous avez réussi à déguerpir !", persoReussi);
+            this.sendSongToAll(Constante.jouerSon(Constante.SOUND_DEGUERPIR));
+        }
 
         // Les joueurs qui n'ont pas réussi à fuir se prennent des incident fâcheux
         for(Personnage persoEchec : dicoFuite.get(Boolean.FALSE)){
@@ -650,7 +652,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
             for(Monstre monstre : combat.getCampMechant())
                 this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-            this.sendSongToAll(Constante.jouerSon(Constante.SOUND_DEGUERPIR));
+            this.sendSongToAll(Constante.jouerSon(Constante.SOUND_INCIDENTFACHEUX));
         }
     }
 
