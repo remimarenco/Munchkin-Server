@@ -684,7 +684,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
             this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
             this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
-
+            this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
             // On rafraichit
             this.sendInfos();
         }
