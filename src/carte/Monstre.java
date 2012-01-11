@@ -30,6 +30,7 @@ public class Monstre extends Donjon {
         this.monstreVaincu      = monstreVaincu;
         this.incidentDeguerpir  = incidentDeguerpir;
         this.puissance          = puissance;
+        this.bonusPuissance     = 0;
     }
 
     

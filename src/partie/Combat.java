@@ -112,6 +112,7 @@ public class Combat {
         int puissanceMechant = 0;
         Iterator itGentil    = CampGentil.iterator();
         Iterator itMechant   = CampMechant.iterator();
+        boolean guerrier     = false;
         
         while(itGentil.hasNext()){
             Object obj = itGentil.next();
@@ -140,7 +141,12 @@ public class Combat {
                 return false;
             }
         }
-
+        for(Personnage persoImpacte : CampGentil){
+            if(persoImpacte.getClasse()==Constante.CLASSE_GUERRIER)
+                guerrier=true;
+        }
+        if(guerrier)
+            puissanceGentil++;
         return (puissanceGentil >= puissanceMechant); // True si camps gentil gagne
     }
     

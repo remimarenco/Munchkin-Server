@@ -1,5 +1,6 @@
 package action;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import java.util.ArrayList;
 
 import joueur.Joueur;
@@ -39,23 +40,28 @@ public class PiocherCarte extends Action {
 			int phaseTour, Joueur joueurTourEnCours) {
 		
 		String out = "";
-		
+                int i;
 		for(Joueur joueurImpacte : joueurDestinataire){
-	        out += "Le joueur " + joueurImpacte.getName();
-	        
-	        if(nbCarte > 1)
-	            out += " pioche "+nbCarte+" cartes dans la pioche ";
-	        else
-	            out += " pioche "+nbCarte+" carte dans la pioche ";
-	
-	        if(type_pioche == Constante.DONJON){
-	            out += "donjon";
-	            joueurImpacte.piocherCarte(Constante.DONJON);
-	        } else {
-	            out += "trésor";
-	            joueurImpacte.piocherCarte(Constante.TRESOR);
-	        }
-		}
+                    if(joueurImpacte.getPersonnage().getRace()==Constante.RACE_HALFELIN)
+                        nbCarte++;
+
+                    out += "Le joueur " + joueurImpacte.getName();
+
+                    if(nbCarte > 1)
+                        out += " pioche "+nbCarte+" cartes dans la pioche ";
+                    else
+                        out += " pioche "+nbCarte+" carte dans la pioche ";
+
+                    for(i=0; i<nbCarte; i++){
+                        if(type_pioche == Constante.DONJON){
+                            out += "donjon";
+                            joueurImpacte.piocherCarte(Constante.DONJON);
+                        } else {
+                            out += "trésor";
+                            joueurImpacte.piocherCarte(Constante.TRESOR);
+                        }
+                    }
+                }
         return out;
 	}
 }

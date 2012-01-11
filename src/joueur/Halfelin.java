@@ -22,8 +22,6 @@ public class Halfelin extends Race {
      */
     @Override
     public void defausserRace(Personnage personnage) {
-        // TODO : gain de niveau uniquement après avoir aidé en combat
-        
-        personnage.setCapaciteFuite(personnage.getCapaciteFuite()-1);
+
     }
 }

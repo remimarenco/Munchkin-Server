@@ -103,7 +103,7 @@ public class ModifPuissanceMonstre extends Action{
         }
 		
         if(accept)
-        	monstre.setPuissance(monstre.getPuissance()+bonusPuissance);	
+        	monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);	
         }
         return out;	
 	}
