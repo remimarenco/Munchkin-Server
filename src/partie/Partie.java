@@ -874,30 +874,34 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
             // Oui c'est fait exprès pour etre le plus flexible possible
             // On récupère la carte choisie par l'utilisateur que l'on veut défausser
-            Carte carteADefausser = demandeDefausseCarte(enCours);
-            try{
-                if(carteADefausser != null)
-                {
-                    // On la supprime de sa main
-                    if(enCours.getMain().supprimerCarte(carteADefausser))
-                    {
-                        this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" a été correctement supprimé de la main");
-                    }
-                    else
-                    {
-                       this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" n'a pas été correctement supprimé de la main !!!");
-                       throw new Exception();
-                    }
-                }
-                // Si la carte est null, il y a eu une erreur
-                else{
-                    throw new Exception();
-                }
-            }
-            catch(Exception ex){
-                Exception e = new Exception();
-                this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
-            }
+        	for(int i = 0; i < nbCartesADefausser; i++)
+        	{
+        		// Test si on a modifié les paramètres : ex : recalculer nbCartesADefausser ?
+	            Carte carteADefausser = demandeDefausseCarte(enCours);
+	            try{
+	                if(carteADefausser != null)
+	                {
+	                    // On la supprime de sa main
+	                    if(enCours.getMain().supprimerCarte(carteADefausser))
+	                    {
+	                        this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" a été correctement supprimé de la main");
+	                    }
+	                    else
+	                    {
+	                       this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" n'a pas été correctement supprimé de la main !!!");
+	                       throw new Exception();
+	                    }
+	                }
+	                // Si la carte est null, il y a eu une erreur
+	                else{
+	                    throw new Exception();
+	                }
+	            }
+	            catch(Exception ex){
+	                Exception e = new Exception();
+	                this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
+	            }
+        	}
         }
     }
 
