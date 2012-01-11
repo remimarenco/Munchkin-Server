@@ -25,9 +25,9 @@ public class Constante {
     /**
      * Type de pioche
      */
-    public static final int NB_PAR_DE        = -1;
-    public static final int NB_TOUT          = -2;
-    public static final int NB_TOUT_CONCERNE = -3;
+    public static final int NB_PAR_DE        = -50;
+    public static final int NB_TOUT          = -51;
+    public static final int NB_TOUT_CONCERNE = -52;
     
     public static final Class TRESOR = Tresor.class;
     public static final Class DONJON = Donjon.class;

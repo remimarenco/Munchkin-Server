@@ -760,6 +760,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
 
             this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
+            this.sendMessageToCurrent(cartePiochee.getNom());
             this.sendMessageToCurrent(cartePiochee.getDescription());
 
             this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");

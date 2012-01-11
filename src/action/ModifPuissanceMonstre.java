@@ -51,11 +51,11 @@ public class ModifPuissanceMonstre extends Action{
      * @return out : texte résumant l'action
      */    
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
+    @Override
+    public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
 			int phaseTour, Joueur joueurTourEnCours) {
-		String out           = "";
+        String out           = "";
         boolean accept       = true;
         boolean raceTrouve   = false;
         boolean classeTrouve = false;
@@ -64,47 +64,46 @@ public class ModifPuissanceMonstre extends Action{
         out += "Le monstre impliqué est "+monstre.getNom();
         out += ", le bonus puissance attribué est de " + this.bonusPuissance;
     
-        for(Joueur joueurImpacte : joueurDestinataire)
-        {
-        if(tabRace != null && !(tabRace.isEmpty())){
-            out += ", les races contre lesquelles ce bonus s'applique sont :";
-            for(Race race : tabRace)
-                out += " " + race.toString();
-        }else{
-            out += " , aucune race n'est concernée par ce bonus";
-        }
-        
-        if(tabClasse != null && !(tabClasse.isEmpty())){
-            out += ", les classes contre lesquelles ce bonus s'applique sont :";
-            for(Classe classe : tabClasse){
-                out += " ";
-                out += classe.toString();
+        for(Joueur joueurImpacte : joueurDestinataire){
+            if(tabRace != null && !(tabRace.isEmpty())){
+                out += ", les races contre lesquelles ce bonus s'applique sont :";
+                for(Race race : tabRace)
+                    out += " " + race.toString();
+            }else{
+                out += " , aucune race n'est concernée par ce bonus";
             }
-            out += "\n";
-        }else{
-            out += " , aucune classe n'est concernée par ce bonus";
-        }
-        System.out.println(out);
 
-        if(tabRace != null && !tabRace.isEmpty()){      // Si des races sont spécifiées  
-            for(Race race: tabRace)                     // On regarde si celle du joueur est concernée
-                if(joueurImpacte.getPersonnage().getRace().toString().equals(race.toString()))
-                    raceTrouve=true;
-            if(!raceTrouve)
-                accept=false;
-        }
-		
-        if(tabClasse != null && !tabClasse.isEmpty()){  // Si des classes sont spécifiées  
-            for(Classe classe: tabClasse)               // On regarde si celle du joueur est concernée
-                if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
-                    raceTrouve=true;
-            if(!classeTrouve)
+            if(tabClasse != null && !(tabClasse.isEmpty())){
+                out += ", les classes contre lesquelles ce bonus s'applique sont :";
+                for(Classe classe : tabClasse){
+                    out += " ";
+                    out += classe.toString();
+                }
+                out += "\n";
+            }else{
+                out += " , aucune classe n'est concernée par ce bonus";
+            }
+            System.out.println(out);
+
+            if(tabRace != null && !tabRace.isEmpty()){      // Si des races sont spécifiées  
+                for(Race race: tabRace)                     // On regarde si celle du joueur est concernée
+                    if(joueurImpacte.getPersonnage().getRace().toString().equals(race.toString()))
+                        raceTrouve=true;
+                if(!raceTrouve)
                     accept=false;
-        }
-		
-        if(accept)
-        	monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);	
+            }
+
+            if(tabClasse != null && !tabClasse.isEmpty()){  // Si des classes sont spécifiées  
+                for(Classe classe: tabClasse)               // On regarde si celle du joueur est concernée
+                    if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
+                        raceTrouve=true;
+                if(!classeTrouve)
+                        accept=false;
+            }
+
+            if(accept)
+                monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);	
         }
         return out;	
-	}
+    }
 }
