@@ -372,8 +372,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 if(!msg.getIdCard().equals("")){
                     Integer id = new Integer(msg.getIdCard());
                     this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
-                    this.sendCartesJeuxJoueursToAll();
-                    this.sendCartesMainToOwner();                    
+                    this.sendInfos();                  
                 } else {
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");                   
@@ -387,9 +386,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     final Joueur j= this.getJoueurByName(msg.getNick_src());                    
                     Deck.getCardById(id).desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);                    
                     this.getJoueurByName(msg.getNick_src()).getJeu().supprimerCarte(Deck.getCardById(id));
-                    this.sendCartesJeuxJoueursToAll();
-                    this.sendCartesMainToOwner();
-                    this.sendInfosJoueursToAll();
+                    this.sendInfos();
                 } else {
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite se desequiper d'une carte ! ");
                     this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Désequiper");                   
@@ -404,13 +401,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     this.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
                     // Activation de la carte
                     appliquerCartePoseMainSurJoueur(this.getJoueurByName(msg.getNick_src()),Deck.getCardById(id));                
-                    this.sendCartesJeuxJoueursToAll();
-                    this.sendCartesMainToOwner(); 
-                    this.sendInfosJoueursToAll();
+                    this.sendInfos();
                 } else {   //Le joueur informe qu'il veut poser une carte
                     this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
-                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");
-                    
+                    this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");                    
                     this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
                                 this.getJoueurByName(msg.getNick_src()).getMain().getCartesPosables()));
 
@@ -686,21 +680,36 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             this.sendMessageToAll("C'est un sort !!\n");
             this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
             this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
-
+            demanderIntervenir();
             this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
             this.sendMessageToCurrent(cartePiochee.getNom());
             this.sendMessageToCurrent(cartePiochee.getDescription());
 
+            //
             this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-            this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
-
+            this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>()
+                {{add(enCours);}}, null, this.phaseTour, enCours));
+//            this.sendQuestionToEnCours("Utiliser ?");
+//            this.answer=null;
+//            while( this.answer==null )
+//                try {
+//                   Thread.currentThread().sleep(200);//sleep for 200 ms
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            if(this.answer.equals("Yes")){
+//            
+//            } else if(this.answer.equals("Non")){
+//
+//            }
+            //
             this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
 
             // On pille la piece
             PillerLaPiece();
             // On rafraichit
             this.sendInfos();
-        }
+            }
 
         return cartePiochee;
     }
@@ -819,6 +828,27 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.sendCartesJeuxJoueursToAll();
         this.sendCartesMainToOwner();
     }
+    
+    private void demanderIntervenir(){
+        for(Joueur j:this)           
+            j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+        this.answer=null;
+        while(this.answer==null){
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(this.answer.equals("Yes")){
+            this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
+        }
+        else{
+            this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
+        }
+        
+    }
+
 
     private void PillerLaPiece() {
         this.phaseTour = Constante.PHASE_PILLER_LA_PIECE;
