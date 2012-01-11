@@ -116,10 +116,10 @@ public class Constante {
     /**
      * Constante Phase d'un tour
      */
-    public static final int OUVRIR_PORTE = 0;
-    public static final int CHERCHER_LA_BAGARRE = 1;
-    public static final int PILLER_LA_PIECE = 2;
-    public static final int CHARITE_SIOUPLAIT = 3;
+    public static final int PHASE_OUVRIR_PORTE = 0;
+    public static final int PHASE_CHERCHER_LA_BAGARRE = 1;
+    public static final int PHASE_PILLER_LA_PIECE = 2;
+    public static final int PHASE_CHARITE_SIOUPLAIT = 3;
 
     /**
      * Constantes de gestion des joueurs impliqués

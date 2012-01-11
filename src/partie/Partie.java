@@ -313,8 +313,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      * 
      */
     public void sendInfosCampsToAll(Combat c){
-         for(Joueur j :this)            
+        if(c != null)
+        for(Joueur j :this){
             j.sendMessage(new Message(Message.INFO_CAMPS, "Partie", j.getName(), c.generateInfos()));
+        }
      }
     
     
@@ -528,8 +530,15 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // === MONSTRE ===
             if(cartePiochee.getClass().equals(Monstre.class))
             {
-                ChercherLaBagarre((Monstre)cartePiochee);
+                // On cherche la bagarre, si on a gagné, on pille la pièce
+                if(ChercherLaBagarre((Monstre)cartePiochee))
+                {
+                    PillerLaPiece();
+                }
             }
+
+            // On applique la phase Charité pour défausser les cartes
+            Charite();
             // On annule les bonus temporaires
             annulationBonusTemporaire(cartePiochee);
             }
@@ -657,7 +666,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		    	// => Si Sort => Agit sur le joueur si possible => Défaussée
 		    	// => Autre type => Jouer ou mettre dans main
     private Carte phaseOuvrirPorte() {
-    	this.phaseTour = Constante.OUVRIR_PORTE;
+    	this.phaseTour = Constante.PHASE_OUVRIR_PORTE;
         Carte cartePiochee;
         
         cartePiochee = (Carte) piocheDonjon.tirerCarte();
@@ -684,7 +693,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
             this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
             this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+
             this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
+
+            // On pille la piece
+            PillerLaPiece();
             // On rafraichit
             this.sendInfos();
         }
@@ -692,9 +705,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         return cartePiochee;
     }
 
-    private void ChercherLaBagarre(Monstre monstrePioche) {
-        this.phaseTour = Constante.CHERCHER_LA_BAGARRE;
-        Combat combat = new Combat(this);
+    /**
+     * Méthode qui permet de lancer la combat
+     * @param monstrePioche
+     * @return boolean, si le joueur a gagné le combat ou perdu
+     */
+    private boolean ChercherLaBagarre(Monstre monstrePioche) {
+        boolean gagne = true;
+
+        this.phaseTour = Constante.PHASE_CHERCHER_LA_BAGARRE;
+        combat = new Combat(this);
         
         combat.getCampGentil().add(enCours.getPersonnage());
         combat.getCampMechant().add(monstrePioche);
@@ -731,12 +751,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // le nb de niveau gagné et les cartes trésors qu'il peut tirer
             if(combat.combattre()){
                 combatGagne(monstrePioche);
-                
+                gagne = true;
             } else {
                 combatPerdu(monstrePioche);
+                gagne = false;
             }
         } else if(this.answer.equals("Non")){
             deguerpir(combat);
+            gagne = false;
         }
         else {
             System.out.println("Veuillez entrer une réponse correcte");
@@ -745,6 +767,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.defausseDonjon.ajouterCarte(monstrePioche);
         
         this.sendInfos();
+
+        return gagne;
     }
 
     private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
@@ -794,5 +818,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         this.sendInfosJoueursToAll();
         this.sendCartesJeuxJoueursToAll();
         this.sendCartesMainToOwner();
+    }
+
+    private void PillerLaPiece() {
+        this.phaseTour = Constante.PHASE_PILLER_LA_PIECE;
+        // On pioche une carte du donjon
+        
+    }
+
+    private void Charite() {
+        this.phaseTour = Constante.PHASE_CHARITE_SIOUPLAIT;
+        // On vérifie la main du joueur, on défausse
     }
 }
