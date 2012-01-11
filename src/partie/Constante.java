@@ -103,7 +103,7 @@ public class Constante {
     public static final int SOUND_SORT400               = 400;
     public static final int SOUND_SORT401               = 401;
     
-    public static final ConstanteSon SOUND_VICTOIRE = new ConstanteSon(500,1505);
+    public static final ConstanteSon SOUND_VICTOIRE = new ConstanteSon(500,505);
     public static final int SOUND_VICTOIRE500           = 500;
     public static final int SOUND_VICTOIRE501           = 501;
     public static final int SOUND_VICTOIRE502           = 502;
