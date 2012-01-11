@@ -35,6 +35,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
     private String           answer;
     private int              phaseTour;
     private Combat           combat;
+    private Carte            carteClickee=null;   
 
     /**
      * Constructeur
@@ -371,6 +372,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             case Constante.ACTION_DEFAUSSER:
                 if(!msg.getIdCard().equals("")){
                     Integer id = new Integer(msg.getIdCard());
+                    this.setCarteClickee(Deck.getCardById(id));
                     this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
                     this.sendInfos();                  
                 } else {
@@ -872,7 +874,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             // On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
             // Oui c'est fait exprès pour etre le plus flexible possible
             // On récupère la carte choisie par l'utilisateur que l'on veut défausser
-            Carte carteADefausser = demandeDefausseCarte();
+            Carte carteADefausser = demandeDefausseCarte(enCours);
             try{
                 if(carteADefausser != null)
                 {
@@ -899,8 +901,29 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         }
     }
 
+    public void setCarteClickee(Carte carteClickee) {
+        this.carteClickee = carteClickee;
+    }
+    
+    
+
     // TODO : Demander au joueur de defausser une carte de sa main, renvoi la carte à défausser.
-    private Carte demandeDefausseCarte() {
-        return null;
+    private Carte demandeDefausseCarte(Joueur j) {
+        this.sendMessageBackToSender(j.getName(),"Choisissez la carte à Defausser");
+        j.sendMessage(new Message(Message.INTERVENTION, "Partie",j.getName(),Constante.ACTION_DEFAUSSER));
+        j.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", j.getName(),
+                    j.getMain().generateInfos()));
+        this.carteClickee=null;
+        while(this.carteClickee==null)
+        {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }                   
+                    
+                    
+        return carteClickee;
     }
 }
