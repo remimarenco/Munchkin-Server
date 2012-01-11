@@ -506,10 +506,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
      */
     private void tour() {
         // TODO : Phases du tour de jeu
-	    	
-    		// Chercher la bagarre (pas dans specs)
-    			// Jouer un monstre de la main
-    			// Combattre
     		// Piller la pièce
     			// Tué monstre ou pas rencontré monstre => Tirer deuxième carte paquet donjon
     			// Sinon pas le droit
@@ -534,30 +530,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             {
                 ChercherLaBagarre((Monstre)cartePiochee);
             }
-            // ===============
-
-            // ==== SORT ====
-            /* Déjà géré dans OuvrirPorte();
-             else if(cartePiochee.getClass().equals(Sort.class)){
-                Sort sort = (Sort) cartePiochee;
-                //System.out.println("C'est un sort !!");
-                //this.sendMessageToAll("C'est un sort !!\n");
-                this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
-                this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
-
-                this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
-                this.sendMessageToCurrent(sort.getDescription());
-
-                this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-                this.sendMessageToAll(sort.appliquerSortilege(enCours, new ArrayList(){{add(enCours);}}, null, this.phaseTour, enCours));
-            }
-            */
-
-            // ==============
-
             // On annule les bonus temporaires
-            this.enCours.getPersonnage().setBonusCapaciteFuite(0);
-            this.enCours.getPersonnage().setBonusPuissance(0);
+            annulationBonusTemporaire(cartePiochee);
             }
         it = this.iterator();	
     }
@@ -653,7 +627,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             if(!j.getPersonnage().equals(personnage))
                 j.sendMessage(msg);
     }
-
+    
     /**
      * Méthode permettant de faire le déroulement de la phase déguerpir
      * @param combat
@@ -710,70 +684,67 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
             this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
             this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
-            
+
+            // On rafraichit
+            this.sendInfos();
         }
 
         return cartePiochee;
     }
 
     private void ChercherLaBagarre(Monstre monstrePioche) {
+        this.phaseTour = Constante.CHERCHER_LA_BAGARRE;
         this.sendSongToAll(Constante.SOUND_MONSTREFORT);
-                Combat combat = new Combat(this);
-                combat.getCampGentil().add(enCours.getPersonnage());
+        Combat combat = new Combat(this);
+        
+        combat.getCampGentil().add(enCours.getPersonnage());
+        combat.getCampMechant().add(monstrePioche);
 
-                combat.getCampMechant().add(monstrePioche);
+        System.out.println("Vous avez tiré le monstre :");
+        System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
+        System.out.println(monstrePioche.getDescription());
+        this.sendInfos();
 
-                System.out.println("Vous avez tiré le monstre :");
-                System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
-                System.out.println(monstrePioche.getDescription());
-                this.sendInfosCampsToAll(combat);
+        /**
+         * On applique la condition du monstre
+         */
+        this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+        this.sendInfos();
+        
+        System.out.println("Combattre ? (o/n)");
+        this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
+                + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
+                + monstrePioche.getDescription() +"\n"
+                +" Va-t il combattre ?\n");
+        this.sendQuestionToEnCours("Combattre ?");
+        this.answer=null;
 
-                /**
-                 * On applique la condition du monstre
-                 */
-                this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+        while( this.answer==null )
+            try {
+               Thread.currentThread().sleep(200);//sleep for 200 ms
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-                System.out.println("Combattre ? (o/n)");
-                this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
-                        + monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")\n"
-                        + monstrePioche.getDescription() +"\n"
-                        +" Va-t il combattre ?\n");
-                this.sendQuestionToEnCours("Combattre ?");
-                this.answer=null;
-
-                while( this.answer==null )
-                    try {
-                       Thread.currentThread().sleep(200);//sleep for 200 ms
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                if(this.answer.equals("Yes")){
-                    // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
-                    // le nb de niveau gagné et les cartes trésors qu'il peut tirer
-                    if(combat.combattre()){
-                        System.out.println("Vous avez gagné !");
-                        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
-                        this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
-                    } else {
-                        System.out.println("Vous avez perdu...");
-                        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
-                        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a perdu le combat ! \n");
-                        this.sendSongToAll(Constante.SOUND_COMBATPERDU);
-
-                    }
-                } else if(this.answer.equals("Non")){
-                    deguerpir(combat);
-                }
-                else {
-                    System.out.println("Veuillez entrer une réponse correcte");
-                }
-                monstrePioche.setBonusPuissance(0);
-                this.defausseDonjon.ajouterCarte(monstrePioche);
-                this.sendInfosJoueursToAll();
-                this.sendCartesJeuxJoueursToAll();
-                this.sendCartesMainToOwner();
+        if(this.answer.equals("Yes")){
+            // Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
+            // le nb de niveau gagné et les cartes trésors qu'il peut tirer
+            if(combat.combattre()){
+                combatGagne(monstrePioche);
+                
+            } else {
+                combatPerdu(monstrePioche);
+            }
+        } else if(this.answer.equals("Non")){
+            deguerpir(combat);
+        }
+        else {
+            System.out.println("Veuillez entrer une réponse correcte");
+        }
+        
+        this.defausseDonjon.ajouterCarte(monstrePioche);
+        
+        this.sendInfos();
     }
 
     private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
@@ -783,5 +754,45 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
             this.SendDebugMessage(cardById.equiper(j, new ArrayList<Joueur>(){{add(j);}}, null, this.phaseTour, this.enCours));
         }
+    }
+
+    /**
+     * Méthode permettant de dérouler le code sur un combat gagné
+     * @param monstrePioche
+     */
+    private void combatGagne(Monstre monstrePioche) {
+        System.out.println("Vous avez gagné !");
+        this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+        this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
+        this.sendSongToAll(Constante.SOUND_COMBATGAGNE);
+    }
+
+    /**
+     * Méthode permettant de dérouler le code sur un combat perdu
+     * @param monstrePioche
+     */
+    private void combatPerdu(Monstre monstrePioche) {
+        System.out.println("Vous avez perdu...");
+        this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+        this.sendMessageToAll("Le joueur : " + enCours.getName() + "  a perdu le combat ! \n");
+        this.sendSongToAll(Constante.SOUND_COMBATPERDU);
+    }
+
+    /**
+     * Méthode permettant d'annuler tous les bonus temporaires donnés dans le combat
+     * TODO : Voir si à mettre plutôt dans le combat
+     */
+    private void annulationBonusTemporaire(Carte cartePiochee) {
+        if(cartePiochee.getClass().equals(Monstre.class))
+            ((Monstre) cartePiochee).setBonusPuissance(0);
+        this.enCours.getPersonnage().setBonusCapaciteFuite(0);
+        this.enCours.getPersonnage().setBonusPuissance(0);
+    }
+
+    private void sendInfos() {
+        this.sendInfosCampsToAll(combat);
+        this.sendInfosJoueursToAll();
+        this.sendCartesJeuxJoueursToAll();
+        this.sendCartesMainToOwner();
     }
 }
