@@ -16,6 +16,7 @@ import carte.Carte;
 import carte.Monstre;
 import carte.Objet;
 import carte.Malediction;
+import carte.Sort;
 import comportement.ComportementDefausserCarte;
 import comportement.Condition;
 import comportement.Equipement;
@@ -417,12 +418,10 @@ public final class Deck {
         // ================
         
         
-        
         // =============
-        // === SORTS ===
+        // === MALEDICTION ===
         // =============
-        
-        //TODO
+      //TODO
         cartes.add(new Malediction(36, "Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(37, "Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(38, "Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
@@ -443,6 +442,7 @@ public final class Deck {
         cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
+        // TODO : Manque la malédiction impot sur le revenu
         cartes.add(new Malediction(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
@@ -451,6 +451,7 @@ public final class Deck {
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
+        // TODO : Refaire cette fonction en tant que déséquipement
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
         cartes.add(new Malediction(54, "Malédiction! Déclassé!", "Défaussez votre carte de Classe si vous en avez une. Si vous avez deux classes en jeu, vous en perdez une au choix. Si vous n'avez pas de Classe, vous perdez 1 niveau.", new Sortilege(actionTabMalediction)));
         
@@ -491,50 +492,58 @@ public final class Deck {
         cartes.add(new Malediction(71, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(94, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         
-        cartes.add(new Malediction(158, "Potion de bravoure hystérique", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(96, "Cotion de Ponfusion", "A jouer pendant n'imquorte pel combat. Bonus de +3 accordé à un champ au coix. Usique unage.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
+        // =============
+        // =============
+        
+        // =============
+        // === SORTS ===
+        // =============
+        
+        
+        cartes.add(new Sort(158, "Potion de bravoure hystérique", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(96, "Cotion de Ponfusion", "A jouer pendant n'imquorte pel combat. Bonus de +3 accordé à un champ au coix. Usique unage.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
-        cartes.add(new Malediction(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
         
         //TODO
-        cartes.add(new Malediction(99, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(100, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(101, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(102, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(99, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(100, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(101, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(102, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(1));
-        cartes.add(new Malediction(104, "Don de chips désintéressé au MJ", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(109, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(104, "Don de chips désintéressé au MJ", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(109, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
          actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new PiocherCarte(Constante.TRESOR, 3));
-        cartes.add(new Malediction(110, "Pillaaaaaaage !", "Tirez immédiatement trois nouvelles cartes de trésor. Elles sont tirées face cachée si vous avez tiré cette carte face cachée, et face visible dans le cas contraire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(111, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(112, "Lampe merveilleuse", "Vous ne pouvez utiliser la Lampe qu'à votre tour. Elle invoque un génie qui fait disparaitre un seul monstre, même s'il était sur le point de vous attraper après un jet de Déguerpir raté. S'il était seul contre vous, vous prenez son trésor mais sans gagner de niveau. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(114, "Missile magique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(115, "Oh, les jolis ballons !", "A jouer pendant n'importe quel combat pour distraire l'ennemi. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(116, "Doppelganger", "Crée votre double, qui combat à vos côtés : votre force de combat est doublée. Vous ne pouvez utiliser Doppelganger que si vous êtes le seul joueur à participer au combat. Usage unique", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(117, "Baguette de sourcier", "Parcourez les défausses pour trouver la carte de votre choix. Prenez-la et défaussez la baguette de sourcier", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(118, "Potion d'amitié", "A jouer pendant n'importe quel combat. Défaussez tous les monstres combattus. Aucun trésor n'est gagné, mais vous pouvez piller la pièce. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(119, "Potion de transfert", "A jouer pendant n'importe quel combat. Un autre joueur de votre choix combat le ou les monstres. Il peut demander de l'aide normalement, et obtient le trésor et les niveaux s'il l'emporte. Le joueur qui combattait à l'origine reprend alors son tour, et peut piller la pièce, que le combat ait été remporté ou perdu. Usage unique", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(120, "Potion de sommeil", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(121, "Potion de polly-morphie", "Utilisable une seule fois, pendant le combat. Transforme n'importe quel monstre en joli perroquet appelé Polly, qui s'envole en abandonnant son trésor (Pas de gain de niveau). Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(122, "Potion acide, radioactive et électrique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(123, "Potion glaciale explosive", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(124, "Boisson énergisante éventée", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(125, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(110, "Pillaaaaaaage !", "Tirez immédiatement trois nouvelles cartes de trésor. Elles sont tirées face cachée si vous avez tiré cette carte face cachée, et face visible dans le cas contraire.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(111, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(112, "Lampe merveilleuse", "Vous ne pouvez utiliser la Lampe qu'à votre tour. Elle invoque un génie qui fait disparaitre un seul monstre, même s'il était sur le point de vous attraper après un jet de Déguerpir raté. S'il était seul contre vous, vous prenez son trésor mais sans gagner de niveau. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(114, "Missile magique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(115, "Oh, les jolis ballons !", "A jouer pendant n'importe quel combat pour distraire l'ennemi. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(116, "Doppelganger", "Crée votre double, qui combat à vos côtés : votre force de combat est doublée. Vous ne pouvez utiliser Doppelganger que si vous êtes le seul joueur à participer au combat. Usage unique", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(117, "Baguette de sourcier", "Parcourez les défausses pour trouver la carte de votre choix. Prenez-la et défaussez la baguette de sourcier", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(118, "Potion d'amitié", "A jouer pendant n'importe quel combat. Défaussez tous les monstres combattus. Aucun trésor n'est gagné, mais vous pouvez piller la pièce. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(119, "Potion de transfert", "A jouer pendant n'importe quel combat. Un autre joueur de votre choix combat le ou les monstres. Il peut demander de l'aide normalement, et obtient le trésor et les niveaux s'il l'emporte. Le joueur qui combattait à l'origine reprend alors son tour, et peut piller la pièce, que le combat ait été remporté ou perdu. Usage unique", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(120, "Potion de sommeil", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(121, "Potion de polly-morphie", "Utilisable une seule fois, pendant le combat. Transforme n'importe quel monstre en joli perroquet appelé Polly, qui s'envole en abandonnant son trésor (Pas de gain de niveau). Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(122, "Potion acide, radioactive et électrique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(123, "Potion glaciale explosive", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(124, "Boisson énergisante éventée", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(125, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));
         
         
         // =============
