@@ -1,21 +1,17 @@
 package carte;
+
 import comportement.Sortilege;
 
 /**
- * Classe Donjon.
- * Hérite de la classe Donjon
- * @author Rémi Marenco
+ * Classe Sort piochée dans la pioche Tresor
+ * @author Remi
+ *
  */
-public class Sort extends Donjon {
+public class Sort extends Tresor {
 
-    /**
-     * Constructeur de la classe sort (un sortilège)
-     * @param nom
-     * @param description
-     * @param sortilege
-     */
-    public Sort(int id,String nom, String description, Sortilege sortilege) {
-        super(id,nom, description);
+	public Sort(int id, String nom, String description, Sortilege sortilege) {
+		super(id, nom, description);
         this.sortilege = sortilege;
-    }
+	}
+
 }
