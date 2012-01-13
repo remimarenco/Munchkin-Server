@@ -35,7 +35,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private String           answer;
 	private int              phaseTour;
 	private Combat           combat;
-	private Carte            carteClickee=null;   
+	private Carte            carteClickee    = null;
+	private final Boolean    verrou          = false;
 
 	/**
 	 * Constructeur
@@ -461,7 +462,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @return 
 	 */
 	public boolean answer(Message msg){
-		this.answer = msg.getMessage();      
+		synchronized(this.verrou)
+		{
+			this.answer = msg.getMessage();
+		}
 		return true;     
 	}    
 
@@ -603,7 +607,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 
 	/**
-	 * // TODO : Commenter
+	 * Méthode permettant d'envoyer des messages au joueur passé en paramètre
 	 * @param txt
 	 * @param personnage 
 	 */
@@ -617,7 +621,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 
 	/**
-	 * // TODO : Commenter
+	 * Méthode permettant d'envoyer des messages à tous les joueurs sauf celui passé en paramètre
 	 * @param txt
 	 * @param personnage 
 	 */
@@ -681,7 +685,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			this.sendMessageToAll("C'est un sort !!\n");
 			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
 			this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
-			jouerCarteSort((Malediction)cartePiochee);
+			jouerCarteMalediction((Malediction)cartePiochee);
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
 			this.sendMessageToCurrent(cartePiochee.getDescription());
@@ -718,10 +722,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	/**
 	 * Méthode permettant jouer la carte sort piochée
 	 */
-	private void jouerCarteSort(Malediction cartePiochee) {
+	private void jouerCarteMalediction(Malediction cartePiochee) {
 		this.sendMessageToAllButCurrent(enCours.getName()+" va lancer un sort. Voulez vous, auparavant, intervenir ?");
-		demanderIntervenir();
-		cartePiochee.appliquerSortilege(enCours, null, combat, phaseTour, enCours);
+		demanderIntervenirSaufJoueurs(new ArrayList<Joueur>(){{add(enCours);}});
+		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, phaseTour, enCours);
 	}
 
 	/**
@@ -867,7 +871,54 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 	}
 	
-	
+	/**
+	 * Fonction permettant de gérer la demande d'intervention. Non envoyé aux joueurs passés en paramètre
+	 */
+	private void demanderIntervenirSaufJoueurs(ArrayList<Joueur> joueursNonConcernes){
+		int nbJoueursRepondu = 0;
+		for(Joueur j:this){
+			// On envoi à tous les joueurs non concernés
+			if(!joueursNonConcernes.contains(j))
+			{
+				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+			}
+		}
+		// TODO : Protéger la ressource answer => On peut la modifier juste après qu'on soit rentré dans les cas suivants
+		// Tant qu'un joueur n'a pas répondu, on attends
+		this.answer=null;
+			while(true){
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException ex) {
+					Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+				}
+				synchronized(this.verrou)
+				{
+					if(this.answer!= null)
+					{
+						// Si un joueur a répondu oui, on fait le traitement d'envoi d'une demande d'intervention puis on redemande si quelqu'un veut intervenir encore
+						if(this.answer.equals("Yes")){
+							this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
+							this.answer = null;
+							break;
+							// TODO : Envoyer un message de fin de demande d'intervention aux autres joueurs
+						}
+						// Sinon on attends que les autres joueurs aient répondu
+						// TODO
+						else if(this.answer.equals("Non")){
+							this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
+							this.answer = null;
+							nbJoueursRepondu++;
+							// Si tout le monde concerné a répondu, on arrete l'intervention
+							if((this.size()-joueursNonConcernes.size()) == nbJoueursRepondu)
+							{
+								break;
+							}
+						}
+					}
+				}
+			}
+	}
 
 	/**
 	 * Phase de pillage de la piece, on pioche une carte et on change la phaseTour
@@ -880,7 +931,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	/**
-	 * TODO : Faire la charite
+	 * Méthode permettant de dérouler la phase de la Charité
 	 */
 	private void Charite() {
 		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
@@ -930,7 +981,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 
 
-	// TODO : Demander au joueur de defausser une carte de sa main, renvoi la carte à défausser.
+	/**
+	 * Méthode permettant de demander au joueur de défausser une carte. Une fois la carte choisie, elle est renvoyée.
+	 * @param j
+	 * @return
+	 */
 	private Carte demandeDefausseCarte(Joueur j) {
 		this.sendMessageBackToSender(j.getName(),"Choisissez la carte à Defausser");
 		j.sendMessage(new Message(Message.INTERVENTION, "Partie",j.getName(),Constante.ACTION_DEFAUSSER));
@@ -945,8 +1000,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}                   
-
-
+		
 		return carteClickee;
 	}
 }

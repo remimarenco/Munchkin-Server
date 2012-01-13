@@ -18,8 +18,4 @@ public abstract class Action {
      * @param joueurImpacte : Joueur recevant l'action
      */
     public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours);
-    
-    // TODO : Avoir une implémentation de l'action du type :
-    // String action(Joueur joueurEmetteur, ArrayList<Joueur> joueursDestinataires)
-    // afin de gérer la multi-application
 }

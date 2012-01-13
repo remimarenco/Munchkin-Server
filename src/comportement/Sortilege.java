@@ -41,6 +41,10 @@ public class Sortilege {
             out += "Aucune sortilège à appliquer";
         } else {
             out += "----- Sortilège -----\n";
+            if(joueurDestinataire == null)
+            {
+            	out += "Erreur dans la liste des joueurs destinataires";
+            }
             for(Joueur joueurImpacte : joueurDestinataire){
                 out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
                 for(Action action : tabAction)
