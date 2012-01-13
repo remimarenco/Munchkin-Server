@@ -900,6 +900,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						if(this.answer.equals("Yes")){
 							this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
 							this.answer = null;
+							for(Joueur j:this){
+								// On envoi à tous les joueurs non concernés
+								if(!joueursNonConcernes.contains(j))
+								{
+									j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
+								}
+							}
 							break;
 							// TODO : Envoyer un message de fin de demande d'intervention aux autres joueurs
 						}
