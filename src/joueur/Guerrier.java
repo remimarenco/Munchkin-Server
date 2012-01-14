@@ -2,7 +2,7 @@ package joueur;
 
 /**
  * Classe guerrier pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Guerrier extends Classe {
 

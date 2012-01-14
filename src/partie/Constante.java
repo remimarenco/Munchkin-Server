@@ -68,11 +68,12 @@ public class Constante {
      * TYPE D'ACTION
      */
     
-    public static final int ACTION_POSERCARTE = 1;    
-    public static final int ACTION_RACE       = 3;
-    public static final int ACTION_INTERVENIR = 4;
-    public static final int ACTION_DEFAUSSER  = 5;
-    public static final int ACTION_DESEQUIPER = 6;
+    public static final int ACTION_POSERCARTE 				  = 1;    
+    public static final int ACTION_RACE       				  = 3;
+    public static final int ACTION_INTERVENIR 				  = 4;
+    public static final int ACTION_DEFAUSSER  				  = 5;
+    public static final int ACTION_DESEQUIPER 				  = 6;
+    public static final int ACTION_CARTE_INTERVENTION_CHOISIE = 7;
     
      /**
      * Constante Son

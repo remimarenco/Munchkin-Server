@@ -3,7 +3,7 @@ package joueur;
 
 /**
  * Race Humain pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Humain extends Race
 {

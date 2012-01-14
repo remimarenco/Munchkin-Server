@@ -8,7 +8,7 @@ import joueur.Joueur;
 
 /**
  * Ensemble d'actions lancées par un sort
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Sortilege {
 

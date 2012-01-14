@@ -50,8 +50,9 @@ public class Serveur {
      * Traite le message en fonction de son type et sa destination
      * @param msg
      * @param com 
+     * @throws Exception 
      */
-    public void interpretMessage(Message msg, Joueur com) {
+    public void interpretMessage(Message msg, Joueur com) throws Exception {
         
         // TODO : Commenter le contenu !!
         

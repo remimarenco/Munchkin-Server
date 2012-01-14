@@ -12,7 +12,7 @@ import joueur.Race;
 
 /**
  * Modifie la puissance d'un monstre
- * @author Julien Rouvier
+ * @author Simon Grabit
  */
 public class ModifPuissanceMonstre extends Action{
 

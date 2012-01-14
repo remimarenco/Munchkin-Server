@@ -4,7 +4,7 @@ import partie.Constante;
 
 /**
  * Personnage : entité participant aux combats, etc...
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Personnage {
     

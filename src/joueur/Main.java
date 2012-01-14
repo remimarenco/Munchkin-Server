@@ -2,7 +2,7 @@ package joueur;
 
 /**
  * Main d'un joueur
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Main extends CartesJoueur{
     

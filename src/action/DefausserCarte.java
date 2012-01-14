@@ -10,7 +10,7 @@ import partie.Constante;
 
 /**
  * Classe permettant de defausser un ou plusieurs cartes d'un type spécifique dans un tas spécifique
- * @author Julien Rouvier
+ * @author Simon Grabit
  */
 public class DefausserCarte extends Action{
 

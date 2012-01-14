@@ -8,8 +8,8 @@ import joueur.Joueur;
 
 
 /**
- * 
- * @author Julien Rouvier
+ * Comportement d'équipement a mettre sur une carte afin d'activer la possibilité de "s'équiper"
+ * @author Rémi Marenco
  */
 public  class Equipement {
     

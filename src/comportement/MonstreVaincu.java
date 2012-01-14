@@ -9,7 +9,7 @@ import joueur.Joueur;
 
 /**
  * Applique un ensemble d'action lorsqu'un monstre est vaincu
- * @author Julien Rouvier
+ * @author Simon Grabit
  */
 public class MonstreVaincu {
     

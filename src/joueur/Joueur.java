@@ -269,5 +269,4 @@ public class Joueur extends Thread {
             return deltaCarte;
         }
     }
-
 }

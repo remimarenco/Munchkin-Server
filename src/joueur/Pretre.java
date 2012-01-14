@@ -5,7 +5,7 @@ import partie.Constante;
 
 /**
  * Classe Prêtre pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Pretre extends Classe{
 

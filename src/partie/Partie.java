@@ -5,6 +5,7 @@ import carte.Donjon;
 import carte.Monstre;
 import carte.Objet;
 import carte.Malediction;
+import carte.Sort;
 import carte.Tresor;
 import communication.Message;
 import java.awt.Color;
@@ -21,7 +22,7 @@ import joueur.Personnage;
  * Classe principale du jeu.
  * Gére l'ensemble du déroulement de la partie.
  * Cette classe est à la fois une liste de joueur & un thread
- * @author Julien Rouvier
+ * @author All
  */
 public final class Partie extends ArrayList<Joueur> implements Runnable{
 
@@ -32,7 +33,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private Defausse<Donjon> defausseDonjon;
 	private Joueur           enCours;
 	private Color            Color;
-	private String           answer;
+	private Answer           answer;
 	private int              phaseTour;
 	private Combat           combat;
 	private Carte            carteClickee    = null;
@@ -424,6 +425,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						this.getJoueurByName(msg.getNick_src()).getMain().getCartesJouablePourPourrir()));
 			}
 			break;
+		// Si un joueur a envoyé un message d'intervention ACTION_CARTE_INTERVENTION_CHOISIE, on change la valeur de la carte cliquée
+		case Constante.ACTION_CARTE_INTERVENTION_CHOISIE:
+			if(!msg.getIdCard().equals("")){
+				Integer id = new Integer(msg.getIdCard());
+				this.setCarteClickee(Deck.getCardById(id));
+				this.sendInfos();                  
+			} else {
+				this.sendMessageBackToSender(msg.getNick_src(),"Aucune carte choisie");                   
+			}
+			break;  
 		}
 	}
 
@@ -460,11 +471,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Permet de débloquer la partie lorsque celle ci attends la reponse d'un joueur
 	 * @param msg
 	 * @return 
+	 * @throws Exception 
 	 */
-	public boolean answer(Message msg){
+	public boolean answer(Message msg) throws Exception{
 		synchronized(this.verrou)
 		{
-			this.answer = msg.getMessage();
+			this.answer = new Answer(msg);
 		}
 		return true;     
 	}    
@@ -485,7 +497,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				finPartie();
 				break;
 			}
-			tour();
+			try {
+				tour();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -505,8 +522,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 	/**
 	 * Un tour de jeu d'un joueur
+	 * @throws Exception 
 	 */
-	private void tour() {
+	private void tour() throws Exception {
 		// Deguerpir
 		Iterator it = this.iterator();
 		Carte cartePiochee = null;
@@ -663,7 +681,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	// => Si Monstre => Chercher la bagarre
 	// => Si Sort => Agit sur le joueur si possible => Défaussée
 	// => Autre type => Jouer ou mettre dans main
-	private Carte phaseOuvrirPorte() {
+	private Carte phaseOuvrirPorte() throws Exception {
 		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_OUVRIR_PORTE);
 		this.phaseTour = Constante.PHASE_OUVRIR_PORTE;
 		Carte cartePiochee;
@@ -721,8 +739,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	
 	/**
 	 * Méthode permettant jouer la carte sort piochée
+	 * @throws Exception 
 	 */
-	private void jouerCarteMalediction(Malediction cartePiochee) {
+	private void jouerCarteMalediction(Malediction cartePiochee) throws Exception {
 		this.sendMessageToAllButCurrent(enCours.getName()+" va lancer un sort. Voulez vous, auparavant, intervenir ?");
 		demanderIntervenirSaufJoueurs(new ArrayList<Joueur>(){{add(enCours);}});
 		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, phaseTour, enCours);
@@ -769,7 +788,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 
-		if(this.answer.equals("Yes")){
+		if(this.answer.getAnswer()){
 			// Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
 			// le nb de niveau gagné et les cartes trésors qu'il peut tirer
 			if(combat.combattre()){
@@ -779,18 +798,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				combatPerdu(monstrePioche);
 				gagne = false;
 			}
-		} else if(this.answer.equals("Non")){
+		} else {
 			deguerpir(combat);
 			gagne = false;
-		}
-		else {
-			System.out.println("Veuillez entrer une réponse correcte");
 		}
 
 		this.defausseDonjon.ajouterCarte(monstrePioche);
 
 		this.sendInfos();
-
+		
+		this.answer = null;
 		return gagne;
 	}
 
@@ -873,8 +890,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	
 	/**
 	 * Fonction permettant de gérer la demande d'intervention. Non envoyé aux joueurs passés en paramètre
+	 * @throws Exception 
 	 */
-	private void demanderIntervenirSaufJoueurs(ArrayList<Joueur> joueursNonConcernes){
+	private void demanderIntervenirSaufJoueurs(ArrayList<Joueur> joueursNonConcernes) throws Exception{
 		int nbJoueursRepondu = 0;
 		for(Joueur j:this){
 			// On envoi à tous les joueurs non concernés
@@ -885,50 +903,101 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		}
 		// Tant qu'un joueur n'a pas répondu, on attends
 		this.answer=null;
-			while(true){
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException ex) {
-					Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-				}
-				synchronized(this.verrou)
+		while(true){
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			synchronized(this.verrou)
+			{
+				if(this.answer!= null)
 				{
-					if(this.answer!= null)
-					{
-						// Si un joueur a répondu oui, on fait le traitement d'envoi d'une demande d'intervention puis on redemande si quelqu'un veut intervenir encore
-						if(this.answer.equals("Yes")){
-							this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
-							this.answer = null;
-							for(Joueur j:this){
-								// On envoi à tous les joueurs non concernés
-								if(!joueursNonConcernes.contains(j))
-								{
-									j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
-								}
-							}
-							
-							break;
-						}
-						// Sinon on attends que les autres joueurs aient répondu
-						else if(this.answer.equals("Non")){
-							this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
-							this.answer = null;
-							nbJoueursRepondu++;
-							// Si tout le monde concerné a répondu, on arrete l'intervention
-							if((this.size()-joueursNonConcernes.size()) == nbJoueursRepondu)
+					// Si un joueur a répondu oui, on fait le traitement d'envoi d'une demande d'intervention puis on redemande si quelqu'un veut intervenir encore
+					if(this.answer.getAnswer()){
+						this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
+						for(Joueur j:this){
+							// On envoi à tous les joueurs non concernés
+							if(!joueursNonConcernes.contains(j))
 							{
-								break;
+								j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
 							}
+						}
+
+						break;
+					}
+					// Sinon on attends que les autres joueurs aient répondu
+					else if(!this.answer.getAnswer()){
+						this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
+						this.answer = null;
+						nbJoueursRepondu++;
+						// Si tout le monde concerné a répondu, on arrete l'intervention
+						if((this.size()-joueursNonConcernes.size()) == nbJoueursRepondu)
+						{
+							break;
 						}
 					}
 				}
 			}
-			// Si tout le monde n'a pas répondu et qu'on est sorti de la boucle, cela signifie qu'une personne a demandé d'intervenir
-			// On lance donc (TODO) la demande d'intervention + on en relance une dernière
-			if((this.size()-joueursNonConcernes.size()) != nbJoueursRepondu)
+		}
+		// Si tout le monde n'a pas répondu et qu'on est sorti de la boucle, cela signifie qu'une personne a demandé d'intervenir
+		// On lance donc (TODO) la demande d'intervention + on en relance une dernière
+		if((this.size()-joueursNonConcernes.size()) != nbJoueursRepondu)
+		{
+			Carte carteChoisie;
+			// Choisir une carte à poser parmi les possibles
+			synchronized(verrou)
 			{
-				demanderIntervenirSaufJoueurs(joueursNonConcernes);
+				carteChoisie = intervention(answer.getEmetteur());
+				if(carteChoisie.getClass().equals(Malediction.class) || carteChoisie.getClass().equals(Sort.class))
+				{
+					// On applique le sortilege
+					// TODO : Faire le ciblage
+					this.sendMessageToAll(carteChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
+					if(enCours.getMain().supprimerCarte(carteChoisie))
+					{
+						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
+					}
+					else
+					{
+						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
+						throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
+					}
+				}
+				// Si on a voulu utiliser un objet
+				else if(carteChoisie.getClass().equals(Objet.class))
+				{
+					// On applique le UtiliserObjet
+				}
 			}
+		}
+		// On envoie les infos aux joueurs
+		this.sendInfos();
+	}
+
+	/**
+	 * Méthode permettant à un joueur de 
+	 * @param emetteur
+	 */
+	private Carte intervention(Joueur emetteur) {
+		this.sendMessageBackToSender(emetteur.getName(),"Choisissez la carte pour intervenir");
+		emetteur.sendMessage(new Message(Message.INTERVENTION, "Partie",emetteur.getName(),Constante.ACTION_CARTE_INTERVENTION_CHOISIE));
+		// On autorise la joueur a sélectionner des cartes
+		// TODO : Selection des cartes jouables
+		emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", emetteur.getName(),
+				emetteur.getMain().generateInfos()));
+		this.carteClickee=null;
+		// On attends que le joueur ait choisi une carte
+		while(this.carteClickee==null)
+		{
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}                   
+		
+		return carteClickee;
 	}
 
 	/**
@@ -965,11 +1034,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						// On la supprime de sa main
 						if(enCours.getMain().supprimerCarte(carteADefausser))
 						{
-							this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" a été correctement supprimé de la main");
+							this.SendDebugMessage("La carte "+carteADefausser.getNom()+" a été correctement supprimé de la main");
 						}
 						else
 						{
-							this.SendDebugMessage("La carte "+carteADefausser.getDescription()+" n'a pas été correctement supprimé de la main !!!");
+							this.SendDebugMessage("La carte "+carteADefausser.getNom()+" n'a pas été correctement supprimé de la main !!!");
 							throw new Exception();
 						}
 					}
@@ -1013,5 +1082,66 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		}                   
 		
 		return carteClickee;
+	}
+	
+	private class Answer
+	{
+		private Boolean answer  = false;
+		private Joueur emetteur = null; 
+		
+		/**
+		 * Constructeur de la classe interne Answer, permet de construire un objet réponse avec tous les éléments nécessaires :
+		 * - Le nom du joueur ayant envoyé le message
+		 * - La réponse envoyée
+		 * @param msg
+		 * @throws Exception
+		 */
+		Answer(Message msg) throws Exception
+		{
+			// On vérifie que le champ émetteur n'est pas vide, et on l'ajoute à notre objet Answer
+			if(msg.getNick_src() != null)
+			{
+				for(Joueur joueur : Partie.this)
+				{
+					if(msg.getNick_src().equals(joueur.getName()))
+					{
+						setEmetteur(joueur);
+					}
+				}				
+			}
+			else
+			{
+				throw new Exception("Erreur dans le constructeur Answer, sur le message recu");
+			}
+			// On le transforme en Booléen
+			if(msg.getMessage().equals("Yes"))
+			{
+				setAnswer(Boolean.TRUE);
+			}
+			else if(msg.getMessage().equals("Non"))
+			{
+				setAnswer(Boolean.FALSE);
+			}
+			else
+			{
+				throw new Exception("Erreur dans la fonction Answer, sur answer");
+			}
+		}
+
+		public Joueur getEmetteur() {
+			return emetteur;
+		}
+
+		public void setEmetteur(Joueur emetteur) {
+			this.emetteur = emetteur;
+		}
+
+		public Boolean getAnswer() {
+			return answer;
+		}
+
+		public void setAnswer(Boolean answer) {
+			this.answer = answer;
+		}
 	}
 }

@@ -3,7 +3,7 @@ package joueur;
 
 /**
  * Race Halfelin pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Halfelin extends Race {
 

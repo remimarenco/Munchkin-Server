@@ -4,7 +4,7 @@ import comportement.Sortilege;
 
 /**
  * Classe Sort piochée dans la pioche Tresor
- * @author Remi
+ * @author Remi Marenco
  *
  */
 public class Sort extends Tresor {

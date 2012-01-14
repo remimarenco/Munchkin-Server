@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Jeu d'un joueur 
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Jeu extends CartesJoueur{
     

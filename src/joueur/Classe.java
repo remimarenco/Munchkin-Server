@@ -3,7 +3,7 @@ package joueur;
 
 /**
  * La classe d'un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public abstract class Classe {
     

@@ -5,7 +5,7 @@ import partie.Constante;
 
 /**
  * Classe Magicien pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Magicien extends Classe {
 

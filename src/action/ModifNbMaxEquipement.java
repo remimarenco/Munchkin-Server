@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import partie.Combat;
 import joueur.Joueur;
 
+/**
+ * TODO :
+ * @author Simon Grabit
+ *
+ */
 public class ModifNbMaxEquipement extends Action{
 
     private int bonusNbMax;

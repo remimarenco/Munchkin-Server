@@ -3,7 +3,7 @@ package joueur;
 
 /**
  * 
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Elfe extends Race {
 

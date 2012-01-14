@@ -5,7 +5,7 @@ import partie.Constante;
 
 /**
  * Classe Voleur pour un personnage
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Voleur extends Classe {
 

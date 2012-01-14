@@ -8,7 +8,7 @@ import joueur.Joueur;
 
 /**
  * Contient une liste d'action qui ne sont applicables que sous certaines conditions // TODO : Vérifier si correct
- * @author Julien Rouvier
+ * @author Rémi Marenco
  */
 public class Condition {
     
