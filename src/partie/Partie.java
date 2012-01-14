@@ -883,7 +883,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
 			}
 		}
-		// TODO : Protéger la ressource answer => On peut la modifier juste après qu'on soit rentré dans les cas suivants
 		// Tant qu'un joueur n'a pas répondu, on attends
 		this.answer=null;
 			while(true){
@@ -907,11 +906,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 									j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
 								}
 							}
+							
 							break;
-							// TODO : Envoyer un message de fin de demande d'intervention aux autres joueurs
 						}
 						// Sinon on attends que les autres joueurs aient répondu
-						// TODO
 						else if(this.answer.equals("Non")){
 							this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
 							this.answer = null;
@@ -924,6 +922,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						}
 					}
 				}
+			}
+			// Si tout le monde n'a pas répondu et qu'on est sorti de la boucle, cela signifie qu'une personne a demandé d'intervenir
+			// On lance donc (TODO) la demande d'intervention + on en relance une dernière
+			if((this.size()-joueursNonConcernes.size()) != nbJoueursRepondu)
+			{
+				demanderIntervenirSaufJoueurs(joueursNonConcernes);
 			}
 	}
 
