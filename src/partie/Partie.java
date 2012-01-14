@@ -473,7 +473,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public boolean answer(Message msg) throws Exception{
 
-                this.getJoueurByName(msg.getNick_src()).setAnswer(msg.getMessage());		
+		this.getJoueurByName(msg.getNick_src()).setAnswer(msg.getMessage());		
 
 		synchronized(this.verrou)
 		{
@@ -481,28 +481,28 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		}
 		return true;     
 	}
-        
-        public void resetAnswers(){
-            for(Joueur j:this) 
-                j.setAnswer(null);
-        }
-        
-        public boolean allPlayersAnsweredButThisOne(Joueur j){
-            boolean ret=true;
-            for(Joueur j2:this)   
-                if(!j2.equals(j))                    
-                    if(j.getAnswer()==null)
-                        ret=false;
-            return ret;
-        }
-        
-        public boolean allPlayersAreReady(){
-            boolean ret=true;
-            for(Joueur j:this)            
-                if(j.getAnswer()==null)
-                    ret=false;
-            return ret;
-        }
+
+	public void resetAnswers(){
+		for(Joueur j:this) 
+			j.setAnswer(null);
+	}
+
+	public boolean allPlayersAnsweredButThisOne(Joueur j){
+		boolean ret=true;
+		for(Joueur j2:this)   
+			if(!j2.equals(j))                    
+				if(j.getAnswer()==null)
+					ret=false;
+		return ret;
+	}
+
+	public boolean allPlayersAreReady(){
+		boolean ret=true;
+		for(Joueur j:this)            
+			if(j.getAnswer()==null)
+				ret=false;
+		return ret;
+	}
 
 
 	/**
@@ -766,7 +766,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private void jouerCarteMalediction(Malediction cartePiochee) throws Exception {
 		this.sendMessageToAllButCurrent(enCours.getName()+" va lancer un sort. Voulez vous, auparavant, intervenir ?");
-		demanderIntervenirSaufJoueurs(new ArrayList<Joueur>(){{add(enCours);}});
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			demanderIntervenirSaufJoueurs(new ArrayList<Joueur>(){{add(enCours);}});
+		}
 		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, phaseTour, enCours);
 	}
 
