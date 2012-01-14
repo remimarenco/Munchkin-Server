@@ -27,7 +27,7 @@ public class Joueur extends Thread {
     private DataInputStream in   = null;
     private DataOutputStream out = null;
     private int sexe             = Constante.SEXE_M;
-    
+    private String answer        = null;
     
     /**
      * Constructeur
@@ -106,7 +106,17 @@ public class Joueur extends Thread {
     public void setPersonnage(Personnage personnage) {
         this.personnage = personnage;
     }
+    
+      public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
     // ================================== // 
+
+  
     
     
     

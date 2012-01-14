@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
- * // TODO : A commenter
+ * Classe Message identique entre client et serveur. Protocole d'echange
  * @author Guillaume Renoult
  */
 public class Message {
@@ -24,7 +24,8 @@ public class Message {
     public static final int SOUND             			= 9;
     public static final int CARTE_EN_COURS    			= 10;        
     public static final int CHOIXCAMP         			= 11;        
-    public static final int CHOIXJOUEUR       			= 12;        
+    public static final int CHOIXJOUEUR       			= 12;
+    public static final int STOP_QUESTION_INTERVENTION          = 13;
     public static final int INFO_JOUEUR       			= 80;
     public static final int JEUX_JOUEUR       			= 81;
     public static final int MAIN_JOUEUR       			= 82;
@@ -32,8 +33,7 @@ public class Message {
     public static final int CARTE_CAMPGENTIL  			= 85; 
     public static final int CARTE_CAMPMECHANT 			= 86; 
     public static final int CARTES_JOUABLES   			= 87;
-    public static final int STOP_QUESTION_INTERVENTION  = 201;
-            
+    
     private String nick_src  = "";     
     private String nick_dest = "";    
     private String message   = "";

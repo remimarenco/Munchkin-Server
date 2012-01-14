@@ -472,12 +472,37 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @throws Exception 
 	 */
 	public boolean answer(Message msg) throws Exception{
+
+                this.getJoueurByName(msg.getNick_src()).setAnswer(msg.getMessage());		
+
 		synchronized(this.verrou)
 		{
 			this.answer = new Answer(msg);
 		}
 		return true;     
-	}    
+	}
+        
+        public void resetAnswers(){
+            for(Joueur j:this) 
+                j.setAnswer(null);
+        }
+        
+        public boolean allPlayersAnsweredButThisOne(Joueur j){
+            boolean ret=true;
+            for(Joueur j2:this)   
+                if(!j2.equals(j))                    
+                    if(j.getAnswer()==null)
+                        ret=false;
+            return ret;
+        }
+        
+        public boolean allPlayersAreReady(){
+            boolean ret=true;
+            for(Joueur j:this)            
+                if(j.getAnswer()==null)
+                    ret=false;
+            return ret;
+        }
 
 
 	/**
@@ -777,16 +802,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				+ monstrePioche.getDescription() +"\n"
 				+" Va-t il combattre ?\n");
 		this.sendQuestionToEnCours("Combattre ?");
-		this.answer=null;
-
-		while( this.answer==null )
+                this.enCours.setAnswer(null);
+                while( this.enCours.getAnswer()==null )
 			try {
 				Thread.currentThread().sleep(200);//sleep for 200 ms
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 
-		if(this.answer.getAnswer()){
+
+		if(this.enCours.getAnswer().equals("Yes")){
+		
+
 			// Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
 			// le nb de niveau gagné et les cartes trésors qu'il peut tirer
 			if(combat.combattre()){
@@ -795,8 +822,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			} else {
 				combatPerdu(monstrePioche);
 				gagne = false;
-			}
+			}		
+
 		} else {
+
 			deguerpir(combat);
 			gagne = false;
 		}
