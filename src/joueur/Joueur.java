@@ -210,8 +210,10 @@ public class Joueur extends Thread {
      */
     public boolean defausserCarte(Carte c){
         if(this.getMain().contains(c)){
+        	System.out.println("On supprime la carte "+ c.getNom()+" de la main");
             return this.getMain().supprimerCarte(c);
         }else if(this.getJeu().contains(c)){
+        	System.out.println("On supprime la carte "+ c.getNom()+" du jeu");
             return this.getJeu().supprimerCarte(c);
         }else{
             return false;

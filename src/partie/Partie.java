@@ -374,9 +374,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		case Constante.ACTION_DEFAUSSER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
-				this.setCarteClickee(Deck.getCardById(id));
-				this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
-				this.sendInfos();                  
+				this.setCarteClickee(Deck.getCardById(id));               
 			} else {
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");                   
@@ -954,7 +952,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					// On applique le sortilege
 					// TODO : Faire le ciblage
 					this.sendMessageToAll(carteChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
-					if(enCours.defausserCarte(carteChoisie))
+					if(answer.getEmetteur().defausserCarte(carteChoisie))
 					{
 						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
 					}
@@ -1051,6 +1049,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					Exception e = new Exception();
 					this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
 				}
+				this.sendInfos();
 			}
 		}
 	}
