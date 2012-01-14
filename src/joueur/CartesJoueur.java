@@ -61,8 +61,7 @@ public class CartesJoueur {
      * @return boolean : indique si la suppression s'est bien passé
      */
     public boolean supprimerCarte(Carte c){
-        cartes.remove(c);
-        return true;
+        return cartes.remove(c);
     }
     
     

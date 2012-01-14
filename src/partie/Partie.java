@@ -389,7 +389,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Integer id = new Integer(msg.getIdCard());
 				final Joueur j= this.getJoueurByName(msg.getNick_src());                    
 				Deck.getCardById(id).desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);                    
-				this.getJoueurByName(msg.getNick_src()).getJeu().supprimerCarte(Deck.getCardById(id));
+				this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
 				this.sendInfos();
 			} else {
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite se desequiper d'une carte ! ");
@@ -402,7 +402,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
 				Integer id= new Integer(msg.getIdCard());
 				this.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
-				this.getJoueurByName(msg.getNick_src()).getMain().supprimerCarte(Deck.getCardById(id));
+				this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
 				// Activation de la carte
 				appliquerCartePoseMainSurJoueur(this.getJoueurByName(msg.getNick_src()),Deck.getCardById(id));                
 				this.sendInfos();
@@ -954,7 +954,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					// On applique le sortilege
 					// TODO : Faire le ciblage
 					this.sendMessageToAll(carteChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
-					if(enCours.getMain().supprimerCarte(carteChoisie))
+					if(enCours.defausserCarte(carteChoisie))
 					{
 						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
 					}
@@ -1032,7 +1032,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					if(carteADefausser != null)
 					{
 						// On la supprime de sa main
-						if(enCours.getMain().supprimerCarte(carteADefausser))
+						if(enCours.defausserCarte(carteADefausser))
 						{
 							this.SendDebugMessage("La carte "+carteADefausser.getNom()+" a été correctement supprimé de la main");
 						}
