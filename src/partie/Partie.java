@@ -930,7 +930,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                     Carte carteChoisie;
                                     carteChoisie=intervention(joueurIntervenant);
                                     ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
-                                    joueurDest.add(joueurIntervenant);
+                                    joueurDest.add(enCours);
                                     if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
 				{
 					// On applique le sortilege pour la malediction et le sortilege
