@@ -385,9 +385,23 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		case Constante.ACTION_DESEQUIPER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
-				final Joueur j= this.getJoueurByName(msg.getNick_src());                    
-				Deck.getCardById(id).desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);                    
-				this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
+				final Joueur j= this.getJoueurByName(msg.getNick_src());
+				// On vérifie que la carte passée est un objet, puis on le déséquipe et on la supprime
+				if(Deck.getCardById(id).getClass().equals(Objet.class))
+				{
+					Objet obj = (Objet) Deck.getCardById(id);
+					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);
+					this.getJoueurByName(msg.getNick_src()).defausserCarte(obj);
+				}
+				else
+				{
+					try {
+						throw new Exception("Erreur dans intervenir, Carte passée non Objet");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				this.sendInfos();
 			} else {
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite se desequiper d'une carte ! ");
@@ -722,18 +736,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.sendCarteEnCoursToAll(cartePiochee);
 
 		if(cartePiochee.getClass().equals(Malediction.class)){
-			cartePiochee = (Malediction) cartePiochee;
+			Malediction carteMaledictionPiochee = (Malediction) cartePiochee;
 			this.sendMessageToAll("C'est un sort !!\n");
 			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
 			this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
-			jouerCarteMalediction((Malediction)cartePiochee);
+			jouerCarteMalediction(carteMaledictionPiochee);
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
 			this.sendMessageToCurrent(cartePiochee.getDescription());
 
 			//
 			this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-			this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>()
+			this.sendMessageToAll(carteMaledictionPiochee.appliquerSortilege(enCours, new ArrayList<Joueur>()
 					{{add(enCours);}}, null, this.phaseTour, enCours));
 			//            this.sendQuestionToEnCours("Utiliser ?");
 			//            this.answer=null;
@@ -845,9 +859,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
 		if(cardById.getClass().equals(Objet.class))
 		{   
+			Objet carteObjet = (Objet) cardById;
 			final Joueur j=joueur;
 			this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
-			this.SendDebugMessage(cardById.equiper(j, new ArrayList<Joueur>(){{add(j);}}, null, this.phaseTour, this.enCours));
+			this.SendDebugMessage(carteObjet.equiper(j, new ArrayList<Joueur>(){{add(j);}}, null, this.phaseTour, this.enCours));
 		}
 	}
 
@@ -982,9 +997,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				carteChoisie = intervention(answer.getEmetteur());
 				if(carteChoisie.getClass().equals(Malediction.class) || carteChoisie.getClass().equals(Sort.class))
 				{
-					// On applique le sortilege
+					// On applique le sortilege pour la malediction et le sortilege
 					// TODO : Faire le ciblage
-					this.sendMessageToAll(carteChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
+					if(carteChoisie.getClass().equals(Malediction.class))
+					{
+						Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
+						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
+					}
+					else
+					{
+						Sort carteSortChoisie = (Sort) carteChoisie;
+						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
+					}
 					if(answer.getEmetteur().defausserCarte(carteChoisie))
 					{
 						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
