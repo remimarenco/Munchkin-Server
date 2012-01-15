@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Message {
     
     
-	public static final int CONNECT           			= 0;
+    public static final int CONNECT           			= 0;
     public static final int DISCONNECT        			= 1;
     public static final int MESSAGE           			= 2;
     public static final int LISTE             			= 3;       

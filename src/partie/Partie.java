@@ -371,6 +371,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public void intervenir(Message msg){
 		switch(msg.getAction()){
+                case Constante.ACTION_PRET:
+                       if(!msg.getIdCard().equals("")){
+								              
+			} 
+                       else { 
+                           this.answer(msg);
+                       }
+                       break;
 		case Constante.ACTION_DEFAUSSER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
@@ -485,13 +493,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @return 
 	 * @throws Exception 
 	 */
-	public boolean answer(Message msg) throws Exception{
-
+	public boolean answer(Message msg){
 		this.getJoueurByName(msg.getNick_src()).setAnswer(msg.getMessage());
-//		synchronized(this.verrou)
-//		{
-//			this.answer = new Answer(msg);
-//		}
 		return true;     
 	}
 
@@ -559,9 +562,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		piocheDonjon.init(this.deck);       // Les cartes donjon sont mises dans la pioche donjon
 		piocheTresor.init(this.deck);       // Les cartes trésor sont mises dans la pioche trésor
 		this.distribuer();                  // Distribution des cartes aux joueurs (4 de chaque)
-		this.sendInfosJoueursToAll();       // Echanges des infos joueurs
-		this.sendCartesJeuxJoueursToAll();  // Echanges des jeux des joueurs
-		this.sendCartesMainToOwner();       // Envoi sa main à chaque joueur
+		this.sendInfos();
+                this.sendMessageToAll("Vous pouvez posez des cartes dans votre Jeux, "
+                        + "la partie demarrera lorsque tous les joueurs auront indiquer qu'ils sont prêts.");
+                //on attend que tous les joueurs soient pret.
+                while(!this.allPlayersAreReady()){
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
 	}
 
 
