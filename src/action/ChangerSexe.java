@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import joueur.Joueur;
 import partie.Combat;
 import partie.Constante;
+import partie.Partie;
 
 /**
  * Classe permettant de définir l'action d'un changement de sexe

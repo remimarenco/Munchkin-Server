@@ -3,6 +3,8 @@ package action;
 import java.util.ArrayList;
 
 import partie.Combat;
+import partie.Constante;
+import partie.Partie;
 
 import carte.Monstre;
 
@@ -43,6 +45,7 @@ public class ModifPuissanceMonstre extends Action{
 		
         this.bonusPuissance = bonusPuissance;
         this.monstre = monstre;
+        
     }
 
     /**
@@ -51,6 +54,7 @@ public class ModifPuissanceMonstre extends Action{
      * @return out : texte résumant l'action
      */    
     // TODO : Description méthode + PROTECTION NULL
+    // Méthode permettant de modifier la puissance d'un monstre
     @Override
     public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
@@ -83,7 +87,7 @@ public class ModifPuissanceMonstre extends Action{
             }else{
                 out += " , aucune classe n'est concernée par ce bonus";
             }
-            System.out.println(out);
+            
 
             if(tabRace != null && !tabRace.isEmpty()){      // Si des races sont spécifiées  
                 for(Race race: tabRace)                     // On regarde si celle du joueur est concernée
@@ -100,9 +104,23 @@ public class ModifPuissanceMonstre extends Action{
                 if(!classeTrouve)
                         accept=false;
             }
+            
+            // Si on ne se trouve pas dans la phase de recherche de la bagarre => En combat, cette carte n'aura aucun effet
+            if(phaseTour != Constante.PHASE_CHERCHER_LA_BAGARRE)
+            {
+            	accept = false;
+            }
 
             if(accept)
-                monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);	
+            {
+                monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);
+                out += "\nModification du monstre effectuée";
+            }
+            else
+            {
+            	out += "\nModification du monstre NON effectuée";
+            }
+            System.out.println(out);
         }
         return out;	
     }

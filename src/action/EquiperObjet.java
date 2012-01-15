@@ -7,6 +7,7 @@ package action;
 import java.util.ArrayList;
 
 import partie.Combat;
+import partie.Partie;
 
 import joueur.Classe;
 import joueur.Joueur;

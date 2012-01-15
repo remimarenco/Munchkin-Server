@@ -20,8 +20,7 @@ import java.util.Random;
  * Contient également des méthodes pouvant être utilisées dans différentes classes
  * @author Julien Rouvier
  */
-public class Constante {
-    
+public class Constante {	
     /**
      * Type de pioche
      */

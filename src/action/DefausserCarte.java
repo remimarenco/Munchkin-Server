@@ -7,6 +7,7 @@ import joueur.CartesJoueur;
 import joueur.Joueur;
 import partie.Combat;
 import partie.Constante;
+import partie.Partie;
 
 /**
  * Classe permettant de defausser un ou plusieurs cartes d'un type spécifique dans un tas spécifique
