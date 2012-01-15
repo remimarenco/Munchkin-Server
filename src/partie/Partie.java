@@ -563,9 +563,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		piocheTresor.init(this.deck);       // Les cartes trésor sont mises dans la pioche trésor
 		this.distribuer();                  // Distribution des cartes aux joueurs (4 de chaque)
 		this.sendInfos();
+                for(Joueur j:this)
+                    j.sendMessage(new Message(Message.INTERVENTION, "Partie",j.getName(),Constante.ACTION_PRET));
+                
                 this.sendMessageToAll("Vous pouvez posez des cartes dans votre Jeux, "
                         + "la partie demarrera lorsque tous les joueurs auront indiquer qu'ils sont prêts.");
                 //on attend que tous les joueurs soient pret.
+                
                 while(!this.allPlayersAreReady()){
                     try {
                         Thread.sleep(200);
@@ -992,103 +996,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		}
                 this.sendMessageToAll("Tous les joueurs ont répondu a la demande d'intervention");		
                 this.sendInfos();
-	}
-	
-	/**
-	 * Fonction permettant de gérer la demande d'intervention. Non envoyé aux joueurs passés en paramètre
-	 * @throws Exception 
-	 */
-//	private void demanderIntervenirSaufJoueurs(ArrayList<Joueur> joueursNonConcernes) throws Exception{
-//		int nbJoueursRepondu = 0;
-//		for(Joueur j:this){
-//			// On envoi à tous les joueurs non concernés
-//			if(!joueursNonConcernes.contains(j))
-//			{
-//				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
-//			}
-//		}
-//		// Tant qu'un joueur n'a pas répondu, on attends
-//		this.answer=null;
-//		while(true){
-//			try {
-//				Thread.sleep(200);
-//			} catch (InterruptedException ex) {
-//				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-//			}
-//			synchronized(this.verrou)
-//			{
-//				if(this.answer!= null)
-//				{
-//					// Si un joueur a répondu oui, on fait le traitement d'envoi d'une demande d'intervention puis on redemande si quelqu'un veut intervenir encore
-//					if(this.answer.getAnswer()){
-//						this.sendMessageToAll("Le joueur : TODO souhaite intervenir");
-//						for(Joueur j:this){
-//							// On envoi à tous les joueurs non concernés
-//							if(!joueursNonConcernes.contains(j))
-//							{
-//								j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
-//							}
-//						}
-//
-//						break;
-//					}
-//					// Sinon on attends que les autres joueurs aient répondu
-//					else if(!this.answer.getAnswer()){
-//						this.sendMessageToAll("Le joueur : TODO ne souhaite pas intervenir");
-//						this.answer = null;
-//						nbJoueursRepondu++;
-//						// Si tout le monde concerné a répondu, on arrete l'intervention
-//						if((this.size()-joueursNonConcernes.size()) == nbJoueursRepondu)
-//						{
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		}
-//		// Si tout le monde n'a pas répondu et qu'on est sorti de la boucle, cela signifie qu'une personne a demandé d'intervenir
-//		// On lance donc (TODO) la demande d'intervention + on en relance une dernière
-//		if((this.size()-joueursNonConcernes.size()) != nbJoueursRepondu)
-//		{
-//			Carte carteChoisie;
-//			// Choisir une carte à poser parmi les possibles
-//			synchronized(verrou)
-//			{
-//				carteChoisie = intervention(answer.getEmetteur());
-//				if(carteChoisie.getClass().equals(Malediction.class) || carteChoisie.getClass().equals(Sort.class))
-//				{
-//					// On applique le sortilege pour la malediction et le sortilege
-//					// TODO : Faire le ciblage
-//					if(carteChoisie.getClass().equals(Malediction.class))
-//					{
-//						Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-//						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
-//					}
-//					else
-//					{
-//						Sort carteSortChoisie = (Sort) carteChoisie;
-//						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(answer.getEmetteur(), new ArrayList<Joueur>(){{add(answer.getEmetteur());}}, combat, nbJoueursRepondu, enCours));
-//					}
-//					if(answer.getEmetteur().defausserCarte(carteChoisie))
-//					{
-//						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
-//					}
-//					else
-//					{
-//						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
-//						throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
-//					}
-//				}
-//				// Si on a voulu utiliser un objet
-//				else if(carteChoisie.getClass().equals(Objet.class))
-//				{
-//					// On applique le UtiliserObjet
-//				}
-//			}
-//		}
-//		// On envoie les infos aux joueurs
-//		this.sendInfos();
-//	}
+	}	
+
 
 	/**
 	 * Méthode permettant à un joueur de 
