@@ -36,9 +36,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	//private Answer           answer;
 	private int              phaseTour;
 	private Combat           combat;
-	private Carte            carteClickee    = null;
-	private final Boolean    verrou          = false;
-
+        private Joueur           joueurIntervenant=null;
+        
 	/**
 	 * Constructeur
 	 */
@@ -370,6 +369,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @param msg 
 	 */
 	public void intervenir(Message msg){
+                Joueur emetteur=this.getJoueurByName(msg.getNick_src());
 		switch(msg.getAction()){
                 case Constante.ACTION_PRET:
                        if(!msg.getIdCard().equals("")){
@@ -382,25 +382,25 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		case Constante.ACTION_DEFAUSSER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
-				this.setCarteClickee(Deck.getCardById(id));               
+				this.setCarteClickee(Deck.getCardById(id),emetteur);               
 			} else {
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite defausser une carte ! ");
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Defausser");                   
-				this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						this.getJoueurByName(msg.getNick_src()).getMain().generateInfos()));
+				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+						emetteur.getMain().generateInfos()));
 			}
 			break;           
 		case Constante.ACTION_DESEQUIPER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
-				final Joueur j= this.getJoueurByName(msg.getNick_src());
+				final Joueur j= emetteur;
 				// On vérifie que la carte passée est un objet, puis on le déséquipe et on la supprime
 				if(Deck.getCardById(id).getClass().equals(Objet.class))
 				{
 					Objet obj = (Objet) Deck.getCardById(id);
 					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);
-					this.getJoueurByName(msg.getNick_src()).getMain().ajouterCarte(obj);
-					this.getJoueurByName(msg.getNick_src()).getJeu().supprimerCarte(obj);                                        
+					emetteur.getMain().ajouterCarte(obj);
+					emetteur.getJeu().supprimerCarte(obj);                                        
 				}
 				else
 				{
@@ -412,26 +412,37 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					}
 				}
 				this.sendInfos();
+                                if(joueurIntervenant!=null){                              
+                                    joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
+                                            joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
+                                    this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte pour intervenir");
+                                }
 			} else {
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite se desequiper d'une carte ! ");
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à Désequiper");                   
-				this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						this.getJoueurByName(msg.getNick_src()).getJeu().generateInfos()));
+				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+						emetteur.getJeu().generateInfos()));
 			}
 			break;           
 		case Constante.ACTION_POSERCARTE:
 			if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
 				Integer id= new Integer(msg.getIdCard());
-				this.getJoueurByName(msg.getNick_src()).getJeu().ajouterCarte(Deck.getCardById(id));
-				this.getJoueurByName(msg.getNick_src()).defausserCarte(Deck.getCardById(id));
+				emetteur.getJeu().ajouterCarte(Deck.getCardById(id));
+				emetteur.defausserCarte(Deck.getCardById(id));
 				// Activation de la carte
-				appliquerCartePoseMainSurJoueur(this.getJoueurByName(msg.getNick_src()),Deck.getCardById(id));                
-				this.sendInfos();
+				appliquerCartePoseMainSurJoueur(emetteur,Deck.getCardById(id));            
+                                this.sendInfos();
+                                if(joueurIntervenant!=null){                              
+                                    joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
+                                            joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
+                                    this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte pour intervenir");
+                                }
+                                
 			} else {   //Le joueur informe qu'il veut poser une carte
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");                    
-				this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						this.getJoueurByName(msg.getNick_src()).getMain().getCartesPosables()));
+				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+						emetteur.getMain().getCartesPosables()));
 
 			}
 			break;
@@ -442,15 +453,15 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			else{
 				this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à utiliser pour POURRIR le joueur : "+this.enCours.getName());
-				this.getJoueurByName(msg.getNick_src()).sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						this.getJoueurByName(msg.getNick_src()).getMain().getCartesJouablePourPourrir()));
+				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
+						emetteur.getMain().getCartesJouablePourPourrir()));
 			}
 			break;
 		// Si un joueur a envoyé un message d'intervention ACTION_CARTE_INTERVENTION_CHOISIE, on change la valeur de la carte cliquée
 		case Constante.ACTION_CARTE_INTERVENTION_CHOISIE:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
-				this.setCarteClickee(Deck.getCardById(id));
+				this.setCarteClickee(Deck.getCardById(id),emetteur);
 				this.sendInfos();                  
 			} else {
 				this.sendMessageBackToSender(msg.getNick_src(),"Aucune carte choisie");                   
@@ -763,26 +774,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		if(cartePiochee.getClass().equals(Malediction.class)){
 			Malediction carteMaledictionPiochee = (Malediction) cartePiochee;
 			this.sendMessageToAll("C'est un sort !!\n");
+                        this.sendMessageToAll("Suspense, quelqu'un va peut etre intervenir..");
 			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
 			this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
 			jouerCarteMalediction(carteMaledictionPiochee);
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
-			this.sendMessageToCurrent(cartePiochee.getDescription());
-			//            this.sendQuestionToEnCours("Utiliser ?");
-			//            this.answer=null;
-			//            while( this.answer==null )
-			//                try {
-			//                   Thread.currentThread().sleep(200);//sleep for 200 ms
-			//                } catch (InterruptedException ex) {
-			//                    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-			//                }
-			//            if(this.answer.equals("Yes")){
-			//            
-			//            } else if(this.answer.equals("Non")){
-			//
-			//            }
-			//
+			this.sendMessageToCurrent(cartePiochee.getDescription());			
 			this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
 
 			// On pille la piece
@@ -871,8 +869,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 		this.defausseDonjon.ajouterCarte(monstrePioche);
 
-		this.sendInfos();		
-		//this.answer = null;
+		this.sendInfos();				
 		return gagne;
 	}
 
@@ -938,12 +935,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		while(!this.allPlayersAnsweredButThose(joueursNonConcernes)){
 			try {
 				Thread.sleep(200);
-                                Joueur hasAnswered=null;
-                                while((hasAnswered=this.onePlayerHasAnsweredExceptThose(joueursNonConcernes)) == null){
+                                joueurIntervenant=null;
+                                while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursNonConcernes)) == null){
                                     Thread.sleep(200);
                                 }
-                                if(hasAnswered.getAnswer().equals("Yes")){                                    
-                                    this.sendMessageToAll("Le joueur : "+hasAnswered.getName()+" souhaite intervenir");
+                                if(joueurIntervenant.getAnswer().equals("Yes")){                                    
+                                    this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" souhaite intervenir");
                                     for(Joueur j:this){
                                             // On envoi à tous les joueurs non concernés
                                             if(!joueursNonConcernes.contains(j))
@@ -952,9 +949,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                             }
                                     }
                                     Carte carteChoisie;
-                                    carteChoisie=intervention(hasAnswered);
+                                    carteChoisie=intervention(joueurIntervenant);
                                     ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
-                                    joueurDest.add(hasAnswered);
+                                    joueurDest.add(joueurIntervenant);
                                     if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
 				{
 					// On applique le sortilege pour la malediction et le sortilege
@@ -962,14 +959,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					if(carteChoisie instanceof Malediction)
 					{
 						Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(hasAnswered, joueurDest, combat,phaseTour , enCours));
+						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, combat,phaseTour , enCours));
 					}
 					else
 					{
 						Sort carteSortChoisie = (Sort) carteChoisie;
-						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(hasAnswered, joueurDest, combat, phaseTour, enCours));
+						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, combat, phaseTour, enCours));
 					}
-					if(hasAnswered.defausserCarte(carteChoisie))
+					if(joueurIntervenant.defausserCarte(carteChoisie))
 					{
 						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
 					}
@@ -987,7 +984,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                                 
                                 }
                                 else{
-                                    this.sendMessageToAll("Le joueur : "+hasAnswered.getName()+" ne souhaite pas intervenir");
+                                    this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
                                 }                                
                                 
                                 
@@ -995,6 +992,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
+                joueurIntervenant.setCarteClickee(null);
+                joueurIntervenant=null;
                 this.sendMessageToAll("Tous les joueurs ont répondu a la demande d'intervention");		
                 this.sendInfos();
 	}	
@@ -1011,9 +1010,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// TODO : Selection des cartes jouables
 		emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", emetteur.getName(),
 				emetteur.getMain().generateInfos()));
-		this.carteClickee=null;
+                emetteur.setCarteClickee(null);		
 		// On attends que le joueur ait choisi une carte
-		while(this.carteClickee==null)
+		while(emetteur.getCarteClickee()==null)
 		{
 			try {
 				Thread.sleep(200);
@@ -1022,7 +1021,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			}
 		}                   
 		
-		return carteClickee;
+		return emetteur.getCarteClickee();
 	}
 
 	/**
@@ -1045,7 +1044,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser
 		// TODO :
 		if((nbCartesADefausser = enCours.verifieMain()) > 0)
-		{
+		{   
+                        this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes !");
 			// On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
 			// Oui c'est fait exprès pour etre le plus flexible possible
 			// On récupère la carte choisie par l'utilisateur que l'on veut défausser
@@ -1077,12 +1077,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
 				}
 				this.sendInfos();
+                                enCours.setCarteClickee(null);
 			}
 		}
 	}
 
-	public void setCarteClickee(Carte carteClickee) {
-		this.carteClickee = carteClickee;
+	public void setCarteClickee(Carte carteClickee,Joueur emetteur) {
+		emetteur.setCarteClickee(carteClickee);
 	}
 
 
@@ -1097,8 +1098,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		j.sendMessage(new Message(Message.INTERVENTION, "Partie",j.getName(),Constante.ACTION_DEFAUSSER));
 		j.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", j.getName(),
 				j.getMain().generateInfos()));
-		this.carteClickee=null;
-		while(this.carteClickee==null)
+		j.setCarteClickee(null);
+		while(j.getCarteClickee()==null)
 		{
 			try {
 				Thread.sleep(200);
@@ -1107,67 +1108,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			}
 		}                   
 		
-		return carteClickee;
+		return j.getCarteClickee();
 	}
-	
-//	private class Answer
-//	{
-//		private Boolean answer  = false;
-//		private Joueur emetteur = null; 
-//		
-//		/**
-//		 * Constructeur de la classe interne Answer, permet de construire un objet réponse avec tous les éléments nécessaires :
-//		 * - Le nom du joueur ayant envoyé le message
-//		 * - La réponse envoyée
-//		 * @param msg
-//		 * @throws Exception
-//		 */
-//		Answer(Message msg) throws Exception
-//		{
-//			// On vérifie que le champ émetteur n'est pas vide, et on l'ajoute à notre objet Answer
-//			if(msg.getNick_src() != null)
-//			{
-//				for(Joueur joueur : Partie.this)
-//				{
-//					if(msg.getNick_src().equals(joueur.getName()))
-//					{
-//						setEmetteur(joueur);
-//					}
-//				}				
-//			}
-//			else
-//			{
-//				throw new Exception("Erreur dans le constructeur Answer, sur le message recu");
-//			}
-//			// On le transforme en Booléen
-//			if(msg.getMessage().equals("Yes"))
-//			{
-//				setAnswer(Boolean.TRUE);
-//			}
-//			else if(msg.getMessage().equals("Non"))
-//			{
-//				setAnswer(Boolean.FALSE);
-//			}
-//			else
-//			{
-//				throw new Exception("Erreur dans la fonction Answer, sur answer");
-//			}
-//		}
-//
-//		public Joueur getEmetteur() {
-//			return emetteur;
-//		}
-//
-//		public void setEmetteur(Joueur emetteur) {
-//			this.emetteur = emetteur;
-//		}
-//
-//		public Boolean getAnswer() {
-//			return answer;
-//		}
-//
-//		public void setAnswer(Boolean answer) {
-//			this.answer = answer;
-//		}
-//	}
 }

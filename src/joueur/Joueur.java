@@ -30,6 +30,7 @@ public class Joueur extends Thread {
     private DataOutputStream out = null;
     private int sexe             = Constante.SEXE_M;
     private String answer        = null;
+    private Carte carteClickee  = null;
     
     /**
      * Constructeur
@@ -108,14 +109,23 @@ public class Joueur extends Thread {
     public void setPersonnage(Personnage personnage) {
         this.personnage = personnage;
     }
+
+    public Carte getCarteClickee() {
+        return carteClickee;
+    }
+
+    public void setCarteClickee(Carte carteClickee) {
+        this.carteClickee = carteClickee;
+    } 
     
-      public String getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
+    }   
+    
     // ================================== // 
 
   
