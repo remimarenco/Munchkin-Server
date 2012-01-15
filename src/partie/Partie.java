@@ -399,7 +399,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				{
 					Objet obj = (Objet) Deck.getCardById(id);
 					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);
-					this.getJoueurByName(msg.getNick_src()).defausserCarte(obj);
+					this.getJoueurByName(msg.getNick_src()).getMain().ajouterCarte(obj);
+					this.getJoueurByName(msg.getNick_src()).getJeu().supprimerCarte(obj);                                        
 				}
 				else
 				{
