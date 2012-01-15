@@ -1,7 +1,10 @@
 package action;
 
+import communication.Message;
 import java.util.ArrayList;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import partie.Combat;
 import partie.Partie;
 import joueur.Joueur;
@@ -26,6 +29,16 @@ public abstract class Action {
     // TODO : Faire les échanges avec le serveur pour une demande de choix du joueur
     protected Joueur demandeChoixJoueur(Partie partie, Joueur joueurEmetteur)
     {
-    	return null;
+        joueurEmetteur.sendMessage(new Message(Message.CHOIXJOUEUR, "Partie", joueurEmetteur.getName(),"Veuiller choisir le joueur destination "));
+        partie.setJoueurCible(null);
+        while(partie.getJoueurCible()==null){
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    	return partie.getJoueurCible();
     }
 }

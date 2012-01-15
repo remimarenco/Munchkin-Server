@@ -138,7 +138,9 @@ public class Serveur {
                 break;
             case Message.CHOIXCAMP:               
                 break;
-            case Message.CHOIXJOUEUR:                
+            case Message.CHOIXJOUEUR:
+                Joueur cible=this.partie.getJoueurByName(msg.getMessage());
+                this.partie.setJoueurCible(cible);
                 break;
         }
     }

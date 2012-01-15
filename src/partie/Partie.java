@@ -37,6 +37,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private int              phaseTour;
 	private Combat           combat;
         private Joueur           joueurIntervenant=null;
+        private Joueur           joueurCible=null;   
         
 	/**
 	 * Constructeur
@@ -82,6 +83,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	public void setDefausseTresor(Defausse defausseTresor) {
 		this.defausseTresor = defausseTresor;
 	}
+
+        public Joueur getJoueurCible() {
+            return joueurCible;
+        }
+
+        public void setJoueurCible(Joueur joueurCible) {
+            this.joueurCible = joueurCible;
+        }
 
 	public Pioche<Donjon> getPiocheDonjon() {
 		return piocheDonjon;
