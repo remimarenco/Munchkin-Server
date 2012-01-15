@@ -764,11 +764,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
 			this.sendMessageToCurrent(cartePiochee.getDescription());
-
-			//
-			this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-			this.sendMessageToAll(carteMaledictionPiochee.appliquerSortilege(enCours, new ArrayList<Joueur>()
-					{{add(enCours);}}, null, this.phaseTour, enCours));
 			//            this.sendQuestionToEnCours("Utiliser ?");
 			//            this.answer=null;
 			//            while( this.answer==null )
@@ -805,6 +800,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		{
 			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 		}
+		this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
 		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, phaseTour, enCours);
 	}
 
