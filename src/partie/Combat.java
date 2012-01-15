@@ -155,7 +155,7 @@ public class Combat {
      * puissances associées
      * @return HashMap : ensembles des infos du combat
      */
-    public HashMap<String,String> generateInfos(){
+    public LinkedHashMap<String,String> generateInfos(){
         LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();        
         map.put("Camp Gentil", getPuissanceCampGentil());
         for(Personnage p : CampGentil)

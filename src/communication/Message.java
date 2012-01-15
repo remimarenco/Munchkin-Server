@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Classe Message identique entre client et serveur. Protocole d'echange
@@ -42,7 +43,7 @@ public class Message {
     private int type;
     private int action;
     private Color color;
-    private HashMap<String,String> map;
+    private LinkedHashMap<String,String> map;
     
     /**
      * Constructeur par défaut
@@ -130,7 +131,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,HashMap<String,String> map){
+    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,String> map){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
@@ -177,7 +178,7 @@ public class Message {
                 if(type == INTERVENTION)
                     idCard = in.readUTF();
                 if(type >= INFO_JOUEUR)
-                    this.map=(HashMap<String,String>)ois.readObject();
+                    this.map=(LinkedHashMap<String,String>)ois.readObject();
             }    
             return true;
         } catch(Exception e) {

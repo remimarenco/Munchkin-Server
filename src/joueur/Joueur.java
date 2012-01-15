@@ -7,6 +7,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import partie.Constante;
 import partie.Partie;
 
@@ -241,8 +243,8 @@ public class Joueur extends Thread {
      * Génère les infos du joueur à envoyer aux clients
      * @return 
      */
-    public HashMap<String,String> generateInfos(){
-        HashMap<String,String> map=new HashMap<String, String>();
+    public LinkedHashMap<String,String> generateInfos(){
+    	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         map.put("Nom", this.getName());
         map.put("Niveau Personnage",Integer.toString(this.getPersonnage().getNiveau()));
         if(this.getPersonnage().getSexe()==Constante.SEXE_F)

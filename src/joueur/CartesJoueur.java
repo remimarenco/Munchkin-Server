@@ -4,6 +4,8 @@ import carte.Carte;
 import carte.Monstre;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import partie.Constante;
 
 /**
@@ -92,8 +94,8 @@ public class CartesJoueur {
      * Prépare les données pour envoi au client
      * @return HashMap<String,String> infos sur les cartes 
      */
-    public HashMap<String,String> generateInfos(){
-        HashMap<String,String> map = new HashMap<String, String>();
+    public LinkedHashMap<String,String> generateInfos(){
+    	LinkedHashMap<String,String> map = new LinkedHashMap<String, String>();
         for(Carte c : this.cartes){
             map.put(c.getId().toString(), c.getId().toString());           
         }
@@ -107,8 +109,8 @@ public class CartesJoueur {
      * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
      * @return 
      */
-    public HashMap<String,String> getCartesPosables(){
-        HashMap<String,String> map=new HashMap<String, String>();
+    public LinkedHashMap<String,String> getCartesPosables(){
+    	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes)
             if(c.getClass().getSimpleName().equals("Objet"))
                 map.put(c.getId().toString(), c.getId().toString());
@@ -133,8 +135,8 @@ public class CartesJoueur {
      * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
      * @return
      */
-    public HashMap<String,String> getCartesJouablePourPourrir(){
-        HashMap<String,String> map=new HashMap<String, String>();
+    public LinkedHashMap<String,String> getCartesJouablePourPourrir(){
+    	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes)
             if(c.getClass().getSimpleName().equals("Objet"))
                 map.put(c.getId().toString(), c.getId().toString());
