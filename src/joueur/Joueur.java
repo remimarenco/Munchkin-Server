@@ -252,7 +252,14 @@ public class Joueur extends Thread {
         map.put("Capacité de fuite",Integer.toString(this.getPersonnage().getCapaciteFuite()));
         map.put("Puissance",Integer.toString(this.getPersonnage().getPuissance()));
         if(this.getPersonnage().getClasse()!=null)
-            map.put("Classe",this.getPersonnage().getClasse().toString());        
+        {
+            map.put("Classe",this.getPersonnage().getClasse().toString());
+        }
+        // Si le joueur n'a pas de classe, on affiche qu'il n'en a aucune
+        else
+        {
+        	map.put("Classe","Aucune");
+        }
         map.put("Race",this.getPersonnage().getRace().toString());
         map.put("Nombre equipement",Integer.toString(this.getPersonnage().getNbEquipement()));
         map.put("Bonus cap fuite",Integer.toString(this.getPersonnage().getBonusCapaciteFuite()));
