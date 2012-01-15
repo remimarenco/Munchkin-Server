@@ -66,12 +66,46 @@ public class ChangerNiveau extends Action {
      * Niveau positif : gain de niveaux
      * Niveau négatif : perte de niveaux
      * @param niveau : le delta de changement de niveau
+     * @param tabClasse : tableau des classe impactée par le changement
+     * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
+     * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
+     */
+    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse, boolean choixJoueur, Partie partie){
+        this.niveau    = niveau;
+        this.tabClasse = tabClasse;
+        this.niveauMin = 0;
+        this.choixJoueur = choixJoueur;
+        this.partie = partie;
+    }
+    
+    /**
+     * Constructeur de l'action ChangerNiveau
+     * Niveau positif : gain de niveaux
+     * Niveau négatif : perte de niveaux
+     * @param niveau : le delta de changement de niveau
      * @param niveauMin : niveau minimum
      */
     public ChangerNiveau(int niveau, int niveauMin){
         this.niveau    = niveau;
         this.niveauMin = niveauMin;
         this.tabClasse = null;
+    }
+    
+    /**
+     * Constructeur de l'action ChangerNiveau
+     * Niveau positif : gain de niveaux
+     * Niveau négatif : perte de niveaux
+     * @param niveau : le delta de changement de niveau
+     * @param niveauMin : niveau minimum
+     * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
+     * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
+     */
+    public ChangerNiveau(int niveau, int niveauMin, boolean choixJoueur, Partie partie){
+        this.niveau    = niveau;
+        this.niveauMin = niveauMin;
+        this.tabClasse = null;
+        this.choixJoueur = choixJoueur;
+        this.partie = partie;
     }
     
     /**
@@ -88,7 +122,7 @@ public class ChangerNiveau extends Action {
 		String out           = "";
         boolean classeTrouve = true;
         
-        // On demande ici la liste des joueurs destinataires si choix est a true
+        // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
         if(choixJoueur)
         {
         	// Si on avait spécifié null, on doit créer l'arraylist

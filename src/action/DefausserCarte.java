@@ -18,6 +18,8 @@ public class DefausserCarte extends Action{
     private int typeCarte;
     private int nbCarte;
     private int typeTas;
+	protected Partie partie;
+	protected boolean choixJoueur;
     
     
     /**
@@ -38,6 +40,20 @@ public class DefausserCarte extends Action{
         this.nbCarte   = nbCarte;
         this.typeTas   = typeTas;
     }
+    
+    /**
+     * Constructeur
+     * @param typeCarte : type de carte à défausser
+     * @param nbCarte : nombre de carte à défausser
+     * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
+     */
+    public DefausserCarte(int typeCarte, int nbCarte, int typeTas, boolean choixJoueur, Partie partie) {
+        this.typeCarte = typeCarte;
+        this.nbCarte   = nbCarte;
+        this.typeTas   = typeTas;
+        this.choixJoueur = choixJoueur;
+        this.partie = partie;
+    }
 
     
     /**
@@ -56,6 +72,20 @@ public class DefausserCarte extends Action{
         CartesJoueur tas;
         int valeur;
         
+        // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
+        if(choixJoueur)
+        {
+        	// Si on avait spécifié null, on doit créer l'arraylist
+        	if(joueurDestinataire == null)
+        	{
+        		joueurDestinataire = new ArrayList<Joueur>();
+        	}
+        	
+        	// On renvoi les joueurs destinataires par une demande au joueur initiateur
+        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        }
+        
+        // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
         for(Joueur joueurImpacte : joueurDestinataire){
 	        out += "Une action de défausse de carte est en cours : \n";
 	        out += "On défausse " + this.nbCarte + " de type " + this.typeCarte + " dans le tas " + this.typeTas + "\n";

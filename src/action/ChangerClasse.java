@@ -51,9 +51,16 @@ public class ChangerClasse extends Action{
                     int phaseTour, Joueur joueurTourEnCours) {
         String out = "";
         
+        // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
         if(choixJoueur)
         {
-        	// TODO : Faire suite du traitement
+        	// Si on avait spécifié null, on doit créer l'arraylist
+        	if(joueurDestinataire == null)
+        	{
+        		joueurDestinataire = new ArrayList<Joueur>();
+        	}
+        	
+        	// On renvoi les joueurs destinataires par une demande au joueur initiateur
         	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
         

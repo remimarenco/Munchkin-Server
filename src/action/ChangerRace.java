@@ -14,6 +14,8 @@ import joueur.Race;
 public class ChangerRace extends Action {
     
     protected Race race;
+    protected boolean choixJoueur;
+	protected Partie partie;
     
     /**
      * Constructeur par défaut
@@ -21,6 +23,18 @@ public class ChangerRace extends Action {
      */
     public ChangerRace(Race race) {
         this.race = race;
+    }
+    
+    /**
+     * Méthode permettant de changer la race d'un joueur choisi par le joueur émetteur
+     * @param race
+     * @param choixJoueur => True pour que le joueur cible soit choisi par le joueur émetteur
+     * @param partie
+     */
+    public ChangerRace(Race race, boolean choixJoueur, Partie partie) {
+        this.race = race;
+        this.choixJoueur = choixJoueur;
+        this.partie = partie;
     }
 
     /**
@@ -35,6 +49,20 @@ public class ChangerRace extends Action {
 			int phaseTour, Joueur joueurTourEnCours) {
 		
 		String out = "";
+		
+		// On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
+        if(choixJoueur)
+        {
+        	// Si on avait spécifié null, on doit créer l'arraylist
+        	if(joueurDestinataire == null)
+        	{
+        		joueurDestinataire = new ArrayList<Joueur>();
+        	}
+        	
+        	// On renvoi les joueurs destinataires par une demande au joueur initiateur
+        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        }
+		
 		for(Joueur joueurImpacte : joueurDestinataire){
 			out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
 	        joueurImpacte.getPersonnage().setRace(this.race);

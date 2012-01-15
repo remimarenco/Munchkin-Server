@@ -7,6 +7,11 @@ import comportement.Sortilege;
 import joueur.Joueur;
 import partie.Combat;
 
+/**
+ * Permet de garantir qu'appliquerSortilege est identique au niveau de la signature partout
+ * @author Remi
+ *
+ */
 public interface ISortilege {	
 	/**
      * Permet de lancer le comportement Sortilege d'une carte monstre

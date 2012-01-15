@@ -12,12 +12,25 @@ import partie.Partie;
  * @author Rémi Marenco
  */
 public class ChangerSexe extends Action {
-
+	protected boolean choixJoueur;
+	protected Partie partie;
+	
     /**
      * Constructeur par défaut
      */
     public ChangerSexe() {
 
+    }
+    
+    /**
+     * Méthode permettant de définir si le changement de sexe demande un choix utilisateur
+     * @param choixJoueur => True si on veut faire choisir un joueur
+     * @param partie
+     */
+    public ChangerSexe(boolean choixJoueur, Partie partie)
+    {
+    	this.choixJoueur = choixJoueur;
+    	this.partie = partie;
     }
     
     /**
@@ -33,6 +46,19 @@ public class ChangerSexe extends Action {
 		
 		String out = "";
         int sexe;
+        
+        // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
+        if(choixJoueur)
+        {
+        	// Si on avait spécifié null, on doit créer l'arraylist
+        	if(joueurDestinataire == null)
+        	{
+        		joueurDestinataire = new ArrayList<Joueur>();
+        	}
+        	
+        	// On renvoi les joueurs destinataires par une demande au joueur initiateur
+        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        }
         
         for(Joueur joueurImpacte : joueurDestinataire){
 	        out += joueurImpacte.getName() + " se transforme en";
