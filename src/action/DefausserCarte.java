@@ -47,7 +47,7 @@ public class DefausserCarte extends Action{
      * @param nbCarte : nombre de carte à défausser
      * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
      */
-    public DefausserCarte(int typeCarte, int nbCarte, int typeTas, boolean choixJoueur, Partie partie) {
+    public DefausserCarte(int typeCarte, int nbCarte, int typeTas, boolean choixJoueur) {
         this.typeCarte = typeCarte;
         this.nbCarte   = nbCarte;
         this.typeTas   = typeTas;
@@ -64,29 +64,31 @@ public class DefausserCarte extends Action{
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out = "";
         Carte c    = null;
         CartesJoueur tas;
         int valeur;
         
+     // Création d'une nouvelle ArrayList pour éviter de modifier les paramètres...possible de les passer en final
+        ArrayList<Joueur> joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+
         // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
         if(choixJoueur)
         {
         	// Si on avait spécifié null, on doit créer l'arraylist
-        	if(joueurDestinataire == null)
+        	if(joueurDestinataireTemp == null)
         	{
-        		joueurDestinataire = new ArrayList<Joueur>();
+        		joueurDestinataireTemp = new ArrayList<Joueur>();
         	}
-        	
+
         	// On renvoi les joueurs destinataires par une demande au joueur initiateur
-        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
         
         // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
-        for(Joueur joueurImpacte : joueurDestinataire){
+        for(Joueur joueurImpacte : joueurDestinataireTemp){
 	        out += "Une action de défausse de carte est en cours : \n";
 	        out += "On défausse " + this.nbCarte + " de type " + this.typeCarte + " dans le tas " + this.typeTas + "\n";
 	        

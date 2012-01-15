@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import comportement.Sortilege;
 
 import joueur.Joueur;
-import partie.Combat;
+import partie.Partie;
 
 /**
  * Permet de garantir qu'appliquerSortilege est identique au niveau de la signature partout
@@ -19,7 +19,7 @@ public interface ISortilege {
      * TODO : Faire un hashmap de cibles/destinations => Personnages + Monstres
      * ex   : Joueur A lance le sortilège qui s'applique à tous les personnages sauf lui
      * ex 2 : Joueur B lance le sortilège qui s'applique à tous les monstres en jeu
-     * @param joueurImpacte
+	 * @param joueurImpacte
      */
-    public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours);
+    public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie);
 }

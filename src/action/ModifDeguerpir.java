@@ -46,8 +46,7 @@ public class ModifDeguerpir extends Action{
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out              = "";
         boolean accept          = true;

@@ -3,7 +3,7 @@ package comportement;
 import action.Action;
 import java.util.ArrayList;
 
-import partie.Combat;
+import partie.Partie;
 import joueur.Joueur;
 
 
@@ -32,10 +32,9 @@ public class IncidentFacheux extends Comportement{
      */
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		String out = "";
-        if(tabAction != null || !(tabAction.isEmpty()))
+        if(tabAction != null && !(tabAction.isEmpty()))
         {
             out += "--- Incident fâcheux ---\n";
             
@@ -44,7 +43,7 @@ public class IncidentFacheux extends Comportement{
 	            out += "Un incident fâcheux vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
 	            out += "Il y a " + tabAction.size();
 	            for(Action action : tabAction)
-	                out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+	                out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie);
             }
 	        out += "--- Fin d'incident fâcheux ---\n";
         } else {

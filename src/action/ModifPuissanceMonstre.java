@@ -57,8 +57,7 @@ public class ModifPuissanceMonstre extends Action{
     // Méthode permettant de modifier la puissance d'un monstre
     @Override
     public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
         String out           = "";
         boolean accept       = true;
         boolean raceTrouve   = false;
@@ -106,7 +105,7 @@ public class ModifPuissanceMonstre extends Action{
             }
             
             // Si on ne se trouve pas dans la phase de recherche de la bagarre => En combat, cette carte n'aura aucun effet
-            if(phaseTour != Constante.PHASE_CHERCHER_LA_BAGARRE)
+            if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE)
             {
             	accept = false;
             }

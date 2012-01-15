@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import joueur.Joueur;
 import partie.Combat;
+import partie.Partie;
 import comportement.ComportementDefausserCarte;
 import comportement.Equipement;
 import comportement.UtiliserCarte;
@@ -60,9 +61,9 @@ public class Objet extends Tresor {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public String equiper(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String equiper(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         if(this.equipement != null)
-            return equipement.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return equipement.action(joueurEmetteur, joueurDestinataire, partie);
         else
             return "Cette carte n'a pas d'équipement\n";
     }
@@ -72,9 +73,9 @@ public class Objet extends Tresor {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param equipement
      */
-    public String desequiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String desequiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         if(this.defausserCarte != null)
-            return defausserCarte.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return defausserCarte.action(joueurDestinateur, joueurDestinataire, partie);
         else
             return "Cette carte n'a pas de comportement defausser carte\n";
     }

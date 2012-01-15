@@ -19,14 +19,13 @@ public abstract class Action {
      * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), dépend d'une phase d'un tour (ou pas), dépend d'un tour (ou pas)
      * @param joueurImpacte : Joueur recevant l'action
      */
-    public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours);
+    public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie);
     
     /**
      * Méthode permettant de retourner le joueur choisit
      * @param partie
      * @return
      */
-    // TODO : Faire les échanges avec le serveur pour une demande de choix du joueur
     protected Joueur demandeChoixJoueur(Partie partie, Joueur joueurEmetteur)
     {
         joueurEmetteur.sendMessage(new Message(Message.CHOIXJOUEUR, "Partie", joueurEmetteur.getName(),"Veuiller choisir le joueur destination "));

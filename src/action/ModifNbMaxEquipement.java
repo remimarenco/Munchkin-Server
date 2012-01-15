@@ -33,8 +33,7 @@ public class ModifNbMaxEquipement extends Action{
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out = "";
         out += "On modifie le nombre maximum d'objet portés par un joueur :\n";

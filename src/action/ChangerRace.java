@@ -31,7 +31,7 @@ public class ChangerRace extends Action {
      * @param choixJoueur => True pour que le joueur cible soit choisi par le joueur émetteur
      * @param partie
      */
-    public ChangerRace(Race race, boolean choixJoueur, Partie partie) {
+    public ChangerRace(Race race, boolean choixJoueur) {
         this.race = race;
         this.choixJoueur = choixJoueur;
         this.partie = partie;
@@ -45,25 +45,27 @@ public class ChangerRace extends Action {
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out = "";
+		
+		// Création d'une nouvelle ArrayList pour éviter de modifier les paramètres...possible de les passer en final
+		ArrayList<Joueur> joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
 		
 		// On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
         if(choixJoueur)
         {
         	// Si on avait spécifié null, on doit créer l'arraylist
-        	if(joueurDestinataire == null)
+        	if(joueurDestinataireTemp == null)
         	{
-        		joueurDestinataire = new ArrayList<Joueur>();
+        		joueurDestinataireTemp = new ArrayList<Joueur>();
         	}
         	
         	// On renvoi les joueurs destinataires par une demande au joueur initiateur
-        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
 		
-		for(Joueur joueurImpacte : joueurDestinataire){
+		for(Joueur joueurImpacte : joueurDestinataireTemp){
 			out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
 	        joueurImpacte.getPersonnage().setRace(this.race);
 	        out += " à la race " + joueurImpacte.getPersonnage().getRace();

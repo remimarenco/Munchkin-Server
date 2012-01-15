@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import joueur.Joueur;
 import partie.Combat;
 import partie.Constante;
+import partie.Partie;
 
 
 /**
@@ -35,8 +36,7 @@ public class PiocherCarte extends Action {
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out = "";
                 int i;

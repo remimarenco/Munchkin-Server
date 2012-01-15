@@ -2,7 +2,7 @@ package comportement;
 
 import java.util.ArrayList;
 
-import partie.Combat;
+import partie.Partie;
 import action.Action;
 import joueur.Joueur;
 
@@ -30,13 +30,12 @@ public class IncidentDeguerpir extends Comportement{
      */
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
-            out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += action.action(joueurEmetteur, joueurDestinataire, partie);
         out += "--- Fin d'incident fuite ---\n";
         return out;
 	}

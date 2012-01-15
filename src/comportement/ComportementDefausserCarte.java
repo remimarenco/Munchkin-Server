@@ -2,7 +2,7 @@ package comportement;
 
 import java.util.ArrayList;
 
-import partie.Combat;
+import partie.Partie;
 import action.Action;
 import joueur.Joueur;
 
@@ -27,13 +27,12 @@ public class ComportementDefausserCarte extends Comportement {
      */
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		String out = "";
         out += "--- Defausser carte ---\n";
         out += "Le joueur défausse une carte\n";
         for(Action action : tabAction)
-            out += action.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += action.action(joueurEmetteur, joueurDestinataire, partie);
         out += "--- Fin Defausser Carte ---\n";
         return out;
 	}

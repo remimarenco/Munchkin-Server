@@ -3,7 +3,7 @@ package comportement;
 import java.util.ArrayList;
 
 import joueur.Joueur;
-import partie.Combat;
+import partie.Partie;
 
 import action.Action;
 
@@ -20,6 +20,6 @@ public abstract class Comportement {
 		}
 	}
 	
-	public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours);
+	public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie);
 
 }

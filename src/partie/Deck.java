@@ -518,7 +518,7 @@ public final class Deck {
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new ChangerNiveau(1));
+        actionTabMalediction.add(new ChangerNiveau(1,true));
         cartes.add(new Sort(104, "Don de chips désintéressé au MJ", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));

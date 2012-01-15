@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import joueur.Joueur;
 import partie.Combat;
+import partie.Partie;
 import comportement.Condition;
 import comportement.IncidentDeguerpir;
 import comportement.IncidentFacheux;
@@ -97,9 +98,9 @@ public class Monstre extends Donjon {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerIncidentFacheux(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerIncidentFacheux(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         if(this.incidentFacheux != null)
-            return this.incidentFacheux.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.incidentFacheux.action(joueurEmetteur, joueurDestinataire, partie);
         else
             return "Cette carte n'a pas d'incident facheux\n";
     }
@@ -109,9 +110,9 @@ public class Monstre extends Donjon {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         if(this.condition != null)
-            return this.condition.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.condition.action(joueurEmetteur, joueurDestinataire, partie);
         else
             return "Cette carte n'a pas de condition\n";
     }
@@ -121,10 +122,10 @@ public class Monstre extends Donjon {
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * @param joueurImpacte
      */
-    public String appliquerMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         String out = "";
     	if(this.monstreVaincu != null)
-            out += this.monstreVaincu.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += this.monstreVaincu.action(joueurEmetteur, joueurDestinataire, partie);
         else
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;

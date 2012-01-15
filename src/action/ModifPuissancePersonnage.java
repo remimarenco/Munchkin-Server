@@ -3,6 +3,7 @@ package action;
 import java.util.ArrayList;
 
 import partie.Combat;
+import partie.Partie;
 
 import joueur.Classe;
 import joueur.Joueur;
@@ -62,8 +63,7 @@ public class ModifPuissancePersonnage extends Action{
     // TODO : Description méthode + PROTECTION NULL
     @Override
     public String action(Joueur joueurEmetteur,
-                    ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-                    int phaseTour, Joueur joueurTourEnCours) {
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
 
         int puissanceObjet   = 0;
         int niveauJoueur     = 0;

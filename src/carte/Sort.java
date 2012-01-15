@@ -3,7 +3,7 @@ package carte;
 import java.util.ArrayList;
 
 import joueur.Joueur;
-import partie.Combat;
+import partie.Partie;
 import comportement.Sortilege;
 
 /**
@@ -30,11 +30,11 @@ public class Sort extends Tresor implements ISortilege{
      * TODO : Faire un hashmap de cibles/destinations => Personnages + Monstres
      * ex   : Joueur A lance le sortilège qui s'applique à tous les personnages sauf lui
      * ex 2 : Joueur B lance le sortilège qui s'applique à tous les monstres en jeu
-     * @param joueurImpacte
+	 * @param joueurImpacte
      */
-    public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
+    public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie){
         if(this.sortilege != null)
-            return this.sortilege.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.sortilege.action(joueurEmetteur, joueurDestinataire, partie);
         else
             return "Cette carte n'a pas de malus\n";
     }

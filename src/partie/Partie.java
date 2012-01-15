@@ -34,10 +34,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private Joueur           enCours;
 	private Color            Color;
 	//private Answer           answer;
-	private int              phaseTour;
+	private int               phaseTour;
 	private Combat           combat;
-        private Joueur           joueurIntervenant=null;
-        private Joueur           joueurCible=null;   
+    private Joueur           joueurIntervenant=null;
+    private Joueur           joueurCible=null;   
         
 	/**
 	 * Constructeur
@@ -107,13 +107,40 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	public Pioche<Tresor> getPiocheTresor() {
 		return piocheTresor;
 	}
+	
+	/**
+	 * @return the combat
+	 */
+	public Combat getCombat() {
+		return combat;
+	}
+
+	/**
+	 * @param combat the combat to set
+	 */
+	public void setCombat(Combat combat) {
+		this.combat = combat;
+	}
+
+	/**
+	 * @return the phaseTour
+	 */
+	public int getPhaseTour() {
+		return phaseTour;
+	}
+
+	/**
+	 * @param phaseTour the phaseTour to set
+	 */
+	public void setPhaseTour(int phaseTour) {
+		this.phaseTour = phaseTour;
+	}
+	
 	// ================================== //
 
-
-
-			/**
-			 * Distribue les cartes aux joueurs au début de la partie
-			 */
+	/**
+	 * Distribue les cartes aux joueurs au début de la partie
+	 */
 	public void distribuer(){
 		Iterator it = this.iterator();
 		Joueur j;
@@ -407,7 +434,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				if(Deck.getCardById(id).getClass().equals(Objet.class))
 				{
 					Objet obj = (Objet) Deck.getCardById(id);
-					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, combat, phaseTour, enCours);
+					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, this);
 					emetteur.getMain().ajouterCarte(obj);
 					emetteur.getJeu().supprimerCarte(obj);                                        
 				}
@@ -723,7 +750,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			sendMessageToPlayer("Vous n'avez pas réussi à déguerpir !", persoEchec);
 			sendMessageToAllButPlayer(persoEchec + " n'a pas réussi à déguerpir", persoEchec);
 			for(Monstre monstre : combat.getCampMechant())
-				this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+				this.sendMessageToAll(monstre.appliquerIncidentFacheux(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this));
 			this.sendSongToAll(Constante.jouerSon(Constante.SOUND_INCIDENTFACHEUX));
 		}
 	}
@@ -734,8 +761,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	// => Si Sort => Agit sur le joueur si possible => Défaussée
 	// => Autre type => Jouer ou mettre dans main
 	private Carte phaseOuvrirPorte() throws Exception {
-		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_OUVRIR_PORTE);
-		this.phaseTour = Constante.PHASE_OUVRIR_PORTE;
+		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_OUVRIR_PORTE);
+		this.setPhaseTour(Constante.PHASE_OUVRIR_PORTE);
 		Carte cartePiochee;
 
 		cartePiochee = (Carte) piocheDonjon.tirerCarte();
@@ -783,7 +810,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 		}
 		this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, combat, phaseTour, enCours);
+		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this);
 	}
 
 	/**
@@ -793,12 +820,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private boolean ChercherLaBagarre(Monstre monstrePioche) {
 		boolean gagne = true;
-		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_CHERCHER_LA_BAGARRE);
-		this.phaseTour = Constante.PHASE_CHERCHER_LA_BAGARRE;
-		combat = new Combat(this);
+		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_CHERCHER_LA_BAGARRE);
+		this.setPhaseTour(Constante.PHASE_CHERCHER_LA_BAGARRE);
+		setCombat(new Combat(this));
 
-		combat.getCampGentil().add(enCours.getPersonnage());
-		combat.getCampMechant().add(monstrePioche);
+		getCombat().getCampGentil().add(enCours.getPersonnage());
+		getCombat().getCampMechant().add(monstrePioche);
 
 		System.out.println("Vous avez tiré le monstre :");
 		System.out.println(monstrePioche.getNom() + "(Puissance : " + monstrePioche.getPuissance() + ")");
@@ -809,7 +836,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		/**
 		 * On applique la condition du monstre
 		 */
-		this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, null, this.phaseTour, enCours));
+		this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, this));
 		this.sendInfos();
 
 		System.out.println("Combattre ? (o/n)");
@@ -832,7 +859,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 			// Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
 			// le nb de niveau gagné et les cartes trésors qu'il peut tirer
-			if(combat.combattre()){
+			if(getCombat().combattre()){
 				combatGagne(monstrePioche);
 				gagne = true;
 			} else {
@@ -842,7 +869,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 		} else {
 
-			deguerpir(combat);
+			deguerpir(getCombat());
 			gagne = false;
 		}
 
@@ -858,7 +885,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			Objet carteObjet = (Objet) cardById;
 			final Joueur j=joueur;
 			this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
-			this.SendDebugMessage(carteObjet.equiper(j, new ArrayList<Joueur>(){{add(j);}}, null, this.phaseTour, this.enCours));
+			this.SendDebugMessage(carteObjet.equiper(j, new ArrayList<Joueur>(){{add(j);}}, this));
 		}
 	}
 
@@ -868,7 +895,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private void combatGagne(Monstre monstrePioche) {
 		System.out.println("Vous avez gagné !");
-		this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+		this.sendMessageToAll(monstrePioche.appliquerMonstreVaincu(null, new ArrayList<Joueur>(){{add(enCours);}}, this));
 		this.sendMessageToAll("Le joueur : " +enCours.getName() + "  a gagné le combat ! \n");
 		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_VICTOIRE));
 	}
@@ -879,7 +906,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private void combatPerdu(Monstre monstrePioche) {
 		System.out.println("Vous avez perdu...");
-		this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, combat, this.phaseTour, enCours));
+		this.sendMessageToAll(monstrePioche.appliquerIncidentFacheux(null, new ArrayList<Joueur>(){{add(enCours);}}, this));
 		this.sendMessageToAll("Le joueur : " + enCours.getName() + "  a perdu le combat ! \n");
 		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_INCIDENTFACHEUX));
 	}
@@ -896,7 +923,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	private void sendInfos() {
-		this.sendInfosCampsToAll(combat);
+		this.sendInfosCampsToAll(getCombat());
 		this.sendInfosJoueursToAll();
 		this.sendCartesJeuxJoueursToAll();
 		this.sendCartesMainToOwner();
@@ -938,12 +965,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					if(carteChoisie instanceof Malediction)
 					{
 						Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, combat,phaseTour , enCours));
+						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
 					}
 					else
 					{
 						Sort carteSortChoisie = (Sort) carteChoisie;
-						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, combat, phaseTour, enCours));
+						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
 					}
 					if(joueurIntervenant.defausserCarte(carteChoisie))
 					{
@@ -1007,8 +1034,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Phase de pillage de la piece, on pioche une carte et on change la phaseTour
 	 */
 	private void PillerLaPiece() {
-		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_PILLER_LA_PIECE);
-		this.phaseTour = Constante.PHASE_PILLER_LA_PIECE;
+		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_PILLER_LA_PIECE);
+		this.setPhaseTour(Constante.PHASE_PILLER_LA_PIECE);
 		// On pioche une carte du donjon
 		enCours.piocherCarte(Constante.DONJON);
 	}
@@ -1017,8 +1044,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Méthode permettant de dérouler la phase de la Charité
 	 */
 	private void Charite() {
-		this.sendMessageToAll("Changement de phase : "+phaseTour+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
-		this.phaseTour = Constante.PHASE_CHARITE_SIOUPLAIT;
+		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
+		this.setPhaseTour(Constante.PHASE_CHARITE_SIOUPLAIT);
 		int nbCartesADefausser = 0;
 		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser
 		// TODO :

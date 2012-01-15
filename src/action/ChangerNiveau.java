@@ -40,7 +40,7 @@ public class ChangerNiveau extends Action {
      * @param choixJoueur
      * @param partie => Permet de demander au joueur le joueur sur lequel le changement de niveau doit être fait
      */
-    public ChangerNiveau(int niveau, boolean choixJoueur, Partie partie){
+    public ChangerNiveau(int niveau, boolean choixJoueur){
         this.niveau    = niveau;
         this.niveauMin = 0;
         this.tabClasse = null;
@@ -70,7 +70,7 @@ public class ChangerNiveau extends Action {
      * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
      * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
      */
-    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse, boolean choixJoueur, Partie partie){
+    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse, boolean choixJoueur){
         this.niveau    = niveau;
         this.tabClasse = tabClasse;
         this.niveauMin = 0;
@@ -100,7 +100,7 @@ public class ChangerNiveau extends Action {
      * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
      * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
      */
-    public ChangerNiveau(int niveau, int niveauMin, boolean choixJoueur, Partie partie){
+    public ChangerNiveau(int niveau, int niveauMin, boolean choixJoueur){
         this.niveau    = niveau;
         this.niveauMin = niveauMin;
         this.tabClasse = null;
@@ -116,28 +116,30 @@ public class ChangerNiveau extends Action {
     // TODO : Description méthode + PROTECTION NULL
 	@Override
 	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
-			int phaseTour, Joueur joueurTourEnCours) {
+			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out           = "";
         boolean classeTrouve = true;
         
+        // Création d'une nouvelle ArrayList pour éviter de modifier les paramètres...possible de les passer en final
+        ArrayList<Joueur> joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+
         // On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
         if(choixJoueur)
         {
         	// Si on avait spécifié null, on doit créer l'arraylist
-        	if(joueurDestinataire == null)
+        	if(joueurDestinataireTemp == null)
         	{
-        		joueurDestinataire = new ArrayList<Joueur>();
+        		joueurDestinataireTemp = new ArrayList<Joueur>();
         	}
-        	
+
         	// On renvoi les joueurs destinataires par une demande au joueur initiateur
-        	joueurDestinataire.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
         
-        if(joueurDestinataire != null)
+        if(joueurDestinataireTemp != null)
         {
-        	for(Joueur joueurImpacte : joueurDestinataire){
+        	for(Joueur joueurImpacte : joueurDestinataireTemp){
         		// Si le joueur est en dessous ou pile au niveau min & qu'on veut lui enlever des niveaux
         		if(niveauMin >= joueurImpacte.getPersonnage().getNiveau() && this.niveau < 0){
         			return joueurImpacte.getName() + "ne peut pas perdre encore de niveau\n";
