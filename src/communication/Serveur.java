@@ -9,7 +9,7 @@ import joueur.Joueur;
 import partie.Partie;
 
 /**
- * // TODO : Commenter
+ * Cette classe permet les connexions reseau, l'ajout des joueurs dans la partie, et lance la partie
  * @author Guillaume Renoult
  */
 public class Serveur {

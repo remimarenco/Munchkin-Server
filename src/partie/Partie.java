@@ -406,8 +406,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				{
 					try {
 						throw new Exception("Erreur dans intervenir, Carte passée non Objet");
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
+					} catch (Exception e) {						
 						e.printStackTrace();
 					}
 				}
@@ -471,34 +470,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	/**
-	 * Aider un joueur dans un combat
-	 * @param msg 
-	 */
-	public void aider(Message msg){
-
-	}
-
-
-	/**
-	 * Pourrir un joueur dans un combat
-	 * @param msg 
-	 */
-	public void pourrir(Message msg){
-
-	}
-
-
-	/**
-	 * Poser une carte (transfert de la main au jeu)
-	 * @param msg 
-	 */
-	// TODO : Vérifier l'utilité de la méthode
-	public void poserCarte(Message msg){
-
-	}
-
-
-	/**
 	 * Methode qui est appelé par le serveur lorsque la reponse attendu est reçu
 	 * Permet de débloquer la partie lorsque celle ci attends la reponse d'un joueur
 	 * @param msg
@@ -559,8 +530,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			}
 			try {
 				tour();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 		}
