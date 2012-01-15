@@ -32,4 +32,10 @@ public class Pretre extends Classe{
     public void resurrection(){
         
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Prêtre";
+	}
 }

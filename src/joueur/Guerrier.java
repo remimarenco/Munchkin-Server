@@ -15,4 +15,10 @@ public class Guerrier extends Classe {
     public void rage(){
         
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Guerrier";
+	}
 }

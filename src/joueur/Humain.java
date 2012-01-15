@@ -25,4 +25,10 @@ public class Humain extends Race
     public void defausserRace(Personnage personnage) {
 
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Humain";
+	}
 }

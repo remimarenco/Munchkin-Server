@@ -24,4 +24,10 @@ public class Nain extends Race {
     public void defausserRace(Personnage personnage) {
         personnage.setCapaciteEquipement(personnage.getCapaciteEquipement()-1);
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Nain";
+	}
 }

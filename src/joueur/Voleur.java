@@ -32,4 +32,10 @@ public class Voleur extends Classe {
     public void poignarder(){
         
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Voleur";
+	}
 }

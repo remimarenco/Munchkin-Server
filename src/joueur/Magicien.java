@@ -32,4 +32,10 @@ public class Magicien extends Classe {
     public void sortDeVol(){
         
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Magicien";
+	}
 }

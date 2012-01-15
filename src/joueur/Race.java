@@ -32,7 +32,5 @@ public abstract class Race {
      * @return String : le nom de la race
      */
     @Override
-    public String toString(){
-        return this.getClass().toString();
-    }
+    public abstract String toString();
 }

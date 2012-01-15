@@ -24,4 +24,10 @@ public class Halfelin extends Race {
     public void defausserRace(Personnage personnage) {
 
     }
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Halfelin";
+	}
 }

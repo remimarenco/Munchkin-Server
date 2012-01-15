@@ -21,7 +21,5 @@ public abstract class Classe {
      * @return String : le nom de la classe
      */
     @Override
-    public String toString(){
-        return this.getClass().toString();
-    }
+    public abstract String toString();
 }

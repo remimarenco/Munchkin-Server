@@ -30,4 +30,10 @@ public class Elfe extends Race {
         personnage.setCapaciteFuite(personnage.getCapaciteFuite()-1);
     }
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Elfe";
+	}
+
 }
