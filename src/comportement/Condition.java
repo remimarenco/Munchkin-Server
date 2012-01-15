@@ -10,22 +10,13 @@ import joueur.Joueur;
  * Contient une liste d'action qui ne sont applicables que sous certaines conditions // TODO : Vérifier si correct
  * @author Rémi Marenco
  */
-public class Condition {
-    
-    private ArrayList<Action> tabAction;
-    
-    
+public class Condition extends Comportement {    
     /**
      * Constructeur
      * @param tabAction : ensemble d'actions 
      */
     public Condition(ArrayList<Action> tabAction){
-        try{
-            this.tabAction = (ArrayList<Action>) tabAction.clone();
-        }
-        catch(Exception e){
-            System.out.println("Aucune action dans la condition");
-        }
+        super(tabAction);
     }
 
     /**
@@ -33,8 +24,11 @@ public class Condition {
      * @param joueurImpacte : joueur sur lequel s'applique la condition
      * @return out : texte résumant l'action
      */
-    public String mettreCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
-        String out = "";
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out = "";
 
         if(tabAction == null){
             out += "Aucune condition sur ce monstre\n";
@@ -48,5 +42,5 @@ public class Condition {
             }
         }
         return out;
-    }
+	}
 }

@@ -11,21 +11,13 @@ import joueur.Joueur;
  * Applique un ensemble d'action lorsqu'un monstre est vaincu
  * @author Simon Grabit
  */
-public class MonstreVaincu {
-    
-    public ArrayList<Action> tabAction;
-    
-    
+public class MonstreVaincu extends Comportement{    
     /**
      * Constructeur
      * @param tabAction 
      */
     public MonstreVaincu(ArrayList<Action> tabAction){
-        try {
-            this.tabAction = (ArrayList<Action>) tabAction.clone();
-        } catch(Exception e) {
-            System.out.println("Aucune action dans le comportement MonstreVaincu");
-        }
+        super(tabAction);
     }
 	
     
@@ -34,9 +26,11 @@ public class MonstreVaincu {
      * @param joueurImpacte : joueur ayant vaincu le monstre
      * @return 
      */
-    public String actionMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours) {
-        
-        String out = "";
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out = "";
 
         if(tabAction == null) {
             out += "Aucune condition sur ce monstre\n";
@@ -51,5 +45,5 @@ public class MonstreVaincu {
         }
         out += "\n";    
         return out;
-    }
+	}
 }

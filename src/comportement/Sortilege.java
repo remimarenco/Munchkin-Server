@@ -10,16 +10,13 @@ import joueur.Joueur;
  * Ensemble d'actions lancées par un sort
  * @author Rémi Marenco
  */
-public class Sortilege {
-
-    private ArrayList<Action> tabAction;    // Ensemble des actions du sort
-
-    
+public class Sortilege extends Comportement{    
     /**
      * Constructeur
      * @param tabAction 
      */
     public Sortilege(ArrayList<Action> tabAction) {
+    	super(tabAction);
     	try {
             // Enregistre une copie du tableau d'action dans le sortilège
             this.tabAction = (ArrayList<Action>) tabAction.clone();
@@ -35,8 +32,11 @@ public class Sortilege {
      * @return out : texte résumant l'action
      *         nomPhase : StackTraceElement permettant de situer la phase dans laquelle nous sommes
      */
-    public String actionSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
-        String out = "";
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out = "";
         if(tabAction == null){
             out += "Aucune sortilège à appliquer";
         } else {
@@ -55,5 +55,5 @@ public class Sortilege {
         }
         out += "\n";
         return out;
-    }
+	}
 }

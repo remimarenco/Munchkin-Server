@@ -23,7 +23,7 @@ public abstract class Carte {
     
     protected Integer id;           // id de la carte, reference sur serveur et client
     protected String nom;
-    protected String description;   // Description de la carte, correspondante à la réalité 
+    protected String description;   // Description de la carte, correspondante à la réalité
     
     /**
      * Constructeur de la carte

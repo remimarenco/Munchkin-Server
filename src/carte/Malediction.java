@@ -38,7 +38,7 @@ public class Malediction extends Donjon implements ISortilege{
      */
     public String appliquerSortilege(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.sortilege != null)
-            return this.sortilege.actionSortilege(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.sortilege.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de malus\n";
     }

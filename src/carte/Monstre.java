@@ -99,7 +99,7 @@ public class Monstre extends Donjon {
      */
     public String appliquerIncidentFacheux(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.incidentFacheux != null)
-            return this.incidentFacheux.actionIncidentFacheux(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.incidentFacheux.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'incident facheux\n";
     }
@@ -111,7 +111,7 @@ public class Monstre extends Donjon {
      */
     public String appliquerCondition(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.condition != null)
-            return this.condition.mettreCondition(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return this.condition.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de condition\n";
     }
@@ -124,7 +124,7 @@ public class Monstre extends Donjon {
     public String appliquerMonstreVaincu(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         String out = "";
     	if(this.monstreVaincu != null)
-            out += this.monstreVaincu.actionMonstreVaincu(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            out += this.monstreVaincu.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;

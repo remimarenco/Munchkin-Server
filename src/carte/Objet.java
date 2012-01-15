@@ -62,7 +62,7 @@ public class Objet extends Tresor {
      */
     public String equiper(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.equipement != null)
-            return equipement.equipe(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return equipement.action(joueurEmetteur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas d'équipement\n";
     }
@@ -74,7 +74,7 @@ public class Objet extends Tresor {
      */
     public String desequiper(Joueur joueurDestinateur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours){
         if(this.defausserCarte != null)
-            return defausserCarte.defausserCarte(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
+            return defausserCarte.action(joueurDestinateur, joueurDestinataire, combatCible, phaseTour, joueurTourEnCours);
         else
             return "Cette carte n'a pas de comportement defausser carte\n";
     }

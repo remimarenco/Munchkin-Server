@@ -11,7 +11,7 @@ import joueur.Joueur;
  * Classe permettant de déclencher les incidents fâcheux
  * @author Rémi Marenco
  */
-public class IncidentFacheux {
+public class IncidentFacheux extends Comportement{
 
     public ArrayList<Action> tabAction; // Esemble d'action à effectuer sur un incident fâcheux
 
@@ -22,12 +22,7 @@ public class IncidentFacheux {
      */
     public IncidentFacheux(ArrayList<Action> tabAction)
     {
-    	try {
-            this.tabAction = (ArrayList<Action>) tabAction.clone();
-        }
-        catch(Exception e){
-            System.out.println("Aucune action dans l'incident fâcheux");
-        }
+    	super(tabAction);
     }
 
     
@@ -35,9 +30,11 @@ public class IncidentFacheux {
      * Application de l'ensemble des actions de l'incident fâcheux sur le joueur
      * @param joueurImpacte
      */
-    public String actionIncidentFacheux(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Combat combatCible, int phaseTour, Joueur joueurTourEnCours)
-    {
-        String out = "";
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Combat combatCible,
+			int phaseTour, Joueur joueurTourEnCours) {
+		String out = "";
         if(tabAction != null || !(tabAction.isEmpty()))
         {
             out += "--- Incident fâcheux ---\n";
@@ -54,5 +51,5 @@ public class IncidentFacheux {
             out += "Aucune incident fâcheux !!\n";
         }
         return out;
-    }
+	}
 }
