@@ -987,10 +987,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                     {
                                             // On applique le UtiliserObjet
                                     }
-                                    joueursNonConcernes.add(joueurIntervenant);
+                                    joueurIntervenant.setAnswer(null);
                                     for(Joueur j:this)  
-                                        if(!joueursNonConcernes.contains(j))                                                                                            
-                                                j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));            
+                                        if(!joueursNonConcernes.contains(j)){                                                                                            
+                                                j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+                                                j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
+                                        }
                                 }
                                 else{
                                     this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
