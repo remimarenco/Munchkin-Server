@@ -809,8 +809,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		{
 			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 		}
-		this.sendMessageToCurrent("On tente d'appliquer le sort sur vous tout de suite !\n");
-		cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this);
+		this.sendMessageToCurrent("On applique le sort !\n");
+		cartePiochee.appliquerSortilege(enCours, null, this);
 	}
 
 	/**
@@ -934,79 +934,79 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private void demanderIntervenir(ArrayList<Joueur> joueursNonConcernes) throws Exception{
 		for(Joueur j:this)  
-                    if(!joueursNonConcernes.contains(j))
-			j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+			if(!joueursNonConcernes.contains(j))
+				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
 		// Tant que les joueurs n'ont pas répondu, on attends
 		this.resetAnswers();
 		while(!this.allPlayersAnsweredButThose(joueursNonConcernes)){
 			try {
 				Thread.sleep(200);
-                                joueurIntervenant=null;
-                                while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursNonConcernes)) == null){
-                                    Thread.sleep(200);
-                                }
-                                if(joueurIntervenant.getAnswer().equals("Yes")){                                    
-                                    this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" souhaite intervenir");
-                                    for(Joueur j:this){
-                                            // On envoi à tous les joueurs non concernés
-                                            if(!joueursNonConcernes.contains(j))
-                                            {
-                                                    j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
-                                            }
-                                    }
-                                    Carte carteChoisie;
-                                    carteChoisie=intervention(joueurIntervenant);
-                                    ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
-                                    joueurDest.add(enCours);
-                                    if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
-                                    {
-					// On applique le sortilege pour la malediction et le sortilege
-					// TODO : Faire le ciblage
-					if(carteChoisie instanceof Malediction)
-					{
-						Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-						this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+				joueurIntervenant=null;
+				while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursNonConcernes)) == null){
+					Thread.sleep(200);
+				}
+				if(joueurIntervenant.getAnswer().equals("Yes")){                                    
+					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" souhaite intervenir");
+					for(Joueur j:this){
+						// On envoi à tous les joueurs non concernés
+						if(!joueursNonConcernes.contains(j))
+						{
+							j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
+						}
 					}
-					else
+					Carte carteChoisie;
+					carteChoisie=intervention(joueurIntervenant);
+					ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
+					//joueurDest.add(enCours);
+					if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
 					{
-						Sort carteSortChoisie = (Sort) carteChoisie;
-						this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+						// On applique le sortilege pour la malediction et le sortilege
+						// TODO : Faire le ciblage
+						if(carteChoisie instanceof Malediction)
+						{
+							Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
+							this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+						}
+						else
+						{
+							Sort carteSortChoisie = (Sort) carteChoisie;
+							this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+						}
+						if(joueurIntervenant.defausserCarte(carteChoisie))
+						{
+							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
+						}
+						else
+						{
+							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
+							throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
+						}
 					}
-					if(joueurIntervenant.defausserCarte(carteChoisie))
+					// Si on a voulu utiliser un objet
+					else if(carteChoisie.getClass().equals(Objet.class))
 					{
-						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
+						// On applique le UtiliserObjet
 					}
-					else
-					{
-						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
-						throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
-					}
-                                    }
-                                    // Si on a voulu utiliser un objet
-                                    else if(carteChoisie.getClass().equals(Objet.class))
-                                    {
-                                            // On applique le UtiliserObjet
-                                    }
-                                    joueurIntervenant.setAnswer(null);
-                                    for(Joueur j:this)  
-                                        if(!joueursNonConcernes.contains(j)){                                                                                            
-                                                j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
-                                                j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
-                                        }
-                                }
-                                else{
-                                    this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
-                                }                                
-                                
-                                
+					joueurIntervenant.setAnswer(null);
+					for(Joueur j:this)  
+						if(!joueursNonConcernes.contains(j)){                                                                                            
+							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+							j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
+						}
+				}
+				else{
+					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
+				}                                
+
+
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-                joueurIntervenant.setCarteClickee(null);
-                joueurIntervenant=null;
-                this.sendMessageToAll("Tous les joueurs ont répondu a la demande d'intervention");		
-                this.sendInfos();
+		joueurIntervenant.setCarteClickee(null);
+		joueurIntervenant=null;
+		this.sendMessageToAll("Tous les joueurs ont répondu a la demande d'intervention");		
+		this.sendInfos();
 	}	
 
 
