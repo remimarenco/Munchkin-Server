@@ -959,7 +959,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                     ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
                                     joueurDest.add(enCours);
                                     if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
-				{
+                                    {
 					// On applique le sortilege pour la malediction et le sortilege
 					// TODO : Faire le ciblage
 					if(carteChoisie instanceof Malediction)
@@ -981,13 +981,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
 						throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
 					}
-				}
-				// Si on a voulu utiliser un objet
-				else if(carteChoisie.getClass().equals(Objet.class))
-				{
-					// On applique le UtiliserObjet
-				}
-                                                
+                                    }
+                                    // Si on a voulu utiliser un objet
+                                    else if(carteChoisie.getClass().equals(Objet.class))
+                                    {
+                                            // On applique le UtiliserObjet
+                                    }
+                                    joueursNonConcernes.add(joueurIntervenant);
+                                    for(Joueur j:this)  
+                                        if(!joueursNonConcernes.contains(j))                                                                                            
+                                                j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));            
                                 }
                                 else{
                                     this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
