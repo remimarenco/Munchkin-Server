@@ -987,7 +987,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					{
 						// On applique le UtiliserObjet
 					}
-					joueurIntervenant.setAnswer(null);
+					
 					for(Joueur j:this)  
 						if(!joueursNonConcernes.contains(j)){                                                                                            
 							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
@@ -997,7 +997,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				else{
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
 				}                                
-
+                                joueurIntervenant.setAnswer(null);        
 
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
