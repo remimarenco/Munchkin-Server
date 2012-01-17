@@ -145,7 +145,11 @@ public class Personnage {
         this.puissanceObjet = puissanceObjet;
     }
 
-    public int getCapaciteEquipement() {
+    public void setMaxCartes(int maxCartes) {
+		this.maxCartes = maxCartes;
+	}
+
+	public int getCapaciteEquipement() {
         return capaciteEquipement;
     }
 

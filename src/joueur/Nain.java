@@ -13,6 +13,7 @@ public class Nain extends Race {
      */
     @Override
     public void modifPersonnage(Personnage personnage) {
+    	personnage.setMaxCartes(personnage.getMaxCartes()+1);
         personnage.setCapaciteEquipement(personnage.getCapaciteEquipement()+1);
     }
 
@@ -22,6 +23,7 @@ public class Nain extends Race {
      */
     @Override
     public void defausserRace(Personnage personnage) {
+    	personnage.setMaxCartes(personnage.getMaxCartes()-1);
         personnage.setCapaciteEquipement(personnage.getCapaciteEquipement()-1);
     }
 
