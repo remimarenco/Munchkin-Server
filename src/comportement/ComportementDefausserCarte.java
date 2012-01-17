@@ -38,4 +38,17 @@ public class ComportementDefausserCarte extends Comportement {
         out += "--- Fin Defausser Carte ---\n";
         return out;
 	}
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		String out = "";
+        out += "--- Defausser carte ---\n";
+        out += "Le joueur défausse une carte\n";
+        for(Action action : tabAction)
+            out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+        out += "--- Fin Defausser Carte ---\n";
+        return out;
+	}
 }

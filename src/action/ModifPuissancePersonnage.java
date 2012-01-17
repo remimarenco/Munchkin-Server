@@ -130,4 +130,14 @@ public class ModifPuissancePersonnage extends Action{
         }
         return out;
     }
+
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		ArrayList<Joueur> array = new ArrayList<Joueur>();
+		array.add(partie.getEnCours());
+		return action(joueurEmetteur, array, partie);
+	}
 }       

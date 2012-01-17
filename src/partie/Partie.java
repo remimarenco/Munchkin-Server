@@ -122,6 +122,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.combat = combat;
 	}
 
+	public Joueur getEnCours() {
+		return enCours;
+	}
+
+	public void setEnCours(Joueur enCours) {
+		this.enCours = enCours;
+	}
+
 	/**
 	 * @return the phaseTour
 	 */
@@ -810,7 +818,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		}
 		this.sendMessageToCurrent("On applique le sort !\n");
 		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
-		cartePiochee.appliquerSortilege(enCours, null, this);
+		// On applique le sortilege sur soi
+		this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this));
 	}
 
 	/**
@@ -965,12 +974,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						if(carteChoisie instanceof Malediction)
 						{
 							Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-							this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+							this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
 						}
 						else
 						{
 							Sort carteSortChoisie = (Sort) carteChoisie;
-							this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this));
+							this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
 						}
 						if(joueurIntervenant.defausserCarte(carteChoisie))
 						{

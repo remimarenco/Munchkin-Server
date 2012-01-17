@@ -22,6 +22,13 @@ public abstract class Action {
     public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie);
     
     /**
+     * Méthode abstraite permettant de lancer l'action
+     * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), demande un choix de ciblage de joueur
+     * @param joueurImpacte : Joueur recevant l'action
+     */
+    public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie, boolean choixJoueur);
+    
+    /**
      * Méthode permettant de retourner le joueur choisit
      * @param partie
      * @return

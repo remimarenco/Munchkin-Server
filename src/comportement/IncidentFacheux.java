@@ -48,4 +48,23 @@ public class IncidentFacheux extends Comportement{
 		}
         return out;
 	}
+
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		String out = "";
+		if(tabAction != null && !(tabAction.isEmpty()))
+		{
+			out += "--- Incident fâcheux ---\n";
+			out += "Il y a " + tabAction.size() + "actions !";
+			for(Action action : tabAction)
+				out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+			out += "--- Fin d'incident fâcheux ---\n";
+		} else {
+			out += "Aucune incident fâcheux !!\n";
+		}
+        return out;
+	}
 }

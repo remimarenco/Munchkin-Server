@@ -42,4 +42,14 @@ public class Malediction extends Donjon implements ISortilege{
         else
             return "Cette carte n'a pas de malus\n";
     }
+
+	@Override
+	public String appliquerSortilege(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		if(this.sortilege != null)
+            return this.sortilege.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+        else
+            return "Cette carte n'a pas de malus\n";
+	}
 }

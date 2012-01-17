@@ -63,4 +63,17 @@ public class PiocherCarte extends Action {
                 }
         return out;
 	}
+
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		// TODO Auto-generated method stub
+		ArrayList<Joueur> array = new ArrayList<Joueur>();
+		array.add(partie.getEnCours());
+		return action(joueurEmetteur, array, partie);
+	}
+	
+	
 }

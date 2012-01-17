@@ -43,4 +43,22 @@ public class UtiliserCarte extends Comportement{
         out += "--- Fin Utiliser Carte ---\n";
         return out;
 	}
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		String out = "";
+
+		if(tabAction == null) {
+			out += "Aucune action sur utiliserCarte\n";
+		} else {
+			out += "--- Utiliser carte ---\n";
+			for(Action action : tabAction)
+				out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+			out += "--- Fin Utiliser Carte ---\n";
+		}
+        out += "\n";    
+        return out;
+	}
 }

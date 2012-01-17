@@ -44,4 +44,23 @@ public class MonstreVaincu extends Comportement{
         out += "\n";    
         return out;
 	}
+
+
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		String out = "";
+
+		if(tabAction == null) {
+			out += "Aucune condition sur ce monstre\n";
+		} else {
+			out += "--- Monstre Vaincu ---\n";
+			for(Action action : tabAction)
+				out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+			out += "\n--- Fin de monstre vaincu ---";
+		}
+        out += "\n";    
+        return out;
+	}
 }

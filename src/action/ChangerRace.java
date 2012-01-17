@@ -49,20 +49,20 @@ public class ChangerRace extends Action {
 		
 		String out = "";
 		
-		// Création d'une nouvelle ArrayList pour éviter de modifier les paramètres...possible de les passer en final
-		ArrayList<Joueur> joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
-		
-		// On demande ici la liste des joueurs destinataires au joueur émetteur si choix est a true
-        if(choixJoueur)
+		ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
+
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+		if(joueurDestinataire == null || joueurDestinataire.isEmpty())
         {
-        	// Si on avait spécifié null, on doit créer l'arraylist
-        	if(joueurDestinataireTemp == null)
+        	if(choixJoueur)
         	{
-        		joueurDestinataireTemp = new ArrayList<Joueur>();
+        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
+            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         	}
-        	
-        	// On renvoi les joueurs destinataires par une demande au joueur initiateur
-        	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+        }
+        else
+        {
+        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
 		
 		for(Joueur joueurImpacte : joueurDestinataireTemp){
@@ -71,5 +71,17 @@ public class ChangerRace extends Action {
 	        out += " à la race " + joueurImpacte.getPersonnage().getRace();
 		}
         return out;
+	}
+	
+	@Override
+	public String action(Joueur joueurEmetteur,
+			ArrayList<Joueur> joueurDestinataire, Partie partie,
+			boolean choixJoueur) {
+		
+		boolean ancienChoixJoueur = this.choixJoueur;
+		this.choixJoueur = choixJoueur;
+		String out = action(joueurEmetteur, joueurDestinataire, partie);
+		this.choixJoueur = ancienChoixJoueur;
+		return out;
 	}
 }

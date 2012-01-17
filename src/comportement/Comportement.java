@@ -40,5 +40,16 @@ public abstract class Comportement {
 	 * @return retourne le message du déroulement du comportement
 	 */
 	public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie);
+	
+	/**
+	 * Méthode que tous les comportements doivent implémenter.
+	 * Permet de lancer l'action du comportement.
+	 * Demande si le joueur doit choisir un joueur cible
+	 * @param joueurEmetteur
+	 * @param joueurDestinataire
+	 * @param partie
+	 * @return retourne le message du déroulement du comportement
+	 */
+	public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie, boolean choixJoueur);
 
 }
