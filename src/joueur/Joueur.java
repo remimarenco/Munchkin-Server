@@ -1,6 +1,8 @@
 package joueur;
 
 import carte.Carte;
+import carte.Donjon;
+import carte.Monstre;
 import communication.Message;
 import communication.Serveur;
 import java.io.DataInputStream;
@@ -214,7 +216,17 @@ public class Joueur extends Thread {
      */ 
     public boolean piocherCarte(Class typePioche){
         if(typePioche == Constante.DONJON){
-            this.main.ajouterCarte(this.partie.getPiocheDonjon().tirerCarte());
+        	// J'annule le fait de pouvoir piocher en pillant une piece une carte de monstre
+        	Donjon carte = this.partie.getPiocheDonjon().tirerCarte();
+        	if(carte.getClass().equals(Monstre.class))
+        	{
+        		this.partie.getPiocheDonjon().poserEnDessousPioche(carte);
+        	}
+        	else
+        	{
+        		this.main.ajouterCarte(carte);
+        	}
+            
         }else if(typePioche == Constante.TRESOR){
             this.main.ajouterCarte(this.partie.getPiocheTresor().tirerCarte());
         }else{

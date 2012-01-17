@@ -49,6 +49,15 @@ public class Pioche<T> {
         return ret;
     }
     
+    /**
+     * Permet de poser la carte en dessous de la pioche
+     * @param carte
+     */
+    public void poserEnDessousPioche(T carte)
+    {
+    	pioche.add(pioche.size(), carte);
+    }
+    
     
     /**
      * Vérifie si la pioche est vide

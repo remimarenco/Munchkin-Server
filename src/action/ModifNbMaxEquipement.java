@@ -37,11 +37,26 @@ public class ModifNbMaxEquipement extends Action{
 		
 		String out = "";
         out += "On modifie le nombre maximum d'objet portés par un joueur :\n";
-        
-        for(Joueur joueur : joueurDestinataire)
+        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
+
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
         {
-        	out += "Le joueur impliqué est "+joueur.getName();
-        	joueur.getPersonnage().setCapaciteEquipement(joueur.getPersonnage().getCapaciteEquipement()+bonusNbMax);
+        	if(choixJoueur)
+        	{
+        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
+            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	}
+        }
+        else
+        {
+        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        }
+        
+        // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
+        for(Joueur joueurImpacte : joueurDestinataireTemp){
+        	out += "Le joueur impliqué est "+joueurImpacte.getName();
+        	joueurImpacte.getPersonnage().setCapaciteEquipement(joueurImpacte.getPersonnage().getCapaciteEquipement()+bonusNbMax);
         }
         
         return out;
@@ -51,8 +66,10 @@ public class ModifNbMaxEquipement extends Action{
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
+		boolean ancienChoixJoueur = this.choixJoueur;
+		this.choixJoueur = choixJoueur;
+		String out = action(joueurEmetteur, joueurDestinataire, partie);
+		this.choixJoueur = ancienChoixJoueur;
+		return out;
 	}
 }

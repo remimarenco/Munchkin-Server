@@ -75,7 +75,23 @@ public class ModifDeguerpir extends Action{
         }
         out += "\n";
         
-        for(Joueur joueurImpacte : joueurDestinataire)
+        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
+
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
+        {
+        	if(choixJoueur)
+        	{
+        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
+            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	}
+        }
+        else
+        {
+        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        }
+        
+        for(Joueur joueurImpacte : joueurDestinataireTemp)
         {
 	        if(niveauMax != null)                                       // Si un niveau max est défini
 	            if(joueurImpacte.getPersonnage().getNiveau()>niveauMax) // On regarde que le personnage ne le dépasse pas
@@ -111,8 +127,10 @@ public class ModifDeguerpir extends Action{
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
+		boolean ancienChoixJoueur = this.choixJoueur;
+		this.choixJoueur = choixJoueur;
+		String out = action(joueurEmetteur, joueurDestinataire, partie);
+		this.choixJoueur = ancienChoixJoueur;
+		return out;
 	}
 }

@@ -13,7 +13,8 @@ import joueur.Joueur;
  * Classe abstraite permettant de définir des actions
  * @author Rémi Marenco
  */
-public abstract class Action {    
+public abstract class Action {
+	protected boolean choixJoueur = false;
     /**
      * Méthode abstraite permettant de lancer l'action
      * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), dépend d'une phase d'un tour (ou pas), dépend d'un tour (ou pas)

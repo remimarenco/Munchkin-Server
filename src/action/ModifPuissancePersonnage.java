@@ -72,8 +72,25 @@ public class ModifPuissancePersonnage extends Action{
         boolean accept       = true;
 
         String out = "";
+        
+        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
-        for(Joueur joueurImpacte : joueurDestinataire) {
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
+        {
+        	if(choixJoueur)
+        	{
+        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
+            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+        	}
+        }
+        else
+        {
+        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        }
+        
+        
+        for(Joueur joueurImpacte : joueurDestinataireTemp) {
             out += "On passe dans une action de modification de puissance de personnage :\n";
             out += "Le joueur impliqué est "+joueurImpacte.getName();
             out += ", le bonus puissance attribué est de " + this.bonusPuissance;
@@ -136,8 +153,10 @@ public class ModifPuissancePersonnage extends Action{
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
+		boolean ancienChoixJoueur = this.choixJoueur;
+		this.choixJoueur = choixJoueur;
+		String out = action(joueurEmetteur, joueurDestinataire, partie);
+		this.choixJoueur = ancienChoixJoueur;
+		return out;
 	}
 }       

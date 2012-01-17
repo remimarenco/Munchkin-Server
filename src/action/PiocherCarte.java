@@ -37,31 +37,48 @@ public class PiocherCarte extends Action {
 	@Override
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		
+
 		String out = "";
-                int i;
-		for(Joueur joueurImpacte : joueurDestinataire){
-                    if(joueurImpacte.getPersonnage().getRace()==Constante.RACE_HALFELIN)
-                        nbCarte++;
+		int i;
 
-                    out += "Le joueur " + joueurImpacte.getName();
+		ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
+		// Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+		if(joueurDestinataire == null || joueurDestinataire.isEmpty())
+		{
+			if(choixJoueur)
+			{
+				// On renvoi les joueurs destinataires par une demande au joueur initiateur
+				joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+			}
+		}
+		else
+		{
+			joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+		}
 
-                    if(nbCarte > 1)
-                        out += " pioche "+nbCarte+" cartes dans la pioche ";
-                    else
-                        out += " pioche "+nbCarte+" carte dans la pioche ";
 
-                    for(i=0; i<nbCarte; i++){
-                        if(type_pioche == Constante.DONJON){
-                            out += "donjon";
-                            joueurImpacte.piocherCarte(Constante.DONJON);
-                        } else {
-                            out += "trésor";
-                            joueurImpacte.piocherCarte(Constante.TRESOR);
-                        }
-                    }
-                }
-        return out;
+		for(Joueur joueurImpacte : joueurDestinataireTemp) {
+			if(joueurImpacte.getPersonnage().getRace()==Constante.RACE_HALFELIN)
+				nbCarte++;
+
+			out += "Le joueur " + joueurImpacte.getName();
+
+			if(nbCarte > 1)
+				out += " pioche "+nbCarte+" cartes dans la pioche ";
+			else
+				out += " pioche "+nbCarte+" carte dans la pioche ";
+
+			for(i=0; i<nbCarte; i++){
+				if(type_pioche == Constante.DONJON){
+					out += "donjon";
+					joueurImpacte.piocherCarte(Constante.DONJON);
+				} else {
+					out += "trésor";
+					joueurImpacte.piocherCarte(Constante.TRESOR);
+				}
+			}
+		}
+		return out;
 	}
 
 
@@ -69,10 +86,11 @@ public class PiocherCarte extends Action {
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
-		// TODO Auto-generated method stub
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
+		boolean ancienChoixJoueur = this.choixJoueur;
+		this.choixJoueur = choixJoueur;
+		String out = action(joueurEmetteur, joueurDestinataire, partie);
+		this.choixJoueur = ancienChoixJoueur;
+		return out;
 	}
 	
 	

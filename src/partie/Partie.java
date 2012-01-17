@@ -156,8 +156,20 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		while(it.hasNext()){
 			j = (Joueur) it.next();
 			for(int i=0; i<4; i++){
-				j.getMain().ajouterCarte((Carte) piocheDonjon.tirerCarte());
-				j.getMain().ajouterCarte((Carte) piocheTresor.tirerCarte());
+				// On désactive la pioche de carte Monstre pour le moment
+				// TODO : Réactiver
+				Carte carte = piocheDonjon.tirerCarte();
+				if(!carte.getClass().equals(Monstre.class))
+				{
+					j.getMain().ajouterCarte(carte);
+					j.getMain().ajouterCarte((Carte) piocheTresor.tirerCarte());
+				}
+				// On est bon pour refaire un tour et on remet la carte dans la pioche
+				else
+				{
+					piocheDonjon.poserEnDessousPioche((Donjon)carte);
+					i--;
+				}			
 			}
 		}
 
@@ -772,7 +784,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_OUVRIR_PORTE);
 		this.setPhaseTour(Constante.PHASE_OUVRIR_PORTE);
 		Carte cartePiochee;
-
+		
 		cartePiochee = (Carte) piocheDonjon.tirerCarte();
 
 		if(cartePiochee == null){

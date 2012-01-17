@@ -114,26 +114,24 @@ public class Combat {
         Iterator itMechant   = CampMechant.iterator();
         boolean guerrier     = false;
         
+        // IL N'Y A JAMAIS DE MONSTRE COTE GENTIL !!!!!!!!!!!!!!!!!!!!!!
         while(itGentil.hasNext()){
             Object obj = itGentil.next();
             if(obj instanceof Personnage){
                 Personnage p = (Personnage) obj;
-                puissanceGentil += p.getNiveau();
-            }else if(obj instanceof Monstre){
-                Monstre m = (Monstre) obj;
-                puissanceGentil += m.getPuissance();
-            }else{
+                // On regarde la puissance et non le niveau
+                puissanceGentil += p.getPuissance();
+            }
+            else{
                 System.out.print("Petit problème dans le camps des gentils !");
                 return false;
             }
         }
         
+        // IL N'Y A JAMAIS DE PERSONNAGE COTE MECHANT !!!!!!!!!!!!!!!!!!!!!!!!!
         while(itMechant.hasNext()){
             Object obj = itMechant.next();
-            if(obj instanceof Personnage){
-                Personnage p = (Personnage) obj;
-                puissanceMechant += p.getNiveau();
-            }else if(obj instanceof Monstre){
+            if(obj instanceof Monstre){
                 Monstre m = (Monstre) obj;
                 puissanceMechant += m.getPuissance();
             }else{
