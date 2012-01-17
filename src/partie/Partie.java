@@ -614,7 +614,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			// On test si la piocheDonjon et la piocheTresor est vide
 			testPioche(piocheDonjon);
 			testPioche(piocheTresor);
-
+			this.sendMessageToAllButCurrent("Voulez vous intervenir avant que "+enCours.getName()+" ne pioche une carte ?");
 			this.sendMessageToAll("Vous ouvrez la porte du donjon...");
 			cartePiochee = phaseOuvrirPorte();
 
@@ -697,7 +697,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				return true;
 			}
 		} else {
-			System.out.println("Joueur en cours est null");
+			System.out.println("Partie Terminee : Joueur en cours est null");
 		}
 		return false;
 	}
@@ -780,14 +780,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		if(cartePiochee.getClass().equals(Malediction.class)){
 			Malediction carteMaledictionPiochee = (Malediction) cartePiochee;
 			this.sendMessageToAll("C'est un sort !!\n");
-                        this.sendMessageToAll("Suspense, quelqu'un va peut etre intervenir..");
 			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
 			this.sendMessageToAllButCurrent("Que va-t-il faire ?\n");
-			jouerCarteMalediction(carteMaledictionPiochee);
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
-			this.sendMessageToCurrent(cartePiochee.getDescription());			
-			this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
+			this.sendMessageToCurrent(cartePiochee.getDescription());
+			jouerCarteMalediction(carteMaledictionPiochee);			
 
 			// On pille la piece
 			PillerLaPiece();
@@ -804,12 +802,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private void jouerCarteMalediction(Malediction cartePiochee) throws Exception {
 		this.sendMessageToAllButCurrent(enCours.getName()+" va lancer un sort. Voulez vous, auparavant, intervenir ?");
+		this.sendMessageToAll("Suspense, quelqu'un va peut etre intervenir..");
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
 			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 		}
 		this.sendMessageToCurrent("On applique le sort !\n");
+		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
 		cartePiochee.appliquerSortilege(enCours, null, this);
 	}
 
@@ -982,12 +982,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 							throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
 						}
 					}
-					// Si on a voulu utiliser un objet
+					// TODO : Si on a voulu utiliser un objet
 					else if(carteChoisie.getClass().equals(Objet.class))
 					{
 						// On applique le UtiliserObjet
 					}
-					
+
 					for(Joueur j:this)  
 						if(!joueursNonConcernes.contains(j)){                                                                                            
 							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
@@ -996,12 +996,15 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				}
 				else{
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
+					// On sort de l'attente d'une intervention
+					break;
 				}                                
-                                joueurIntervenant.setAnswer(null);        
+				joueurIntervenant.setAnswer(null);        
 
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
+			this.sendInfos();
 		}
 		joueurIntervenant.setCarteClickee(null);
 		joueurIntervenant=null;
@@ -1056,7 +1059,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// TODO :
 		if((nbCartesADefausser = enCours.verifieMain()) > 0)
 		{   
-                        this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes !");
+			this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes !");
 			// On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
 			// Oui c'est fait exprès pour etre le plus flexible possible
 			// On récupère la carte choisie par l'utilisateur que l'on veut défausser
@@ -1088,7 +1091,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					this.SendDebugMessage("Une erreur est intervenue dans "+e.getStackTrace().toString()+"\n, on continue mais c'est pas normal !");
 				}
 				this.sendInfos();
-                                enCours.setCarteClickee(null);
+				enCours.setCarteClickee(null);
 			}
 		}
 	}

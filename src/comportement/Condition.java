@@ -31,17 +31,14 @@ public class Condition extends Comportement {
 			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		String out = "";
 
-        if(tabAction == null){
-            out += "Aucune condition sur ce monstre\n";
-        } else {
-            out += "--- Condition ---\n";
-            for(Joueur joueurImpacte : joueurDestinataire){
-	            out += "Une condition vient de se déclencher sur " + joueurImpacte.getName() + " :";
-	            for(Action action : tabAction)
-	                out += action.action(joueurEmetteur, joueurDestinataire, partie);
-	            out += "\n--- Fin de condition ---\n";
-            }
-        }
-        return out;
+		if(tabAction == null){
+			out += "Aucune condition sur ce monstre\n";
+		} else {
+			out += "--- Condition ---\n";
+			for(Action action : tabAction)
+				out += action.action(joueurEmetteur, joueurDestinataire, partie);
+			out += "\n--- Fin de condition ---\n";
+		}
+		return out;
 	}
 }

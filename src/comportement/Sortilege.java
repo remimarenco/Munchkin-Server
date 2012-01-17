@@ -38,23 +38,16 @@ public class Sortilege extends Comportement{
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		String out = "";
-        if(tabAction == null){
-            out += "Aucune sortilège à appliquer";
-        } else {
-            out += "----- Sortilège -----\n";
-            if(joueurDestinataire == null)
-            {
-            	out += "Erreur dans la liste des joueurs destinataires";
-            }
-            for(Joueur joueurImpacte : joueurDestinataire){
-                out += "Un sortilège s'applique sur " + joueurImpacte.getName() + " :";
-                for(Action action : tabAction)
-                    out += action.action(joueurEmetteur, joueurDestinataire, partie);
-                out += "\n";
-            }
-            out += "--- Fin sortilège ---";
-        }
-        out += "\n";
-        return out;
+		if(tabAction == null){
+			out += "Aucune sortilège à appliquer";
+		} else {
+			out += "----- Sortilège -----\n";
+			for(Action action : tabAction)
+				out += action.action(joueurEmetteur, joueurDestinataire, partie);
+			out += "\n";
+		}
+		out += "--- Fin sortilège ---";
+		out += "\n";
+		return out;
 	}
 }

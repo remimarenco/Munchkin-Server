@@ -32,13 +32,9 @@ public  class Equipement extends Comportement {
 
 		if(tabAction != null){
 			out += "--- Equipement ---\n";
-
-			for(Joueur joueurImpacte : joueurDestinataire){
-				out += "Un équipement vient de se déclencher sur " + joueurImpacte.getName() + " :\n";
-				for(Action action : tabAction)
-					out += action.action(joueurEmetteur, joueurDestinataire, partie);
-				out += "--- Fin d'equipement ---\n";
-			}
+			for(Action action : tabAction)
+				out += action.action(joueurEmetteur, joueurDestinataire, partie);
+			out += "--- Fin d'equipement ---\n";
 		} else {
 			out += "Aucun equipement !\n";
 		}
