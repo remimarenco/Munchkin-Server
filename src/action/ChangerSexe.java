@@ -9,7 +9,7 @@ import partie.Partie;
 
 /**
  * Classe permettant de définir l'action d'un changement de sexe
- * @author Rémi Marenco
+ * @author Simon Grabit
  */
 public class ChangerSexe extends Action {
 	protected boolean choixJoueur;

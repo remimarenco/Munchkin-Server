@@ -348,7 +348,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	/**
-	 * 
+	 * Envoi les infos de chaque camp à tous les joueurs
 	 */
 	public void sendInfosCampsToAll(Combat c){
 		if(c != null)

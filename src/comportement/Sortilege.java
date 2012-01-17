@@ -29,9 +29,10 @@ public class Sortilege extends Comportement{
     
     /**
      * Action lors d'un sortilège
-     * @param joueurImpacte : joueur recevant le sortilège
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      * @return out : texte résumant l'action
-     *         nomPhase : StackTraceElement permettant de situer la phase dans laquelle nous sommes
      */
 	@Override
 	public String action(Joueur joueurEmetteur,

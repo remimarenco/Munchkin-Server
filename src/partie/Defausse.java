@@ -46,6 +46,8 @@ public class Defausse<T> {
     
     /**
      * Supprime une carte de la défausse
+     * @param c
+     * @return 
      */
     public boolean supprimerCarte(T c){
     	return this.defausse.remove(c);

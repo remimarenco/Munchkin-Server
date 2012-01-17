@@ -25,7 +25,13 @@ public class EquiperObjet extends Action{
     int bonusPuissance, bonusDeguerpir, poids;
    
     /**
-     * Constructeur
+     * Constructeur d'EquiperObjet
+     * @param tabRace => race auxquelles s'appliquent l'objet 
+     * @param tabClasse => classe auxquelles s'appliquent l'objet 
+     * @param aChangeSexe => true si le personnage doit avoir changé de sexe
+     * @param bonusPuissance => bonus de puissance conféré par l'objet
+     * @param bonusDeguerpir => bonus de déguerpir conféré par l'objet
+     * @param poids => poids de l'objet
      */
     public EquiperObjet(ArrayList<Race> tabRace, ArrayList<Classe> tabClasse, boolean aChangeSexe, int bonusPuissance, int bonusDeguerpir, int poids) {
         super();

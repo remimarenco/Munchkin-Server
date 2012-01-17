@@ -23,7 +23,9 @@ public class MonstreVaincu extends Comportement{
     
     /**
      * Action lorsqu'un monstre est vaincu
-     * @param joueurImpacte : joueur ayant vaincu le monstre
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      * @return 
      */
 	@Override

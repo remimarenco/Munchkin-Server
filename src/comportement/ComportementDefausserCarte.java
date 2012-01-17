@@ -8,7 +8,7 @@ import joueur.Joueur;
 
 
 /**
- *
+ * Un joueur doit défausser une carte
  * @author simon.grabit
  */
 public class ComportementDefausserCarte extends Comportement {
@@ -22,8 +22,10 @@ public class ComportementDefausserCarte extends Comportement {
     
     /**
      * Applique un incident lors d'un déguerpissage
-     * @param joueurImpacte
-     * @return 
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
+     * @return out : texte résumant l'action
      */
 	@Override
 	public String action(Joueur joueurEmetteur,

@@ -20,15 +20,27 @@ public class Pretre extends Classe{
         }
     }
 
+    /**
+     * Demande au joueur de la capacité à utiliser
+     * @param capacite1
+     * @param capacite2
+     * @return 
+     */
     public int choixJoueur(int capacite1, int capacite2){
         
         return 0;
     }
 
+    /**
+     * Utiliser capacité renvoie
+     */
     public void renvoie(){
     
     }
     
+    /**
+     * Utiliser capacité resurrection
+     */
     public void resurrection(){
         
     }

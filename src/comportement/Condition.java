@@ -21,7 +21,9 @@ public class Condition extends Comportement {
 
     /**
      * Met une condition sur un joueur
-     * @param joueurImpacte : joueur sur lequel s'applique la condition
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      * @return out : texte résumant l'action
      */
 	@Override

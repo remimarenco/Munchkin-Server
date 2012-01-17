@@ -28,7 +28,9 @@ public class IncidentFacheux extends Comportement{
     
     /**
      * Application de l'ensemble des actions de l'incident fâcheux sur le joueur
-     * @param joueurImpacte
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      */
 	@Override
 	public String action(Joueur joueurEmetteur,

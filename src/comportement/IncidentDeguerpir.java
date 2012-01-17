@@ -25,7 +25,9 @@ public class IncidentDeguerpir extends Comportement{
 
     /**
      * Applique un incident lors d'un déguerpissage
-     * @param joueurImpacte
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      * @return 
      */
 	@Override

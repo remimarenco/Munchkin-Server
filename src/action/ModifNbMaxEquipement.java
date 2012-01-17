@@ -7,7 +7,7 @@ import partie.Partie;
 import joueur.Joueur;
 
 /**
- * TODO :
+ * Modifie le nombre d'objet que le personnage peut porter.
  * @author Simon Grabit
  *
  */

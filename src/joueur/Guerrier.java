@@ -7,11 +7,17 @@ package joueur;
 public class Guerrier extends Classe {
 
     // TODO: Completer la classe
+    /**
+     * Choix des capacités à utiliser
+     */
     @Override
     public void utiliserCapacite() {
         rage();
     }
 
+    /**
+     * Utiliser capacité rage
+     */
     public void rage(){
         
     }

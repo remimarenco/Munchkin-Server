@@ -52,8 +52,8 @@ public class Combat {
     
     
     /**
-     * 
-     * @return 
+     * Retourne le total de puissance du camp gentil
+     * @return total: valeur (chaine) du camp gentil
      */
     public String getPuissanceCampGentil(){    
         Integer total = 0;
@@ -65,7 +65,7 @@ public class Combat {
     
     /**
      * Retourne le total de puissance du camp mechant
-     * @return 
+     * @return total: valeur (chaine) du camp gentil
      */
     public String getPuissanceCampMechant(){    
         Integer total = 0;

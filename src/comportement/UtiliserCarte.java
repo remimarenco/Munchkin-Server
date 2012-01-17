@@ -8,7 +8,7 @@ import joueur.Joueur;
 
 
 /**
- *
+ * Utiliser la compétence d'une carte
  * @author Simon Grabit
  */
 public class UtiliserCarte extends Comportement{
@@ -27,7 +27,9 @@ public class UtiliserCarte extends Comportement{
 
     /**
      * Applique un incident lors d'un déguerpissage
-     * @param joueurImpacte
+     * @param joueurEmetteur
+     * @param joueurDestinataire
+     * @param partie
      * @return 
      */
 	@Override
