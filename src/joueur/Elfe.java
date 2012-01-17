@@ -16,7 +16,7 @@ public class Elfe extends Race {
     public void modifPersonnage(Personnage personnage) {
         // TODO : gain de niveau uniquement après avoir aidé en combat
         
-        personnage.changerNiveau(1);
+        //personnage.changerNiveau(1);
         personnage.setCapaciteFuite(personnage.getCapaciteFuite()+1);
     }
     
@@ -26,7 +26,6 @@ public class Elfe extends Race {
      */
     @Override
     public void defausserRace(Personnage personnage) {
-        
         personnage.setCapaciteFuite(personnage.getCapaciteFuite()-1);
     }
 

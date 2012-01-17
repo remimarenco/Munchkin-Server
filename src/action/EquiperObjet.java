@@ -80,7 +80,7 @@ public class EquiperObjet extends Action{
                     if(tabClasse!=null){                                        // Si un tableau de classe est défini
                         for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
                             if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
-                                            raceTrouve=true;
+                                            classeTrouve=true;
                             if(!classeTrouve)
                                     accept=false;
                     }
