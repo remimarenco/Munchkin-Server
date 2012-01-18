@@ -892,7 +892,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 		if(this.enCours.getAnswer().equals("Yes")){
 		
-
+			
+			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+			// TODO : Autoriser les cartes valables ici
+			if(this.size() != 1)
+			{
+				try {
+					demanderIntervenir(null);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			// Si le joueur gagne le combat, on lance MonstreVaincu pour connaitre
 			// le nb de niveau gagné et les cartes trésors qu'il peut tirer
 			if(getCombat().combattre()){

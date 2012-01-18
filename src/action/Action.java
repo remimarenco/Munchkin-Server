@@ -48,4 +48,9 @@ public abstract class Action {
         
     	return partie.getJoueurCible();
     }
+    
+    protected Object demandeCampCible(Partie partie, Joueur joueurEmetteur)
+    {
+    	return null;
+    }
 }

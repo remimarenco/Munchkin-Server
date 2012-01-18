@@ -132,4 +132,6 @@ public class ModifPuissanceMonstre extends Action{
 		array.add(partie.getEnCours());
 		return action(joueurEmetteur, array, partie);
 	}
+	
+	
 }

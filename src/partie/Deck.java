@@ -9,6 +9,7 @@ import action.DefausserCarte;
 import action.EquiperObjet;
 import action.ModifDeguerpir;
 import action.ModifNbMaxEquipement;
+import action.ModifPuissanceCampChoisi;
 import action.ModifPuissanceMonstre;
 import action.ModifPuissancePersonnage;
 import action.PiocherCarte;
@@ -499,22 +500,26 @@ public final class Deck {
         // === SORTS ===
         // =============
         
-        
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(2));
         cartes.add(new Sort(158, "Potion de bravoure hystérique", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(3));
         cartes.add(new Sort(96, "Cotion de Ponfusion", "A jouer pendant n'imquorte pel combat. Bonus de +3 accordé à un champ au coix. Usique unage.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
+        
+        //cartes.add(new Sort(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
         cartes.add(new Sort(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
         
         //TODO
-        cartes.add(new Sort(99, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(100, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(101, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(102, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(99, "Potion de poison enflammé", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(100, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(101, "Anneau de souhait", "Annule n'importe quelle Malédiction. Peut être jouée n'importe quand. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(102, "Dé pipé", "A jouer après n'importe quel jet de dé. Vous choisissez vous-même le résultat de jet de dé. Usage unique.", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
@@ -526,26 +531,41 @@ public final class Deck {
         cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(109, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
-         actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new PiocherCarte(Constante.TRESOR, 3));
         cartes.add(new Sort(110, "Pillaaaaaaage !", "Tirez immédiatement trois nouvelles cartes de trésor. Elles sont tirées face cachée si vous avez tiré cette carte face cachée, et face visible dans le cas contraire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(111, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
+        // TODO : Implémentation de ces cartes
+        /*cartes.add(new Sort(111, "Fidèle serviteur", "Ce laquais qui vous suit et vous sert de porteur vous permet de porter et d'utiliser un Gros objet supplémentaire, mais il ne se battra pas pour vous... si vous perdez votre serviteur, vous perdez aussi votre gros objet. Vous pouvez défausser votre serviteur pour vous permettre de fuir automatiquement contre n'importe quel monstre.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(112, "Lampe merveilleuse", "Vous ne pouvez utiliser la Lampe qu'à votre tour. Elle invoque un génie qui fait disparaitre un seul monstre, même s'il était sur le point de vous attraper après un jet de Déguerpir raté. S'il était seul contre vous, vous prenez son trésor mais sans gagner de niveau. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre de niveau 8 ou inférieur. Bonus de +1", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(114, "Missile magique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(115, "Oh, les jolis ballons !", "A jouer pendant n'importe quel combat pour distraire l'ennemi. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(116, "Doppelganger", "Crée votre double, qui combat à vos côtés : votre force de combat est doublée. Vous ne pouvez utiliser Doppelganger que si vous êtes le seul joueur à participer au combat. Usage unique", new Sortilege(actionTabMalediction)));
+        
+        
         cartes.add(new Sort(117, "Baguette de sourcier", "Parcourez les défausses pour trouver la carte de votre choix. Prenez-la et défaussez la baguette de sourcier", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(118, "Potion d'amitié", "A jouer pendant n'importe quel combat. Défaussez tous les monstres combattus. Aucun trésor n'est gagné, mais vous pouvez piller la pièce. Usage unique.", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(119, "Potion de transfert", "A jouer pendant n'importe quel combat. Un autre joueur de votre choix combat le ou les monstres. Il peut demander de l'aide normalement, et obtient le trésor et les niveaux s'il l'emporte. Le joueur qui combattait à l'origine reprend alors son tour, et peut piller la pièce, que le combat ait été remporté ou perdu. Usage unique", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(120, "Potion de sommeil", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        
         cartes.add(new Sort(121, "Potion de polly-morphie", "Utilisable une seule fois, pendant le combat. Transforme n'importe quel monstre en joli perroquet appelé Polly, qui s'envole en abandonnant son trésor (Pas de gain de niveau). Usage unique.", new Sortilege(actionTabMalediction)));
+        
+        cartes.add(new Sort(125, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));*/
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(5));
         cartes.add(new Sort(122, "Potion acide, radioactive et électrique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(3));
         cartes.add(new Sort(123, "Potion glaciale explosive", "A jouer pendant n'importe quel combat. Bonus de +3 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(2));
         cartes.add(new Sort(124, "Boisson énergisante éventée", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(125, "Champagne", "A jouer pendant n'importe quel combat. Utilisable une fois et seulement sur les Elfes. Confère un bonus de +2 à chaque Elfe engagé dans la bataille.", new Sortilege(actionTabMalediction)));
-        
-        
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(2));
+        cartes.add(new Sort(120, "Potion de sommeil", "A jouer pendant n'importe quel combat. Bonus de +2 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(5));
+        cartes.add(new Sort(114, "Missile magique", "A jouer pendant n'importe quel combat. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ModifPuissanceCampChoisi(5));
+        cartes.add(new Sort(115, "Oh, les jolis ballons !", "A jouer pendant n'importe quel combat pour distraire l'ennemi. Bonus de +5 accordé à un camp au choix. Usage unique.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(116, "Doppelganger", "Crée votre double, qui combat à vos côtés : votre force de combat est doublée. Vous ne pouvez utiliser Doppelganger que si vous êtes le seul joueur à participer au combat. Usage unique", new Sortilege(actionTabMalediction)));
         // =============
         // =============
         
@@ -599,12 +619,12 @@ public final class Deck {
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
         cartes.add(new Objet(86, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(null), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
         
-        actionEquipement.clear();
+        /*actionEquipement.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 1, 0, 0));
         actionEquipement.add(new ChangerClasse(Constante.CLASSE_GUERRIER));
         actionDefausser.clear();
-        actionDefausser.add(new EquiperObjet(null, null, false, -1, 0, 0));
-        //actionDefausser.add(new ChangerClasse(Constante.CLASSE));
+        actionDefausser.add(new EquiperObjet(null, null, false, -1, 0, 0));*/
+        nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);
         cartes.add(new Objet(87, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_GUERRIER);

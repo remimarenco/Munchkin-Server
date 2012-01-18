@@ -10,7 +10,7 @@ import joueur.Joueur;
 import joueur.Race;
 
 /**
- * Modifie la puissance d'un personnage
+ * Modifie la puissance d'un personnage dans un combat
  * @author Simon Grabit
  */
 public class ModifPuissancePersonnage extends Action{

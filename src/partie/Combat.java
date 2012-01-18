@@ -1,7 +1,6 @@
 package partie;
 
 import carte.Monstre;
-import com.sun.org.apache.xerces.internal.impl.dtd.models.CMAny;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -18,10 +17,32 @@ public class Combat {
     
     private ArrayList<Personnage> CampGentil;
     private ArrayList<Monstre> CampMechant;
+    private int bonusTemporaireGentil = 0;
+    private int bonusTemporaireMechant = 0;
     private Partie partie;
 
     
-    /**
+    public int getBonusTemporaireGentil() {
+		return bonusTemporaireGentil;
+	}
+
+
+	public void setBonusTemporaireGentil(int bonusTemporaireGentil) {
+		this.bonusTemporaireGentil = bonusTemporaireGentil;
+	}
+
+
+	public int getBonusTemporaireMechant() {
+		return bonusTemporaireMechant;
+	}
+
+
+	public void setBonusTemporaireMechant(int bonusTemporaireMechant) {
+		this.bonusTemporaireMechant = bonusTemporaireMechant;
+	}
+
+
+	/**
      * Constructeur
      * @param partie : partie dans laquelle à lieu le combat 
      */
@@ -155,7 +176,14 @@ public class Combat {
                 guerrier=true;
         }
         if(guerrier)
-            puissanceGentil++;
+        	bonusTemporaireGentil++;
+        
+        // On applique les bonusTemporaires en plus
+        puissanceGentil += bonusTemporaireGentil;
+        puissanceMechant += bonusTemporaireMechant;
+        boolean resultat = puissanceGentil > puissanceMechant;
+        bonusTemporaireGentil = 0;
+        bonusTemporaireMechant = 0;
         return (puissanceGentil >= puissanceMechant); // True si camps gentil gagne
     }
     
