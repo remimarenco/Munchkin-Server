@@ -134,6 +134,7 @@ public class Joueur extends Thread {
 
     public void setSexe(int sexe) {
         this.sexe = sexe;
+        this.personnage.setSexe(sexe);
     }    
     
     public String getAnswer() {
