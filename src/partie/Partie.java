@@ -234,13 +234,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @param log
 	 * @return 
 	 */
-	public boolean LoginDispo(String log){
+	public boolean loginDispo(String log){
 		String l = getListe();
 		boolean k =true;
 		StringTokenizer l2=new StringTokenizer(l,";");
 		while(l2.hasMoreTokens())
 			try{
-				if(l2.nextToken().equals(log))
+				if(l2.nextToken().equals(log) || log.equals("Partie"))
 					k = false;
 			} catch(Exception e){
 				System.out.println("Exception :" + e.toString());
@@ -593,20 +593,19 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	@Override
 	public void run() {    	
 		// Initialisation de la partie       
-		init();
-                boolean condition=true;
-		while(condition){
+		init();                
+		while(true){
 			// Si la partie est terminée, on stop le jeu
 			if(PartieTerminee()) {
 				// TODO Faire ce qu'il se passe en fin de partie
 				finPartie();
-				condition=false;
+				
 			}
 			try {
 				tour();
 			} catch (Exception e) {				
 				e.printStackTrace();
-                                condition=false;
+                                
 			}
 		}
 	}
@@ -737,12 +736,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				ret=true;
 			}
 		} else {
-			System.out.println("Partie Terminee : Joueur en cours est null");
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+			System.out.println("Partie Terminee : Joueur en cours est null");                        
 		}
 		return ret;
 	}

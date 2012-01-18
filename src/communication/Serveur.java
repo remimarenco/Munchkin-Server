@@ -58,7 +58,7 @@ public class Serveur {
         
         switch (msg.getType()) {
             case Message.CONNECT:
-                if (this.partie.LoginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
+                if (this.partie.loginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
                     com.setSexe(Integer.valueOf(msg.getMessage()));
                     this.partie.add(com);
