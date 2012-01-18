@@ -540,6 +540,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			{
 				campCible = msg.getMessage();
 			}
+			break;
 		}
 	}
 
@@ -599,13 +600,16 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(PartieTerminee()) {
 				// TODO Faire ce qu'il se passe en fin de partie
 				finPartie();
-				
+				break;
 			}
-			try {
-				tour();
-			} catch (Exception e) {				
-				e.printStackTrace();
-                                
+			else
+			{
+				try {
+					tour();
+				} catch (Exception e) {				
+					e.printStackTrace();
+	                                
+				}
 			}
 		}
 	}
@@ -736,7 +740,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				ret=true;
 			}
 		} else {
-			System.out.println("Partie Terminee : Joueur en cours est null");                        
+			System.out.println("Partie Terminee : Joueur en cours est null"); 
+			ret = true;
 		}
 		return ret;
 	}

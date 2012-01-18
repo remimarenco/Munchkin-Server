@@ -200,6 +200,8 @@ public class Message {
             }    
             return true;
         } catch(Exception e) {
+        	System.out.println(e.toString());
+        	e.printStackTrace();
             return false;
         }
     }
