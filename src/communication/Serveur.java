@@ -3,8 +3,10 @@ package communication;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import joueur.Joueur;
 import partie.Partie;
 
@@ -61,17 +63,15 @@ public class Serveur {
                 if (this.partie.loginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
                     com.setSexe(Integer.valueOf(msg.getMessage()));
-                    this.partie.add(com);
-                    
-                    //partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
+                    com.setAvatar(msg.getAvatar());
+                    this.partie.add(com);                   
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message  = new Message(Message.MESSAGE, "admin", "Partie",    text);
                     Message message2 = new Message(Message.MESSAGE, "admin", "connexion", msg.getNick_src());
                     Message message3 = new Message(Message.MESSAGE, "admin", "Partie",    "La partie est pleine, elle demarre ! \n");
-                    String list = this.partie.getListe();
-                    System.out.println(list);
-                    for(Joueur j : this.partie){
-                        j.sendList(list);
+                                   
+                    for(Joueur j : this.partie){ 
+                        j.sendList(this.partie.getListe());
                         j.sendMessage(message);
                         j.sendMessage(message2);
                         if(this.partie.size()==this.nombreJoueur)
@@ -94,22 +94,18 @@ public class Serveur {
                 com.setName(msg.getNick_src());
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);
-                com.sendList(listeVide);                
+                com.sendList(new LinkedHashMap<String,JLabel>());                
                 partie.remove(com);                
                 
                 //partie.removeJoueurByName(msg.getNick_src());
                 Message message2 = new Message(Message.MESSAGE, "admin", "déconnexion", msg.getNick_src());
 
                 Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !\n");
-                String list2 = partie.getListe();
+                
                 for(Joueur j:this.partie){                    
                     j.sendMessage(message);
                     j.sendMessage(message2);
-                    j.sendList(list2);
-                    for(Joueur j2:this.partie){
-                        if(j2.getAvatar()!=null)
-                            j.sendMessage(new Message(Message.AVATAR, j2.getName(), j.getName(),j2.getAvatar()));
-                    }
+                    j.sendList(this.partie.getListe());                    
                 }               
              
                 break;
@@ -129,7 +125,7 @@ public class Serveur {
                 break;
             case Message.LISTE:
                 for(Joueur j:this.partie)
-                    j.sendList(msg.getMessage().toString());
+                    j.sendList(this.partie.getListe());
                 break;
             case Message.QUESTION:      
                 this.partie.answer(msg);             
@@ -146,14 +142,7 @@ public class Serveur {
             case Message.CHOIXJOUEUR:
                 Joueur cible=this.partie.getJoueurByName(msg.getMessage());
                 this.partie.setJoueurCible(cible);
-                break;
-            case Message.AVATAR:
-                com.setAvatar(msg.getAvatar());
-                for(Joueur j:this.partie)
-                    for(Joueur j2:this.partie)
-                        if(j2.getAvatar()!=null)
-                            j.sendMessage(new Message(Message.AVATAR, j2.getName(), j.getName(),j2.getAvatar()));
-                break;
+                break;            
         }
     }
 }

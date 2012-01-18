@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import javax.swing.JLabel;
 
 /**
@@ -15,10 +16,10 @@ import javax.swing.JLabel;
 public class Message {
     
     
-    public static final int CONNECT           			= 20;
+    public static final int CONNECT           			= 88;
     public static final int DISCONNECT        			= 1;
     public static final int MESSAGE           			= 2;
-    public static final int LISTE             			= 3;       
+    public static final int LISTE             			= 89;       
     public static final int NICKEXIST         			= 5;        
     public static final int QUESTION          			= 7;
     public static final int INTERVENTION      			= 8;
@@ -34,7 +35,7 @@ public class Message {
     public static final int CARTE_CAMPGENTIL  			= 85; 
     public static final int CARTE_CAMPMECHANT 			= 86; 
     public static final int CARTES_JOUABLES   			= 87;
-    public static final int AVATAR                              = 88;
+    //public static final int AVATAR                              = 88;
     
     private String nick_src  = "";     
     private String nick_dest = "";    
@@ -45,6 +46,7 @@ public class Message {
     private int action;
     private Color color;
     private HashMap<String,String> map;
+    private HashMap<String,JLabel> list;
     
     /**
      * Constructeur par défaut
@@ -145,10 +147,24 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,JLabel avatar){
+    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,JLabel> list){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
+        this.list        = list;            
+    }
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest
+     * @param map 
+     */
+    public Message(int type,String nick_src,String nick_dest,String msg,JLabel avatar){
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;    
+        this.message    = msg;
         this.avatar     = avatar;            
     }
     
@@ -192,16 +208,18 @@ public class Message {
                 if(type == INTERVENTION)
                     idCard = in.readUTF();
                 if(type >= INFO_JOUEUR){
-                    if(type!=AVATAR)
-                        this.map=(HashMap<String,String>)ois.readObject();
-                    else
+                    if(type==CONNECT){
+                        this.message=in.readUTF();
                         this.avatar=(JLabel)ois.readObject();
+                    }
+                    else if(type==LISTE)
+                        this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
+                    else
+                        this.map=(HashMap<String,String>)ois.readObject();
                 }
             }    
             return true;
-        } catch(Exception e) {
-        	System.out.println(e.toString());
-        	e.printStackTrace();
+        } catch(Exception e) {        	
             return false;
         }
     }
@@ -228,10 +246,14 @@ public class Message {
                 if(type==INTERVENTION)
                     out.writeUTF(idCard);
                 if(type>=INFO_JOUEUR){
-                    if(type!=AVATAR)
-                        oos.writeObject(this.map);
-                    else
+                    if(type==CONNECT){
+                        out.writeUTF(message);
                         oos.writeObject(this.avatar);
+                    }
+                    else if(type==LISTE)
+                        oos.writeObject(this.list);
+                    else  
+                        oos.writeObject(map);
                 }
             }                 
                    
@@ -269,6 +291,10 @@ public class Message {
     public HashMap<String, String> getMap() {
         return map;
     }
+
+    public HashMap<String, JLabel> getList() {
+        return list;
+    }    
 
     public int getAction() {
         return action;

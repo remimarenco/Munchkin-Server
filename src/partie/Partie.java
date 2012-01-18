@@ -12,9 +12,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import joueur.Joueur;
 import joueur.Personnage;
 
@@ -235,17 +238,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @return 
 	 */
 	public boolean loginDispo(String log){
-		String l = getListe();
-		boolean k =true;
-		StringTokenizer l2=new StringTokenizer(l,";");
-		while(l2.hasMoreTokens())
-			try{
-				if(l2.nextToken().equals(log) || log.equals("Partie"))
-					k = false;
-			} catch(Exception e){
-				System.out.println("Exception :" + e.toString());
-			}
-		return k;
+                boolean ret=true;
+		LinkedHashMap<String,JLabel> l = getListe();
+                for(Map.Entry<String,JLabel> m :l.entrySet())
+                    if(m.getKey().equals(log) || log.equals("Partie"))
+                        ret=false;
+                
+                return ret;	
 	}
 
 
@@ -253,11 +252,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Renvoi la liste de nom des joueurs
 	 * @return 
 	 */
-	public String getListe(){
-		String liste="";
-		for(int i=0;i<size();i++)
-			liste+=get(i).getName() + ";";
-		return liste;
+	public LinkedHashMap<String,JLabel> getListe(){
+            LinkedHashMap<String,JLabel> liste=new LinkedHashMap<String, JLabel>();
+            for(Joueur j:this)                    
+                liste.put(j.getName(),j.getAvatar());                    
+
+            return liste;
 	}
 
 
@@ -596,21 +596,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// Initialisation de la partie       
 		init();                
 		while(true){
+                        try {
+                            tour();
+                        } catch (Exception e) {				
+                            e.printStackTrace();
+	                                
+                        }
 			// Si la partie est terminée, on stop le jeu
 			if(PartieTerminee()) {
 				// TODO Faire ce qu'il se passe en fin de partie
 				finPartie();
 				break;
-			}
-			else
-			{
-				try {
-					tour();
-				} catch (Exception e) {				
-					e.printStackTrace();
-	                                
-				}
-			}
+			}			
 		}
 	}
 
@@ -978,11 +975,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.enCours.getPersonnage().setBonusPuissance(0);
 	}
 
-	private void sendInfos() {
-		this.sendInfosCampsToAll(getCombat());
+	private void sendInfos() {		
 		this.sendInfosJoueursToAll();
 		this.sendCartesJeuxJoueursToAll();
 		this.sendCartesMainToOwner();
+                this.sendInfosCampsToAll(getCombat());
 	}
 	
 	/**

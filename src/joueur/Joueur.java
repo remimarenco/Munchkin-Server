@@ -172,8 +172,8 @@ public class Joueur extends Thread {
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
      */
-    public void sendList(String list){
-        new Message(Message.LISTE,"admin","General",list).write(out);
+    public void sendList(LinkedHashMap<String,JLabel> list){
+        new Message(Message.LISTE,"Partie",getName(),list).write(out);
     }
 
     
