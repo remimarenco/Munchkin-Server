@@ -500,6 +500,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                             joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
                                     this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte pour intervenir");
                                 }
+                                if(joueurIntervenant!=null && joueurIntervenant.getName().equals(msg.getNick_src()) && this.phaseTour==Constante.PHASE_CHARITE_SIOUPLAIT ){
+                                    joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
+                                            joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
+                                    this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte a");
+                                }
                                 
 			} else {   //Le joueur informe qu'il veut poser une carte
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
@@ -904,7 +909,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(this.size() != 1)
 			{
 				try {
-					demanderIntervenir(null);
+					demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1045,12 +1050,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						if(!joueursNonConcernes.contains(j)){                                                                                            
 							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
 							j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
-						}
+                                                        j.setAnswer(null);
+                                                }
 				}
 				else{
+
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
-				}                                
-				joueurIntervenant.setAnswer(null);        
+                                }                                
+				       
 
 			} catch (InterruptedException ex) {
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
