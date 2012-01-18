@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import javax.swing.JLabel;
 import partie.Constante;
 import partie.Partie;
 
@@ -25,7 +26,7 @@ public class Joueur extends Thread {
     private Jeu jeu;
     private Personnage personnage;
     private Partie partie;
-    
+    private JLabel avatar        = null;
     private Message msg          = new Message();
     private Object parent        = null;
     private DataInputStream in   = null;
@@ -83,11 +84,18 @@ public class Joueur extends Thread {
         this.jeu        = jeu;        
         this.personnage = personnage;
         this.partie     = partie;
-    }
-    
-    
+    }   
     
     // ===== ACCESSEURS & MUTATEURS ===== //
+    
+    public JLabel getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(JLabel avatar) {
+        this.avatar = avatar;
+    }
+    
     public Jeu getJeu() {
         return jeu;
     }
@@ -118,7 +126,15 @@ public class Joueur extends Thread {
 
     public void setCarteClickee(Carte carteClickee) {
         this.carteClickee = carteClickee;
-    } 
+    }
+
+    public int getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }    
     
     public String getAnswer() {
         return answer;

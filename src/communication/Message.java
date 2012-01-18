@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import javax.swing.JLabel;
 
 /**
  * Classe Message identique entre client et serveur. Protocole d'echange
@@ -14,7 +15,7 @@ import java.util.HashMap;
 public class Message {
     
     
-    public static final int CONNECT           			= 0;
+    public static final int CONNECT           			= 20;
     public static final int DISCONNECT        			= 1;
     public static final int MESSAGE           			= 2;
     public static final int LISTE             			= 3;       
@@ -33,12 +34,13 @@ public class Message {
     public static final int CARTE_CAMPGENTIL  			= 85; 
     public static final int CARTE_CAMPMECHANT 			= 86; 
     public static final int CARTES_JOUABLES   			= 87;
+    public static final int AVATAR                              = 88;
     
     private String nick_src  = "";     
     private String nick_dest = "";    
     private String message   = "";
     private String idCard    = new String();
-    
+    private JLabel avatar;
     private int type;
     private int action;
     private Color color;
@@ -136,6 +138,19 @@ public class Message {
         this.nick_dest  = nick_dest;        
         this.map        = map;            
     }
+    /**
+     * Constructeur
+     * @param type
+     * @param nick_src
+     * @param nick_dest
+     * @param map 
+     */
+    public Message(int type,String nick_src,String nick_dest,JLabel avatar){
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.avatar     = avatar;            
+    }
     
     
    /**
@@ -176,8 +191,12 @@ public class Message {
                     action = in.readInt();
                 if(type == INTERVENTION)
                     idCard = in.readUTF();
-                if(type >= INFO_JOUEUR)
-                    this.map=(HashMap<String,String>)ois.readObject();
+                if(type >= INFO_JOUEUR){
+                    if(type!=AVATAR)
+                        this.map=(HashMap<String,String>)ois.readObject();
+                    else
+                        this.avatar=(JLabel)ois.readObject();
+                }
             }    
             return true;
         } catch(Exception e) {
@@ -193,21 +212,24 @@ public class Message {
     public boolean write(DataOutputStream out) {
         try{
             ObjectOutputStream oos=new ObjectOutputStream(out);
-            out.writeInt(type);
-                
+            out.writeInt(type);                
             out.writeUTF(nick_src);
+            
             if(type>DISCONNECT){
                 out.writeUTF(nick_dest);
                 if(type<INFO_JOUEUR && type!=INTERVENTION && type!=SOUND){
-                out.writeUTF(message);                    
-                oos.writeObject(color);   
-            }
-            if(type==INTERVENTION || type==SOUND)
-                out.writeInt(action);
+                    out.writeUTF(message);                    
+                    oos.writeObject(color);   
+                }
+                if(type==INTERVENTION || type==SOUND)
+                    out.writeInt(action);
                 if(type==INTERVENTION)
                     out.writeUTF(idCard);
                 if(type>=INFO_JOUEUR){
-                    oos.writeObject(this.map);
+                    if(type!=AVATAR)
+                        oos.writeObject(this.map);
+                    else
+                        oos.writeObject(this.avatar);
                 }
             }                 
                    
@@ -249,4 +271,9 @@ public class Message {
     public int getAction() {
         return action;
     }
+
+    public JLabel getAvatar() {
+        return avatar;
+    }
+    
 }

@@ -1,6 +1,7 @@
 package partie;
 
 import carte.Monstre;
+import com.sun.org.apache.xerces.internal.impl.dtd.models.CMAny;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -47,6 +48,15 @@ public class Combat {
     public ArrayList<Monstre> getCampMechant() {
         return CampMechant;
     }
+    public Object getCampCible(){
+        Object obj;
+        if(partie.getCampCible().equals("Camp Gentil"))
+            obj=this.CampGentil;
+        else
+            obj=this.CampMechant;
+        return obj;
+    }
+    
     // ================================== //
     
     
@@ -73,6 +83,7 @@ public class Combat {
             total += p.getPuissance();        
         return total.toString();
     }
+    
     
     
     /**

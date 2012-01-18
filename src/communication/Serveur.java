@@ -60,6 +60,7 @@ public class Serveur {
             case Message.CONNECT:
                 if (this.partie.LoginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
+                    com.setSexe(Integer.valueOf(msg.getMessage()));
                     this.partie.add(com);
                     
                     //partie.getListeJoueurs().add(new Joueur(msg.getNick_src()));
@@ -94,7 +95,7 @@ public class Serveur {
                 com.setName(msg.getNick_src());
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);
-                com.sendList(listeVide);
+                com.sendList(listeVide);                
                 partie.remove(com);                
                 
                 //partie.removeJoueurByName(msg.getNick_src());
@@ -102,17 +103,21 @@ public class Serveur {
 
                 Message message = new Message(Message.MESSAGE, "admin", "Partie", msg.getNick_src() + " quitte le serveur !\n");
                 String list2 = partie.getListe();
-                for (int i = 0; i < partie.size(); i++) {
-                    partie.get(i).sendList(list2);
-                    if(partie.size()<nombreJoueur)
-                        partie.get(i).sendMessage(message);
-                    partie.get(i).sendMessage(message2);
-                }
+                for(Joueur j:this.partie){                    
+                    j.sendMessage(message);
+                    j.sendMessage(message2);
+                    j.sendList(list2);
+                    for(Joueur j2:this.partie){
+                        if(j2.getAvatar()!=null)
+                            j.sendMessage(new Message(Message.AVATAR, j2.getName(), j.getName(),j2.getAvatar()));
+                    }
+                }               
+             
                 break;
             case Message.MESSAGE:
                 if (msg.getNick_dest().equals("Partie")) {
-                    for (int i = 0; i < partie.size(); i++)
-                        partie.get(i).sendMessage(msg);
+                    for(Joueur j:this.partie)
+                        j.sendMessage(msg);
                 } else {
                     int indexDest = partie.getCommunication(msg.getNick_dest());
                     if (indexDest == -1) {
@@ -124,8 +129,8 @@ public class Serveur {
                 }
                 break;
             case Message.LISTE:
-                for (int i = 0; i < partie.size(); i++)
-                    partie.get(i).sendList(msg.getMessage().toString());
+                for(Joueur j:this.partie)
+                    j.sendList(msg.getMessage().toString());
                 break;
             case Message.QUESTION:      
                 this.partie.answer(msg);             
@@ -136,11 +141,19 @@ public class Serveur {
             case Message.SOUND:
                 this.partie.sendSongToAll(msg.getAction());
                 break;
-            case Message.CHOIXCAMP:               
+            case Message.CHOIXCAMP:
+                this.partie.setCampCible(msg.getMessage());
                 break;
             case Message.CHOIXJOUEUR:
                 Joueur cible=this.partie.getJoueurByName(msg.getMessage());
                 this.partie.setJoueurCible(cible);
+                break;
+            case Message.AVATAR:
+                com.setAvatar(msg.getAvatar());
+                for(Joueur j:this.partie)
+                    for(Joueur j2:this.partie)
+                        if(j2.getAvatar()!=null)
+                            j.sendMessage(new Message(Message.AVATAR, j2.getName(), j.getName(),j2.getAvatar()));
                 break;
         }
     }

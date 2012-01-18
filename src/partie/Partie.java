@@ -32,12 +32,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private Defausse<Tresor> defausseTresor;
 	private Defausse<Donjon> defausseDonjon;
 	private Joueur           enCours;
-	private Color            Color;
-	//private Answer           answer;
-	private int               phaseTour;
+	private Color            Color;	
+	private int              phaseTour;
 	private Combat           combat;
-    private Joueur           joueurIntervenant=null;
-    private Joueur           joueurCible=null;   
+        private String           campCible;
+        private Joueur           joueurIntervenant=null;
+        private Joueur           joueurCible=null;   
         
 	/**
 	 * Constructeur
@@ -95,6 +95,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	public Pioche<Donjon> getPiocheDonjon() {
 		return piocheDonjon;
 	}
+
+        public String getCampCible() {
+            return campCible;
+        }
+
+        public void setCampCible(String campCible) {
+            this.campCible = campCible;
+        }
 
 	public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
 		this.piocheDonjon = piocheDonjon;
@@ -576,18 +584,19 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	public void run() {    	
 		// Initialisation de la partie       
 		init();
-
-		while(true){
+                boolean condition=true;
+		while(condition){
 			// Si la partie est terminée, on stop le jeu
 			if(PartieTerminee()) {
 				// TODO Faire ce qu'il se passe en fin de partie
 				finPartie();
-				break;
+				condition=false;
 			}
 			try {
 				tour();
 			} catch (Exception e) {				
 				e.printStackTrace();
+                                condition=false;
 			}
 		}
 	}
@@ -711,15 +720,21 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Faux : La partie n'est pas terminée
 	 */
 	private boolean PartieTerminee() {
+            boolean ret=false;
 		if(enCours != null){
 			if(enCours.getPersonnage().getNiveau() >= 10){
 				this.sendMessageToAll("La partie est terminée !!\n Le joueur "+enCours.getName()+" est passé niveau 10 !!");
-				return true;
+				ret=true;
 			}
 		} else {
 			System.out.println("Partie Terminee : Joueur en cours est null");
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 		}
-		return false;
+		return ret;
 	}
 
 
