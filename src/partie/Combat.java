@@ -20,6 +20,7 @@ public class Combat {
     private int bonusTemporaireGentil = 0;
     private int bonusTemporaireMechant = 0;
     private Partie partie;
+    private Object campCible = null;
 
     
     public int getBonusTemporaireGentil() {
@@ -69,13 +70,13 @@ public class Combat {
     public ArrayList<Monstre> getCampMechant() {
         return CampMechant;
     }
+    
     public Object getCampCible(){
-        Object obj;
         if(partie.getCampCible().equals("Camp Gentil"))
-            obj=this.CampGentil;
+        	campCible=this.CampGentil;
         else
-            obj=this.CampMechant;
-        return obj;
+        	campCible=this.CampMechant;
+        return campCible;
     }
     
     // ================================== //

@@ -529,7 +529,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			} else {
 				this.sendMessageBackToSender(msg.getNick_src(),"Aucune carte choisie");                   
 			}
-			break;  
+			break;
+		case Constante.ACTION_CHOIX_CAMP:
+			this.sendMessageToAll("On a recu le choix du camp");
+			if(msg.getMessage().equals(""))
+			{
+				this.sendMessageToAll("Action choix camp est vide !");
+			}
+			else
+			{
+				campCible = msg.getMessage();
+			}
 		}
 	}
 
