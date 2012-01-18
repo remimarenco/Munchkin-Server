@@ -566,7 +566,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			j.setAnswer(null);
 	}
         
-        public Joueur onePlayerHasAnsweredExceptThose(ArrayList<Joueur> jList){
+        public Joueur onePlayerHasAnsweredExceptThose(ArrayList<Joueur> jList){;
             Joueur ret=null;
 		for(Joueur j2:this)   
 			if(!jList.contains(j2))
@@ -825,7 +825,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		if(this.size() != 1)
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
-			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+			demanderIntervenir(new ArrayList<Joueur>());
 		}
 		this.sendMessageToAll(enCours.getName() + " pioche une carte ! : \n");
 		this.sendCarteEnCoursToAll(cartePiochee);
@@ -869,7 +869,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
-			demanderIntervenir(null);
+			demanderIntervenir(new ArrayList<Joueur>());
 		}
 	}
 
@@ -916,13 +916,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 		if(this.enCours.getAnswer().equals("Yes")){
 		
-			
+			// On demande à tous les joueurs si ils veulent intervenir ici avant que le combat ne commence
 			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 			// TODO : Autoriser les cartes valables ici
 			if(this.size() != 1)
 			{
 				try {
-					demanderIntervenir(null);
+					demanderIntervenir(new ArrayList<Joueur>());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -938,16 +938,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				gagne = false;
 			}
 			try {
-				demanderIntervenir(null);
+				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		} else {
+                        // On demande si tous les joueurs veulent intervenir une fois le combat fini
 			// Avant que le joueur ne puisse intervenir on demande si on intervient
 			try {
-				demanderIntervenir(null);
+				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1078,6 +1079,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                                         j.setAnswer(null);
                                                 }
 				}
+                                // Si c'est non, on affiche qu'il ne souhaite pas intervenir
 				else{
 
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
@@ -1134,7 +1136,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
-				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1146,7 +1148,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
-				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1168,7 +1170,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
-				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1215,7 +1217,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			{
 				// On applique le sort sans que le joueur n'ait pu faire quelque chose
 				try {
-					demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+					demanderIntervenir(new ArrayList<Joueur>());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
