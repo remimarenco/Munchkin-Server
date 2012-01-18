@@ -1049,8 +1049,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				}
 				else{
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
-					// On sort de l'attente d'une intervention
-					break;
 				}                                
 				joueurIntervenant.setAnswer(null);        
 
