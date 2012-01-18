@@ -601,12 +601,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// Initialisation de la partie       
 		init();                
 		while(true){
-                        try {
-                            tour();
-                        } catch (Exception e) {				
-                            e.printStackTrace();
-	                                
-                        }
+			try {
+				tour();
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}
 			// Si la partie est terminée, on stop le jeu
 			if(PartieTerminee()) {
 				// TODO Faire ce qu'il se passe en fin de partie
@@ -820,9 +819,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 		System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
 		//envoi du message a tous les client connectÃ©
+		
+		// Avant que le joueur pioche, on peut intervenir
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			// On applique le sort sans que le joueur n'ait pu faire quelque chose
+			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+		}
 		this.sendMessageToAll(enCours.getName() + " pioche une carte ! : \n");
 		this.sendCarteEnCoursToAll(cartePiochee);
-
+		
 		if(cartePiochee.getClass().equals(Malediction.class)){
 			Malediction carteMaledictionPiochee = (Malediction) cartePiochee;
 			this.sendMessageToAll("C'est un sort !!\n");
@@ -852,12 +859,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
+			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
 		}
 		this.sendMessageToCurrent("On applique le sort !\n");
 		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
 		// On applique le sortilege sur soi
 		this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this));
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			demanderIntervenir(null);
+		}
 	}
 
 	/**
@@ -909,7 +922,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(this.size() != 1)
 			{
 				try {
-					demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+					demanderIntervenir(null);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -923,10 +936,22 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			} else {
 				combatPerdu(monstrePioche);
 				gagne = false;
-			}		
+			}
+			try {
+				demanderIntervenir(null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} else {
-
+			// Avant que le joueur ne puisse intervenir on demande si on intervient
+			try {
+				demanderIntervenir(null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			deguerpir(getCombat());
 			gagne = false;
 		}
@@ -1102,8 +1127,31 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void PillerLaPiece() {
 		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_PILLER_LA_PIECE);
 		this.setPhaseTour(Constante.PHASE_PILLER_LA_PIECE);
+		// TODO : Faire un message pour indiquer qu'on pioche une carte donjon
 		// On pioche une carte du donjon
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			// On applique le sort sans que le joueur n'ait pu faire quelque chose
+			try {
+				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		enCours.piocherCarte(Constante.DONJON);
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			// On applique le sort sans que le joueur n'ait pu faire quelque chose
+			try {
+				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -1115,6 +1163,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		int nbCartesADefausser = 0;
 		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser
 		// TODO :
+		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		if(this.size() != 1)
+		{
+			// On applique le sort sans que le joueur n'ait pu faire quelque chose
+			try {
+				demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		if((nbCartesADefausser = enCours.verifieMain()) > 0)
 		{   
 			this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes !");
@@ -1150,6 +1209,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				}
 				this.sendInfos();
 				enCours.setCarteClickee(null);
+			}
+			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+			if(this.size() != 1)
+			{
+				// On applique le sort sans que le joueur n'ait pu faire quelque chose
+				try {
+					demanderIntervenir(new ArrayList<Joueur>(){{add(enCours);}});
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

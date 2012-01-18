@@ -14,8 +14,7 @@ import javax.swing.JLabel;
  * @author Guillaume Renoult
  */
 public class Message {
-    
-    
+	
     public static final int CONNECT           			= 88;
     public static final int DISCONNECT        			= 1;
     public static final int MESSAGE           			= 2;
@@ -219,7 +218,7 @@ public class Message {
                 }
             }    
             return true;
-        } catch(Exception e) {        	
+        } catch(Exception e) {
             return false;
         }
     }
