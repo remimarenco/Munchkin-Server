@@ -76,8 +76,7 @@ public class Serveur {
                         j.sendMessage(message2);
                         if(this.partie.size()==this.nombreJoueur)
                             j.sendMessage(message3);
-                    }
-                    this.partie.sendInfosJoueursToAll();
+                    }                    
                     if(this.partie.size()==this.nombreJoueur){
                         thrd= new Thread(this.partie);  
                         thrd.start();
