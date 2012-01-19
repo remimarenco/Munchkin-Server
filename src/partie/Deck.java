@@ -452,15 +452,17 @@ public final class Deck {
         //cartes.add(new Malediction(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
-        actionTabMalediction = new ArrayList<Action>();
+        /*actionTabMalediction = new ArrayList<Action>();
         // TODO : Refaire cette fonction en tant que déséquipement
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
         cartes.add(new Malediction(54, "Malédiction! Déclassé!", "Défaussez votre carte de Classe si vous en avez une. Si vous avez deux classes en jeu, vous en perdez une au choix. Si vous n'avez pas de Classe, vous perdez 1 niveau.", new Sortilege(actionTabMalediction)));
+        */
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 1, Constante.JEU));
         cartes.add(new Malediction(55, "Malédiction! Commun des Mortels", "Défaussez toute carte de Race que vous avez en jeu et redevenez Humain.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
+        
         tabClasse.clear();
         tabClasse.add(Constante.CLASSE_PRETRE);
         actionTabMalediction.add(new ChangerNiveau(1));
@@ -471,9 +473,9 @@ public final class Deck {
         //cartes.add(new Malediction(57, "Malédiction! Poulet sur la tête", "-1 à tous vos jets de dé. toute Malédiction ou Incident Fâcheux qui vous retire votre couvre-chef fera également disparaitre le poulet.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerSexe());
-        cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
         //cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
         
@@ -484,8 +486,8 @@ public final class Deck {
         //cartes.add(new Malediction(63, "Malédiction! Miroir perfide", "Vous êtes maudit! Lors de votre prochain combat uniquement, vous n'obtiendrez aucun bonus de vos objets à l'exception de votre armure. Si vous utilisez un Anneau de Souhait avant votre prochain combat, la malédiction est levée.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
-        cartes.add(new Malediction(64, "Pause déjeuner", "A jouer pendant n'importe quel combat. Les monstres de cette pièce font la pause. Le joueur qui affronte le ou les monstres les défausse tous et tire immédiatement 2 cartes trésor(fuir)", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(65, "Illusion", "A jouer pendant n'importe quel combat. Défaussez un monstre impliqué dans ce combat, ainsi que toutes les cartes jouées pour le modifier, et remplacez le par une carte par une carte de monstre tirée de votre main.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(64, "Pause déjeuner", "A jouer pendant n'importe quel combat. Les monstres de cette pièce font la pause. Le joueur qui affronte le ou les monstres les défausse tous et tire immédiatement 2 cartes trésor(fuir)", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(65, "Illusion", "A jouer pendant n'importe quel combat. Défaussez un monstre impliqué dans ce combat, ainsi que toutes les cartes jouées pour le modifier, et remplacez le par une carte par une carte de monstre tirée de votre main.", new Sortilege(actionTabMalediction)));
         //cartes.add(new Malediction(66, "Tricheur!", "Vous pouvez posséder et utiliser les objets qui vous seraient normalement interdit par les règles. Posez cette carte a côté de l'objet que vous jouez de votre main ou que vous avez déja en jeu. Si vous perdez cette objet, cette carte est défaussée avec.", new Sortilege(actionTabMalediction)));
         //cartes.add(new Malediction(67, "Tire moi de la!", "Jouez cette carte quand vous êtes en plein combat. Vous pouvez prendre un objet à n'importe quel autre joueur, à condition qu'il vous permette de gagner le combat alors que vous n'aviez aucune chance au moment ou vous jouez la carte. Vous pouvez défausser un de vos propres objets avant de prendre celui ci si vous le désirez", new Sortilege(actionTabMalediction)));
         //cartes.add(new Malediction(68, "Super Munchkin", "En tant que super grosbill, vous pouvez posséder 2 cartes de Classe, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une classe et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les Prêtres n'auront aucun bonus contre les super Prêtres). Vous perdez cette carte si vous perdez votre ou vos cartes de classe.", new Sortilege(actionTabMalediction)));
@@ -529,8 +531,8 @@ public final class Deck {
         cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-1,true));
         actionTabMalediction.add(new ChangerNiveau(1));
@@ -646,12 +648,13 @@ public final class Deck {
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
         cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(null), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
         
-        actionEquipement.clear();
+        /*actionEquipement.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 1, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -1, 0, -1));
         actionDefausser.add(new ModifDeguerpir(1000, null, null, null, null));
         cartes.add(new Objet(113, "Brochette de rat", "Défaussez cette carte pour échapper automatiquement à n'importe quel monstre. Bonus de +1", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
+        */
         
         actionEquipement.clear();
         tabClasse.clear();
@@ -732,6 +735,7 @@ public final class Deck {
         tabClasse.add(Constante.CLASSE_GUERRIER);
         tabClasse.add(Constante.CLASSE_PRETRE);
         tabClasse.add(Constante.CLASSE_VOLEUR);
+        tabClasse.add(Constante.CLASSE_AUCUNE);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
@@ -742,6 +746,7 @@ public final class Deck {
         tabClasse.add(Constante.CLASSE_MAGICIEN);
         tabClasse.add(Constante.CLASSE_PRETRE);
         tabClasse.add(Constante.CLASSE_VOLEUR);
+        tabClasse.add(Constante.CLASSE_AUCUNE);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
@@ -768,6 +773,7 @@ public final class Deck {
         tabClasse.add(Constante.CLASSE_MAGICIEN);
         tabClasse.add(Constante.CLASSE_PRETRE);
         tabClasse.add(Constante.CLASSE_GUERRIER);
+        tabClasse.add(Constante.CLASSE_AUCUNE);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 2, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -2, 0, -1));
