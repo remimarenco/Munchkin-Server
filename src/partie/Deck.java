@@ -127,7 +127,7 @@ public final class Deck {
         nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-1000, null, null, null, null));
-        cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1));
+        //cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
@@ -147,7 +147,7 @@ public final class Deck {
         tabRace.add(Constante.RACE_ELFE);
         actionTabCondition.add(new ModifPuissanceMonstre(tabRace, null, 4, mstr));
         mstr.setCondition(new Condition(actionTabCondition));
-        cartes.add(mstr);
+        //cartes.add(mstr);
 
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
@@ -388,7 +388,6 @@ public final class Deck {
         cartes.add(new Monstre(33, "Céphalopodzilla", "C'est gluant! Les elfes combattent à  -4. Ne poursuivra aucun personnage de niveau 4 ou moins, sauf si c'est un elfe.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 18));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,5), new ChangerNiveau(2));
-        // FAUX !!
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), null);
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 4, null, null, null));
@@ -401,7 +400,7 @@ public final class Deck {
         actionTabCondition.add(new ModifDeguerpir(+1000, 5, null, null, null));
         actionDeguerpir.clear();
         actionDeguerpir.add(new ChangerNiveau(-2, 5));
-        cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 20));
+        //cartes.add(new Monstre(35, "Dragon de plutonium", "Ne poursuit aucun personnage de niveau 5 ou inférieur. Les autres perdent 2 niveaux même si ils réussissent a déguerpir.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 20));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
@@ -438,25 +437,25 @@ public final class Deck {
         cartes.add(new Malediction(44, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(45, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
         
-        //actionTabMalediction = new ArrayList<Action>();
-        //actionTabMalediction.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
-        //cartes.add(new Malediction(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        cartes.add(new Malediction(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
         // TODO : Manque la malédiction impot sur le revenu
-        //cartes.add(new Malediction(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
         //TODO
         //cartes.add(new Malediction(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
-        /*actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction = new ArrayList<Action>();
         // TODO : Refaire cette fonction en tant que déséquipement
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
         cartes.add(new Malediction(54, "Malédiction! Déclassé!", "Défaussez votre carte de Classe si vous en avez une. Si vous avez deux classes en jeu, vous en perdez une au choix. Si vous n'avez pas de Classe, vous perdez 1 niveau.", new Sortilege(actionTabMalediction)));
-        */
+        
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 1, Constante.JEU));
@@ -473,10 +472,12 @@ public final class Deck {
         //cartes.add(new Malediction(57, "Malédiction! Poulet sur la tête", "-1 à tous vos jets de dé. toute Malédiction ou Incident Fâcheux qui vous retire votre couvre-chef fera également disparaitre le poulet.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerSexe());
-        //cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
+        cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 2, Constante.MAIN));
+        cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
@@ -862,11 +863,11 @@ public final class Deck {
         
         actionEquipement.clear();
         tabRace.clear();
-        tabRace.add(Constante.RACE_HUMAINE);
+        tabRace.add(Constante.RACE_HALFELIN);
         actionEquipement.add(new EquiperObjet(tabRace, null, false, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(tabRace, null, false, -3, 0, -1));
-        cartes.add(new Objet(155 ,"Sandwich Chocolat-Moules-Anchois", "Réservé aux Humains. Bonus de + 3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
+        cartes.add(new Objet(155 ,"Sandwich Chocolat-Moules-Anchois", "Réservé aux Halfelins. Bonus de + 3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         actionEquipement.clear();
         tabRace.clear();
         tabRace.add(Constante.RACE_HUMAINE);

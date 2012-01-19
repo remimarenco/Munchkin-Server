@@ -176,7 +176,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					j.getMain().ajouterCarte((Carte) piocheTresor.tirerCarte());
 				}
 				// On est bon pour refaire un tour et on remet la carte dans la pioche
-				else
+                                else
 				{
 					piocheDonjon.poserEnDessousPioche((Donjon)carte);
 					i--;
@@ -518,7 +518,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				this.sendMessageToAllButSender(msg.getNick_src(),"Le joueur :" +msg.getNick_src()+" souhaite pourrir le joueur "+this.enCours.getName());
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à utiliser pour POURRIR le joueur : "+this.enCours.getName());
 				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						emetteur.getMain().getCartesJouablePourPourrir()));
+						emetteur.getMain().getCartesJouablePourIntervenir(this.phaseTour)));
 			}
 			break;
 		// Si un joueur a envoyé un message d'intervention ACTION_CARTE_INTERVENTION_CHOISIE, on change la valeur de la carte cliquée
@@ -1042,6 +1042,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void demanderIntervenir(ArrayList<Joueur> joueursNonConcernes) throws Exception{
                 ArrayList<Joueur> joueursAyantRepondu=new ArrayList<Joueur>(joueursNonConcernes);
 		//Envoi de la demande a tous les joueur sauf ceux contenu dans joueursNonConcernes
+                this.sendInfos();
                 for(Joueur j:this)  
 			if(!joueursNonConcernes.contains(j))
 				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
@@ -1049,6 +1050,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.resetAnswers();
                 // Tant que les joueurs n'ont pas répondu, on attends
 		while(!this.allPlayersAnsweredButThose(joueursNonConcernes)){
+                    this.sendInfos();
 			try {
 				Thread.sleep(200);       //permet de laisser le temps au serveur d'interpreter les reponses de joueurs                         
 				joueurIntervenant=null;

@@ -94,7 +94,9 @@ public class DefausserCarte extends Action{
 	        
 	        if(this.typeTas == Constante.TAS_CHOISIR){  // Si c'est au joueur de choisir (main ou jeu)
 	            // TODO : donner la possibilité au joueur de choisir depuis quel tas se défausser
-	            valeur = Constante.nbAleatoire(1, 2+1); // On choisit aléatoirement pour lui
+	            partie.sendMessageToAll("On jette le dé !");
+                    valeur = Constante.nbAleatoire(1, 2+1); // On choisit aléatoirement pour lui
+                    partie.sendMessageToAll("Le dé a parlé : "+valeur);
 	            if(valeur == 1)
 	                this.typeTas = Constante.MAIN;
 	            else if(valeur == 2)
@@ -104,7 +106,9 @@ public class DefausserCarte extends Action{
 	        }
 	        
 	        if(this.nbCarte == Constante.NB_PAR_DE){            // Le nb de carte est défini par dé
+                    partie.sendMessageToAll("On jette le dé !");                    
 	            this.nbCarte = Constante.nbAleatoire(1, 6+1);
+                    partie.sendMessageToAll("Le dé a parlé : "+nbCarte);
 	        }else if(this.nbCarte == Constante.NB_TOUT){        // Toutes les cartes du tas
 	            if(this.typeTas == Constante.MAIN)
 	                this.nbCarte = joueurImpacte.getMain().getCartes().size();

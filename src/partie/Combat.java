@@ -72,11 +72,16 @@ public class Combat {
     }
     
     public Object getCampCible(){
-        if(partie.getCampCible().equals("Camp Gentil"))
-        	campCible=this.CampGentil;
-        else
-        	campCible=this.CampMechant;
-        return campCible;
+        if(partie.getCampCible() == null)
+        {
+            if(partie.getCampCible().equals("Camp Gentil"))
+                    campCible=this.CampGentil;
+            else
+                    campCible=this.CampMechant;
+            return campCible;
+        }
+        System.out.println("Le camp cible est null");
+        return null; 
     }
     
     // ================================== //
@@ -126,10 +131,19 @@ public class Combat {
 
         // Parcourt des personnages du campGentil, assignation dans les tableaux
     	for(Personnage gentil : CampGentil)
-            if(gentil.deguerpir())
+        {
+            partie.sendMessageToAll("On lance le dé !");
+            int valeurDe = Constante.nbAleatoire(1, 7);
+            partie.sendMessageToAll("Le dé a parlé : "+valeurDe);
+            if(gentil.deguerpir(valeurDe))
+            {
                 reussi.add(gentil);
+            }
             else
+            {
                 echec.add(gentil);
+            }
+        }
         return dico;
     }    
     

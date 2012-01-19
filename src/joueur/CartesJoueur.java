@@ -135,11 +135,17 @@ public class CartesJoueur {
      * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
      * @return
      */
-    public LinkedHashMap<String,String> getCartesJouablePourPourrir(){
+    public LinkedHashMap<String,String> getCartesJouablePourIntervenir(int phaseTour){
     	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes)
-            if(c.getClass().getSimpleName().equals("Objet"))
+        {
+            // On ne peut intervenir qu'avec des cartes non posables, sinon le joueur doit utiliser carte
+            if(!c.getClass().getSimpleName().equals("Objet"))
+            {
+                // On vérifie si chaque carte est posable
                 map.put(c.getId().toString(), c.getId().toString());
+            }
+        }
         return map;
     }
 }

@@ -156,8 +156,12 @@ public class ChangerNiveau extends Action {
         			return out;
 
         		// Si le nombre de niveau doit se choisir par dé...
-        		if(this.niveau == Constante.NB_PAR_DE)  
+        		if(this.niveau == Constante.NB_PAR_DE)
+                        {
+                            partie.sendMessageToAll("On lance le dé !");
         			this.niveau = Constante.nbAleatoire(1, 6+1);
+                                partie.sendMessageToAll("Le dé a parlé : "+niveau);
+                        }
 
         		out += joueurImpacte.getName();
         		if(niveau < 0)

@@ -51,9 +51,9 @@ public abstract class Action {
     
     protected Object demandeCampCible(Partie partie, Joueur joueurEmetteur)
     {
-    	joueurEmetteur.sendMessage(new Message(Message.CHOIXCAMP, "Partie", joueurEmetteur.getName(),"Veuiller choisir le joueur destination "));
+    	joueurEmetteur.sendMessage(new Message(Message.CHOIXCAMP, "Partie", joueurEmetteur.getName(),"Veuiller choisir le camp de destination "));
         partie.setCampCible(null);
-        while(partie.getJoueurCible()==null){
+        while(partie.getCampCible()==null){
             try {
                 Thread.sleep(200);
             } catch (InterruptedException ex) {

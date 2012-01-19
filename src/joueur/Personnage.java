@@ -180,8 +180,7 @@ public class Personnage {
      * Méthode de déguerpissage du perso
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
-    public Boolean deguerpir() {
-        int resultatDe = Constante.nbAleatoire(1, 7);
+    public Boolean deguerpir(int resultatDe) {
         if((capaciteFuite + bonusCapaciteFuite) >= resultatDe){
             return true;
         }
