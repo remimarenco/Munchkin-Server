@@ -423,7 +423,7 @@ public final class Deck {
         // === MALEDICTION ===
         // =============
       //TODO
-        cartes.add(new Malediction(36, "Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", new Sortilege(actionTabMalediction)));
+        /*cartes.add(new Malediction(36, "Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(37, "Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(38, "Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(39, "Vénérable", "+10 au niveau du monstre. A jouer pendant le combat. Si le monstre est vaincu, tirez 2 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
@@ -431,24 +431,25 @@ public final class Deck {
         cartes.add(new Malediction(41, "Bébé", "-5 au niveau du monstre(niveau minimum: 1). A jouer pendant le combat. Si le monstre est vaincu, tirez 1 cartes trésor en moins (minimum 1).", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(42, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(43, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
+        */
         //FIN_TODO
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-1));
         cartes.add(new Malediction(44, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(45, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
         
-        actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
-        cartes.add(new Malediction(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
+        //actionTabMalediction = new ArrayList<Action>();
+        //actionTabMalediction.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        //cartes.add(new Malediction(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(49, "Malédiction vraiment trop injuste!", "Perdez l'objet qui vous donne le plus haut bonus", new Sortilege(actionTabMalediction))); 
         // TODO : Manque la malédiction impot sur le revenu
-        cartes.add(new Malediction(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(51, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(52, "Malédiction! Petite perte", "Choisissez un petit objet à défausser. Tout objet qui n'est pas spécifiquement désigné comme \"Gros\" est petit.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(53, "Malédiction! Grosse perte", "Choisissez un gros objet à défausser.", new Sortilege(actionTabMalediction)));
         //TODO
-        cartes.add(new Malediction(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(50, "Malédiction! Impôt sur le revenu", "Défaussez un objet de votre choix. Chaque autre joueur doit maintenant défausser un ou des objets dont la valeur totale égale au moins celle du vôtre. Ceux qui n'ont pas assez pour payer doivent défausser tous leurs objets et perdre un niveau", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
@@ -463,35 +464,35 @@ public final class Deck {
         tabClasse.clear();
         tabClasse.add(Constante.CLASSE_PRETRE);
         actionTabMalediction.add(new ChangerNiveau(1));
-        cartes.add(new Malediction(56, "Intervention Divine!", "Vous devez jouer cette carte immédiatement. Tous les Prêtres gagnent immédiatement 1 niveau. Si cela permet à un joueur de terminer la partie, il est autorisé à se gausser grassement et sans pitié des autres joueurs.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(56, "Intervention Divine!", "Vous devez jouer cette carte immédiatement. Tous les Prêtres gagnent immédiatement 1 niveau. Si cela permet à un joueur de terminer la partie, il est autorisé à se gausser grassement et sans pitié des autres joueurs.", new Sortilege(actionTabMalediction)));
         
         actionTabMalediction = new ArrayList<Action>();
         //TODO
-        cartes.add(new Malediction(57, "Malédiction! Poulet sur la tête", "-1 à tous vos jets de dé. toute Malédiction ou Incident Fâcheux qui vous retire votre couvre-chef fera également disparaitre le poulet.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(57, "Malédiction! Poulet sur la tête", "-1 à tous vos jets de dé. toute Malédiction ou Incident Fâcheux qui vous retire votre couvre-chef fera également disparaitre le poulet.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerSexe());
         cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
         
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-2));
         cartes.add(new Malediction(62, "Malédiction! Canard de l'apocalypse", "Les aventuruers malins ne ramassent pas de canard dans les donjons. Perdez 2 niveaux", new Sortilege(actionTabMalediction)));
         //TODO
-        cartes.add(new Malediction(63, "Malédiction! Miroir perfide", "Vous êtes maudit! Lors de votre prochain combat uniquement, vous n'obtiendrez aucun bonus de vos objets à l'exception de votre armure. Si vous utilisez un Anneau de Souhait avant votre prochain combat, la malédiction est levée.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(63, "Malédiction! Miroir perfide", "Vous êtes maudit! Lors de votre prochain combat uniquement, vous n'obtiendrez aucun bonus de vos objets à l'exception de votre armure. Si vous utilisez un Anneau de Souhait avant votre prochain combat, la malédiction est levée.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
         cartes.add(new Malediction(64, "Pause déjeuner", "A jouer pendant n'importe quel combat. Les monstres de cette pièce font la pause. Le joueur qui affronte le ou les monstres les défausse tous et tire immédiatement 2 cartes trésor(fuir)", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(65, "Illusion", "A jouer pendant n'importe quel combat. Défaussez un monstre impliqué dans ce combat, ainsi que toutes les cartes jouées pour le modifier, et remplacez le par une carte par une carte de monstre tirée de votre main.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(66, "Tricheur!", "Vous pouvez posséder et utiliser les objets qui vous seraient normalement interdit par les règles. Posez cette carte a côté de l'objet que vous jouez de votre main ou que vous avez déja en jeu. Si vous perdez cette objet, cette carte est défaussée avec.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(67, "Tire moi de la!", "Jouez cette carte quand vous êtes en plein combat. Vous pouvez prendre un objet à n'importe quel autre joueur, à condition qu'il vous permette de gagner le combat alors que vous n'aviez aucune chance au moment ou vous jouez la carte. Vous pouvez défausser un de vos propres objets avant de prendre celui ci si vous le désirez", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(68, "Super Munchkin", "En tant que super grosbill, vous pouvez posséder 2 cartes de Classe, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une classe et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les Prêtres n'auront aucun bonus contre les super Prêtres). Vous perdez cette carte si vous perdez votre ou vos cartes de classe.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(69, "Super Munchkin", "En tant que super grosbill, vous pouvez posséder 2 cartes de Classe, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une classe et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les Prêtres n'auront aucun bonus contre les super Prêtres). Vous perdez cette carte si vous perdez votre ou vos cartes de classe.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(70, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(71, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(94, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(66, "Tricheur!", "Vous pouvez posséder et utiliser les objets qui vous seraient normalement interdit par les règles. Posez cette carte a côté de l'objet que vous jouez de votre main ou que vous avez déja en jeu. Si vous perdez cette objet, cette carte est défaussée avec.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(67, "Tire moi de la!", "Jouez cette carte quand vous êtes en plein combat. Vous pouvez prendre un objet à n'importe quel autre joueur, à condition qu'il vous permette de gagner le combat alors que vous n'aviez aucune chance au moment ou vous jouez la carte. Vous pouvez défausser un de vos propres objets avant de prendre celui ci si vous le désirez", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(68, "Super Munchkin", "En tant que super grosbill, vous pouvez posséder 2 cartes de Classe, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une classe et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les Prêtres n'auront aucun bonus contre les super Prêtres). Vous perdez cette carte si vous perdez votre ou vos cartes de classe.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(69, "Super Munchkin", "En tant que super grosbill, vous pouvez posséder 2 cartes de Classe, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une classe et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les Prêtres n'auront aucun bonus contre les super Prêtres). Vous perdez cette carte si vous perdez votre ou vos cartes de classe.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(70, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(71, "Sang mêlé", "Vous pouvez avoir deux carte de race, et disposer de tous les avantages et désavantages de chacune. Vous pouvez aussi choisir de n'avoir qu'une race et d'avoir tous ses avantages mais aucun désavantage (par exemple les monstres qui haïssent les elfes n'auront aucun bonus contre les demi-elfes). Vous perdez cette carte si vous perdez votre ou vos cartes de race.", new Sortilege(actionTabMalediction)));
+        //cartes.add(new Malediction(94, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         
         // =============
         // =============
@@ -510,9 +511,9 @@ public final class Deck {
         //cartes.add(new Sort(97, "Flaque de colle", "A utiliser quand quelqu'un réussit à fuir le combat pour quelque raison que ce soit. La victime doit relancer les dés pour Déguerpir (même s'il s'agissait d'une réussite automatique la première fois). Usage unique.", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         
-        actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
-        cartes.add(new Sort(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
+        //actionTabMalediction = new ArrayList<Action>();
+        //actionTabMalediction.add(new ModifDeguerpir(+1000, null, null, null, null));
+        //cartes.add(new Sort(98, "Potion d'invisibilité", "A défausser après avoir raté votre jet pour Déguerpir. Vous vous enfuyez automatiquement. Usage unique.", new Sortilege(actionTabMalediction)));
         //cartes.add(new Sort(103, "Mur instantané", "Permet à un ou deux personnages de fuir automatiquement n'importe quel combat. Usage unique.", new Sortilege(actionTabMalediction)));
         
         //TODO
@@ -530,6 +531,9 @@ public final class Deck {
         cartes.add(new Sort(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        actionTabMalediction = new ArrayList<Action>();
+        actionTabMalediction.add(new ChangerNiveau(-1,true));
+        actionTabMalediction.add(new ChangerNiveau(1));
         cartes.add(new Sort(109, "Vol de niveau", "Choisissez un joueur auquel vous volez un niveau. Vous gagnez un niveau et il en perd un.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new PiocherCarte(Constante.TRESOR, 3));
