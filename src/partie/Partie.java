@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -1017,6 +1016,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Fonction permettant de gérer la demande d'intervention des joueurs
 	 */
 	private void demanderIntervenir(ArrayList<Joueur> joueursNonConcernes) throws Exception{
+                ArrayList<Joueur> joueursAyantRepondu=new ArrayList<Joueur>(joueursNonConcernes);
 		for(Joueur j:this)  
 			if(!joueursNonConcernes.contains(j))
 				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
@@ -1024,11 +1024,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.resetAnswers();
 		while(!this.allPlayersAnsweredButThose(joueursNonConcernes)){
 			try {
-				Thread.sleep(200);
+				Thread.sleep(200);                                
 				joueurIntervenant=null;
-				while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursNonConcernes)) == null){
+				while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursAyantRepondu)) == null){
 					Thread.sleep(200);
 				}
+                                joueursAyantRepondu.add(joueurIntervenant);
 				if(joueurIntervenant.getAnswer().equals("Yes")){                                    
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" souhaite intervenir");
 					for(Joueur j:this){
@@ -1077,12 +1078,13 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
 							j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
                                                         j.setAnswer(null);
+                                                        joueursAyantRepondu.clear();
+                                                        joueursAyantRepondu.addAll(joueursNonConcernes);
                                                 }
 				}
                                 // Si c'est non, on affiche qu'il ne souhaite pas intervenir
-				else{
-
-					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");
+                                else{
+					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" ne souhaite pas intervenir");                                        
                                 }                                
 				       
 
@@ -1212,6 +1214,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				this.sendInfos();
 				enCours.setCarteClickee(null);
 			}
+                        enCours.sendMessage(new Message(Message.INTERVENTION,"Partie",enCours.getName(),Constante.ACTION_FIN_CHARITE));
 			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 			if(this.size() != 1)
 			{
@@ -1238,6 +1241,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @return
 	 */
 	private Carte demandeDefausseCarte(Joueur j) {
+                this.joueurIntervenant=j;
 		this.sendMessageBackToSender(j.getName(),"Choisissez la carte à Defausser");
 		j.sendMessage(new Message(Message.INTERVENTION, "Partie",j.getName(),Constante.ACTION_DEFAUSSER));
 		j.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", j.getName(),
@@ -1251,7 +1255,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}                   
-		
+		this.joueurIntervenant=null;
 		return j.getCarteClickee();
 	}
 }

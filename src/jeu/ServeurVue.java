@@ -6,6 +6,8 @@
 package jeu;
 
 import communication.Serveur;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -17,6 +19,10 @@ public class ServeurVue extends javax.swing.JFrame {
           
     /** Creates new form ServeurVue */
     public ServeurVue() {
+        UIManager.put("nimbusBase", new ColorUIResource(62,35, 2));         
+        UIManager.put("nimbusFocus", new ColorUIResource(62,35, 2));         
+        UIManager.put("nimbusLightBackground", new ColorUIResource(244,233,211));           
+        UIManager.put("control", new ColorUIResource(172, 158,123));
         initComponents();
         this.jLabel2.setVisible(false);
     }
@@ -125,6 +131,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if(th!=null)
         this.th.interrupt();
     this.dispose();
+    System.exit(0);
 }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
