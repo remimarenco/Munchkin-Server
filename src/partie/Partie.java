@@ -141,6 +141,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	/**
+         * Méthode permettant de retourner l'entier correspondant à la phase du tour
 	 * @return the phaseTour
 	 */
 	public int getPhaseTour() {
@@ -656,8 +657,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			// On test si la piocheDonjon et la piocheTresor est vide
 			testPioche(piocheDonjon);
 			testPioche(piocheTresor);
-			this.sendMessageToAllButCurrent("Voulez vous intervenir avant que "+enCours.getName()+" ne pioche une carte ?");
-			this.sendMessageToAll("Vous ouvrez la porte du donjon...");
+                        this.sendMessageToAllButCurrent(enCours.getName()+" ouvre la porte du donjon...");
+			this.sendMessageToCurrent("Vous ouvrez la porte du donjon...");
 			cartePiochee = phaseOuvrirPorte();
 
 			// === MONSTRE ===
@@ -805,7 +806,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	// => Si Sort => Agit sur le joueur si possible => Défaussée
 	// => Autre type => Jouer ou mettre dans main
 	private Carte phaseOuvrirPorte() throws Exception {
-		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_OUVRIR_PORTE);
+		this.sendMessageToAll("Changement de phase : "+getPhaseTourString()+" => "+getPhaseTourString(Constante.PHASE_OUVRIR_PORTE));
 		this.setPhaseTour(Constante.PHASE_OUVRIR_PORTE);
 		Carte cartePiochee;
 		
@@ -819,6 +820,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		System.out.println("\n\n" + enCours.getName() + " (Niveau "+ enCours.getPersonnage().getNiveau() + ") : ");
 		//envoi du message a tous les client connectÃ©
 		
+                this.sendMessageToAllButCurrent("Avant que le joueur "+enCours.getName()+" ne pioche une carte, vous pouvez intervenir");
+                this.sendMessageToCurrent("Avant de piocher une carte, vous pouvez intervenir");
 		// Avant que le joueur pioche, on peut intervenir
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
@@ -837,7 +840,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			this.sendMessageToCurrent("Vous venez de piocher la carte Sort : ");
 			this.sendMessageToCurrent(cartePiochee.getNom());
 			this.sendMessageToCurrent(cartePiochee.getDescription());
-			jouerCarteMalediction(carteMaledictionPiochee);			
+			jouerCarteMaledictionOuvrirPorte(carteMaledictionPiochee);			
 
 			// On pille la piece
 			PillerLaPiece();
@@ -852,7 +855,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Méthode permettant jouer la carte sort piochée
 	 * @throws Exception 
 	 */
-	private void jouerCarteMalediction(Malediction cartePiochee) throws Exception {
+	private void jouerCarteMaledictionOuvrirPorte(Malediction cartePiochee) throws Exception {
 		this.sendMessageToAllButCurrent(enCours.getName()+" va lancer un sort. Voulez vous, auparavant, intervenir ?");
 		this.sendMessageToAll("Suspense, quelqu'un va peut etre intervenir..");
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
@@ -865,7 +868,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.sendSongToAll(Constante.jouerSon(Constante.SOUND_SORT));
 		// On applique le sortilege sur soi
 		this.sendMessageToAll(cartePiochee.appliquerSortilege(enCours, new ArrayList<Joueur>(){{add(enCours);}}, this));
-		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		this.sendMessageToAll("Avant que la phase ouvrirPorte ne se termine, vous pouvez intervenir");
+                // Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
 			demanderIntervenir(new ArrayList<Joueur>());
@@ -879,7 +883,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	private boolean ChercherLaBagarre(Monstre monstrePioche) {
 		boolean gagne = true;
-		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_CHERCHER_LA_BAGARRE);
+		this.sendMessageToAll("Changement de phase : "+getPhaseTourString()+" => "+getPhaseTourString(Constante.PHASE_CHERCHER_LA_BAGARRE));
 		this.setPhaseTour(Constante.PHASE_CHERCHER_LA_BAGARRE);
 		setCombat(new Combat(this));
 
@@ -897,6 +901,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		 */
 		this.sendMessageToAll(monstrePioche.appliquerCondition(null, new ArrayList<Joueur>(){{add(enCours);}}, this));
 		this.sendInfos();
+                
+                this.sendMessageToAllButCurrent("Avant que le joueur "+enCours.getName()+" ne choisisse d'attaquer ou de déguerpir, voulez vous intervenir ?");
+                this.sendMessageToCurrent("Avant que vous ne choisissez d'attaquer ou de déguerpir, voulez intervenir ?");
+                if(this.size() != 1)
+			{
+				try {
+					demanderIntervenir(new ArrayList<Joueur>());
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+			}
 
 		System.out.println("Combattre ? (o/n)");
 		this.sendMessageToAll("Le joueur : " +enCours.getName() + " a tiré le monstre : \n"
@@ -914,11 +929,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 
 		if(this.enCours.getAnswer().equals("Yes")){
+                    this.sendMessageToAll("Quelle vaillance, "+enCours.getName()+" attaque le montre !");
 		
 			// On demande à tous les joueurs si ils veulent intervenir ici avant que le combat ne commence
 			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 			// TODO : Autoriser les cartes valables ici
-			if(this.size() != 1)
+                    this.sendMessageToAllButCurrent("Maintenant que "+enCours.getName()+" a choisi d'attaquer le monstre...voulez vous intervenir ?");
+                    this.sendMessageToCurrent("Maintenant que vous avez choisi d'attaquer le monstre...voulez vous intervenir ?");
+                    if(this.size() != 1)
 			{
 				try {
 					demanderIntervenir(new ArrayList<Joueur>());
@@ -935,6 +953,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				combatPerdu(monstrePioche);
 				gagne = false;
 			}
+                        
+                        this.sendMessageToAll("Maintenant que le combat est terminé, voulez vous intervenir ?");
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
 			} catch (Exception e) {				
@@ -942,6 +962,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			}
 
 		} else {
+                    this.sendMessageToAll("Quelle déception, "+enCours.getName()+" fuit le montre...");
+                    this.sendMessageToAllButCurrent("Avant que " + enCours.getName() + " ne lance le dé pour déguerpir, voulez vous intervenir ?");
+                    this.sendMessageToCurrent("Avant que vous ne lanciez le dé pour déguerpir, voulez vous intervenir ?");
                         // On demande si tous les joueurs veulent intervenir une fois le combat fini
 			// Avant que le joueur ne puisse intervenir on demande si on intervient
 			try {
@@ -1136,11 +1159,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Phase de pillage de la piece, on pioche une carte et on change la phaseTour
 	 */
 	private void PillerLaPiece() {
-		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_PILLER_LA_PIECE);
+		this.sendMessageToAll("Changement de phase : "+getPhaseTourString()+" => "+getPhaseTourString(Constante.PHASE_PILLER_LA_PIECE));
 		this.setPhaseTour(Constante.PHASE_PILLER_LA_PIECE);
-                this.sendMessageToAllButCurrent("Le joueur : "+enCours.getName()+" pioche une carte donjon !");
-                this.sendMessageToCurrent("Vous piochez une carte donjon !");		
-		// On pioche une carte du donjon
+                this.sendMessageToAllButCurrent("Avant que le joueur "+enCours.getName()+" ne pioche une carte, vous pouvez intervenir");
+		this.sendMessageToCurrent("Avant que vous ne piochez une carte, vous pouvez intervenir");
+                // On pioche une carte du donjon
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
@@ -1151,8 +1174,12 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				e.printStackTrace();
 			}
 		}
+                this.sendMessageToAllButCurrent("Le joueur : "+enCours.getName()+" pioche une carte donjon !");
+                this.sendMessageToCurrent("Vous piochez une carte donjon !");
 		enCours.piocherCarte(Constante.DONJON);
-		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+		this.sendMessageToAllButCurrent("Maintenant que le joueur "+enCours.getName()+" a pioché sa carte...va t il ou allez vous intervenir ?");
+                this.sendMessageToCurrent("Maintenant que vous avez pioché une carte...voulez vous intervenir ?");
+                // Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
@@ -1168,24 +1195,28 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Méthode permettant de dérouler la phase de la Charité
 	 */
 	private void Charite() {
-		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
+		this.sendMessageToAll("Changement de phase : "+getPhaseTourString()+" => "+getPhaseTourString(Constante.PHASE_CHARITE_SIOUPLAIT));
 		this.setPhaseTour(Constante.PHASE_CHARITE_SIOUPLAIT);
 		int nbCartesADefausser = 0;
-		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser		
-		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
-		if(this.size() != 1)
-		{
-			// On applique le sort sans que le joueur n'ait pu faire quelque chose
-			try {
-				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {				
-				e.printStackTrace();
-			}
-		}
+
+		
 		if((nbCartesADefausser = enCours.verifieMain()) > 0)
 		{   
-			this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes !");
-			// On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
+			
+                        // On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser		
+                        this.sendMessageToAllButCurrent("Le joueur: "+enCours.getName()+" doit defausser "+nbCartesADefausser+" Cartes ! Vous pouvez intervenir pour modifier cela...");
+                        this.sendMessageToCurrent("Vous devez vous défausser de "+ nbCartesADefausser + ". Voulez vous intervenir pour modifier cela ?");
+                        // Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+                        if(this.size() != 1)
+                        {
+                                // On applique le sort sans que le joueur n'ait pu faire quelque chose
+                                try {
+                                        demanderIntervenir(new ArrayList<Joueur>());
+                                } catch (Exception e) {				
+                                        e.printStackTrace();
+                                }
+                        }
+                        // On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
 			// Oui c'est fait exprès pour etre le plus flexible possible
 			// On récupère la carte choisie par l'utilisateur que l'on veut défausser
 			for(int i = 0; i < nbCartesADefausser; i++)
@@ -1219,7 +1250,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				enCours.setCarteClickee(null);
 			}
                         enCours.sendMessage(new Message(Message.INTERVENTION,"Partie",enCours.getName(),Constante.ACTION_FIN_CHARITE));
-			// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
+			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" a fini de défausser ses cartes. Voulez vous maintenant intervenir ?");
+                        this.sendMessageToCurrent("Vous avez terminé de defausser vos cartes...voulez vous maintenant intervenir ?");
+                        // Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 			if(this.size() != 1)
 			{
 				// On applique le sort sans que le joueur n'ait pu faire quelque chose
@@ -1261,4 +1294,50 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.joueurIntervenant=null;
 		return j.getCarteClickee();
 	}
+        
+        /**
+         * Méthode permettant de retourner le nom de la phase en cours
+         * @return 
+         */
+        private String getPhaseTourString()
+        {
+            switch(getPhaseTour())
+            {
+                case Constante.PHASE_INIT:
+                    return "Initiale";
+                case Constante.PHASE_OUVRIR_PORTE:
+                    return "Ouvrir la porte";
+                case Constante.PHASE_CHERCHER_LA_BAGARRE:
+                    return "Chercher la bagarre";
+                case Constante.PHASE_PILLER_LA_PIECE:
+                    return "Piller la pièce";
+                case Constante.PHASE_CHARITE_SIOUPLAIT:
+                    return "Charité siouplait";
+                default:
+                    return "Phase non renseigée";
+            }
+        }
+        
+        /**
+         * Méthode permettant de retourner le nom de la phase en paramètre
+         * @return 
+         */
+        private String getPhaseTourString(int phase)
+        {
+            switch(phase)
+            {
+                case Constante.PHASE_INIT:
+                    return "Initiale";
+                case Constante.PHASE_OUVRIR_PORTE:
+                    return "Ouvrir la porte";
+                case Constante.PHASE_CHERCHER_LA_BAGARRE:
+                    return "Chercher la bagarre";
+                case Constante.PHASE_PILLER_LA_PIECE:
+                    return "Piller la pièce";
+                case Constante.PHASE_CHARITE_SIOUPLAIT:
+                    return "Charité siouplait";
+                default:
+                    return "Phase non renseigée";
+            }
+        }
 }
