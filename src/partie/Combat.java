@@ -72,15 +72,15 @@ public class Combat {
     }
     
     public Object getCampCible(){
-        if(partie.getCampCible() == null)
+        if(partie.getCampCible() != null)
         {
-            if(partie.getCampCible().equals("Camp Gentil"))
+            if(partie.getCampCible().equals("Gentil"))
                     campCible=this.CampGentil;
             else
                     campCible=this.CampMechant;
             return campCible;
         }
-        System.out.println("Le camp cible est null");
+        System.out.println("Le camp cible est null dans getCampCible");
         return null; 
     }
     
@@ -213,9 +213,13 @@ public class Combat {
         for(Personnage p : CampGentil)
             map.put(p.getNom(),String.valueOf(p.getPuissance()));
         
+        map.put("BonusG", String.valueOf(bonusTemporaireGentil));
+        
         map.put("Camp Mechant", getPuissanceCampMechant());
         for(Monstre m : CampMechant)
             map.put(m.getNom(),String.valueOf(m.getPuissance()));
+        
+        map.put("BonusM", String.valueOf(bonusTemporaireMechant));
         
         return map;
     }

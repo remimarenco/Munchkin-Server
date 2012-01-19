@@ -8,6 +8,7 @@ import carte.Monstre;
 
 import joueur.Classe;
 import joueur.Joueur;
+import joueur.Personnage;
 import joueur.Race;
 import partie.Combat;
 import partie.Partie;
@@ -42,7 +43,7 @@ public class ModifPuissanceCampChoisi extends Action {
 					if(it.hasNext())
 					{
 						Object o = it.next();
-						if(o.getClass().equals(Joueur.class))
+						if(o.getClass().equals(Personnage.class))
 						{
 							out += "On applique le bonus de "+ bonus + " au camp gentil";
 							partie.getCombat().setBonusTemporaireGentil(bonus);
@@ -70,7 +71,7 @@ public class ModifPuissanceCampChoisi extends Action {
 		{
 			out += "combat est null, on est apparemment pas dans la bonne phase";
 		}
-		
+		partie.sendInfos();
 		return out;
 	}
 

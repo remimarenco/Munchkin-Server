@@ -1027,7 +1027,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         /**
          * Methode qui envois toutes les infos necessaires a tous les joueurs
          */
-	private void sendInfos() {		
+	public void sendInfos() {		
 		this.sendInfosJoueursToAll();
 		this.sendCartesJeuxJoueursToAll();
 		this.sendCartesMainToOwner();
@@ -1218,6 +1218,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                         e.printStackTrace();
                                 }
                         }
+                        nbCartesADefausser = enCours.verifieMain();
                         // On appelle plusieurs fois la demande de défausse selon le nbCartesADefausser
 			// Oui c'est fait exprès pour etre le plus flexible possible
 			// On récupère la carte choisie par l'utilisateur que l'on veut défausser

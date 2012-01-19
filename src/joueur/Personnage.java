@@ -11,7 +11,7 @@ public class Personnage {
     private int     niveau;
     private int     sexe;
     private boolean aChangeSexe;
-    private int     capaciteFuite;
+    private int     MiniDeAFaireFuite;
     private int     bonusCapaciteFuite;
     private int     nbEquipement;
     private Race    race;
@@ -36,7 +36,7 @@ public class Personnage {
         this.niveau         	= niveau;
         this.sexe           	= sexe;
         this.aChangeSexe    	= aChangeSexe;
-        this.capaciteFuite  	= capaciteFuite;
+        this.MiniDeAFaireFuite  = capaciteFuite;
         this.bonusCapaciteFuite	= 0;
         this.nbEquipement   	= nbEquipement;
         this.bonusPuissance 	= 0;
@@ -72,11 +72,11 @@ public class Personnage {
     }
 
     public int getCapaciteFuite() {
-        return capaciteFuite;
+        return MiniDeAFaireFuite;
     }
 
     public void setCapaciteFuite(int capaciteFuite) {
-        this.capaciteFuite = capaciteFuite;
+        this.MiniDeAFaireFuite = capaciteFuite;
     }
     
     public int getNbEquipement() {
@@ -181,7 +181,7 @@ public class Personnage {
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
     public Boolean deguerpir(int resultatDe) {
-        if((capaciteFuite + bonusCapaciteFuite) >= resultatDe){
+        if((MiniDeAFaireFuite - bonusCapaciteFuite) <= resultatDe){
             return true;
         }
         return false;

@@ -235,14 +235,17 @@ public class Joueur extends Thread {
         if(typePioche == Constante.DONJON){
         	// J'annule le fait de pouvoir piocher en pillant une piece une carte de monstre
         	Donjon carte = this.partie.getPiocheDonjon().tirerCarte();
-        	if(carte.getClass().equals(Monstre.class))
-        	{
-        		this.partie.getPiocheDonjon().poserEnDessousPioche(carte);
-        	}
-        	else
-        	{
-        		this.main.ajouterCarte(carte);
-        	}
+                // TODO : Gérer le cas ou il ne reste plus que des monstres dans la pioche donjon
+                // On boucle tant qu'on a pas pioché une autre carte qu'un monstre
+                    if(carte.getClass().equals(Monstre.class))
+                    {
+                        System.out.println("On a pioché un monstre, on le remet en dessous de la pile");
+                            this.partie.getPiocheDonjon().poserEnDessousPioche(carte);
+                    }
+                    else
+                    {
+                            this.main.ajouterCarte(carte);
+                    }
             
         }else if(typePioche == Constante.TRESOR){
             this.main.ajouterCarte(this.partie.getPiocheTresor().tirerCarte());
