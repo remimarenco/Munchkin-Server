@@ -298,7 +298,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * @param txt
 	 */
 	public void sendMessageToAllButCurrent(String txt){
-		Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.GREEN);
+		Message msg=new Message(Message.MESSAGE,"Partie","Partie",txt,Color.ORANGE);
 		for(Joueur j : this)
 			if(!j.equals(enCours))
 				j.sendMessage(msg);
