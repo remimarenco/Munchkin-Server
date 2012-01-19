@@ -124,6 +124,8 @@ public class Constante {
     public static final int PHASE_CHERCHER_LA_BAGARRE = 1;
     public static final int PHASE_PILLER_LA_PIECE = 2;
     public static final int PHASE_CHARITE_SIOUPLAIT = 3;
+    public static final int PHASE_INIT = 4;
+    
 
     /**
      * Constantes de gestion des joueurs impliqués

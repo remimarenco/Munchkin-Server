@@ -45,8 +45,7 @@ public class Voleur extends Classe {
     }
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
+	public String toString() {		
 		return "Voleur";
 	}
 }

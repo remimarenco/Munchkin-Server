@@ -89,8 +89,7 @@ public class Serveur {
                     com.sendMessage(message);
                 }
                 break;
-            case Message.DISCONNECT:
-                String listeVide = "";
+            case Message.DISCONNECT:                
                 com.setName(msg.getNick_src());
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);

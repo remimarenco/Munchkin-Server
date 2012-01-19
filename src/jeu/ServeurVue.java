@@ -6,6 +6,7 @@
 package jeu;
 
 import communication.Serveur;
+import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
@@ -18,7 +19,7 @@ public class ServeurVue extends javax.swing.JFrame {
     private Thread th;
           
     /** Creates new form ServeurVue */
-    public ServeurVue() {
+    public ServeurVue() {        
         UIManager.put("nimbusBase", new ColorUIResource(62,35, 2));         
         UIManager.put("nimbusFocus", new ColorUIResource(62,35, 2));         
         UIManager.put("nimbusLightBackground", new ColorUIResource(244,233,211));           

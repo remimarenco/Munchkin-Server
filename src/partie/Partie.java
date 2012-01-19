@@ -429,19 +429,15 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 	/**
 	 * Intervention d'un joueur dans un combat
+         * L'intervention est géré differement selon le type d'action
+         * A chaque fois, l'on a deux cas : - le message contient un id de carte,--> traitement
+         *                                  - le message contient pas d'id de carte --> on demande au joueur de choisir la carte
+         * (envoi des cartes qu'il peut jouer)
 	 * @param msg 
 	 */
 	public void intervenir(Message msg){
                 Joueur emetteur=this.getJoueurByName(msg.getNick_src());
-		switch(msg.getAction()){
-                case Constante.ACTION_PRET:
-                       if(!msg.getIdCard().equals("")){
-								              
-			} 
-                       else { 
-                           this.answer(msg);
-                       }
-                       break;
+		switch(msg.getAction()){                
 		case Constante.ACTION_DEFAUSSER:
 			if(!msg.getIdCard().equals("")){
 				Integer id = new Integer(msg.getIdCard());
@@ -549,15 +545,17 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	/**
-	 * Methode qui est appelé par le serveur lorsque la reponse attendu est reçu
-	 * Permet de débloquer la partie lorsque celle ci attends la reponse d'un joueur
-	 * @param msg
-	 * @return 
-	 * @throws Exception 
-	 */
-	public boolean answer(Message msg){
-		this.getJoueurByName(msg.getNick_src()).setAnswer(msg.getMessage());
-		return true;     
+         * Cette methode est appelé lorsqu' un joueur a repondu a une question posé par le serveur
+         * Elle retourne le joueur qui a repondu
+         * @param msg
+         * @return 
+         */
+	public Joueur answer(Message msg){
+                Joueur emetteur=this.getJoueurByName(msg.getNick_src());
+		emetteur.setAnswer(msg.getMessage());
+                if(this.phaseTour==Constante.PHASE_INIT)
+                    this.sendMessageToAll("Le joueur : "+emetteur.getName()+" a indiqué qu'il est pret !");
+		return emetteur;     
 	}
 
 	public void resetAnswers(){
@@ -617,8 +615,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 	/**
 	 * Initialisation de la partie
+         * Attente que tous les joueurs aient clické sur pret.
 	 */
 	private void init() {
+                this.phaseTour=Constante.PHASE_INIT;
 		piocheDonjon.init(this.deck);       // Les cartes donjon sont mises dans la pioche donjon
 		piocheTresor.init(this.deck);       // Les cartes trésor sont mises dans la pioche trésor
 		this.distribuer();                  // Distribution des cartes aux joueurs (4 de chaque)
@@ -632,7 +632,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 
                 while(!this.allPlayersAreReady()){
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(200);                        
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -922,8 +922,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			{
 				try {
 					demanderIntervenir(new ArrayList<Joueur>());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {					
 					e.printStackTrace();
 				}
 			}
@@ -938,8 +937,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			}
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 
@@ -948,8 +946,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			// Avant que le joueur ne puisse intervenir on demande si on intervient
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 			deguerpir(getCombat());
@@ -1004,7 +1001,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.enCours.getPersonnage().setBonusCapaciteFuite(0);
 		this.enCours.getPersonnage().setBonusPuissance(0);
 	}
-
+        /**
+         * Methode qui envois toutes les infos necessaires a tous les joueurs
+         */
 	private void sendInfos() {		
 		this.sendInfosJoueursToAll();
 		this.sendCartesJeuxJoueursToAll();
@@ -1013,23 +1012,30 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 	
 	/**
-	 * Fonction permettant de gérer la demande d'intervention des joueurs
-	 */
+         * Fonction permettant de gérer la demande d'intervention des joueurs sauf ceux contenu dans joueursNonConcernes
+         * @param joueursNonConcernes
+         * @throws Exception 
+         */
 	private void demanderIntervenir(ArrayList<Joueur> joueursNonConcernes) throws Exception{
                 ArrayList<Joueur> joueursAyantRepondu=new ArrayList<Joueur>(joueursNonConcernes);
-		for(Joueur j:this)  
+		//Envoi de la demande a tous les joueur sauf ceux contenu dans joueursNonConcernes
+                for(Joueur j:this)  
 			if(!joueursNonConcernes.contains(j))
 				j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
-		// Tant que les joueurs n'ont pas répondu, on attends
+		
 		this.resetAnswers();
+                // Tant que les joueurs n'ont pas répondu, on attends
 		while(!this.allPlayersAnsweredButThose(joueursNonConcernes)){
 			try {
-				Thread.sleep(200);                                
+				Thread.sleep(200);       //permet de laisser le temps au serveur d'interpreter les reponses de joueurs                         
 				joueurIntervenant=null;
+                                //On attends une reponse
 				while((joueurIntervenant=this.onePlayerHasAnsweredExceptThose(joueursAyantRepondu)) == null){
 					Thread.sleep(200);
 				}
+                                //on ajoute le joueurs qui a répondu dans la liste des joueurs qui ont répondu
                                 joueursAyantRepondu.add(joueurIntervenant);
+                                //si la reponse est oui
 				if(joueurIntervenant.getAnswer().equals("Yes")){                                    
 					this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+" souhaite intervenir");
 					for(Joueur j:this){
@@ -1040,6 +1046,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						}
 					}
 					Carte carteChoisie;
+                                        //on demande au joueur de clické sur un carte
 					carteChoisie=intervention(joueurIntervenant);
 					ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
 					//joueurDest.add(enCours);
@@ -1072,7 +1079,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 					{
 						// On applique le UtiliserObjet
 					}
-
+                                        //on renvoi la demande a tous les joueurs sauf ceux NonCOncernes et on reset la liste des joueurs ayant repondu
 					for(Joueur j:this)  
 						if(!joueursNonConcernes.contains(j)){                                                                                            
 							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
@@ -1101,7 +1108,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 
 	/**
-	 * Méthode permettant à un joueur de 
+	 * Méthode permettant d'attendre qu'un joueur passé en parammetre est clické sur une carte pour intervenir
 	 * @param emetteur
 	 */
 	private Carte intervention(Joueur emetteur) {
@@ -1131,7 +1138,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void PillerLaPiece() {
 		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_PILLER_LA_PIECE);
 		this.setPhaseTour(Constante.PHASE_PILLER_LA_PIECE);
-		// TODO : Faire un message pour indiquer qu'on pioche une carte donjon
+                this.sendMessageToAllButCurrent("Le joueur : "+enCours.getName()+" pioche une carte donjon !");
+                this.sendMessageToCurrent("Vous piochez une carte donjon !");		
 		// On pioche une carte du donjon
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
@@ -1139,8 +1147,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 		}
@@ -1151,8 +1158,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 		}
@@ -1165,16 +1171,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.sendMessageToAll("Changement de phase : "+getPhaseTour()+" => "+Constante.PHASE_CHARITE_SIOUPLAIT);
 		this.setPhaseTour(Constante.PHASE_CHARITE_SIOUPLAIT);
 		int nbCartesADefausser = 0;
-		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser
-		// TODO :
+		// On vérifie la main du joueur et on demande au joueur de choisir les cartes à défausser		
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
 		if(this.size() != 1)
 		{
 			// On applique le sort sans que le joueur n'ait pu faire quelque chose
 			try {
 				demanderIntervenir(new ArrayList<Joueur>());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}
 		}
@@ -1221,8 +1225,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				// On applique le sort sans que le joueur n'ait pu faire quelque chose
 				try {
 					demanderIntervenir(new ArrayList<Joueur>());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {					
 					e.printStackTrace();
 				}
 			}
