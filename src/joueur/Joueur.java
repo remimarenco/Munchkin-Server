@@ -262,14 +262,14 @@ public class Joueur extends Thread {
      * @param c : la carte à rechercher
      * @return 
      */
-    public boolean defausserCarte(Carte c){
-        if(this.getMain().contains(c)){
-        	System.out.println("On supprime la carte "+ c.getNom()+" de la main");
+    public boolean defausserCarte(Carte c) {
+        if (this.getMain().contains(c)) {
+            System.out.println("On supprime la carte " + c.getNom() + " de la main");
             return this.getMain().supprimerCarte(c);
-        }else if(this.getJeu().contains(c)){
-        	System.out.println("On supprime la carte "+ c.getNom()+" du jeu");
+        } else if (this.getJeu().contains(c)) {
+            System.out.println("On supprime la carte " + c.getNom() + " du jeu");
             return this.getJeu().supprimerCarte(c);
-        }else{
+        } else {
             return false;
         }
     }

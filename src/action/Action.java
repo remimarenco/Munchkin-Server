@@ -49,6 +49,12 @@ public abstract class Action {
     	return partie.getJoueurCible();
     }
     
+    /**
+     * Méthode permettant de demander au joueurEmetteur de choisir un camp
+     * @param partie
+     * @param joueurEmetteur
+     * @return Renvoi le camp
+     */
     protected Object demandeCampCible(Partie partie, Joueur joueurEmetteur)
     {
     	joueurEmetteur.sendMessage(new Message(Message.CHOIXCAMP, "Partie", joueurEmetteur.getName(),"Veuiller choisir le camp de destination "));

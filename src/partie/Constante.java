@@ -27,6 +27,8 @@ public class Constante {
     public static final int NB_PAR_DE        = -50;
     public static final int NB_TOUT          = -51;
     public static final int NB_TOUT_CONCERNE = -52;
+    public static final int NB_JOUEUR_MOINS_MOI = -53;
+    
     
     public static final Class TRESOR = Tresor.class;
     public static final Class DONJON = Donjon.class;
@@ -62,6 +64,7 @@ public class Constante {
     public static final int MAIN        = 1;
     public static final int JEU         = 2;
     public static final int TAS_CHOISIR = 3;
+    public static final int TYPE_TAS_TOUT = 4;
     
     /**
      * TYPE D'ACTION

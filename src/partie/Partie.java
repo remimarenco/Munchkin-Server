@@ -17,7 +17,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import joueur.CartesJoueur;
+import joueur.Jeu;
 import joueur.Joueur;
+import joueur.Main;
 import joueur.Personnage;
 
 /**
@@ -487,7 +490,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
 				Integer id= new Integer(msg.getIdCard());
 				emetteur.getJeu().ajouterCarte(Deck.getCardById(id));
-				emetteur.defausserCarte(Deck.getCardById(id));
+                                this.defausserCarte(emetteur, emetteur.getMain(), Deck.getCardById(id));
+				//emetteur.defausserCarte(Deck.getCardById(id));
 				// Activation de la carte
 				appliquerCartePoseMainSurJoueur(emetteur,Deck.getCardById(id));            
                                 this.sendInfos();
@@ -1089,7 +1093,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 							Sort carteSortChoisie = (Sort) carteChoisie;
 							this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
 						}
-						if(joueurIntervenant.defausserCarte(carteChoisie))
+                                                // On suppose que cela vient de la main
+                                                this.defausserCarte(joueurIntervenant, joueurIntervenant.getMain(), carteChoisie);
+						/*if(joueurIntervenant.defausserCarte(carteChoisie))
 						{
 							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
 						}
@@ -1097,7 +1103,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						{
 							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
 							throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
-						}
+						}*/
 					}
 					// TODO : Si on a voulu utiliser un objet
 					else if(carteChoisie.getClass().equals(Objet.class))
@@ -1342,5 +1348,129 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                 default:
                     return "Phase non renseigée";
             }
+        }
+        
+        /**
+         * Méthode permettant de défausser une carte de la partie, d'un joueur, d'un tas spécifique
+         * @param piocheOrigine
+         * @param carteADefausser
+         * @return 
+         */
+        public boolean defausserCarte(Joueur joueur, CartesJoueur tas, Carte carteADefausser)
+        {
+            // On teste si le tas concerné par la défausse est la main ou le jeu
+            if(tas.getClass().equals(Main.class))
+            {
+                if(joueur.getMain().supprimerCarte(carteADefausser))
+                {
+                    System.out.println("On a réussi a défausser la carte de la main");
+                }
+                else
+                {
+                    System.out.println("Erreur dans la fonction defausserCarte => Defausse d'une main");
+                    return false;
+                }
+            }
+            else if(tas.getClass().equals(Jeu.class))
+            {
+                if(joueur.getJeu().supprimerCarte(carteADefausser))
+                {
+                    System.out.println("On a réussi a défausser la carte du jeu");
+                    // On applique le comportement de défausse d'une carte selon la carte
+                    // Ici seulement pour les objets
+                    if(carteADefausser.getClass().equals(Objet.class))
+                    {
+                        Objet obj = (Objet) carteADefausser;
+                        ArrayList<Joueur> joueurDestination = new ArrayList<Joueur>();
+                        joueurDestination.add(joueur);
+                        obj.desequiper(joueur, joueurDestination , this);
+                    }
+                    else
+                    {
+                        System.out.println("Problème dans la fonction de defausserCarte : la carte a defausser n'est pas un objet");
+                    }
+                }
+                else
+                {
+                    System.out.println("Erreur dans la fonction defausserCarte => Defausse d'un jeu");
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            
+            // On teste si la carte a defausser est une carte donjon ou une carte tresor
+            // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
+            if(carteADefausser.getClass().getSuperclass().equals(Donjon.class))
+            {
+                return this.defausseDonjon.ajouterCarte((Donjon)carteADefausser);
+            }
+            else if(carteADefausser.getClass().getSuperclass().equals(Tresor.class))
+            {
+                return this.defausseTresor.ajouterCarte((Tresor)carteADefausser);
+            }
+            else
+            {
+                System.out.println("Le type de carte n'a pas été détecté");
+            }
+            
+            return false;
+        }
+        
+        public boolean defausserTout(Joueur joueur, CartesJoueur tas)
+        {
+            // On teste si le tas concerné par la défausse est la main ou le jeu
+            if(tas.getClass().equals(Main.class))
+            {
+                // On les supprime toutes du jeu, et on les mets dans la défausse correspondante
+                for (Carte carte : joueur.getJeu().getCartes()) {
+                    joueur.getMain().supprimerCarte(carte);
+                    // On teste si la carte a defausser est une carte donjon ou une carte tresor
+                    // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
+                    if (carte.getClass().getSuperclass().equals(Donjon.class)) {
+                        return this.defausseDonjon.ajouterCarte((Donjon) carte);
+                    } else if (carte.getClass().getSuperclass().equals(Tresor.class)) {
+                        return this.defausseTresor.ajouterCarte((Tresor) carte);
+                    } else {
+                        System.out.println("Le type de carte n'a pas été détecté");
+                    }
+                }
+            }
+            else if(tas.getClass().equals(Jeu.class))
+            {
+                for (Carte carte : joueur.getJeu().getCartes()) {
+                    if (joueur.getJeu().supprimerCarte(carte)) {
+                        System.out.println("On a réussi a défausser la carte du jeu");
+                        // On applique le comportement de défausse d'une carte selon la carte
+                        // Ici seulement pour les objets
+                        if (carte.getClass().equals(Objet.class)) {
+                            Objet obj = (Objet) carte;
+                            ArrayList<Joueur> joueurDestination = new ArrayList<Joueur>();
+                            joueurDestination.add(joueur);
+                            obj.desequiper(joueur, joueurDestination, this);
+                        } else {
+                            System.out.println("Problème dans la fonction de defausserCarte : la carte a defausser n'est pas un objet");
+                        }
+
+                        // On teste si la carte a defausser est une carte donjon ou une carte tresor
+                        // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
+                        if (carte.getClass().getSuperclass().equals(Donjon.class)) {
+                            return this.defausseDonjon.ajouterCarte((Donjon) carte);
+                        } else if (carte.getClass().getSuperclass().equals(Tresor.class)) {
+                            return this.defausseTresor.ajouterCarte((Tresor) carte);
+                        } else {
+                            System.out.println("Le type de carte n'a pas été détecté");
+                        }
+                    }
+                }
+            } else {
+                return false;
+            }
+            
+            
+            
+            return false;
         }
 }

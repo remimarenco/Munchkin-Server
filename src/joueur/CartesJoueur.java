@@ -4,6 +4,7 @@ import carte.Carte;
 import carte.Monstre;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import partie.Constante;
@@ -52,8 +53,8 @@ public class CartesJoueur {
      * @return boolean : indique si l'ajout s'est bien passé
      */
     public boolean ajouterCarte(Carte c){
-        cartes.add(c);
-        return true;
+        return cartes.add(c);
+        
     }
     
     
@@ -72,12 +73,54 @@ public class CartesJoueur {
      * @return Carte : une carte du tas
      */
     public Carte getRandomCarte(){
-        int valeur = Constante.nbAleatoire(0, cartes.size());
+        int valeur = Constante.nbAleatoire(0, cartes.size()+1);
         // Si le joueur n'a plus de carte en main
         if(cartes.isEmpty())
             return null;
         return cartes.get(valeur);
-    }    
+    }
+    
+    /**
+     * Retourne une carte d'un des types spécifié aléatoire du tas selon 
+     * @return Carte : une carte du tas
+     */
+    public Carte getRandomCarte(ArrayList<Class> typesCarte){
+        System.out.println("On est dans getRandomCarte");
+        // Si il n'y a pas de carte, on retourne null
+        if(cartes.size() == 0)
+        {
+            return null;
+        }
+        // Si le joueur n'a plus de carte en main
+        if(typesCarte == null)
+        {
+            System.out.println("GetRandomCarte, typesCarte est null");
+            return null;
+        }
+        Carte carte = null;
+        ArrayList<Carte> cartesCorrespondantes = new ArrayList<Carte>();
+
+        // Si on a pas rempli le tableau, alors on choisit tout type de carte
+        if (typesCarte == null || typesCarte.isEmpty()) {
+            cartesCorrespondantes = cartes;
+        } else {
+            // On parcourt nos cartes
+            // TODO : Gérer le cas du it.next qui renvoi null
+            for (Carte carteCartes : cartes) {
+                // On parcourt nos classes spécifiées pour voir si une carte correspond
+                for (Class classe : typesCarte) {
+                    if (carteCartes.getClass().equals(classe)) {
+                        cartesCorrespondantes.add(carteCartes);
+                    }
+                }
+            }
+        }
+
+        // On choisit une carte dans ce tas de cartes correspondantes au pif et on la retourne
+        int valeur = Constante.nbAleatoire(0, cartesCorrespondantes.size());
+        System.out.println("valeur dans getRandomCarte est de :"+valeur);
+        return cartesCorrespondantes.get(valeur);
+    }   
 
     
     /**

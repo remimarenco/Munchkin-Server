@@ -114,6 +114,7 @@ public final class Deck {
         ArrayList<Action> actionDefausser = new ArrayList<Action>();
         ArrayList<Classe> tabClasse = new ArrayList<Classe>();
         ArrayList<Race> tabRace = new ArrayList<Race>();
+        ArrayList<Class> tabClassCarte = new ArrayList<Class>();
         Monstre mstr;
         
         // ===============================
@@ -124,7 +125,7 @@ public final class Deck {
         // === MONSTRES ===
         // ================
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        //nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-1000, null, null, null, null));
         //cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1));
@@ -141,7 +142,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new  Monstre(3, "Mucus Baveux", "Beerk! +4 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1);
         tabRace.add(Constante.RACE_ELFE);
@@ -167,7 +170,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(1, null, null, null, null));
         cartes.add(new Monstre(7, "Octaèdre gélatineux", "+1 au jet pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
@@ -175,7 +180,9 @@ public final class Deck {
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), null);
         actionDeguerpir.clear();
-        actionDeguerpir.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        actionDeguerpir.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Monstre(8, "Pit Bull", "Si vous ne pouvez le vaincre, vous pouvez le distraire(vous déguerpissez automatiquement) en lachant une baguette un baton ou une lance. Va chercher Médor!", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
@@ -197,13 +204,17 @@ public final class Deck {
         cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_PAR_DE, Constante.TAS_CHOISIR));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, Constante.NB_PAR_DE, Constante.TAS_CHOISIR));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-2, null, null, null, null));
         cartes.add(new Monstre(11, "Escargot sous acide", "-2 pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 2));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 2, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, 2, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(12, "Lépreuxchaun", "Mais il est dégueu! +5 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 4);
         tabRace.add(Constante.RACE_ELFE);
@@ -213,7 +224,8 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-2), new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(13, "Manticorenithorynque", "Résiste à  la magie, +6 contre les magiciens", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 6);
         tabClasse.add(Constante.CLASSE_MAGICIEN);
@@ -222,12 +234,14 @@ public final class Deck {
         cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.MAIN));
         cartes.add(new Monstre(14, "Gerbausore", "Vous gagnez un niveau supplémentaire si vous le tuer seul et sans utiliser de bonus", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 6));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_JOUEUR_MOINS_MOI, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         tabClasse.add(Constante.CLASSE_VOLEUR);
         actionTabCondition.add(new ModifDeguerpir(+1000, null, null, null, tabClasse));
@@ -235,7 +249,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_RACE, 1, Constante.MAIN));
+        // TODO : Gérer correctemnt ce cas
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(16, "Binoclar Hurleur", "+6 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 6);
         tabClasse.add(Constante.CLASSE_GUERRIER);
@@ -244,7 +260,9 @@ public final class Deck {
         cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.MAIN));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(17, "Suceur de tête", "C'est dégueu! +6 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 8);
         tabRace.add(Constante.RACE_ELFE);
@@ -266,7 +284,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.MAIN));
+        // TODO : Remettre le choix de supprimer CLASSE/RACE
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, null, Constante.SEXE_F, null, null));
         actionDeguerpir.clear();
@@ -285,13 +305,13 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         // FAUX
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_JOUEUR_MOINS_MOI, Constante.JEU));
         cartes.add(new Monstre(22, "Trôliste", "Il n'a aucun pouvoir et ça le rend furax", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 10));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
         actionDeguerpir.clear();
-        actionDeguerpir.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        actionDeguerpir.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Monstre(23, "Nez Flottant", "Si vous ne voulez pas combattre le Nez Flottant, achetez le avec un objet. Il vous laissera partir.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(actionDeguerpir), 10));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
@@ -310,7 +330,7 @@ public final class Deck {
         cartes.add(mstr);
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(26, "Bigfoot, Alias Grand-Pied", "+3 Contre les nains et les Halfelins", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 12);
         tabRace.add(Constante.RACE_NAIN);
@@ -321,7 +341,7 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-10), new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(27, "Horreur non euclidienne indicible", "+4 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 14);
         tabClasse.add(Constante.CLASSE_GUERRIER);
@@ -344,14 +364,14 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(1));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.JEU));
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.TYPE_TAS_TOUT));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifPuissancePersonnage(null, null, 0, false, true));
         cartes.add(new Monstre(29, "Représentant en assurance", "Votre niveau ne compte pas, vous le combattez uniquement avec vos bonus", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 14));
 
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX !!
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.TYPE_TAS_TOUT));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
         actionDeguerpir.clear();
@@ -369,7 +389,8 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,4), new ChangerNiveau(2));
         // FAUX 
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, Constante.NB_TOUT, Constante.MAIN));
+        tabClassCarte.clear();
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_JOUEUR_MOINS_MOI, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, 3, null, null, null));
         cartes.add(new Monstre(32, "Hippogriffe", "Ne poursuit aucun personnage de niveau 3 ou inférieur.", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 16));
@@ -438,7 +459,9 @@ public final class Deck {
         cartes.add(new Malediction(45, "Malédiction!", "Perdez 1 niveau", new Sortilege(actionTabMalediction)));
         
         actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(46, "Malédiction!", "Perdez le couvre-chef que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(47, "Malédiction!", "Perdez l'armure que vous portez", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(48, "Malédiction!", "Perdez les chaussures que vous portez", new Sortilege(actionTabMalediction)));
@@ -453,12 +476,16 @@ public final class Deck {
         
         actionTabMalediction = new ArrayList<Action>();
         // TODO : Refaire cette fonction en tant que déséquipement
-        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_CLASSE, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(54, "Malédiction! Déclassé!", "Défaussez votre carte de Classe si vous en avez une. Si vous avez deux classes en jeu, vous en perdez une au choix. Si vous n'avez pas de Classe, vous perdez 1 niveau.", new Sortilege(actionTabMalediction)));
         
         
         actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(55, "Malédiction! Commun des Mortels", "Défaussez toute carte de Race que vous avez en jeu et redevenez Humain.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         
@@ -476,7 +503,9 @@ public final class Deck {
         cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
-        actionTabMalediction.add(new DefausserCarte(Constante.CARTE_RACE, 2, Constante.MAIN));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 2, Constante.MAIN));
         cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
         
@@ -600,31 +629,31 @@ public final class Deck {
         cartes.add(new Objet(77, "Nain", "Vous pouvez porter autant de Gros objets que vous voulez. Vous pouvez avoir 6 cartes dans votre main", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(78, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(78, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(79, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(79, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementRace(actionEquipement, Constante.RACE_HALFELIN);
-        cartes.add(new Objet(80, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(80, "Halfelin", "Vous pouvez vendre un objet par tour au double de son prix (les autres objets sont au prix normal). Si vous ratez votre première tentative pour déguerpir, vous pouvez défausser une carte pour réésayer une fois.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(81, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(81, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(82, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(82, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_PRETRE);
-        cartes.add(new Objet(83, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(83, "Prêtre", "Résurrection: quand vous devez tirer des cartes face visible, vous pouvez choisir de tirer à la place le même nombre de carte de la défausse appropriée (Trésor ou Donjon). Vous devez ensuite défausser une carte de votre main pour chaque carte que vous avez tirée ainsi. Renvoi: Vous pouvez défausser jusqu'à 3 cartes en combat contre une créature de type Mort-vivant. Chaque carte défaussée vous donne un bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(84, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(actionUtiliser), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(84, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(actionUtiliser), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(85, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(actionUtiliser), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(85, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(actionUtiliser), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_VOLEUR);
-        cartes.add(new Objet(86, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(86, "Voleur", "Poignarder: Vous pouvez défausser une carte pour poignarder un autre joueur dans le dos (-2 au combat). Vous ne pouvez le faire qu'une fois par victime et par combat, mais si deux joueurs combattent ensemble, vous pouvez les poignarder tous les deux. Vol à la tire: vous pouvez défausser une carte pour essayer de voler un petit objet porté par un autre joueur. Lancez un dé: vous réussissez si vous faites 4 ou plus. Sinon, vous prenez une torgnole et perdez un niveau.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         /*actionEquipement.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 1, 0, 0));
@@ -641,13 +670,13 @@ public final class Deck {
         cartes.add(new Objet(89, "Guerrier", "Rage de Berserker: vous pouvez défausser jusqu'à 3 cartes durant un combat. Chacune vous donne un bonus de +1. En cas d'ex-aequo durant un combat, c'est vous qui l'emportez.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(90, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(90, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(91, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(91, "Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         nouvelEquipementClasse(actionEquipement, Constante.CLASSE_MAGICIEN);
-        cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(null)));
+        cartes.add(new Objet(92 ,"Magicien", "Sort de vol: après avoir jeté le dé pour déguerpir, vous pouvez défausser jusqu'à 3 cartes. Chacune vous confère un bonus de +1. Sort de charme: vous pouvez défausser toute votre main (minimum de trois cartes) pour charmer un monstre, et un seul au lieu de le combattre. Défaussez le monstre et prenez son Trésor, mais ne gagnez pas de niveau. Si d'autres monstres participent au combat, combattez les normalement.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         /*actionEquipement.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 1, 0, 1));
