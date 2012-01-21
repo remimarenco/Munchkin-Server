@@ -117,4 +117,13 @@ public class Monstre extends Donjon {
             out += "Cette carte n'a pas de résultat d'un monstre vaincu";
         return out;
     }
+    
+    /**
+     * Une carte monstre n'est jamais posable
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
+        return false;
+    }
 }

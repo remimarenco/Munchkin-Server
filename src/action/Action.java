@@ -14,6 +14,8 @@ import joueur.Joueur;
  */
 public abstract class Action {
 	protected boolean choixJoueur = false;
+        ArrayList<Integer> phasesCompatibles;
+        
     /**
      * Méthode abstraite permettant de lancer l'action
      * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), dépend d'une phase d'un tour (ou pas), dépend d'un tour (ou pas)
@@ -27,6 +29,13 @@ public abstract class Action {
      * @param joueurImpacte : Joueur recevant l'action
      */
     public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie, boolean choixJoueur);
+    
+    /**
+     * Méthode abstraite permettant de lancer l'action
+     * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), demande un choix de ciblage de joueur
+     * @param joueurImpacte : Joueur recevant l'action
+     */
+    //public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie, ArrayList<Integer> phasesCompatibles);
     
     /**
      * Méthode permettant de retourner le joueur choisit
@@ -67,4 +76,6 @@ public abstract class Action {
         
     	return partie.getCombat().getCampCible();
     }
+
+    public abstract boolean isPosable(Partie partie, Joueur joueur);
 }

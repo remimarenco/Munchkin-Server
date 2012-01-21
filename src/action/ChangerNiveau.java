@@ -141,4 +141,14 @@ public class ChangerNiveau extends Action {
         this.choixJoueur = ancienChoixJoueur;
         return out;
     }
+    
+    /**
+     * On peut toujours changer de niveau
+     * @param partie
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

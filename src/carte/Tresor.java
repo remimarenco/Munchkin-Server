@@ -5,7 +5,7 @@ package carte;
  * Hérite de la classe Carte.
  * @author Rémi Marenco
  */
-public class Tresor extends Carte {
+public abstract class Tresor extends Carte {
 
     /**
      * Constructeur de la classe Tresor.

@@ -132,6 +132,7 @@ public class CartesJoueur {
     	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes)
             if(c.getClass().getSimpleName().equals("Objet"))
+                // TODO : Vérifier la pertinence d'envoyer deux fois la même chose dans le linked
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
     }

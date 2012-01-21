@@ -128,6 +128,7 @@ public class Constante {
     public static final int PHASE_PILLER_LA_PIECE = 2;
     public static final int PHASE_CHARITE_SIOUPLAIT = 3;
     public static final int PHASE_INIT = 4;
+    public static final int PHASE_ALL = 5;
     
 
     /**

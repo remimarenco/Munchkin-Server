@@ -58,5 +58,16 @@ public  class Equipement extends Comportement {
         }
 
         return out;
-    }	
+    }
+
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        for(Action action : tabAction)
+        {
+            if(!action.isPosable(partie, joueur))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

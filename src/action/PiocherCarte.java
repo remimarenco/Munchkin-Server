@@ -88,4 +88,9 @@ public class PiocherCarte extends Action {
         this.choixJoueur = ancienChoixJoueur;
         return out;
     }
+    
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

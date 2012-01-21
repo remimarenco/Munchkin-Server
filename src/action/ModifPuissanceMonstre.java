@@ -125,5 +125,10 @@ public class ModifPuissanceMonstre extends Action{
         ArrayList<Joueur> array = new ArrayList<Joueur>();
         array.add(partie.getEnCours());
         return action(joueurEmetteur, array, partie);
-    }	
+    }
+    
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

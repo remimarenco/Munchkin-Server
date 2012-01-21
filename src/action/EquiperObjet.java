@@ -125,5 +125,66 @@ public class EquiperObjet extends Action{
             array.add(partie.getEnCours());
             return action(joueurEmetteur, array, partie);
 	}
+        
+    /**
+     * Méthode permettant de savoir si l'action EquiperObjet est posable ou non selon les conditions de l'action et du joueur impliqué
+     * @param partie
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        boolean accept = true;
+        boolean raceTrouve = false;
+        boolean classeTrouve = false;
+        if (aChangeSexe) {
+            if (!joueur.getPersonnage().isaChangeSexe()) {
+                accept = false;
+            }
+        }
+
+        if (tabRace != null) {                                        // Si un tableau de race est défini
+            for (Race race : tabRace) // On regarde si celle du personnage s'y trouve
+            {
+                if (joueur.getPersonnage().getRace().equals(race)) {
+                    raceTrouve = true;
+                }
+            }
+            if (!raceTrouve) {
+                accept = false;
+            }
+        }
+
+        if (tabClasse != null) {                                        // Si un tableau de classe est défini
+            for (Classe classe : tabClasse) // On regarde si celle du personnage s'y trouve
+            {
+                if (joueur.getPersonnage().getClasse() != null && joueur.getPersonnage().getClasse().equals(classe)) {
+                    classeTrouve = true;
+                }
+            }
+            if (!classeTrouve) {
+                accept = false;
+            }
+        }
+        if (joueur.getPersonnage().getNbEquipement() + poids > joueur.getPersonnage().getCapaciteEquipement()) {
+            accept = false;
+        }
+
+        if (tabClasse != null) {                                        // Si un tableau de classe est défini
+            for (Classe classe : tabClasse) // On regarde si celle du personnage s'y trouve
+            {
+                if ((classe == null && joueur.getPersonnage().getClass() == null) || (joueur.getPersonnage().getClasse() != null && partie.getEnCours().getPersonnage().getClasse().equals(classe))) {
+                    classeTrouve = true;
+                }
+            }
+            if (!classeTrouve) {
+                accept = false;
+            }
+        }
+        if (joueur.getPersonnage().getNbEquipement() + poids > joueur.getPersonnage().getCapaciteEquipement()) {
+            accept = false;
+        }
+
+        return accept;
+    }
 
 }

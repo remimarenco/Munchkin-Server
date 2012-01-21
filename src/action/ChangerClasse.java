@@ -71,4 +71,16 @@ public class ChangerClasse extends Action{
         this.choixJoueur = ancienChoixJoueur;
         return out;
     }
+
+    /**
+     * On peut toujours changer de classe
+     * @param partie
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
+    
+
 }

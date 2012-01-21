@@ -49,4 +49,14 @@ public class Sort extends Tresor implements ISortilege{
         else
             return "Cette carte n'a pas de malus\n";
     }
+    
+    /**
+     * Un sort n'est jamais posable
+     * @param partie
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
+        return false;
+    }
 }

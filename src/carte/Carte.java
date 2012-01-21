@@ -1,5 +1,9 @@
 package carte;
 
+import joueur.Jeu;
+import joueur.Joueur;
+import partie.Partie;
+
 
 /**
  * Classe carte permettant de gérer toutes les cartes du jeu
@@ -47,4 +51,6 @@ public abstract class Carte {
     public String toString(){
         return this.nom;
     }
+    
+    public abstract boolean isPosable(Partie partie, Joueur joueurEmetteur);
 }

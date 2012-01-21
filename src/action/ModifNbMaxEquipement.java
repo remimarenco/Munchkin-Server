@@ -58,4 +58,9 @@ public class ModifNbMaxEquipement extends Action{
         this.choixJoueur = ancienChoixJoueur;
         return out;
     }
+    
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

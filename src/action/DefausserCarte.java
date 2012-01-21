@@ -166,4 +166,14 @@ public class DefausserCarte extends Action {
     private String nomTypeCarte(ArrayList<Class> typeCarte) {
         return "";
     }
+    
+    /**
+     * On peut toujours poser une defausse de carte
+     * @param partie
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

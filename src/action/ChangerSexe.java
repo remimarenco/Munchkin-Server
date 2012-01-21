@@ -80,4 +80,12 @@ public class ChangerSexe extends Action {
         this.choixJoueur = ancienChoixJoueur;
         return out;
     }
+    
+    /**
+     * On peut toujours changer de sexe
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    } 
 }

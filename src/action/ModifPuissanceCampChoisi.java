@@ -73,7 +73,11 @@ public class ModifPuissanceCampChoisi extends Action {
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
 		// TODO Auto-generated method stub
-		return action(joueurEmetteur, joueurDestinataire, partie);
-	}
+        return action(joueurEmetteur, joueurDestinataire, partie);
+    }
 
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueur) {
+        return true;
+    }
 }

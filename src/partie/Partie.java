@@ -453,7 +453,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
 				this.sendMessageBackToSender(msg.getNick_src(),"Choisissez la carte à  poser");                    
 				emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", msg.getNick_src(),
-						emetteur.getMain().getCartesPosables()));
+						this.getCartesPosables(this.getJoueurByName(msg.getNick_src()))));
 
 			}
 			break;
@@ -1421,5 +1421,36 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             
             
             return false;
+        }
+        
+        /**
+         * Methode permettant de retourner les cartes posables de la main vers le jeu
+         * @return 
+         */
+        private LinkedHashMap<String,String> getCartesPosables(Joueur joueurEmetteur)
+        {
+            ArrayList<Objet> cartesMaybePosables = new ArrayList<Objet>();
+            LinkedHashMap<String,String> LHMcartesPosables = new LinkedHashMap<String, String>();
+            // On parcourt les cartes de la main en selectionnant seulement les objets
+            for(Carte c : joueurEmetteur.getMain().getCartes())
+            {
+                if(c instanceof Objet)
+                {
+                    Objet o = (Objet) c;
+                    cartesMaybePosables.add(o);
+                }
+            }
+            // On demande à chaque carte si elle est jouable d'après la main en cours
+            for(Objet o : cartesMaybePosables)
+            {
+                // Si oui, on selectionne les cartes qui match
+                if(o.isPosable(this, joueurEmetteur))
+                {
+                    LHMcartesPosables.put(o.getId().toString(), o.getId().toString());
+                }
+            }
+            
+            // On retourne sous une forme LinkedHashMap<String idCarte,String idCarte>  
+            return LHMcartesPosables;
         }
 }

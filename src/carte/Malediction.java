@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import joueur.Joueur;
 import partie.Partie;
 import comportement.Sortilege;
+import joueur.Jeu;
 
 /**
  * Classe Malediction.
@@ -52,5 +53,14 @@ public class Malediction extends Donjon implements ISortilege{
             return this.sortilege.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
         else
             return "Cette carte n'a pas de malus\n";
+    }
+
+    /**
+     * Une carte Malediction n'est jamais posable
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
+        return false;
     }
 }

@@ -78,4 +78,13 @@ public class Objet extends Tresor {
         else
             return "Cette carte n'a pas de comportement defausser carte\n";
     }
+    
+    /**
+     * On test si un objet est posable au travers de son comportement
+     * @return 
+     */
+    @Override
+    public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
+        return equipement.isPosable(partie, joueurEmetteur);
+    }
 }
