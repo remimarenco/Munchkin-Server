@@ -141,8 +141,15 @@ public class Personnage {
         return puissanceObjet;
     }
 
+    /*
+     * La puissance mini est 0
+     */
     public void setPuissanceObjet(int puissanceObjet) {
         this.puissanceObjet = puissanceObjet;
+        if(this.puissanceObjet < 0)
+        {
+            this.puissanceObjet = 0;
+        }
     }
 
     public void setMaxCartes(int maxCartes) {
