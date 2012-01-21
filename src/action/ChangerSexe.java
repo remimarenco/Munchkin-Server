@@ -3,7 +3,6 @@ package action;
 import java.util.ArrayList;
 
 import joueur.Joueur;
-import partie.Combat;
 import partie.Constante;
 import partie.Partie;
 
@@ -12,8 +11,8 @@ import partie.Partie;
  * @author Simon Grabit
  */
 public class ChangerSexe extends Action {
-	protected boolean choixJoueur;
-	protected Partie partie;
+    protected boolean choixJoueur;
+    protected Partie partie;
 	
     /**
      * Constructeur par défaut
@@ -27,10 +26,8 @@ public class ChangerSexe extends Action {
      * @param choixJoueur => True si on veut faire choisir un joueur
      * @param partie
      */
-    public ChangerSexe(boolean choixJoueur)
-    {
+    public ChangerSexe(boolean choixJoueur){
     	this.choixJoueur = choixJoueur;
-    	this.partie = partie;
     }
     
     /**
@@ -39,63 +36,56 @@ public class ChangerSexe extends Action {
      * @return out : texte résumant l'action
      */    
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+
+        String out = "";
         int sexe;
-        
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+                if(choixJoueur)
+                    // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                    joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
-        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        else{
+                joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
 
-        if(joueurDestinataireTemp != null)
-        {
-        	for(Joueur joueurImpacte : joueurDestinataire){
-        		out += joueurImpacte.getName() + " se transforme en";
-        		sexe=joueurImpacte.getPersonnage().getSexe();
-        		if(sexe==Constante.SEXE_M){
-        			joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
-        			out += " femme!";
-        		}
-        		else{
-        			joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
-        			out += " homme!";
-        		}
+        if(joueurDestinataireTemp != null){
+            for(Joueur joueurImpacte : joueurDestinataire){
+                out += joueurImpacte.getName() + " se transforme en";
+                sexe=joueurImpacte.getPersonnage().getSexe();
+                if(sexe==Constante.SEXE_M){
+                        joueurImpacte.getPersonnage().setSexe(Constante.SEXE_F);
+                        out += " femme!";
+                }
+                else{
+                        joueurImpacte.getPersonnage().setSexe(Constante.SEXE_M);
+                        out += " homme!";
+                }
 
-        		joueurImpacte.getPersonnage().setaChangeSexe(true);
-        	}
+                joueurImpacte.getPersonnage().setaChangeSexe(true);
+            }
         }
-        else
-        {
-        	out += "Aucun joueurDestinataire spécifié";
+        else{
+            out += "Aucun joueurDestinataire spécifié";
         }
         System.out.println(out);
         return out;
-	}
+    }
 	
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

@@ -2,31 +2,24 @@ package action;
 
 import java.util.ArrayList;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import carte.Monstre;
-
-import joueur.Classe;
 import joueur.Joueur;
 import joueur.Personnage;
-import joueur.Race;
 import partie.Combat;
 import partie.Partie;
 
 public class ModifPuissanceCampChoisi extends Action {
-	//private ArrayList<Race> tabRace;
-    //private ArrayList<Classe> tabClasse;
-	protected int bonus;
-	protected Object campCible;
+        
+    protected int bonus;
+    protected Object campCible;
 	
-	public ModifPuissanceCampChoisi(int bonus)
-	{
-		this.bonus = bonus;
-	}
+    public ModifPuissanceCampChoisi(int bonus){
+        this.bonus = bonus;
+    }
 	
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
 		String out = "";
 		out += "Camp Cible !";

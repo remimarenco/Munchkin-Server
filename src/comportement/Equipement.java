@@ -25,38 +25,38 @@ public  class Equipement extends Comportement {
      * @param joueurImpacte : le joueur a équiper
      * @return out : texte résumant l'action
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+            String out = "";
 
-		if(tabAction != null){
-			out += "--- Equipement ---\n";
-			for(Action action : tabAction)
-				out += action.action(joueurEmetteur, joueurDestinataire, partie);
-			out += "--- Fin d'equipement ---\n";
-		} else {
-			out += "Aucun equipement !\n";
-		}
+        if(tabAction != null){
+            out += "--- Equipement ---\n";
+            for(Action action : tabAction)
+                out += action.action(joueurEmetteur, joueurDestinataire, partie);
+            out += "--- Fin d'equipement ---\n";
+        } else {
+            out += "Aucun equipement !\n";
+        }
 
-		return out;
-	}
+        return out;
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        String out = "";
 
-		if(tabAction != null){
-			out += "--- Equipement ---\n";
-			for(Action action : tabAction)
-				out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
-			out += "--- Fin d'equipement ---\n";
-		} else {
-			out += "Aucun equipement !\n";
-		}
+        if(tabAction != null){
+            out += "--- Equipement ---\n";
+            for(Action action : tabAction)
+                out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+            out += "--- Fin d'equipement ---\n";
+        } else {
+            out += "Aucun equipement !\n";
+        }
 
-		return out;
-	}	
+        return out;
+    }	
 }

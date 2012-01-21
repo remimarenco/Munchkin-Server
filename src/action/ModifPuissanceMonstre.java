@@ -2,12 +2,9 @@ package action;
 
 import java.util.ArrayList;
 
-import partie.Combat;
 import partie.Constante;
 import partie.Partie;
-
 import carte.Monstre;
-
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
@@ -105,18 +102,15 @@ public class ModifPuissanceMonstre extends Action{
             }
             
             // Si on ne se trouve pas dans la phase de recherche de la bagarre => En combat, cette carte n'aura aucun effet
-            if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE)
-            {
+            if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE){
             	accept = false;
             }
 
-            if(accept)
-            {
+            if(accept){
                 monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);
                 out += "\nModification du monstre effectuée";
             }
-            else
-            {
+            else{
             	out += "\nModification du monstre NON effectuée";
             }
             System.out.println(out);
@@ -124,14 +118,12 @@ public class ModifPuissanceMonstre extends Action{
         return out;	
     }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
-	}
-	
-	
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        ArrayList<Joueur> array = new ArrayList<Joueur>();
+        array.add(partie.getEnCours());
+        return action(joueurEmetteur, array, partie);
+    }	
 }

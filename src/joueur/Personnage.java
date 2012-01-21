@@ -153,10 +153,10 @@ public class Personnage {
     }
 
     public void setMaxCartes(int maxCartes) {
-		this.maxCartes = maxCartes;
-	}
+        this.maxCartes = maxCartes;
+    }
 
-	public int getCapaciteEquipement() {
+    public int getCapaciteEquipement() {
         return capaciteEquipement;
     }
 
@@ -188,9 +188,8 @@ public class Personnage {
      */
     // TODO : vérifier la pertinence & l'utilité de cette méthode
     public Boolean deguerpir(int resultatDe) {
-        if((MiniDeAFaireFuite - bonusCapaciteFuite) <= resultatDe){
+        if((MiniDeAFaireFuite - bonusCapaciteFuite) <= resultatDe)
             return true;
-        }
         return false;
     }    
     

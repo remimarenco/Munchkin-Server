@@ -1,19 +1,5 @@
 package carte;
 
-import java.util.ArrayList;
-
-import partie.Combat;
-import action.DefausserCarte;
-import comportement.ComportementDefausserCarte;
-import comportement.Condition;
-import comportement.Equipement;
-import comportement.IncidentDeguerpir;
-import comportement.IncidentFacheux;
-import comportement.MonstreVaincu;
-import comportement.Sortilege;
-import comportement.UtiliserCarte;
-import joueur.Joueur;
-
 
 /**
  * Classe carte permettant de gérer toutes les cartes du jeu

@@ -3,7 +3,6 @@ package action;
 import java.util.ArrayList;
 import joueur.Classe;
 import joueur.Joueur;
-import partie.Combat;
 import partie.Constante;
 import partie.Partie;
 
@@ -45,7 +44,6 @@ public class ChangerNiveau extends Action {
         this.niveauMin = 0;
         this.tabClasse = null;
         this.choixJoueur = choixJoueur;
-        this.partie = partie;
     }
     
     /**
@@ -75,7 +73,6 @@ public class ChangerNiveau extends Action {
         this.tabClasse = tabClasse;
         this.niveauMin = 0;
         this.choixJoueur = choixJoueur;
-        this.partie = partie;
     }
     
     /**
@@ -105,7 +102,6 @@ public class ChangerNiveau extends Action {
         this.niveauMin = niveauMin;
         this.tabClasse = null;
         this.choixJoueur = choixJoueur;
-        this.partie = partie;
     }
     
     /**
@@ -114,89 +110,79 @@ public class ChangerNiveau extends Action {
      * @param joueurImpacte : le joueur qui subit le changement de niveau
      */
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
+    @Override
+    public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
-		String out           = "";
+        String out           = "";
         boolean classeTrouve = true;
-        
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur)
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
-        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
         
-        if(joueurDestinataireTemp != null)
-        {
-        	for(Joueur joueurImpacte : joueurDestinataireTemp){
-        		// Si le joueur est en dessous ou pile au niveau min & qu'on veut lui enlever des niveaux
-        		if(niveauMin >= joueurImpacte.getPersonnage().getNiveau() && this.niveau < 0){
-        			return joueurImpacte.getName() + "ne peut pas perdre encore de niveau\n";
-        		}
+        if(joueurDestinataireTemp != null){
+            for(Joueur joueurImpacte : joueurDestinataireTemp){
+                // Si le joueur est en dessous ou pile au niveau min & qu'on veut lui enlever des niveaux
+                if(niveauMin >= joueurImpacte.getPersonnage().getNiveau() && this.niveau < 0)
+                        return joueurImpacte.getName() + "ne peut pas perdre encore de niveau\n";
 
-        		if(tabClasse != null){
-        			classeTrouve = false;
-        			for(Classe classe: tabClasse)
-        				if(joueurImpacte.getPersonnage().getClasse().equals(classe))
-        					classeTrouve=true;
-        		}
+                if(tabClasse != null){
+                    classeTrouve = false;
+                    for(Classe classe: tabClasse)
+                        if(joueurImpacte.getPersonnage().getClasse().equals(classe))
+                            classeTrouve=true;
+                }
 
-        		if(!classeTrouve)
-        			return out;
+                if(!classeTrouve) return out;
 
-        		// Si le nombre de niveau doit se choisir par dé...
-        		if(this.niveau == Constante.NB_PAR_DE)
-                        {
-                            partie.sendMessageToAll("On lance le dé !");
-        			this.niveau = Constante.nbAleatoire(1, 6+1);
-                                partie.sendMessageToAll("Le dé a parlé : "+niveau);
-                        }
+                // Si le nombre de niveau doit se choisir par dé...
+                if(this.niveau == Constante.NB_PAR_DE) {
+                    partie.sendMessageToAll("On lance le dé !");
+                    this.niveau = Constante.nbAleatoire(1, 6+1);
+                    partie.sendMessageToAll("Le dé a parlé : "+niveau);
+                }
 
-        		out += joueurImpacte.getName();
-        		if(niveau < 0)
-        			out += " perds ";
-        		else if(niveau > 0)
-        			out += " gagne ";
-        		// Si le niveau est de 0
-        		else
-        			return out + "ne gagne aucun niveau";
+                out += joueurImpacte.getName();
+                if(niveau < 0)
+                    out += " perds ";
+                else if(niveau > 0)
+                    out += " gagne ";
+                // Si le niveau est de 0
+                else
+                    return out + "ne gagne aucun niveau";
 
-        		joueurImpacte.getPersonnage().changerNiveau(niveau);
-        		if(niveau > 1 || niveau < -1)
-        			out += Math.abs(niveau)+" niveaux !!\n";
-        		else
-        			out += Math.abs(niveau)+" niveau !!\n";
-        		out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
-        	}
+                joueurImpacte.getPersonnage().changerNiveau(niveau);
+                if(niveau > 1 || niveau < -1)
+                    out += Math.abs(niveau)+" niveaux !!\n";
+                else
+                    out += Math.abs(niveau)+" niveau !!\n";
+                out += joueurImpacte.getName() + " est maintenant niveau " + joueurImpacte.getPersonnage().getNiveau() + "\n";
+            }
         }
-        else
-        {
-        	out += "Aucun joueurDestinataire spécifié";
+        else{
+            out += "Aucun joueurDestinataire spécifié";
         }
         System.out.println(out);
         return out;
-	}
-	
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    }
+
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

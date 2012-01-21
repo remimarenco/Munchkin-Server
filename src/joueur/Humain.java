@@ -26,9 +26,9 @@ public class Humain extends Race
 
     }
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Humain";
-	}
+    @Override
+    public String toString() {
+            // TODO Auto-generated method stub
+            return "Humain";
+    }
 }

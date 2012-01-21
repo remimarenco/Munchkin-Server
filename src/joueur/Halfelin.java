@@ -25,9 +25,9 @@ public class Halfelin extends Race {
 
     }
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Halfelin";
-	}
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Halfelin";
+    }
 }

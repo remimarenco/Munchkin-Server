@@ -3,7 +3,6 @@ package action;
 import java.util.ArrayList;
 
 import joueur.Joueur;
-import partie.Combat;
 import partie.Constante;
 import partie.Partie;
 
@@ -34,64 +33,59 @@ public class PiocherCarte extends Action {
      * @return out : texte résumant l'action
      */
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
 
-		String out = "";
-		int i;
-
-		ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
-		// Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-		if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-		{
-			if(choixJoueur)
-			{
-				// On renvoi les joueurs destinataires par une demande au joueur initiateur
-				joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-			}
-		}
-		else
-		{
-			joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
-		}
+        String out = "";
+        int i;
+        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
+        
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur){
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+            }
+        }
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        }
 
 
-		for(Joueur joueurImpacte : joueurDestinataireTemp) {
-			if(joueurImpacte.getPersonnage().getRace()==Constante.RACE_HALFELIN)
-				nbCarte++;
+        for(Joueur joueurImpacte : joueurDestinataireTemp) {
+            if(joueurImpacte.getPersonnage().getRace()==Constante.RACE_HALFELIN)
+                    nbCarte++;
 
-			out += "Le joueur " + joueurImpacte.getName();
+            out += "Le joueur " + joueurImpacte.getName();
 
-			if(nbCarte > 1)
-				out += " pioche "+nbCarte+" cartes dans la pioche ";
-			else
-				out += " pioche "+nbCarte+" carte dans la pioche ";
+            if(nbCarte > 1)
+                    out += " pioche "+nbCarte+" cartes dans la pioche ";
+            else
+                    out += " pioche "+nbCarte+" carte dans la pioche ";
 
-			for(i=0; i<nbCarte; i++){
-				if(type_pioche == Constante.DONJON){
-					out += "donjon";
-					joueurImpacte.piocherCarte(Constante.DONJON);
-				} else {
-					out += "trésor";
-					joueurImpacte.piocherCarte(Constante.TRESOR);
-				}
-			}
-		}
-		return out;
-	}
+            for(i=0; i<nbCarte; i++){
+                if(type_pioche == Constante.DONJON){
+                    out += "donjon";
+                    joueurImpacte.piocherCarte(Constante.DONJON);
+                } else {
+                    out += "trésor";
+                    joueurImpacte.piocherCarte(Constante.TRESOR);
+                }
+            }
+        }
+        return out;
+    }
 
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
-	
-	
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

@@ -2,8 +2,6 @@ package carte;
 
 import java.util.ArrayList;
 
-import comportement.Sortilege;
-
 import joueur.Joueur;
 import partie.Partie;
 
@@ -13,7 +11,7 @@ import partie.Partie;
  *
  */
 public interface ISortilege {	
-	/**
+    /**
      * Permet de lancer le comportement Sortilege d'une carte monstre
      * TODO : Vérifier si c'est toujours applicable => Voir au dessus
      * TODO : Faire un hashmap de cibles/destinations => Personnages + Monstres

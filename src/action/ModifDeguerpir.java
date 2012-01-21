@@ -2,9 +2,7 @@ package action;
 
 import java.util.ArrayList;
 
-import partie.Combat;
 import partie.Partie;
-
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
@@ -58,11 +56,11 @@ public class ModifDeguerpir extends Action{
      * @return out : texte résumant l'action
      */
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
-		String out              = "";
+        String out              = "";
         boolean accept          = true;
         boolean raceTrouve      = false;
         boolean classeTrouve    = false;
@@ -92,59 +90,54 @@ public class ModifDeguerpir extends Action{
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur)
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
-        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
         
-        for(Joueur joueurImpacte : joueurDestinataireTemp)
-        {
-	        if(niveauMax != null)                                       // Si un niveau max est défini
-	            if(joueurImpacte.getPersonnage().getNiveau()>niveauMax) // On regarde que le personnage ne le dépasse pas
-	                accept=false;
+        for(Joueur joueurImpacte : joueurDestinataireTemp){
+            if(niveauMax != null)                                       // Si un niveau max est défini
+                if(joueurImpacte.getPersonnage().getNiveau()>niveauMax) // On regarde que le personnage ne le dépasse pas
+                    accept=false;
+
+            if(sexe != null)                                            // Si un sexe est défini
+                if(joueurImpacte.getPersonnage().getSexe()!=sexe)       // On regarde si c'est celui du personnage
+                    accept=false;
+
+            if(tabRace != null){                                        // Si un tableau de race est défini                                        
+                for(Race race: tabRace)                                 // On regarde si celle du personnage s'y trouve
+                    if(joueurImpacte.getPersonnage().getRace().equals(race))
+                        raceTrouve=true;
+                if(!raceTrouve)
+                    accept=false;
+            }
 			
-	        if(sexe != null)                                            // Si un sexe est défini
-	            if(joueurImpacte.getPersonnage().getSexe()!=sexe)       // On regarde si c'est celui du personnage
-	                accept=false;
-	
-	        if(tabRace != null){                                        // Si un tableau de race est défini                                        
-	            for(Race race: tabRace)                                 // On regarde si celle du personnage s'y trouve
-	                if(joueurImpacte.getPersonnage().getRace().equals(race))
-	                    raceTrouve=true;
-	            if(!raceTrouve)
-	                accept=false;
-	        }
-			
-	        if(tabClasse != null){                                        // Si un tableau de classe est défini
-	            for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
-	                if(joueurImpacte.getPersonnage().getClasse() != null && joueurImpacte.getPersonnage().getClasse().equals(classe))
-	                                raceTrouve=true;
-	                if(!classeTrouve)
-	                        accept=false;
-	        }
-			
-	        if(accept == true)    // Si toutes les conditions sont réunies, on applique la modif
-	            joueurImpacte.getPersonnage().setBonusCapaciteFuite(joueurImpacte.getPersonnage().getBonusCapaciteFuite()+bonusDeguerpir);
+            if(tabClasse != null){                                        // Si un tableau de classe est défini
+                for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
+                    if(joueurImpacte.getPersonnage().getClasse() != null && joueurImpacte.getPersonnage().getClasse().equals(classe))
+                                    raceTrouve=true;
+                    if(!classeTrouve)
+                            accept=false;
+            }
+
+            if(accept == true)    // Si toutes les conditions sont réunies, on applique la modif
+                joueurImpacte.getPersonnage().setBonusCapaciteFuite(joueurImpacte.getPersonnage().getBonusCapaciteFuite()+bonusDeguerpir);
         }
         return out;
-	}
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

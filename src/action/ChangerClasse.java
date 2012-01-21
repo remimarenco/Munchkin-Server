@@ -2,7 +2,6 @@ package action;
 
 import java.util.ArrayList;
 
-import partie.Combat;
 import partie.Partie;
 import joueur.Classe;
 import joueur.Joueur;
@@ -36,7 +35,6 @@ public class ChangerClasse extends Action{
     public ChangerClasse(Classe classe, boolean choixJoueur) {
         this.classe = classe;
         this.choixJoueur = choixJoueur;
-        this.partie = partie;
     }
 
     
@@ -53,44 +51,37 @@ public class ChangerClasse extends Action{
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur)
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
+        else{
         	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
         
         if(joueurDestinataireTemp != null)
-        {
-        	for(Joueur joueurImpacte : joueurDestinataireTemp){             // Parcourt l'ensemble des joueurs cible
-        		out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
-        		joueurImpacte.getPersonnage().setClasse(this.classe);   // Change la classe du personnage
-        		out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();
-        	}
-        }
+            for(Joueur joueurImpacte : joueurDestinataireTemp){             // Parcourt l'ensemble des joueurs cible
+                    out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
+                    joueurImpacte.getPersonnage().setClasse(this.classe);   // Change la classe du personnage
+                    out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();
+            }
         else
-        {
-        	out += "Aucun joueurDestinataire spécifié";
-        }
+            out += "Aucun joueurDestinataire spécifié";
+        
         System.out.println(out);
         return out;
     }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

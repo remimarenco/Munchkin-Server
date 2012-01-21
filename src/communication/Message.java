@@ -254,8 +254,7 @@ public class Message {
                     else  
                         oos.writeObject(map);
                 }
-            }                 
-                   
+            }
             return true;
         }
         catch(Exception e){

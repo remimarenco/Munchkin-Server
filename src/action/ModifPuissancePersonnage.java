@@ -2,9 +2,7 @@ package action;
 
 import java.util.ArrayList;
 
-import partie.Combat;
 import partie.Partie;
-
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
@@ -90,17 +88,13 @@ public class ModifPuissancePersonnage extends Action{
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur)
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
-        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
         
         
@@ -121,7 +115,6 @@ public class ModifPuissancePersonnage extends Action{
                 out += ", les classes pour lesquelles ce bonus s'applique sont :";
                 for(Classe classe : tabClasse)
                     out += " " + classe.toString();
-
             }
             else
                 out += "Aucune classe pour ce bonus";
@@ -163,14 +156,14 @@ public class ModifPuissancePersonnage extends Action{
     }
 
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }       

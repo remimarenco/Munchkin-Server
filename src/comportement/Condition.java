@@ -26,36 +26,36 @@ public class Condition extends Comportement {
      * @param partie
      * @return out : texte résumant l'action
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+        String out = "";
 
-		if(tabAction == null){
-			out += "Aucune condition sur ce monstre\n";
-		} else {
-			out += "--- Condition ---\n";
-			for(Action action : tabAction)
-				out += action.action(joueurEmetteur, joueurDestinataire, partie);
-			out += "\n--- Fin de condition ---\n";
-		}
-		return out;
-	}
+        if(tabAction == null){
+                out += "Aucune condition sur ce monstre\n";
+        } else {
+                out += "--- Condition ---\n";
+                for(Action action : tabAction)
+                        out += action.action(joueurEmetteur, joueurDestinataire, partie);
+                out += "\n--- Fin de condition ---\n";
+        }
+        return out;
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        String out = "";
 
-		if(tabAction == null){
-			out += "Aucune condition sur ce monstre\n";
-		} else {
-			out += "--- Condition ---\n";
-			for(Action action : tabAction)
-				out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
-			out += "\n--- Fin de condition ---\n";
-		}
-		return out;
-	}
+        if(tabAction == null){
+                out += "Aucune condition sur ce monstre\n";
+        } else {
+                out += "--- Condition ---\n";
+                for(Action action : tabAction)
+                        out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+                out += "\n--- Fin de condition ---\n";
+        }
+        return out;
+    }
 }

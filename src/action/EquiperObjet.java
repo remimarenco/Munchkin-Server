@@ -5,10 +5,7 @@
 package action;
 
 import java.util.ArrayList;
-
-import partie.Combat;
 import partie.Partie;
-
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
@@ -73,23 +70,31 @@ public class EquiperObjet extends Action{
             boolean raceTrouve   = false;
             boolean classeTrouve = false;
 
-            for(Joueur joueurImpacte : joueurDestinataire)
-            {
-                    out += "Le joueur "+ joueurImpacte.getName() +"s'équipe d'un objet :\n";
-                    out += "Le bonus déguerpir est de " + bonusDeguerpir + ", la puissance est de "+ bonusPuissance;
+            for(Joueur joueurImpacte : joueurDestinataire){
+                out += "Le joueur "+ joueurImpacte.getName() +"s'équipe d'un objet :\n";
+                out += "Le bonus déguerpir est de " + bonusDeguerpir + ", la puissance est de "+ bonusPuissance;
 
+                if(aChangeSexe)
+                    if(!joueurImpacte.getPersonnage().isaChangeSexe())
+                        accept=false;
 
-                    if(aChangeSexe)
-                        if(!joueurImpacte.getPersonnage().isaChangeSexe())
+                if(tabRace != null){                                        // Si un tableau de race est défini
+                    for(Race race: tabRace)                                 // On regarde si celle du personnage s'y trouve
+                        if(joueurImpacte.getPersonnage().getRace().equals(race))
+                            raceTrouve=true;
+                    if(!raceTrouve)
+                        accept=false;
+                }
+
+                if(tabClasse!=null){                                        // Si un tableau de classe est défini
+                    for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
+                        if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
+                            classeTrouve=true;
+                        if(!classeTrouve)
                             accept=false;
-
-                    if(tabRace != null){                                        // Si un tableau de race est défini
-                        for(Race race: tabRace)                                 // On regarde si celle du personnage s'y trouve
-                            if(joueurImpacte.getPersonnage().getRace().equals(race))
-                                raceTrouve=true;
-                        if(!raceTrouve)
-                            accept=false;
-                    }
+                }
+                if(joueurImpacte.getPersonnage().getNbEquipement()+poids>joueurImpacte.getPersonnage().getCapaciteEquipement())
+                    accept=false;
 
                     if(tabClasse!=null){                                        // Si un tableau de classe est défini
                         for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
@@ -116,9 +121,9 @@ public class EquiperObjet extends Action{
 	public String action(Joueur joueurEmetteur,
 			ArrayList<Joueur> joueurDestinataire, Partie partie,
 			boolean choixJoueur) {
-		ArrayList<Joueur> array = new ArrayList<Joueur>();
-		array.add(partie.getEnCours());
-		return action(joueurEmetteur, array, partie);
+            ArrayList<Joueur> array = new ArrayList<Joueur>();
+            array.add(partie.getEnCours());
+            return action(joueurEmetteur, array, partie);
 	}
 
 }

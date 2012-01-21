@@ -12,6 +12,7 @@ import joueur.Joueur;
  * @author simon.grabit
  */
 public class ComportementDefausserCarte extends Comportement {
+
     /**
      * Constructeur
      * @param tabAction 
@@ -27,28 +28,28 @@ public class ComportementDefausserCarte extends Comportement {
      * @param partie
      * @return out : texte résumant l'action
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+        String out = "";
         out += "--- Defausser carte ---\n";
         out += "Le joueur défausse une carte\n";
         for(Action action : tabAction)
             out += action.action(joueurEmetteur, joueurDestinataire, partie);
         out += "--- Fin Defausser Carte ---\n";
         return out;
-	}
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        String out = "";
         out += "--- Defausser carte ---\n";
         out += "Le joueur défausse une carte\n";
         for(Action action : tabAction)
             out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
         out += "--- Fin Defausser Carte ---\n";
         return out;
-	}
+    }
 }

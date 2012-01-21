@@ -30,28 +30,28 @@ public class IncidentDeguerpir extends Comportement{
      * @param partie
      * @return 
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+        String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
             out += action.action(joueurEmetteur, joueurDestinataire, partie);
         out += "--- Fin d'incident fuite ---\n";
         return out;
-	}
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		String out = "";
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        String out = "";
         out += "--- Incident de fuite ---\n";
         out += "Le joueur a fuit mais subit des incidents\n";
         for(Action action : tabAction)
             out += action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
         out += "--- Fin d'incident fuite ---\n";
         return out;
-	}
+    }
 }

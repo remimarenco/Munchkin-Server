@@ -30,7 +30,6 @@ public class Magicien extends Classe {
      * @return 
      */
     public int choixJoueur(int capacite1, int capacite2){
-        
         return 0;
     }
 
@@ -48,8 +47,8 @@ public class Magicien extends Classe {
         
     }
 
-	@Override
-	public String toString() {		
-		return "Magicien";
-	}
+    @Override
+    public String toString() {		
+        return "Magicien";
+    }
 }

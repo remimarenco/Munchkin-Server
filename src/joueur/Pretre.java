@@ -12,12 +12,10 @@ public class Pretre extends Classe{
     // TODO: Completer la classe
     @Override
     public void utiliserCapacite() {
-        if(choixJoueur(Constante.PRETRE_RESURRECTION, Constante.PRETRE_RENVOIE)==Constante.PRETRE_RENVOIE){
+        if(choixJoueur(Constante.PRETRE_RESURRECTION, Constante.PRETRE_RENVOIE)==Constante.PRETRE_RENVOIE)
             renvoie();
-        }
-        else{
+        else
             resurrection();
-        }
     }
 
     /**
@@ -27,7 +25,6 @@ public class Pretre extends Classe{
      * @return 
      */
     public int choixJoueur(int capacite1, int capacite2){
-        
         return 0;
     }
 
@@ -45,8 +42,8 @@ public class Pretre extends Classe{
         
     }
 
-	@Override
-	public String toString() {		
-		return "Prêtre";
-	}
+    @Override
+    public String toString() {		
+            return "Prêtre";
+    }
 }

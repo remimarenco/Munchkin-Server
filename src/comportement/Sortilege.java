@@ -34,22 +34,22 @@ public class Sortilege extends Comportement{
      * @param partie
      * @return out : texte résumant l'action
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
-		if(tabAction == null){
-			out += "Aucune sortilège à appliquer";
-		} else {
-			out += "----- Sortilège -----\n";
-			for(Action action : tabAction)
-				out += action.action(joueurEmetteur, joueurDestinataire, partie);
-			out += "\n";
-		}
-		out += "--- Fin sortilège ---";
-		out += "\n";
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+        String out = "";
+        if(tabAction == null){
+                out += "Aucune sortilège à appliquer";
+        } else {
+                out += "----- Sortilège -----\n";
+                for(Action action : tabAction)
+                        out += action.action(joueurEmetteur, joueurDestinataire, partie);
+                out += "\n";
+        }
+        out += "--- Fin sortilège ---";
+        out += "\n";
+        return out;
+    }
 
 
 	@Override

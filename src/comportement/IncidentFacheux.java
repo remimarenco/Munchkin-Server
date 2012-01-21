@@ -20,8 +20,7 @@ public class IncidentFacheux extends Comportement{
      * On définit les actions que va faire l'incident fâcheux
      * @param tab : Ensemble d'actions de l'incident fâcheux
      */
-    public IncidentFacheux(ArrayList<Action> tabAction)
-    {
+    public IncidentFacheux(ArrayList<Action> tabAction){
     	super(tabAction);
     }
 
@@ -32,39 +31,38 @@ public class IncidentFacheux extends Comportement{
      * @param joueurDestinataire
      * @param partie
      */
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
-		String out = "";
-		if(tabAction != null && !(tabAction.isEmpty()))
-		{
-			out += "--- Incident fâcheux ---\n";
-			out += "Il y a " + tabAction.size() + "actions !";
-			for(Action action : tabAction)
-				out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie);
-			out += "--- Fin d'incident fâcheux ---\n";
-		} else {
-			out += "Aucune incident fâcheux !!\n";
-		}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
+            String out = "";
+        if(tabAction != null && !(tabAction.isEmpty())){
+            out += "--- Incident fâcheux ---\n";
+            out += "Il y a " + tabAction.size() + "actions !";
+            for(Action action : tabAction)
+                    out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie);
+            out += "--- Fin d'incident fâcheux ---\n";
+        } else {
+            out += "Aucune incident fâcheux !!\n";
+        }
         return out;
-	}
+    }
 
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		String out = "";
-		if(tabAction != null && !(tabAction.isEmpty()))
-		{
-			out += "--- Incident fâcheux ---\n";
-			out += "Il y a " + tabAction.size() + "actions !";
-			for(Action action : tabAction)
-				out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
-			out += "--- Fin d'incident fâcheux ---\n";
-		} else {
-			out += "Aucune incident fâcheux !!\n";
-		}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        String out = "";
+        if(tabAction != null && !(tabAction.isEmpty()))
+        {
+                out += "--- Incident fâcheux ---\n";
+                out += "Il y a " + tabAction.size() + "actions !";
+                for(Action action : tabAction)
+                        out += "\nAction : !" + action.action(joueurEmetteur, joueurDestinataire, partie, choixJoueur);
+                out += "--- Fin d'incident fâcheux ---\n";
+        } else {
+                out += "Aucune incident fâcheux !!\n";
+        }
         return out;
-	}
+    }
 }

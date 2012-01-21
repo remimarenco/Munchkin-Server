@@ -2,7 +2,6 @@ package carte;
 import java.util.ArrayList;
 
 import joueur.Joueur;
-import partie.Combat;
 import partie.Partie;
 import comportement.ComportementDefausserCarte;
 import comportement.Equipement;

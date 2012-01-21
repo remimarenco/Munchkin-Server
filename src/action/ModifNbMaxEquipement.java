@@ -2,7 +2,6 @@ package action;
 
 import java.util.ArrayList;
 
-import partie.Combat;
 import partie.Partie;
 import joueur.Joueur;
 
@@ -31,45 +30,41 @@ public class ModifNbMaxEquipement extends Action{
      * @return 
      */    
     // TODO : Description méthode + PROTECTION NULL
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie) {
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie) {
 		
-		String out = "";
+        String out = "";
         out += "On modifie le nombre maximum d'objet portés par un joueur :\n";
         ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
 
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty())
-        {
-        	if(choixJoueur)
-        	{
-        		// On renvoi les joueurs destinataires par une demande au joueur initiateur
-            	joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        	}
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur)
+                    // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
         }
-        else
-        {
-        	joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
         }
         
         // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
         for(Joueur joueurImpacte : joueurDestinataireTemp){
-        	out += "Le joueur impliqué est "+joueurImpacte.getName();
-        	joueurImpacte.getPersonnage().setCapaciteEquipement(joueurImpacte.getPersonnage().getCapaciteEquipement()+bonusNbMax);
+            out += "Le joueur impliqué est "+joueurImpacte.getName();
+            joueurImpacte.getPersonnage().setCapaciteEquipement(joueurImpacte.getPersonnage().getCapaciteEquipement()+bonusNbMax);
         }
         
         return out;
-	}
+    }
 
-	@Override
-	public String action(Joueur joueurEmetteur,
-			ArrayList<Joueur> joueurDestinataire, Partie partie,
-			boolean choixJoueur) {
-		boolean ancienChoixJoueur = this.choixJoueur;
-		this.choixJoueur = choixJoueur;
-		String out = action(joueurEmetteur, joueurDestinataire, partie);
-		this.choixJoueur = ancienChoixJoueur;
-		return out;
-	}
+    @Override
+    public String action(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie,
+                    boolean choixJoueur) {
+        boolean ancienChoixJoueur = this.choixJoueur;
+        this.choixJoueur = choixJoueur;
+        String out = action(joueurEmetteur, joueurDestinataire, partie);
+        this.choixJoueur = ancienChoixJoueur;
+        return out;
+    }
 }

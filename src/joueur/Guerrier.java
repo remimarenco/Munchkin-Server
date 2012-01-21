@@ -22,9 +22,9 @@ public class Guerrier extends Classe {
         
     }
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Guerrier";
-	}
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Guerrier";
+    }
 }
