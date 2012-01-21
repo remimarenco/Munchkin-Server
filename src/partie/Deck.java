@@ -687,6 +687,7 @@ public final class Deck {
         */
         
         actionEquipement.clear();
+        tabRace.clear();
         tabClasse.clear();
         tabClasse.add(Constante.CLASSE_VOLEUR);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 4, 0, 1));
@@ -695,42 +696,55 @@ public final class Deck {
         cartes.add(new Objet(126 ,"Cape d'ombre", "Réservé aux voleurs. Bonus +4", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 2, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -2, 0, -1));
         cartes.add(new Objet(127 ,"Epée (de) bâtard(e)", "Bonus de + 2", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
         cartes.add(new Objet(128 ,"Enorme rocher", "Bonus de + 3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 2, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -2, 0, -1));
         cartes.add(new Objet(129 ,"Targe d'inconscience suicidaire", "Bonus de + 2", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, true, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
         cartes.add(new Objet(130 ,"Gourdin de misogynie fracassante", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe.Bonus +3.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, true, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
         cartes.add(new Objet(131 ,"Epée de féminisme exacerbé", "Réservé aux joueurs (ou joueuses) qui ont changé de sexe. Bonus +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
+        tabClasse.clear();
         actionEquipement.add(new EquiperObjet(null, null, false, 3, 0, 1));
         actionDefausser.clear();
         actionDefausser.add(new EquiperObjet(null, null, false, -3, 0, -1));
         cartes.add(new Objet(132 ,"Titre qui en jette vraiment grave", "Bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
         tabClasse.clear();
         tabClasse.add(Constante.CLASSE_PRETRE);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 4, 0, 1));
@@ -739,6 +753,7 @@ public final class Deck {
         cartes.add(new Objet(133 ,"Masse d'arme de répartie piquante", "Réservé aux prêtres. Bonus de +4", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
+        tabRace.clear();
         tabClasse.clear();
         tabClasse.add(Constante.CLASSE_VOLEUR);
         actionEquipement.add(new EquiperObjet(null, tabClasse, false, 3, 0, 1));
@@ -784,6 +799,7 @@ public final class Deck {
         
         actionEquipement.clear();
         tabRace.clear();
+        tabClasse.clear();
         tabRace.add(Constante.RACE_NAIN);
         actionEquipement.add(new EquiperObjet(tabRace, null, false, 4, 0, 1));
         actionDefausser.clear();

@@ -79,7 +79,7 @@ public class EquiperObjet extends Action{
 
                     if(tabClasse!=null){                                        // Si un tableau de classe est défini
                         for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
-                            if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
+                            if((classe==null && joueurImpacte.getPersonnage().getClass()==null) || (joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe)))
                                             classeTrouve=true;
                             if(!classeTrouve)
                                     accept=false;
@@ -87,7 +87,7 @@ public class EquiperObjet extends Action{
                     if(joueurImpacte.getPersonnage().getNbEquipement()+poids>joueurImpacte.getPersonnage().getCapaciteEquipement())
                         accept=false;
 
-                    if(accept==true){    // Si toutes les conditions sont réunies, on applique la modif
+                    if(accept==true){    // Si toutes les conditions sont réunies, on applique la modif et on équipe la carte
                         joueurImpacte.getPersonnage().setCapaciteFuite(joueurImpacte.getPersonnage().getCapaciteFuite()+bonusDeguerpir);
                         joueurImpacte.getPersonnage().setPuissanceObjet(joueurImpacte.getPersonnage().getPuissanceObjet()+bonusPuissance);
                         joueurImpacte.getPersonnage().setNbEquipement(joueurImpacte.getPersonnage().getNbEquipement()+poids);

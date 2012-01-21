@@ -490,8 +490,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			if(!msg.getIdCard().equals("")){ //Le joueur a envoyé la carte
 				Integer id= new Integer(msg.getIdCard());
 				emetteur.getJeu().ajouterCarte(Deck.getCardById(id));
-                                this.defausserCarte(emetteur, emetteur.getMain(), Deck.getCardById(id));
-				//emetteur.defausserCarte(Deck.getCardById(id));
+				emetteur.getMain().supprimerCarte(Deck.getCardById(id));
 				// Activation de la carte
 				appliquerCartePoseMainSurJoueur(emetteur,Deck.getCardById(id));            
                                 this.sendInfos();
@@ -987,6 +986,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	}
 
 	private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
+                
+                
 		if(cardById.getClass().equals(Objet.class))
 		{   
 			Objet carteObjet = (Objet) cardById;
@@ -994,6 +995,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			this.SendDebugMessage("Dans appliquerCartePoseMain, on vient de voir que c'est une carte Objet");
 			this.SendDebugMessage(carteObjet.equiper(j, new ArrayList<Joueur>(){{add(j);}}, this));
 		}
+                else
+                {
+                    this.SendDebugMessage("La carte n'est pas un objet, on ne la pose pas");
+                }
 	}
 
 	/**
@@ -1169,7 +1174,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void PillerLaPiece() {
 		this.sendMessageToAll("Changement de phase : "+getPhaseTourString()+" => "+getPhaseTourString(Constante.PHASE_PILLER_LA_PIECE));
 		this.setPhaseTour(Constante.PHASE_PILLER_LA_PIECE);
-                this.sendMessageToAllButCurrent("Avant que le joueur "+enCours.getName()+" ne pioche une carte, vous pouvez intervenir");
+                this.sendMessageToAllButCurrent("Avant que le joueur "+enCours.getName()+" ne pioche une carte tresor, vous pouvez intervenir");
 		this.sendMessageToCurrent("Avant que vous ne piochez une carte, vous pouvez intervenir");
                 // On pioche une carte du donjon
 		// Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention
@@ -1182,9 +1187,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				e.printStackTrace();
 			}
 		}
-                this.sendMessageToAllButCurrent("Le joueur : "+enCours.getName()+" pioche une carte donjon !");
-                this.sendMessageToCurrent("Vous piochez une carte donjon !");
-		enCours.piocherCarte(Constante.DONJON);
+                this.sendMessageToAllButCurrent("Le joueur : "+enCours.getName()+" pioche une carte tresor !");
+                this.sendMessageToCurrent("Vous piochez une carte tresor !");
+		enCours.piocherCarte(Constante.TRESOR);
 		this.sendMessageToAllButCurrent("Maintenant que le joueur "+enCours.getName()+" a pioché sa carte...va t il ou allez vous intervenir ?");
                 this.sendMessageToCurrent("Maintenant que vous avez pioché une carte...voulez vous intervenir ?");
                 // Si le joueur est tout seul à jouer, ce qui ne devrait jamais arriver sur la version finale, on ne demande pas d'intervention

@@ -199,7 +199,7 @@ public class Combat {
         boolean resultat = puissanceGentil > puissanceMechant;
         bonusTemporaireGentil = 0;
         bonusTemporaireMechant = 0;
-        return (puissanceGentil >= puissanceMechant); // True si camps gentil gagne
+        return (puissanceGentil > puissanceMechant); // True si camps gentil gagne
     }
     
     /**
