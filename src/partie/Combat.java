@@ -2,7 +2,6 @@ package partie;
 
 import carte.Monstre;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -51,13 +50,6 @@ public class Combat {
         this.partie = partie;
         CampGentil  = new ArrayList<Personnage>();
         CampMechant = new ArrayList<Monstre>();
-    }
-
-    
-    /**
-     * Constructeur
-     */
-    public Combat() {
     }
     
     

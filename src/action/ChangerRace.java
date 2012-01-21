@@ -13,7 +13,6 @@ import joueur.Race;
 public class ChangerRace extends Action {
     
     protected Race race;
-    protected boolean choixJoueur;
     protected Partie partie;
     
     /**
@@ -24,16 +23,6 @@ public class ChangerRace extends Action {
         this.race = race;
     }
     
-    /**
-     * Méthode permettant de changer la race d'un joueur choisi par le joueur émetteur
-     * @param race
-     * @param choixJoueur => True pour que le joueur cible soit choisi par le joueur émetteur
-     * @param partie
-     */
-    public ChangerRace(Race race, boolean choixJoueur) {
-        this.race = race;
-        this.choixJoueur = choixJoueur;
-    }
 
     /**
      * Action permettant le changement de race

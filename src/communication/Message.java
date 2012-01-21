@@ -62,19 +62,6 @@ public class Message {
         this.type       = type;
         this.nick_src   = nick_src;           
     }
-  
-    
-    /**
-     * Constructeur
-     * @param type
-     * @param nick_src
-     * @param nick_dest 
-     */
-    public Message(int type,String nick_src,String nick_dest){
-        this.type       = type;
-        this.nick_src   = nick_src; 
-        this.nick_dest  = nick_dest;
-    }
     
      /**
       * Constructeur
@@ -107,25 +94,6 @@ public class Message {
         this.idCard     = new String();
     }
     
-    
-    /**
-     * Constructeur
-     * @param type
-     * @param nick_src
-     * @param nick_dest
-     * @param action
-     * @param idCard 
-     */
-    public Message(int type,String nick_src,String nick_dest,int action,String idCard){
-        this.type       = type;            
-        this.nick_src   = nick_src;          
-        this.nick_dest  = nick_dest;        
-        this.action     = action;
-        this.color      = Color.BLACK;
-        this.idCard     = idCard;
-    }
-   
-    
     /**
      * Constructeur
      * @param type
@@ -152,22 +120,7 @@ public class Message {
         this.nick_dest  = nick_dest;        
         this.list        = list;            
     }
-    /**
-     * Constructeur
-     * @param type
-     * @param nick_src
-     * @param nick_dest
-     * @param map 
-     */
-    public Message(int type,String nick_src,String nick_dest,String msg,JLabel avatar){
-        this.type       = type;            
-        this.nick_src   = nick_src;          
-        this.nick_dest  = nick_dest;    
-        this.message    = msg;
-        this.avatar     = avatar;            
-    }
-    
-    
+
    /**
     * Constructeur
     * @param type
@@ -281,18 +234,6 @@ public class Message {
     public String getNick_dest() {
         return this.nick_dest;
     }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public HashMap<String, String> getMap() {
-        return map;
-    }
-
-    public HashMap<String, JLabel> getList() {
-        return list;
-    }    
 
     public int getAction() {
         return action;

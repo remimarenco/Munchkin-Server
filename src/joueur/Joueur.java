@@ -50,42 +50,6 @@ public class Joueur extends Thread {
     }  
 
     
-    /**
-     * Constructeur
-     * @param main
-     * @param jeu
-     * @param personnage
-     * @param partie
-     * @param st
-     * @param parent 
-     */
-    public Joueur(Main main, Jeu jeu, Personnage personnage,Partie partie,Socket st,Object parent) {
-        initCommunication(st, parent);
-        this.main       = main;
-        this.jeu        = jeu;        
-        this.personnage = personnage;
-        this.partie     = partie;
-    }
-
-    
-    /**
-     * Constructeur
-     * @param main
-     * @param jeu
-     * @param nom
-     * @param personnage
-     * @param partie
-     * @param st
-     * @param parent 
-     */
-    public Joueur(Main main, Jeu jeu, String nom, Personnage personnage, Partie partie,Socket st,Object parent) {
-        initCommunication(st, parent);
-        this.main       = main;
-        this.jeu        = jeu;        
-        this.personnage = personnage;
-        this.partie     = partie;
-    }   
-    
     // ===== ACCESSEURS & MUTATEURS ===== //
     
     public JLabel getAvatar() {
@@ -100,24 +64,12 @@ public class Joueur extends Thread {
         return jeu;
     }
 
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
-    }
-
     public Main getMain() {
         return main;
     }
 
-    public void setMain(Main main) {
-        this.main = main;
-    }
-
     public Personnage getPersonnage() {
         return personnage;
-    }
-
-    public void setPersonnage(Personnage personnage) {
-        this.personnage = personnage;
     }
 
     public Carte getCarteClickee() {
@@ -126,10 +78,6 @@ public class Joueur extends Thread {
 
     public void setCarteClickee(Carte carteClickee) {
         this.carteClickee = carteClickee;
-    }
-
-    public int getSexe() {
-        return sexe;
     }
 
     public void setSexe(int sexe) {
@@ -143,8 +91,7 @@ public class Joueur extends Thread {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }   
-    
+    }
     // ================================== // 
 
   
@@ -212,17 +159,6 @@ public class Joueur extends Thread {
         catch(Exception e){       
             System.out.println("Exception com Serv : "+e.toString());
         }
-    }
-    
-    
-    /**
-     * Ajoute une carte au jeu d'un joueur
-     * @param c
-     * @return 
-     */
-    public boolean equiperCarte(Carte c){
-        this.jeu.ajouterCarte(c);
-        return true;
     }
     
     

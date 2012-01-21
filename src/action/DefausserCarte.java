@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import carte.Carte;
 import joueur.CartesJoueur;
 import joueur.Joueur;
-import partie.Combat;
 import partie.Constante;
 import partie.Partie;
 
@@ -19,7 +18,6 @@ public class DefausserCarte extends Action {
     private int nbCarte;
     private int typeTas;
     protected Partie partie;
-    protected boolean choixJoueur;
 
     /**
      * Constructeur par défaut
@@ -46,26 +44,6 @@ public class DefausserCarte extends Action {
         this.typeTas = typeTas;
     }
 
-    /**
-     * Constructeur
-     * @param typeCarte : type de carte à défausser
-     * @param nbCarte : nombre de carte à défausser
-     * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
-     */
-    public DefausserCarte(ArrayList<Class> typeCarte, int nbCarte, int typeTas, boolean choixJoueur) {
-        if(typeCarte != null)
-        {
-            this.typeCarte = (ArrayList<Class>) typeCarte.clone();
-        }
-        else
-        {
-            this.typeCarte = null;
-        }
-        this.nbCarte = nbCarte;
-        this.typeTas = typeTas;
-        this.choixJoueur = choixJoueur;
-        this.partie = partie;
-    }
 
     /**
      * Action de défausse des cartes

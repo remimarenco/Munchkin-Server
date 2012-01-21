@@ -33,8 +33,7 @@ public abstract class Action {
      * @param partie
      * @return
      */
-    protected Joueur demandeChoixJoueur(Partie partie, Joueur joueurEmetteur)
-    {
+    protected Joueur demandeChoixJoueur(Partie partie, Joueur joueurEmetteur){
         joueurEmetteur.sendMessage(new Message(Message.CHOIXJOUEUR, "Partie", joueurEmetteur.getName(),"Veuiller choisir le joueur destination "));
         partie.setJoueurCible(null);
         while(partie.getJoueurCible()==null){

@@ -25,10 +25,6 @@ public class Defausse<T> {
     public ArrayList<T> getDefausse() {
         return defausse;
     }
-
-    public void setDefausse(ArrayList<T> defausse) {
-        this.defausse = defausse;
-    }
     // ================================== //
     
     
@@ -40,17 +36,6 @@ public class Defausse<T> {
      */
     public boolean ajouterCarte(T c){
     	return this.defausse.add(c);
-        
-    }
-    
-    
-    /**
-     * Supprime une carte de la défausse
-     * @param c
-     * @return 
-     */
-    public boolean supprimerCarte(T c){
-    	return this.defausse.remove(c);
         
     }
     

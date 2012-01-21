@@ -14,7 +14,6 @@ import joueur.Joueur;
 public class ChangerClasse extends Action{
     
     protected Classe classe;
-    protected boolean choixJoueur;
     protected Partie partie;
     
     
@@ -25,18 +24,6 @@ public class ChangerClasse extends Action{
     public ChangerClasse(Classe classe) {
         this.classe = classe;
     }
-    
-    /**
-     * Constructeur de la classe ChangerClasse, permet de modifier la classe d'un personnage choisit
-     * @param classe
-     * @param choixJoueur
-     * @param partie => Pour contacter le joueur afin qu'il puisse donner le joueur choisit
-     */
-    public ChangerClasse(Classe classe, boolean choixJoueur) {
-        this.classe = classe;
-        this.choixJoueur = choixJoueur;
-    }
-
     
     /**
      * Change la classe d'un joueur

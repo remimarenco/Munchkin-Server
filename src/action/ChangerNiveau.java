@@ -15,7 +15,6 @@ public class ChangerNiveau extends Action {
     protected int niveau;                     // Delta de changement de niveau
     protected int niveauMin;                  // Niveau minimum
     protected ArrayList<Classe> tabClasse;    // Tableau de classe
-    protected boolean choixJoueur;
     protected Partie partie;
 
     /**
@@ -46,34 +45,6 @@ public class ChangerNiveau extends Action {
         this.choixJoueur = choixJoueur;
     }
     
-    /**
-     * Constructeur de l'action ChangerNiveau
-     * Niveau positif : gain de niveaux
-     * Niveau négatif : perte de niveaux
-     * @param niveau : le delta de changement de niveau
-     * @param tabClasse : tableau des classe impactée par le changement
-     */
-    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse){
-        this.niveau    = niveau;
-        this.tabClasse = tabClasse;
-        this.niveauMin = 0;
-    }
-    
-    /**
-     * Constructeur de l'action ChangerNiveau
-     * Niveau positif : gain de niveaux
-     * Niveau négatif : perte de niveaux
-     * @param niveau : le delta de changement de niveau
-     * @param tabClasse : tableau des classe impactée par le changement
-     * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
-     * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
-     */
-    public ChangerNiveau(int niveau, ArrayList<Classe> tabClasse, boolean choixJoueur){
-        this.niveau    = niveau;
-        this.tabClasse = tabClasse;
-        this.niveauMin = 0;
-        this.choixJoueur = choixJoueur;
-    }
     
     /**
      * Constructeur de l'action ChangerNiveau
@@ -88,21 +59,6 @@ public class ChangerNiveau extends Action {
         this.tabClasse = null;
     }
     
-    /**
-     * Constructeur de l'action ChangerNiveau
-     * Niveau positif : gain de niveaux
-     * Niveau négatif : perte de niveaux
-     * @param niveau : le delta de changement de niveau
-     * @param niveauMin : niveau minimum
-     * @param choixJoueur : Mettre à true si on veut demander au joueur émetteur de choisir un joueur sur lequel lancer le changement de niveau
-     * @param partie : partie controleur afin de pouvoir envoyer des messages et les récupérer
-     */
-    public ChangerNiveau(int niveau, int niveauMin, boolean choixJoueur){
-        this.niveau    = niveau;
-        this.niveauMin = niveauMin;
-        this.tabClasse = null;
-        this.choixJoueur = choixJoueur;
-    }
     
     /**
      * Action de ChangerNiveau

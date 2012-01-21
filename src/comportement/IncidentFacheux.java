@@ -13,8 +13,6 @@ import joueur.Joueur;
  */
 public class IncidentFacheux extends Comportement{
 
-    public ArrayList<Action> tabAction; // Esemble d'action à effectuer sur un incident fâcheux
-
     /**
      * Constructeur
      * On définit les actions que va faire l'incident fâcheux

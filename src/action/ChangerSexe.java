@@ -11,7 +11,7 @@ import partie.Partie;
  * @author Simon Grabit
  */
 public class ChangerSexe extends Action {
-    protected boolean choixJoueur;
+
     protected Partie partie;
 	
     /**
@@ -21,14 +21,6 @@ public class ChangerSexe extends Action {
 
     }
     
-    /**
-     * Méthode permettant de définir si le changement de sexe demande un choix utilisateur
-     * @param choixJoueur => True si on veut faire choisir un joueur
-     * @param partie
-     */
-    public ChangerSexe(boolean choixJoueur){
-    	this.choixJoueur = choixJoueur;
-    }
     
     /**
      * Action permettant le changement de sexe

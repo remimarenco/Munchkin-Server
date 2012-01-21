@@ -13,7 +13,6 @@ import joueur.Joueur;
  */
 public class IncidentDeguerpir extends Comportement{
 
-    public ArrayList<Action> tabAction;
 
     /**
      * Constructeur

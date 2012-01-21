@@ -20,17 +20,6 @@ public class CartesJoueur {
     
     /**
      * Constructeur
-     * @param cartes
-     * @param joueur 
-     */
-    public CartesJoueur(ArrayList<Carte> cartes, Joueur joueur) {
-        this.cartes = cartes;
-        this.joueur = joueur;
-    }
-
-    
-    /**
-     * Constructeur
      */
     public CartesJoueur() {
         cartes = new ArrayList<Carte>();
@@ -65,18 +54,6 @@ public class CartesJoueur {
         return cartes.remove(c);
     }
     
-    
-    /**
-     * Retourne une carte aléatoire du tas
-     * @return Carte : une carte du tas
-     */
-    public Carte getRandomCarte(){
-        int valeur = Constante.nbAleatoire(0, cartes.size()+1);
-        // Si le joueur n'a plus de carte en main
-        if(cartes.isEmpty())
-            return null;
-        return cartes.get(valeur);
-    }
     
     /**
      * Retourne une carte d'un des types spécifié aléatoire du tas selon 
@@ -158,19 +135,8 @@ public class CartesJoueur {
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
     }
-    /**
-     * Retourne l'ensemble des cartes qu'un joueur peut jouer pour AIDER un autre joueur(passer de sa main à son jeu)
-     * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont
-     * // renvoyées alors qu'avec ce test elles ne devraient pas l'être
-     * @return
-     */
-    public HashMap<String,String> getCartesJouablePourAide(){
-        HashMap<String,String> map=new HashMap<String, String>();
-        for(Carte c : this.cartes)
-            if(c instanceof Monstre)
-                map.put(c.getId().toString(), c.getId().toString());
-        return map;
-    }
+    
+    
     /**
      * Retourne l'ensemble des cartes qu'un joueur peut jouer pour POURRIR un autre joueur(passer de sa main à son jeu)
      * // TODO : Vérifier le comportement, notamment pourquoi les race & classe sont

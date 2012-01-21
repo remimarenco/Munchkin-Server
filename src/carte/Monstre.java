@@ -67,10 +67,6 @@ public class Monstre extends Donjon {
         return puissance;
     }
 
-    public void setPuissance(int puissance) {
-        this.puissance = puissance;
-    }
-
     public int getBonusPuissance() {
         return bonusPuissance;
     }
@@ -79,16 +75,8 @@ public class Monstre extends Donjon {
         this.bonusPuissance = bonusPuissance;
     }
 
-    public Condition getCondition() {
-        return condition;
-    }
-
     public void setCondition(Condition condition) {
         this.condition = condition;
-    }
-    
-    public void setIncidentFacheux(IncidentFacheux incidentFacheux) {
-        this.incidentFacheux = incidentFacheux;
     }
     // ================================== //
     

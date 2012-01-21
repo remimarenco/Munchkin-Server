@@ -14,15 +14,6 @@ public class ModifNbMaxEquipement extends Action{
 
     private int bonusNbMax;
 	
-    
-    /**
-     * Constructeur
-     * @param bonusNbMax
-     */
-    public ModifNbMaxEquipement(int bonusNbMax) {
-        super();
-        this.bonusNbMax = bonusNbMax;
-    }
 
     /**
      * Méthode modifiant le nombre maximum d'objet porté par le joueur

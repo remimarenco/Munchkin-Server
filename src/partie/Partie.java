@@ -55,40 +55,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		deck           = new Deck();
 	}
 
-	/**
-	 * Constructeur
-	 * @param piocheTresor
-	 * @param piocheDonjon
-	 * @param defausseTresor
-	 * @param defausseDonjon
-	 * @param listeJoueurs 
-	 */
-	public Partie(Pioche<Tresor> piocheTresor, Pioche<Donjon> piocheDonjon, Defausse<Tresor> defausseTresor, Defausse<Donjon> defausseDonjon, ArrayList<Joueur> listeJoueurs) {
-		this.piocheTresor   = piocheTresor;
-		this.piocheDonjon   = piocheDonjon;
-		this.defausseTresor = defausseTresor;
-		this.defausseDonjon = defausseDonjon;        
-	}
-
-
-
-	// ===== ACCESSEURS & MUTATEURS ===== //
-	public Defausse getDefausseDonjon() {
-		return defausseDonjon;
-	}
-
-	public void setDefausseDonjon(Defausse defausseDonjon) {
-		this.defausseDonjon = defausseDonjon;
-	}
-
-	public Defausse getDefausseTresor() {
-		return defausseTresor;
-	}
-
-	public void setDefausseTresor(Defausse defausseTresor) {
-		this.defausseTresor = defausseTresor;
-	}
-
         public Joueur getJoueurCible() {
             return joueurCible;
         }
@@ -108,14 +74,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         public void setCampCible(String campCible) {
             this.campCible = campCible;
         }
-
-	public void setPiocheDonjon(Pioche<Donjon> piocheDonjon) {
-		this.piocheDonjon = piocheDonjon;
-	}
-
-	public void setPiocheTresor(Pioche<Tresor> piocheTresor) {
-		this.piocheTresor = piocheTresor;
-	}
 
 	public Pioche<Tresor> getPiocheTresor() {
 		return piocheTresor;
@@ -137,10 +95,6 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
 	public Joueur getEnCours() {
 		return enCours;
-	}
-
-	public void setEnCours(Joueur enCours) {
-		this.enCours = enCours;
 	}
 
 	/**
@@ -201,17 +155,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		//        }
 	}
 
-
-	/**
-	 * Début d'un tour
-	 * @return boolean
-	 */
-	public boolean commencerTour(){
-		Donjon enJeu = (Donjon) piocheDonjon.tirerCarte();
-		return true;
-	}
-
-
+        
 	/**
 	 * Supprime un joueur grâce à son nom
 	 * @param name 

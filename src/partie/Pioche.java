@@ -25,10 +25,6 @@ public class Pioche<T> {
     
     
     // ===== ACCESSEURS & MUTATEURS ===== //
-    public ArrayList<T> getPioche() {
-        return pioche;
-    }
-
     public void setPioche(ArrayList<T> pioche) {
         this.pioche = pioche;
     }
