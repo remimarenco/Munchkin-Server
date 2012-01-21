@@ -69,4 +69,15 @@ public class Sortilege extends Comportement{
         out += "\n";    
         return out;
 	}
+
+    public boolean isIntervenable(int phaseTourEnCours) {
+        for(Action action : tabAction)
+        {
+            if(!action.isIntervenable(phaseTourEnCours))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

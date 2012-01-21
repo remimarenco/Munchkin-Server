@@ -72,4 +72,9 @@ public class ChangerRace extends Action {
     public boolean isPosable(Partie partie, Joueur joueur) {
         return true;
     }
+
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        return true;
+    }
 }

@@ -30,6 +30,7 @@ public abstract class Action {
      */
     public abstract String action(Joueur joueurEmetteur, ArrayList<Joueur> joueurDestinataire, Partie partie, boolean choixJoueur);
     
+    
     /**
      * Méthode abstraite permettant de lancer l'action
      * On s'arrête sur : une action a été lancée par un joueur (ou pas), cible un ensemble de joueurs (ou pas), demande un choix de ciblage de joueur
@@ -78,4 +79,6 @@ public abstract class Action {
     }
 
     public abstract boolean isPosable(Partie partie, Joueur joueur);
+
+    public abstract boolean isIntervenable(int phaseTourEnCours);
 }

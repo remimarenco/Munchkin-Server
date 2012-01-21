@@ -1097,7 +1097,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// On autorise la joueur a sélectionner des cartes
 		// TODO : Selection des cartes jouables
 		emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", emetteur.getName(),
-				emetteur.getMain().generateInfos()));
+				this.getCartesIntervenables(emetteur, this.phaseTour)));
                 emetteur.setCarteClickee(null);		
 		// On attends que le joueur ait choisi une carte
 		while(emetteur.getCarteClickee()==null)
@@ -1452,5 +1452,38 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             
             // On retourne sous une forme LinkedHashMap<String idCarte,String idCarte>  
             return LHMcartesPosables;
+        }
+        
+        /**
+         * Méthode permettant de retourner un LinkedHashMap des cartes jouables sur une intervention
+         * Aujourd'hui compatible seulement
+         * @param phaseTourEnCours
+         * @return 
+         */
+        private LinkedHashMap<String, String> getCartesIntervenables(Joueur joueurEmetteur, int phaseTourEnCours)
+        {
+            ArrayList<Carte> cartesMaybeIntervenables = new ArrayList<Carte>();
+            LinkedHashMap<String,String> LHMcartesIntervenables = new LinkedHashMap<String, String>();
+            // On parcourt les cartes de la main en selectionnant seulement les objets
+            for(Carte c : joueurEmetteur.getMain().getCartes())
+            {
+                // Si c'est une carte sort ou malediction, on peut peut etre la poser
+                if(c instanceof Sort || c instanceof Malediction)
+                {
+                    cartesMaybeIntervenables.add(c);
+                }
+            }
+            // On demande à chaque carte si elle est jouable d'après la main en cours
+            for(Carte c : cartesMaybeIntervenables)
+            {
+                // Si oui, on selectionne les cartes qui match
+                if(c.isIntervenable(phaseTourEnCours))
+                {
+                    LHMcartesIntervenables.put(c.getId().toString(), c.getId().toString());
+                }
+            }
+            
+            // On retourne sous une forme LinkedHashMap<String idCarte,String idCarte>  
+            return LHMcartesIntervenables;
         }
 }

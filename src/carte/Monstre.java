@@ -126,4 +126,9 @@ public class Monstre extends Donjon {
     public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
         return false;
     }
+
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        return false;
+    }
 }

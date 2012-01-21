@@ -6,16 +6,27 @@ import carte.Monstre;
 import joueur.Joueur;
 import joueur.Personnage;
 import partie.Combat;
+import partie.Constante;
 import partie.Partie;
 
 public class ModifPuissanceCampChoisi extends Action {
         
     protected int bonus;
     protected Object campCible;
+    protected ArrayList<Integer> phasesIntervenir;
 	
     public ModifPuissanceCampChoisi(int bonus){
         this.bonus = bonus;
+        this.phasesIntervenir = new ArrayList<Integer>();
+        this.phasesIntervenir.add(Constante.PHASE_CHERCHER_LA_BAGARRE);
     }
+    
+    public ModifPuissanceCampChoisi(int bonus, ArrayList<Integer> phasesIntervenir)
+    {
+        this.bonus = bonus;
+        this.phasesIntervenir = (ArrayList<Integer>) phasesIntervenir.clone();
+    }
+    
 	
     @Override
     public String action(Joueur joueurEmetteur,
@@ -79,5 +90,31 @@ public class ModifPuissanceCampChoisi extends Action {
     @Override
     public boolean isPosable(Partie partie, Joueur joueur) {
         return true;
+    }
+    
+    /**
+     * Méthode permettant de savoir si une action est intervenable ou non selon la phase du tour passé en paramètre
+     * @param phaseTourEnCours
+     * @return 
+     */
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        // Si la phase n'a pas été spécifiée ou contient PHASE_ALL, on retourne immédiatement vrai
+        if(phasesIntervenir == null || phasesIntervenir.contains(Constante.PHASE_ALL) || phasesIntervenir.isEmpty())
+        {
+            return true;
+        }
+        // Sinon on parcourt les phasesIntervenir renseigné à la construction de l'objet, si on trouve un match avec celle passée en paramètre, on retourne vrai sinon on retourn faux
+        else
+        {
+            for(Integer phaseIntervenir : phasesIntervenir)
+            {
+                if(phaseIntervenir.equals(phaseTourEnCours))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

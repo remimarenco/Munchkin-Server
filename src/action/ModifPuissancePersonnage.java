@@ -6,6 +6,7 @@ import partie.Partie;
 import joueur.Classe;
 import joueur.Joueur;
 import joueur.Race;
+import partie.Constante;
 
 /**
  * Modifie la puissance d'un personnage dans un combat
@@ -18,6 +19,7 @@ public class ModifPuissancePersonnage extends Action{
     private int bonusPuissance;
     private boolean bNiveau = true;
     private boolean bObjet  = true;
+    protected ArrayList<Integer> phasesIntervenir;
 	
     
     /**
@@ -46,6 +48,9 @@ public class ModifPuissancePersonnage extends Action{
             this.tabClasse = null;
         }
         this.bonusPuissance = bonusPuissance;
+        
+        this.phasesIntervenir = new ArrayList<Integer>();
+        this.phasesIntervenir.add(Constante.PHASE_CHERCHER_LA_BAGARRE);
     }
 	
     
@@ -65,6 +70,9 @@ public class ModifPuissancePersonnage extends Action{
         this.bonusPuissance = bonusPuissance;
         this.bNiveau        = bNiveau;
         this.bObjet         = bObjet;
+        
+        this.phasesIntervenir = new ArrayList<Integer>();
+        this.phasesIntervenir.add(Constante.PHASE_CHERCHER_LA_BAGARRE);
     }
 
     /**
@@ -137,7 +145,7 @@ public class ModifPuissancePersonnage extends Action{
                     accept=false;
             }
 
-            // TODO : Commenter, expliciter ce qu'est bNiveau & bObjet
+            // TODO : Ce n'est pas le personnage qui recoit un bonus de puissance mais le camp gentil du combat
 
             if(!bNiveau){
                 niveauJoueur=joueurImpacte.getPersonnage().getNiveau();
@@ -170,5 +178,31 @@ public class ModifPuissancePersonnage extends Action{
     @Override
     public boolean isPosable(Partie partie, Joueur joueur) {
         return true;
+    }
+    
+    /**
+     * Méthode permettant de savoir si une action est intervenable ou non selon la phase du tour passé en paramètre
+     * @param phaseTourEnCours
+     * @return 
+     */
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        // Si la phase n'a pas été spécifiée ou contient PHASE_ALL, on retourne immédiatement vrai
+        if(phasesIntervenir == null || phasesIntervenir.contains(Constante.PHASE_ALL) || phasesIntervenir.isEmpty())
+        {
+            return true;
+        }
+        // Sinon on parcourt les phasesIntervenir renseigné à la construction de l'objet, si on trouve un match avec celle passée en paramètre, on retourne vrai sinon on retourn faux
+        else
+        {
+            for(Integer phaseIntervenir : phasesIntervenir)
+            {
+                if(phaseIntervenir.equals(phaseTourEnCours))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }       

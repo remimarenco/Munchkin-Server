@@ -19,6 +19,7 @@ public class ModifPuissanceMonstre extends Action{
     private ArrayList<Classe> tabClasse;
     private int bonusPuissance;
     private Monstre monstre;
+    protected ArrayList<Integer> phasesIntervenir;
 	
     /**
      * Constructeur
@@ -42,7 +43,8 @@ public class ModifPuissanceMonstre extends Action{
 		
         this.bonusPuissance = bonusPuissance;
         this.monstre = monstre;
-        
+        this.phasesIntervenir = new ArrayList<Integer>();
+        this.phasesIntervenir.add(Constante.PHASE_CHERCHER_LA_BAGARRE);
     }
 
     /**
@@ -105,7 +107,7 @@ public class ModifPuissanceMonstre extends Action{
             if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE){
             	accept = false;
             }
-
+            //TODO : Ce n'est pas le personnage qui recoit un bonus de puissance mais le camp méchant du combat
             if(accept){
                 monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);
                 out += "\nModification du monstre effectuée";
@@ -130,5 +132,31 @@ public class ModifPuissanceMonstre extends Action{
     @Override
     public boolean isPosable(Partie partie, Joueur joueur) {
         return true;
+    }
+    
+    /**
+     * Méthode permettant de savoir si une action est intervenable ou non selon la phase du tour passé en paramètre
+     * @param phaseTourEnCours
+     * @return 
+     */
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        // Si la phase n'a pas été spécifiée ou contient PHASE_ALL, on retourne immédiatement vrai
+        if(phasesIntervenir == null || phasesIntervenir.contains(Constante.PHASE_ALL) || phasesIntervenir.isEmpty())
+        {
+            return true;
+        }
+        // Sinon on parcourt les phasesIntervenir renseigné à la construction de l'objet, si on trouve un match avec celle passée en paramètre, on retourne vrai sinon on retourn faux
+        else
+        {
+            for(Integer phaseIntervenir : phasesIntervenir)
+            {
+                if(phaseIntervenir.equals(phaseTourEnCours))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

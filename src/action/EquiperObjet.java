@@ -187,4 +187,9 @@ public class EquiperObjet extends Action{
         return accept;
     }
 
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        return true;
+    }
+
 }

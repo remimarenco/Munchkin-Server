@@ -53,4 +53,6 @@ public abstract class Carte {
     }
     
     public abstract boolean isPosable(Partie partie, Joueur joueurEmetteur);
+
+    public abstract boolean isIntervenable(int phaseTourEnCours);
 }

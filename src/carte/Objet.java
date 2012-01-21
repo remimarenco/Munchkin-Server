@@ -87,4 +87,9 @@ public class Objet extends Tresor {
     public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
         return equipement.isPosable(partie, joueurEmetteur);
     }
+
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        return false;
+    }
 }

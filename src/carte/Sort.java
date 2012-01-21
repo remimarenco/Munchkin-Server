@@ -59,4 +59,9 @@ public class Sort extends Tresor implements ISortilege{
     public boolean isPosable(Partie partie, Joueur joueurEmetteur) {
         return false;
     }
+
+    @Override
+    public boolean isIntervenable(int phaseTourEnCours) {
+        return sortilege.isIntervenable(phaseTourEnCours);
+    }
 }
