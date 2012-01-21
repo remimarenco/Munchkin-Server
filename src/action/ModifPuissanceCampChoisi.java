@@ -46,12 +46,12 @@ public class ModifPuissanceCampChoisi extends Action {
 						if(o.getClass().equals(Personnage.class))
 						{
 							out += "On applique le bonus de "+ bonus + " au camp gentil";
-							partie.getCombat().setBonusTemporaireGentil(bonus);
+							partie.getCombat().setBonusTemporaireGentil(partie.getCombat().getBonusTemporaireGentil()+bonus);
 						}
 						else if(o.getClass().equals(Monstre.class))
 						{
 							out += "On applique le bonus de "+ bonus + " au camp mechant";
-							partie.getCombat().setBonusTemporaireMechant(bonus);
+							partie.getCombat().setBonusTemporaireMechant(partie.getCombat().getBonusTemporaireMechant()+bonus);
 						}
 						else
 						{
@@ -63,7 +63,7 @@ public class ModifPuissanceCampChoisi extends Action {
 			}
 			else
 			{
-				partie.getCombat().setBonusTemporaireGentil(bonus);
+				partie.getCombat().setBonusTemporaireGentil(partie.getCombat().getBonusTemporaireGentil()+bonus);
 				out += "obj est null, on applique sur le camp Gentil";
 			}
 		}
