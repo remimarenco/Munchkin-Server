@@ -115,7 +115,8 @@ public class CartesJoueur {
                 }
             }
         }
-
+        
+        // Si on a pas trouvé de correspondance, on retourne null
         // On choisit une carte dans ce tas de cartes correspondantes au pif et on la retourne
         int valeur = Constante.nbAleatoire(0, cartesCorrespondantes.size());
         System.out.println("valeur dans getRandomCarte est de :"+valeur);

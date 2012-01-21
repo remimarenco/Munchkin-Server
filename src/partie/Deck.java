@@ -504,7 +504,7 @@ public final class Deck {
         cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         tabClassCarte.clear();
-        tabClassCarte.add(Objet.class);
+        //tabClassCarte.add(Objet.class);
         actionTabMalediction.add(new DefausserCarte(tabClassCarte, 2, Constante.MAIN));
         cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
