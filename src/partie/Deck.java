@@ -900,9 +900,9 @@ public final class Deck {
         actionEquipement.clear();
         tabRace.clear();
         tabRace.add(Constante.RACE_HUMAINE);
-        actionEquipement.add(new EquiperObjet(tabRace, null, false, 3, 0, 1));
+        actionEquipement.add(new EquiperObjet(tabRace, null, false, 4, 0, 1));
         actionDefausser.clear();
-        actionDefausser.add(new EquiperObjet(tabRace, null, false, -3, 0, -1));
+        actionDefausser.add(new EquiperObjet(tabRace, null, false, -4, 0, -1));
         cartes.add(new Objet(156 ,"Hallebarde suisse multifonctions", "Réservé aux Humains.\n Bonus de + 4", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         
