@@ -35,8 +35,8 @@ public class EquiperObjet extends Action{
      */
     public EquiperObjet(ArrayList<Race> tabRace, ArrayList<Classe> tabClasse, boolean aChangeSexe, int bonusPuissance, int bonusDeguerpir, int poids) {
         super();
-        this.tabRace        = tabRace;
-        this.tabClasse      = tabClasse;
+        this.tabRace        = (ArrayList<Race>)tabRace.clone();
+        this.tabClasse      = (ArrayList<Classe>)tabClasse.clone();
         this.aChangeSexe    = aChangeSexe;
         this.bonusDeguerpir = bonusDeguerpir;
         this.bonusPuissance = bonusPuissance;
