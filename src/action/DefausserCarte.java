@@ -34,7 +34,14 @@ public class DefausserCarte extends Action {
      * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
      */
     public DefausserCarte(ArrayList<Class> typeCarte, int nbCarte, int typeTas) {
-        this.typeCarte = typeCarte;
+        if(typeCarte != null)
+        {
+            this.typeCarte = (ArrayList<Class>) typeCarte.clone();
+        }
+        else
+        {
+            this.typeCarte = null;
+        }
         this.nbCarte = nbCarte;
         this.typeTas = typeTas;
     }
@@ -46,7 +53,14 @@ public class DefausserCarte extends Action {
      * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
      */
     public DefausserCarte(ArrayList<Class> typeCarte, int nbCarte, int typeTas, boolean choixJoueur) {
-        this.typeCarte = typeCarte;
+        if(typeCarte != null)
+        {
+            this.typeCarte = (ArrayList<Class>) typeCarte.clone();
+        }
+        else
+        {
+            this.typeCarte = null;
+        }
         this.nbCarte = nbCarte;
         this.typeTas = typeTas;
         this.choixJoueur = choixJoueur;
