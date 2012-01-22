@@ -39,6 +39,10 @@ public class Combat {
 
 	public void setBonusTemporaireMechant(int bonusTemporaireMechant) {
 		this.bonusTemporaireMechant = bonusTemporaireMechant;
+                if(this.bonusTemporaireMechant < 1)
+                {
+                    this.bonusTemporaireMechant = 1;
+                }
 	}
 
 

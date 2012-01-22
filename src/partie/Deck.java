@@ -11,6 +11,7 @@ import action.ModifDeguerpir;
 import action.ModifNbMaxEquipement;
 import action.ModifPuissanceCampChoisi;
 import action.ModifPuissanceMonstre;
+import action.ModifPuissanceMonstreObjet;
 import action.ModifPuissancePersonnage;
 import action.PiocherCarte;
 import carte.Carte;
@@ -446,14 +447,24 @@ public final class Deck {
         // =============
       //TODO
         /*cartes.add(new Malediction(36, "Petite Amie", "Un autre monstre apparait, du même niveau, et avec les mêmes bonus. Si les monstres sont vaincus, tirez les cartes de trésor et gagnez des niveaux pour chacun d'entre eux.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(37, "Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(38, "Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(39, "Vénérable", "+10 au niveau du monstre. A jouer pendant le combat. Si le monstre est vaincu, tirez 2 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(40, "Enoooorme", "+10 au niveau du monstre. A jouer pendant le combat. Si le monstre est vaincu, tirez 2 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
-        cartes.add(new Malediction(41, "Bébé", "-5 au niveau du monstre(niveau minimum: 1). A jouer pendant le combat. Si le monstre est vaincu, tirez 1 cartes trésor en moins (minimum 1).", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(42, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         cartes.add(new Malediction(43, "Monstre Errant", "A jouer ainsi qu'un monstre de votre main, quand quelqu'un (vous y compris) se bat. Votre monstre rejoint celui qui combat: leurs forces de combat s'additionnent. Si le ou les personnages doivent déguerpir, résolvez séparément les tentatives, dans l'ordre choisi par les victimes", new Sortilege(actionTabMalediction)));
         */
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceMonstreObjet(5));
+        cartes.add(new Malediction(37, "Enragé", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceMonstreObjet(5));
+        cartes.add(new Malediction(38, "Intelligent", "+5 au niveau du monstre. A jouer pendant un combat. Si le monstre est vaincu, tirez 1 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceMonstreObjet(10));
+        cartes.add(new Malediction(39, "Vénérable", "+10 au niveau du monstre. A jouer pendant le combat. Si le monstre est vaincu, tirez 2 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceMonstreObjet(10));
+        cartes.add(new Malediction(40, "Enoooorme", "+10 au niveau du monstre. A jouer pendant le combat. Si le monstre est vaincu, tirez 2 cartes trésor supplémentaire.", new Sortilege(actionTabMalediction)));
+        actionTabMalediction.clear();
+        actionTabMalediction.add(new ModifPuissanceMonstreObjet(-5));
+        cartes.add(new Malediction(41, "Bébé", "-5 au niveau du monstre(niveau minimum: 1). A jouer pendant le combat. Si le monstre est vaincu, tirez 1 cartes trésor en moins (minimum 1).", new Sortilege(actionTabMalediction)));
         //FIN_TODO
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-1));
