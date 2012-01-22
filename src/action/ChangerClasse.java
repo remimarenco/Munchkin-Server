@@ -1,5 +1,6 @@
 package action;
 
+import carte.Carte;
 import java.util.ArrayList;
 
 import partie.Partie;
@@ -14,6 +15,10 @@ import joueur.Joueur;
 public class ChangerClasse extends Action{
     
     protected Classe classe;
+
+    public Classe getClasse() {
+        return classe;
+    }
     protected Partie partie;
     
     
@@ -39,7 +44,26 @@ public class ChangerClasse extends Action{
         
         if(joueurDestinataireTemp != null)
             for(Joueur joueurImpacte : joueurDestinataireTemp){             // Parcourt l'ensemble des joueurs cible
+                    Carte carteTrouve = null;
                     out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
+                    // On parcourt les cartes du jeu du joueur
+                    for(Carte carte : joueurImpacte.getJeu().getCartes())
+                    {
+                        carte.Classe carteClasse;
+                        // Si la carte est une carte de race, on la défausse
+                        if(carte instanceof carte.Classe)
+                        {
+                            carteClasse = (carte.Classe) carte;
+                            if(!carteClasse.getClasse().equals(this.classe))
+                            {
+                                carteTrouve = carteClasse;
+                            }
+                        }
+                    }
+                    if(carteTrouve != null)
+                    {
+                        partie.defausserCarte(joueurImpacte, joueurImpacte.getJeu(), carteTrouve);
+                    }
                     joueurImpacte.getPersonnage().setClasse(this.classe);   // Change la classe du personnage
                     out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();
             }

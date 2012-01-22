@@ -20,6 +20,12 @@ public  class Equipement extends Comportement {
         super(tabAction);
     }
 
+    public ArrayList<Action> getTabAction() {
+        return tabAction;
+    }
+    
+    
+
     /**
      * Equipe un joueur
      * @param joueurImpacte : le joueur a équiper
