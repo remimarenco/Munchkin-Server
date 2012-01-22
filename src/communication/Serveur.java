@@ -64,7 +64,7 @@ public class Serveur {
                 if (this.partie.loginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
                     com.setSexe(Integer.valueOf(msg.getMessage()));
-                    com.setAvatar(new JLabel(new ImageIcon(msg.getAvatar())));
+                    com.setAvatar(new JLabel(msg.getAvatar()));
                     this.partie.add(com);                   
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message  = new Message(Message.MESSAGE, "admin", "Partie",    text);

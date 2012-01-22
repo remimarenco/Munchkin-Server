@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -42,7 +43,7 @@ public class Message {
     private String nick_dest = "";    
     private String message   = "";
     private String idCard    = new String();
-    private BufferedImage avatar;
+    private ImageIcon avatar;
     private int type;
     private int action;
     private Color color;
@@ -161,7 +162,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,String msg,BufferedImage avatar){
+    public Message(int type,String nick_src,String nick_dest,String msg,ImageIcon avatar){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;    
@@ -211,7 +212,7 @@ public class Message {
                 if(type >= INFO_JOUEUR){
                     if(type==CONNECT){
                         this.message=in.readUTF();
-                        this.avatar=(BufferedImage)ois.readObject();
+                        this.avatar=(ImageIcon)ois.readObject();
                     }
                     else if(type==LISTE)
                         this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
@@ -301,7 +302,7 @@ public class Message {
         return action;
     }
 
-    public BufferedImage getAvatar() {
+    public ImageIcon getAvatar() {
         return avatar;
     }
     
