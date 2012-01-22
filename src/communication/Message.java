@@ -5,9 +5,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import javax.swing.JLabel;
 
 /**
  * Classe Message identique entre client et serveur. Protocole d'echange
@@ -16,7 +15,7 @@ import javax.swing.JLabel;
 public class Message {
     
     
-    public static final int CONNECT           			= 88;
+    public static final int CONNECT           			= 15;
     public static final int DISCONNECT        			= 1;
     public static final int MESSAGE           			= 2;
     public static final int LISTE             			= 89;       
@@ -40,13 +39,12 @@ public class Message {
     private String nick_src  = "";     
     private String nick_dest = "";    
     private String message   = "";
-    private String idCard    = new String();
-    private JLabel avatar;
+    private String idCard    = new String();    
     private int type;
     private int action;
     private Color color;
     private HashMap<String,String> map;
-    private HashMap<String,JLabel> list;
+    private ArrayList<String> list;
     
     /**
      * Constructeur par défaut
@@ -147,25 +145,11 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,JLabel> list){
+    public Message(int type,String nick_src,String nick_dest,ArrayList<String> list){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
         this.list        = list;            
-    }
-    /**
-     * Constructeur
-     * @param type
-     * @param nick_src
-     * @param nick_dest
-     * @param map 
-     */
-    public Message(int type,String nick_src,String nick_dest,String msg,JLabel avatar){
-        this.type       = type;            
-        this.nick_src   = nick_src;          
-        this.nick_dest  = nick_dest;    
-        this.message    = msg;
-        this.avatar     = avatar;            
     }
     
     
@@ -193,7 +177,7 @@ public class Message {
     */
     public boolean read(DataInputStream in) {
         try{
-            ObjectInputStream ois = new ObjectInputStream(in);
+            ObjectInputStream ois = new ObjectInputStream(in);            
             type     = in.readInt();        
             nick_src = in.readUTF();
 
@@ -207,13 +191,10 @@ public class Message {
                     action = in.readInt();
                 if(type == INTERVENTION)
                     idCard = in.readUTF();
-                if(type >= INFO_JOUEUR){
-                    if(type==CONNECT){
-                        this.message=in.readUTF();
-                        this.avatar=(JLabel)ois.readObject();
+                if(type >= INFO_JOUEUR){                    
+                    if(type==LISTE){                        
+                        this.list=(ArrayList<String>)ois.readObject();                       
                     }
-                    else if(type==LISTE)
-                        this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
                     else
                         this.map=(HashMap<String,String>)ois.readObject();
                 }
@@ -231,7 +212,7 @@ public class Message {
      */
     public boolean write(DataOutputStream out) {
         try{
-            ObjectOutputStream oos=new ObjectOutputStream(out);
+            ObjectOutputStream oos=new ObjectOutputStream(out);            
             out.writeInt(type);                
             out.writeUTF(nick_src);
             
@@ -246,12 +227,9 @@ public class Message {
                 if(type==INTERVENTION)
                     out.writeUTF(idCard);
                 if(type>=INFO_JOUEUR){
-                    if(type==CONNECT){
-                        out.writeUTF(message);
-                        oos.writeObject(this.avatar);
+                    if(type==LISTE){                      
+                        oos.writeObject(this.list);                        
                     }
-                    else if(type==LISTE)
-                        oos.writeObject(this.list);
                     else  
                         oos.writeObject(map);
                 }
@@ -292,7 +270,7 @@ public class Message {
         return map;
     }
 
-    public HashMap<String, JLabel> getList() {
+    public ArrayList<String> getList() {
         return list;
     }    
 
@@ -300,8 +278,6 @@ public class Message {
         return action;
     }
 
-    public JLabel getAvatar() {
-        return avatar;
-    }
+  
     
 }

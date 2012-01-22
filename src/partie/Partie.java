@@ -190,9 +190,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public boolean loginDispo(String log){
                 boolean ret=true;
-		LinkedHashMap<String,JLabel> l = getListe();
-                for(Map.Entry<String,JLabel> m :l.entrySet())
-                    if(m.getKey().equals(log) || log.equals("Partie"))
+		ArrayList<String> l = getListe();
+                if(l.contains(log)||log.equals("Partie"))                
                         ret=false;
                 
                 return ret;	
@@ -203,11 +202,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Renvoi la liste de nom des joueurs
 	 * @return 
 	 */
-	public LinkedHashMap<String,JLabel> getListe(){
-            LinkedHashMap<String,JLabel> liste=new LinkedHashMap<String,JLabel>();
+	public ArrayList<String> getListe(){
+            ArrayList<String> liste=new ArrayList<String>();
             for(Joueur j:this)                
-                liste.put(j.getName(),j.getAvatar()); 
-            
+                liste.add(j.getName());            
 
             return liste;
 	}

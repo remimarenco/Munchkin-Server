@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -26,8 +27,7 @@ public class Joueur extends Thread {
     private Main main;
     private Jeu jeu;
     private Personnage personnage;
-    private Partie partie;
-    private JLabel avatar = null;
+    private Partie partie;    
     private Message msg          = new Message();
     private Object parent        = null;
     private DataInputStream in   = null;
@@ -51,15 +51,8 @@ public class Joueur extends Thread {
     }  
 
     
-    // ===== ACCESSEURS & MUTATEURS ===== //
-    
-    public JLabel getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(JLabel avatar) {
-        this.avatar = avatar;
-    }
+    // ===== ACCESSEURS & MUTATEURS ===== //    
+  
     
     public Jeu getJeu() {
         return jeu;
@@ -120,7 +113,7 @@ public class Joueur extends Thread {
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
      */
-    public void sendList(LinkedHashMap<String,JLabel> list){
+    public void sendList(ArrayList<String> list){
         new Message(Message.LISTE,"Partie",getName(),list).write(out);
     }
 
