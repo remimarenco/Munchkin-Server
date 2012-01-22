@@ -1,5 +1,6 @@
 package communication;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -64,7 +65,10 @@ public class Serveur {
                 if (this.partie.loginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
                     com.setSexe(Integer.valueOf(msg.getMessage()));
-                    com.setAvatar(new JLabel(msg.getAvatar()));
+                    ImageIcon icon=new ImageIcon(msg.getAvatar());
+                    Image image= icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(image);                     
+                    com.setAvatar(new JLabel(icon));
                     this.partie.add(com);                   
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message  = new Message(Message.MESSAGE, "admin", "Partie",    text);
