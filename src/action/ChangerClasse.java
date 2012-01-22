@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import partie.Partie;
 import joueur.Classe;
 import joueur.Joueur;
+import partie.Constante;
 
 
 /**
@@ -46,27 +47,32 @@ public class ChangerClasse extends Action{
             for(Joueur joueurImpacte : joueurDestinataireTemp){             // Parcourt l'ensemble des joueurs cible
                     Carte carteTrouve = null;
                     out = joueurImpacte.getName() + " passe de la classe " + joueurImpacte.getPersonnage().getClasse();
-                    // On parcourt les cartes du jeu du joueur
-                    for(Carte carte : joueurImpacte.getJeu().getCartes())
+                    // Si on passe null, il n'y a pas besoin de defauser une autre carte de classe car cela signifie que l'action provient d'une defausse
+                    if(!(this.classe == Constante.CLASSE_AUCUNE))
                     {
-                        // Si c'est la dernière carte, on a pas besoin de l'évaluer c'est la carte en cours
-                        if(!(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1))
+                        // On parcourt les cartes du jeu du joueur
+                        for(Carte carte : joueurImpacte.getJeu().getCartes())
                         {
-                            carte.Classe carteClasse;
-                            // Si la carte est une carte de race, on la défausse
-                            if(carte instanceof carte.Classe)
+                            // Si c'est la dernière carte, on a pas besoin de l'évaluer c'est la carte en cours
+                            if(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1)
                             {
-                                carteClasse = (carte.Classe) carte;
-                                if(!carteClasse.getClasse().equals(this.classe))
+                                carte.Classe carteClasse;
+                                // Si la carte est une carte de race, on la défausse
+                                if(carte instanceof carte.Classe)
                                 {
-                                    carteTrouve = carteClasse;
+                                    carteClasse = (carte.Classe) carte;
+                                    if(!carteClasse.getClasse().equals(this.classe))
+                                    {
+                                        carteTrouve = carteClasse;
+                                    }
                                 }
                             }
                         }
-                    }
-                    if(carteTrouve != null)
-                    {
-                        partie.defausserCarte(joueurImpacte, joueurImpacte.getJeu(), carteTrouve);
+                        if(carteTrouve != null)
+                        {
+                            System.out.println("On défausse la carte de classe");
+                            partie.defausserCarte(joueurImpacte, joueurImpacte.getJeu(), carteTrouve);
+                        }
                     }
                     joueurImpacte.getPersonnage().setClasse(this.classe);   // Change la classe du personnage
                     out += " à  la classe " + joueurImpacte.getPersonnage().getClasse();

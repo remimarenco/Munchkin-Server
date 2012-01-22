@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import partie.Partie;
 import joueur.Joueur;
 import joueur.Race;
+import partie.Constante;
 
 /**
  * Classe permettant de modifier la race d'un joueur
@@ -56,24 +57,32 @@ public class ChangerRace extends Action {
         for(Joueur joueurImpacte : joueurDestinataireTemp){
             Carte carteTrouve = null;
             out = joueurImpacte.getName() + " passe de la race " + joueurImpacte.getPersonnage().getRace();
-            // On parcourt les cartes du jeu du joueur
-            for(Carte carte : joueurImpacte.getJeu().getCartes())
+            // Si on passe Humain, il n'y a pas besoin de defauser une autre carte de race car cela signifie que l'action provient d'une defausse
+            if(!this.race.equals(Constante.RACE_HUMAINE))
             {
-                carte.Race carteRace;
-                // Si la carte est une carte de race, on la défausse
-                if(carte instanceof carte.Race)
+                // On parcourt les cartes du jeu du joueur
+                for(Carte carte : joueurImpacte.getJeu().getCartes())
                 {
-                    if(!(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1))
+                    carte.Race carteRace;
+                    // Si la carte est une carte de race, on la défausse
+                    if(carte instanceof carte.Race)
                     {
-                        carteRace = (carte.Race) carte;
-                        if(!carteRace.getRace().equals(this.race))
+                        if(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1)
                         {
-                            carteTrouve = carteRace;
+                            carteRace = (carte.Race) carte;
+                            if(!carteRace.getRace().equals(this.race))
+                            {
+                                carteTrouve = carteRace;
+                            }
                         }
                     }
                 }
+                if(carteTrouve != null)
+                {
+                    System.out.println("On défausse la carte de classe");
+                    partie.defausserCarte(joueurImpacte, joueurImpacte.getJeu(), carteTrouve);
+                }
             }
-            partie.defausserCarte(joueurImpacte, joueurImpacte.getJeu(), carteTrouve);
             joueurImpacte.getPersonnage().setRace(this.race);
             out += " à la race " + joueurImpacte.getPersonnage().getRace();
         }

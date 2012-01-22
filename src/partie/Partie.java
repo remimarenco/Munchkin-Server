@@ -437,7 +437,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                 System.out.println("On a appliqué la pose de carte sur le joueur");
                                 this.sendInfos();
                                 System.out.println("On a envoyé les infos sur le joueur");
-                                if(joueurIntervenant!=null){
+                                /*if(joueurIntervenant!=null){
                                     System.out.println("Le joueur intervenant n'est pas null");
                                     joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
                                             joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
@@ -448,7 +448,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                                     joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
                                             joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
                                     this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte a");
-                                }
+                                }*/
                                 
 			} else {   //Le joueur informe qu'il veut poser une carte
 				this.sendMessageToAllButSender(msg.getNick_src(), msg.getNick_src()+" souhaite poser une carte");
