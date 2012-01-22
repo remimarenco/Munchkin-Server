@@ -101,20 +101,12 @@ public class ModifPuissanceCampChoisi extends Action {
     public boolean isIntervenable(int phaseTourEnCours) {
         // Si la phase n'a pas été spécifiée ou contient PHASE_ALL, on retourne immédiatement vrai
         if(phasesIntervenir == null || phasesIntervenir.contains(Constante.PHASE_ALL) || phasesIntervenir.isEmpty())
-        {
             return true;
-        }
         // Sinon on parcourt les phasesIntervenir renseigné à la construction de l'objet, si on trouve un match avec celle passée en paramètre, on retourne vrai sinon on retourn faux
         else
-        {
             for(Integer phaseIntervenir : phasesIntervenir)
-            {
                 if(phaseIntervenir.equals(phaseTourEnCours))
-                {
                     return true;
-                }
-            }
-        }
         return false;
     }
 }

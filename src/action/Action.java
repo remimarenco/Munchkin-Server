@@ -13,8 +13,10 @@ import joueur.Joueur;
  * @author Rémi Marenco
  */
 public abstract class Action {
-	protected boolean choixJoueur = false;
-        ArrayList<Integer> phasesCompatibles;
+    
+    protected boolean choixJoueur = false;
+    ArrayList<Integer> phasesCompatibles;
+    ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
         
     /**
      * Méthode abstraite permettant de lancer l'action
@@ -76,6 +78,20 @@ public abstract class Action {
         }
         
     	return partie.getCombat().getCampCible();
+    }
+    
+    protected void getJoueursTemporaire(Joueur joueurEmetteur,
+                    ArrayList<Joueur> joueurDestinataire, Partie partie){
+        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
+        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
+            if(choixJoueur){
+                // On renvoi les joueurs destinataires par une demande au joueur initiateur
+                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
+            }
+        }
+        else{
+            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
+        }
     }
 
     public abstract boolean isPosable(Partie partie, Joueur joueur);

@@ -27,17 +27,8 @@ public class ModifNbMaxEquipement extends Action{
 		
         String out = "";
         out += "On modifie le nombre maximum d'objet portés par un joueur :\n";
-        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
-
-        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
-            if(choixJoueur)
-                    // On renvoi les joueurs destinataires par une demande au joueur initiateur
-                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-        }
-        else{
-            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
-        }
+        
+        getJoueursTemporaire(joueurEmetteur, joueurDestinataire, partie);
         
         // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
         for(Joueur joueurImpacte : joueurDestinataireTemp){

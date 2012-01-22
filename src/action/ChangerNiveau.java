@@ -72,8 +72,7 @@ public class ChangerNiveau extends Action {
 		
         String out           = "";
         boolean classeTrouve = true;
-        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
-
+        
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
         if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
             if(choixJoueur)

@@ -36,8 +36,6 @@ public class ChangerRace extends Action {
 		
         String out = "";
 		
-        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
-
         // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
         if(joueurDestinataire == null || joueurDestinataire.isEmpty()){
             if(choixJoueur)

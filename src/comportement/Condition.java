@@ -41,7 +41,7 @@ public class Condition extends Comportement {
         }
         return out;
     }
-
+    
     @Override
     public String action(Joueur joueurEmetteur,
                     ArrayList<Joueur> joueurDestinataire, Partie partie,

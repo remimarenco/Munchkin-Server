@@ -49,8 +49,7 @@ public class Pioche<T> {
      * Permet de poser la carte en dessous de la pioche
      * @param carte
      */
-    public void poserEnDessousPioche(T carte)
-    {
+    public void poserEnDessousPioche(T carte){
     	pioche.add(pioche.size(), carte);
     }
     

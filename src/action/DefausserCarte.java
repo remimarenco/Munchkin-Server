@@ -32,12 +32,10 @@ public class DefausserCarte extends Action {
      * @param typeTas : type de tas (MAIN ou JEU) depuis lequel se défausser
      */
     public DefausserCarte(ArrayList<Class> typeCarte, int nbCarte, int typeTas) {
-        if(typeCarte != null)
-        {
+        if(typeCarte != null){
             this.typeCarte = (ArrayList<Class>) typeCarte.clone();
         }
-        else
-        {
+        else{
             this.typeCarte = null;
         }
         this.nbCarte = nbCarte;
@@ -60,17 +58,7 @@ public class DefausserCarte extends Action {
         CartesJoueur tas;
         int valeur;
 
-        ArrayList<Joueur> joueurDestinataireTemp = new ArrayList<Joueur>();
-
-        // Si on avait pas spécifié de joueurDestinataire, on demande le joueur destinataire
-        if (joueurDestinataire == null || joueurDestinataire.isEmpty()) {
-            if (choixJoueur) {
-                // On renvoi les joueurs destinataires par une demande au joueur initiateur
-                joueurDestinataireTemp.add(demandeChoixJoueur(partie, joueurEmetteur));
-            }
-        } else {
-            joueurDestinataireTemp = (ArrayList<Joueur>) joueurDestinataire.clone();
-        }
+        getJoueursTemporaire(joueurEmetteur, joueurDestinataire, partie);
 
         // TODO : Demander au joueur (joueur selon paramètre) la carte qu'il veut défausser 
         for (Joueur joueurImpacte : joueurDestinataireTemp) {
