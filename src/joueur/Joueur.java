@@ -27,7 +27,7 @@ public class Joueur extends Thread {
     private Jeu jeu;
     private Personnage personnage;
     private Partie partie;
-    private BufferedImage avatar = null;
+    private JLabel avatar = null;
     private Message msg          = new Message();
     private Object parent        = null;
     private DataInputStream in   = null;
@@ -53,11 +53,11 @@ public class Joueur extends Thread {
     
     // ===== ACCESSEURS & MUTATEURS ===== //
     
-    public BufferedImage getAvatar() {
+    public JLabel getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(BufferedImage avatar) {
+    public void setAvatar(JLabel avatar) {
         this.avatar = avatar;
     }
     
@@ -120,7 +120,7 @@ public class Joueur extends Thread {
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
      */
-    public void sendList(LinkedHashMap<String,byte[]> list){
+    public void sendList(LinkedHashMap<String,JLabel> list){
         new Message(Message.LISTE,"Partie",getName(),list).write(out);
     }
 

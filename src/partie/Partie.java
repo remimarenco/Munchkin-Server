@@ -190,8 +190,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public boolean loginDispo(String log){
                 boolean ret=true;
-		LinkedHashMap<String,byte[]> l = getListe();
-                for(Map.Entry<String,byte[]> m :l.entrySet())
+		LinkedHashMap<String,JLabel> l = getListe();
+                for(Map.Entry<String,JLabel> m :l.entrySet())
                     if(m.getKey().equals(log) || log.equals("Partie"))
                         ret=false;
                 
@@ -203,19 +203,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Renvoi la liste de nom des joueurs
 	 * @return 
 	 */
-	public LinkedHashMap<String,byte[]> getListe(){
-            LinkedHashMap<String,byte[]> liste=new LinkedHashMap<String, byte[]>();
-            for(Joueur j:this){ 
-                ByteArrayOutputStream baos=new ByteArrayOutputStream();              
-                try {
-                    ImageIO.write(j.getAvatar(), "jpg", baos);
-                } catch (IOException ex) {
-                    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                byte[] b= null;
-                b=baos.toByteArray();
-                liste.put(j.getName(),b); 
-            }
+	public LinkedHashMap<String,JLabel> getListe(){
+            LinkedHashMap<String,JLabel> liste=new LinkedHashMap<String,JLabel>();
+            for(Joueur j:this)                
+                liste.put(j.getName(),j.getAvatar()); 
+            
 
             return liste;
 	}

@@ -1,16 +1,12 @@
 package communication;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
 /**
@@ -45,12 +41,12 @@ public class Message {
     private String nick_dest = "";    
     private String message   = "";
     private String idCard    = new String();
-    private BufferedImage avatar;
+    private JLabel avatar;
     private int type;
     private int action;
     private Color color;
     private HashMap<String,String> map;
-    private HashMap<String,byte[]> list;
+    private HashMap<String,JLabel> list;
     
     /**
      * Constructeur par défaut
@@ -151,7 +147,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,byte[]> list){
+    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,JLabel> list){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
@@ -164,7 +160,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,String msg,BufferedImage avatar){
+    public Message(int type,String nick_src,String nick_dest,String msg,JLabel avatar){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;    
@@ -214,20 +210,10 @@ public class Message {
                 if(type >= INFO_JOUEUR){
                     if(type==CONNECT){
                         this.message=in.readUTF();
-                        int length=in.readInt();
-                        int i=0;
-                        byte[] b =new byte[length];
-                        in.read(b);
-//                        while(i<length){
-//                            b[i]=in.readByte();
-//                            i++;
-//                        }
-//                        //in.read(b, 0, length);                      
-                        ByteArrayInputStream bais=new ByteArrayInputStream(b);
-                        this.avatar=ImageIO.read(bais);                        
+                        this.avatar=(JLabel)ois.readObject();
                     }
                     else if(type==LISTE)
-                        this.list=(LinkedHashMap<String, byte[]>)ois.readObject();
+                        this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
                     else
                         this.map=(HashMap<String,String>)ois.readObject();
                 }
@@ -262,14 +248,7 @@ public class Message {
                 if(type>=INFO_JOUEUR){
                     if(type==CONNECT){
                         out.writeUTF(message);
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();                        
-                        ImageIO.write(avatar,"jpg" ,baos);
-                        baos.flush();
-                        byte[] resultImageAsRawBytes = baos.toByteArray();
-                        baos.close();
-                        out.writeInt(resultImageAsRawBytes.length);
-                        out.write(resultImageAsRawBytes);
-                        //oos.writeObject(this.avatar);
+                        oos.writeObject(this.avatar);
                     }
                     else if(type==LISTE)
                         oos.writeObject(this.list);
@@ -313,7 +292,7 @@ public class Message {
         return map;
     }
 
-    public HashMap<String, byte[]> getList() {
+    public HashMap<String, JLabel> getList() {
         return list;
     }    
 
@@ -321,7 +300,7 @@ public class Message {
         return action;
     }
 
-    public BufferedImage getAvatar() {
+    public JLabel getAvatar() {
         return avatar;
     }
     
