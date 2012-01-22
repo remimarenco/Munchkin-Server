@@ -65,10 +65,10 @@ public class Serveur {
                 if (this.partie.loginDispo(msg.getNick_src()) && partie.size()<nombreJoueur) {
                     com.setNom(msg.getNick_src());
                     com.setSexe(Integer.valueOf(msg.getMessage()));
-                    ImageIcon icon=new ImageIcon(msg.getAvatar());
-                    Image image= icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-                    icon = new ImageIcon(image);                     
-                    com.setAvatar(new JLabel(icon));
+//                    ImageIcon icon=new ImageIcon(msg.getAvatar());
+//                    Image image= icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+//                    icon = new ImageIcon(image);                     
+                    com.setAvatar(msg.getAvatar());
                     this.partie.add(com);                   
                     String text = msg.getNick_src() + " est maintenant parmis nous \n";
                     Message message  = new Message(Message.MESSAGE, "admin", "Partie",    text);
@@ -98,7 +98,7 @@ public class Serveur {
                 com.setName(msg.getNick_src());
                 Message message1 = new Message(Message.MESSAGE, "admin", "Partie", "Vous êtes déconnecté du serveur, à bientôt !\n");
                 com.sendMessage(message1);
-                com.sendList(new LinkedHashMap<String,JLabel>());                
+                com.sendList(new LinkedHashMap<String,byte[]>());                
                 partie.remove(com);                
                 
                 //partie.removeJoueurByName(msg.getNick_src());

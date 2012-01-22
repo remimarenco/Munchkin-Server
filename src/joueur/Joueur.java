@@ -5,6 +5,7 @@ import carte.Donjon;
 import carte.Monstre;
 import communication.Message;
 import communication.Serveur;
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -26,7 +27,7 @@ public class Joueur extends Thread {
     private Jeu jeu;
     private Personnage personnage;
     private Partie partie;
-    private JLabel avatar        = null;
+    private BufferedImage avatar = null;
     private Message msg          = new Message();
     private Object parent        = null;
     private DataInputStream in   = null;
@@ -52,11 +53,11 @@ public class Joueur extends Thread {
     
     // ===== ACCESSEURS & MUTATEURS ===== //
     
-    public JLabel getAvatar() {
+    public BufferedImage getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(JLabel avatar) {
+    public void setAvatar(BufferedImage avatar) {
         this.avatar = avatar;
     }
     
@@ -119,7 +120,7 @@ public class Joueur extends Thread {
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
      */
-    public void sendList(LinkedHashMap<String,JLabel> list){
+    public void sendList(LinkedHashMap<String,byte[]> list){
         new Message(Message.LISTE,"Partie",getName(),list).write(out);
     }
 

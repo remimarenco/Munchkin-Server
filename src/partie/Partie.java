@@ -9,6 +9,8 @@ import carte.Sort;
 import carte.Tresor;
 import communication.Message;
 import java.awt.Color;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,6 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import joueur.CartesJoueur;
 import joueur.Jeu;
@@ -186,8 +190,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public boolean loginDispo(String log){
                 boolean ret=true;
-		LinkedHashMap<String,JLabel> l = getListe();
-                for(Map.Entry<String,JLabel> m :l.entrySet())
+		LinkedHashMap<String,byte[]> l = getListe();
+                for(Map.Entry<String,byte[]> m :l.entrySet())
                     if(m.getKey().equals(log) || log.equals("Partie"))
                         ret=false;
                 
@@ -199,10 +203,19 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Renvoi la liste de nom des joueurs
 	 * @return 
 	 */
-	public LinkedHashMap<String,JLabel> getListe(){
-            LinkedHashMap<String,JLabel> liste=new LinkedHashMap<String, JLabel>();
-            for(Joueur j:this)                    
-                liste.put(j.getName(),j.getAvatar());                    
+	public LinkedHashMap<String,byte[]> getListe(){
+            LinkedHashMap<String,byte[]> liste=new LinkedHashMap<String, byte[]>();
+            for(Joueur j:this){ 
+                ByteArrayOutputStream baos=new ByteArrayOutputStream();              
+                try {
+                    ImageIO.write(j.getAvatar(), "jpg", baos);
+                } catch (IOException ex) {
+                    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                byte[] b= null;
+                b=baos.toByteArray();
+                liste.put(j.getName(),b); 
+            }
 
             return liste;
 	}

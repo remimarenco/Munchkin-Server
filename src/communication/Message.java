@@ -50,7 +50,7 @@ public class Message {
     private int action;
     private Color color;
     private HashMap<String,String> map;
-    private HashMap<String,JLabel> list;
+    private HashMap<String,byte[]> list;
     
     /**
      * Constructeur par défaut
@@ -151,7 +151,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,JLabel> list){
+    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,byte[]> list){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
@@ -227,7 +227,7 @@ public class Message {
                         this.avatar=ImageIO.read(bais);                        
                     }
                     else if(type==LISTE)
-                        this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
+                        this.list=(LinkedHashMap<String, byte[]>)ois.readObject();
                     else
                         this.map=(HashMap<String,String>)ois.readObject();
                 }
@@ -313,7 +313,7 @@ public class Message {
         return map;
     }
 
-    public HashMap<String, JLabel> getList() {
+    public HashMap<String, byte[]> getList() {
         return list;
     }    
 
