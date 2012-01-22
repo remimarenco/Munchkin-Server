@@ -5,15 +5,11 @@ import carte.Donjon;
 import carte.Monstre;
 import communication.Message;
 import communication.Serveur;
-import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-
-import javax.swing.JLabel;
 import partie.Constante;
 import partie.Partie;
 
@@ -34,7 +30,8 @@ public class Joueur extends Thread {
     private DataOutputStream out = null;
     private int sexe             = Constante.SEXE_M;
     private String answer        = null;
-    private Carte carteClickee  = null;
+    private Carte carteClickee   = null;
+    private int avatar           = 1;
     
     /**
      * Constructeur
@@ -48,12 +45,17 @@ public class Joueur extends Thread {
         this.jeu        = new Jeu();        
         this.personnage = new Personnage(1, sexe, false, 5, 0, 0, 0, 0);
         this.partie     = partie;
-    }  
-
+    }
     
     // ===== ACCESSEURS & MUTATEURS ===== //    
   
-    
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
     public Jeu getJeu() {
         return jeu;
     }
@@ -113,7 +115,7 @@ public class Joueur extends Thread {
      * Envoi la liste des joueurs connectés aux clients
      * @param list 
      */
-    public void sendList(ArrayList<String> list){
+    public void sendList(LinkedHashMap<String,Integer> list){
         new Message(Message.LISTE,"Partie",getName(),list).write(out);
     }
 

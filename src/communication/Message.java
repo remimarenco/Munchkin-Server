@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Classe Message identique entre client et serveur. Protocole d'echange
@@ -44,7 +45,8 @@ public class Message {
     private int action;
     private Color color;
     private HashMap<String,String> map;
-    private ArrayList<String> list;
+    private LinkedHashMap<String,Integer> list;
+    private int avatar=1;
     
     /**
      * Constructeur par défaut
@@ -88,6 +90,21 @@ public class Message {
         this.nick_dest  = nick_dest;        
         this.message    = msg;
         this.color      = Color.BLACK;
+    }
+     /**
+      * Constructeur
+      * @param type
+      * @param nick_src
+      * @param nick_dest
+      * @param msg 
+      */
+    public Message(int type,String nick_src,String nick_dest,String msg,int avatar){
+        this.type       = type;            
+        this.nick_src   = nick_src;          
+        this.nick_dest  = nick_dest;        
+        this.message    = msg;
+        this.color      = Color.BLACK;
+        this.avatar     = avatar;
     }
     
     /**
@@ -145,7 +162,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,ArrayList<String> list){
+    public Message(int type,String nick_src,String nick_dest,LinkedHashMap<String,Integer> list){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;        
@@ -187,13 +204,15 @@ public class Message {
                     message=in.readUTF();                  
                     color=(Color) ois.readObject();
                 }
+                if(type==CONNECT)
+                    avatar=in.readInt();
                 if(type == INTERVENTION || type==SOUND)
                     action = in.readInt();
                 if(type == INTERVENTION)
                     idCard = in.readUTF();
                 if(type >= INFO_JOUEUR){                    
                     if(type==LISTE){                        
-                        this.list=(ArrayList<String>)ois.readObject();                       
+                        this.list=(LinkedHashMap<String,Integer>)ois.readObject();                       
                     }
                     else
                         this.map=(HashMap<String,String>)ois.readObject();
@@ -222,6 +241,8 @@ public class Message {
                     out.writeUTF(message);                    
                     oos.writeObject(color);   
                 }
+                if(type==CONNECT)
+                    out.writeInt(avatar);
                 if(type==INTERVENTION || type==SOUND)
                     out.writeInt(action);
                 if(type==INTERVENTION)
@@ -270,8 +291,12 @@ public class Message {
         return map;
     }
 
-    public ArrayList<String> getList() {
+    public LinkedHashMap<String,Integer> getList() {
         return list;
+    }
+
+    public int getAvatar() {
+        return avatar;
     }    
 
     public int getAction() {

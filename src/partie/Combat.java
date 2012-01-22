@@ -86,6 +86,7 @@ public class Combat {
      */
     public String getPuissanceCampGentil(){    
         Integer total = 0;
+        total+=bonusTemporaireGentil;
         for(Personnage p : CampGentil)
             total += p.getPuissance();        
         return total.toString();
@@ -98,6 +99,7 @@ public class Combat {
      */
     public String getPuissanceCampMechant(){    
         Integer total = 0;
+        total+=bonusTemporaireMechant;
         for(Monstre p : CampMechant)
             total += p.getPuissance();        
         return total.toString();

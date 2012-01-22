@@ -190,8 +190,8 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 */
 	public boolean loginDispo(String log){
                 boolean ret=true;
-		ArrayList<String> l = getListe();
-                if(l.contains(log)||log.equals("Partie"))                
+		LinkedHashMap<String,Integer> l = getListe();
+                if(l.keySet().contains(log)||log.equals("Partie"))                
                         ret=false;
                 
                 return ret;	
@@ -202,10 +202,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * Renvoi la liste de nom des joueurs
 	 * @return 
 	 */
-	public ArrayList<String> getListe(){
-            ArrayList<String> liste=new ArrayList<String>();
+	public LinkedHashMap<String,Integer> getListe(){
+            LinkedHashMap<String,Integer> liste=new LinkedHashMap<String,Integer>();
             for(Joueur j:this)                
-                liste.add(j.getName());            
+                liste.put(j.getName(),j.getAvatar());       
 
             return liste;
 	}
@@ -1026,51 +1026,58 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 							j.sendMessage(new Message(Message.STOP_QUESTION_INTERVENTION, "Partie", j.getName(), ""));
 						}
 					}
+                                        joueurIntervenant.sendMessage(new Message(Message.QUESTION,"Partie", joueurIntervenant.getName(), "Annuler ?"));
 					Carte carteChoisie;
                                         //on demande au joueur de clické sur un carte
 					carteChoisie=intervention(joueurIntervenant);
-					ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
-					//joueurDest.add(enCours);
-					if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
-					{
-						// On applique le sortilege pour la malediction et le sortilege
-						// TODO : Faire le ciblage
-						if(carteChoisie instanceof Malediction)
-						{
-							Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
-							this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
-						}
-						else
-						{
-							Sort carteSortChoisie = (Sort) carteChoisie;
-							this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
-						}
-                                                // On suppose que cela vient de la main
-                                                this.defausserCarte(joueurIntervenant, joueurIntervenant.getMain(), carteChoisie);
-						/*if(joueurIntervenant.defausserCarte(carteChoisie))
-						{
-							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
-						}
-						else
-						{
-							this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
-							throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
-						}*/
-					}
-					// TODO : Si on a voulu utiliser un objet
-					else if(carteChoisie instanceof Objet)
-					{
-						// On applique le UtiliserObjet
-					}
-                                        //on renvoi la demande a tous les joueurs sauf ceux NonCOncernes et on reset la liste des joueurs ayant repondu
-					for(Joueur j:this)  
-						if(!joueursNonConcernes.contains(j)){                                                                                            
-							j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
-							j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
+                                        if(carteChoisie!=null){
+                                            ArrayList<Joueur> joueurDest= new ArrayList<Joueur>();
+                                            //joueurDest.add(enCours);
+                                            if(carteChoisie instanceof Malediction || carteChoisie instanceof Sort)
+                                            {
+                                                    // On applique le sortilege pour la malediction et le sortilege
+                                                    // TODO : Faire le ciblage
+                                                    if(carteChoisie instanceof Malediction)
+                                                    {
+                                                            Malediction carteMaledictionChoisie = (Malediction) carteChoisie;
+                                                            this.sendMessageToAll(carteMaledictionChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
+                                                    }
+                                                    else
+                                                    {
+                                                            Sort carteSortChoisie = (Sort) carteChoisie;
+                                                            this.sendMessageToAll(carteSortChoisie.appliquerSortilege(joueurIntervenant, joueurDest, this, true));
+                                                    }
+                                                    // On suppose que cela vient de la main
+                                                    this.defausserCarte(joueurIntervenant, joueurIntervenant.getMain(), carteChoisie);
+                                                    /*if(joueurIntervenant.defausserCarte(carteChoisie))
+                                                    {
+                                                            this.SendDebugMessage("La carte "+carteChoisie.getNom()+" a été correctement supprimé de la main");
+                                                    }
+                                                    else
+                                                    {
+                                                            this.SendDebugMessage("La carte "+carteChoisie.getNom()+" n'a pas été correctement supprimé de la main !!!");
+                                                            throw new Exception("Probleme dans demanderIntervenirSaufJoueurs : impossible de supprimer la carte de la main");
+                                                    }*/
+                                            }
+                                            // TODO : Si on a voulu utiliser un objet
+                                            else if(carteChoisie instanceof Objet)
+                                            {
+                                                    // On applique le UtiliserObjet
+                                            }                                           
+                                        }
+                                        else{
+                                            this.sendMessageToAll("Le joueur : "+joueurIntervenant.getName()+ " annule son intervention !");
+                                        }
+                                     //on renvoi la demande a tous les joueurs sauf ceux NonCOncernes et on reset la liste des joueurs ayant repondu
+                                        for(Joueur j:this)  
+                                                if(!joueursNonConcernes.contains(j)){                                                                                            
+                                                        j.sendMessage(new Message(Message.QUESTION, "Partie", j.getName(), "Voulez vous intervenir"));
+                                                        j.sendMessage(new Message(Message.MESSAGE, "Partie", "Partie", "Le joueur: "+joueurIntervenant.getName()+" est intervenu, voules vous intervenir ?",Color.GREEN));
                                                         j.setAnswer(null);
                                                         joueursAyantRepondu.clear();
                                                         joueursAyantRepondu.addAll(joueursNonConcernes);
                                                 }
+					
 				}
                                 // Si c'est non, on affiche qu'il ne souhaite pas intervenir
                                 else{
@@ -1101,9 +1108,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		// TODO : Selection des cartes jouables
 		emetteur.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie", emetteur.getName(),
 				this.getCartesIntervenables(emetteur, this.phaseTour)));
-                emetteur.setCarteClickee(null);		
+                emetteur.setCarteClickee(null);
+                emetteur.setAnswer(null);
 		// On attends que le joueur ait choisi une carte
-		while(emetteur.getCarteClickee()==null)
+		while(emetteur.getCarteClickee()==null && emetteur.getAnswer()==null)
 		{
 			try {
 				Thread.sleep(200);
@@ -1111,8 +1119,10 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}                   
-		
-		return emetteur.getCarteClickee();
+		if(emetteur.getCarteClickee()!=null)
+                    return emetteur.getCarteClickee();
+                else
+                    return null;
 	}
 
 	/**
