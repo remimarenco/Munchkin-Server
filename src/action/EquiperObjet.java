@@ -86,31 +86,24 @@ public class EquiperObjet extends Action{
                         accept=false;
                 }
 
+                if(joueurImpacte.getPersonnage().getNbEquipement()+poids>joueurImpacte.getPersonnage().getCapaciteEquipement())
+                    accept=false;
+
                 if(tabClasse!=null){                                        // Si un tableau de classe est défini
                     for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
-                        if(joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe))
-                            classeTrouve=true;
+                        if((classe==null && joueurImpacte.getPersonnage().getClasse()==null) || (joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe)))
+                                        classeTrouve=true;
                         if(!classeTrouve)
-                            accept=false;
+                                accept=false;
                 }
                 if(joueurImpacte.getPersonnage().getNbEquipement()+poids>joueurImpacte.getPersonnage().getCapaciteEquipement())
                     accept=false;
 
-                    if(tabClasse!=null){                                        // Si un tableau de classe est défini
-                        for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
-                            if((classe==null && joueurImpacte.getPersonnage().getClass()==null) || (joueurImpacte.getPersonnage().getClasse()!=null && joueurImpacte.getPersonnage().getClasse().equals(classe)))
-                                            classeTrouve=true;
-                            if(!classeTrouve)
-                                    accept=false;
-                    }
-                    if(joueurImpacte.getPersonnage().getNbEquipement()+poids>joueurImpacte.getPersonnage().getCapaciteEquipement())
-                        accept=false;
-
-                    if(accept==true){    // Si toutes les conditions sont réunies, on applique la modif et on équipe la carte
-                        joueurImpacte.getPersonnage().setCapaciteFuite(joueurImpacte.getPersonnage().getCapaciteFuite()+bonusDeguerpir);
-                        joueurImpacte.getPersonnage().setPuissanceObjet(joueurImpacte.getPersonnage().getPuissanceObjet()+bonusPuissance);
-                        joueurImpacte.getPersonnage().setNbEquipement(joueurImpacte.getPersonnage().getNbEquipement()+poids);
-                    }
+                if(accept==true){    // Si toutes les conditions sont réunies, on applique la modif et on équipe la carte
+                    joueurImpacte.getPersonnage().setCapaciteFuite(joueurImpacte.getPersonnage().getCapaciteFuite()+bonusDeguerpir);
+                    joueurImpacte.getPersonnage().setPuissanceObjet(joueurImpacte.getPersonnage().getPuissanceObjet()+bonusPuissance);
+                    joueurImpacte.getPersonnage().setNbEquipement(joueurImpacte.getPersonnage().getNbEquipement()+poids);
+                }
             }
 
             return out;
@@ -154,17 +147,13 @@ public class EquiperObjet extends Action{
             }
         }
 
-        if (tabClasse != null) {                                        // Si un tableau de classe est défini
-            for (Classe classe : tabClasse) // On regarde si celle du personnage s'y trouve
-            {
-                if (joueur.getPersonnage().getClasse() != null && joueur.getPersonnage().getClasse().equals(classe)) {
-                    classeTrouve = true;
+                if(tabClasse!=null){                                        // Si un tableau de classe est défini
+                    for(Classe classe: tabClasse)                           // On regarde si celle du personnage s'y trouve
+                        if((classe==null && joueur.getPersonnage().getClasse()==null) || (joueur.getPersonnage().getClasse()!=null && joueur.getPersonnage().getClasse().equals(classe)))
+                                        classeTrouve=true;
+                        if(!classeTrouve)
+                                accept=false;
                 }
-            }
-            if (!classeTrouve) {
-                accept = false;
-            }
-        }
         if (joueur.getPersonnage().getNbEquipement() + poids > joueur.getPersonnage().getCapaciteEquipement()) {
             accept = false;
         }
