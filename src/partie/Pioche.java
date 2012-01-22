@@ -78,7 +78,7 @@ public class Pioche<T> {
         // On ajoute la carte dans la pioche seulement si elle appartient à un type de pioche (Donjon ou Trésor)
         while(it.hasNext()){
             c = (Carte) it.next();
-            if(c.getClass().getSuperclass().equals(this.typePioche))
+            if(typePioche.isAssignableFrom(c.getClass()))
                 this.pioche.add((T) c);
         }
     }

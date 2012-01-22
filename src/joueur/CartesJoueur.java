@@ -2,6 +2,7 @@ package joueur;
 
 import carte.Carte;
 import carte.Monstre;
+import carte.Objet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -131,7 +132,7 @@ public class CartesJoueur {
     public LinkedHashMap<String,String> getCartesPosables(){
     	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes)
-            if(c.getClass().getSimpleName().equals("Objet"))
+            if(c instanceof Objet)
                 // TODO : Vérifier la pertinence d'envoyer deux fois la même chose dans le linked
                 map.put(c.getId().toString(), c.getId().toString());
         return map;
@@ -148,7 +149,7 @@ public class CartesJoueur {
     	LinkedHashMap<String,String> map=new LinkedHashMap<String, String>();
         for(Carte c : this.cartes){
             // On ne peut intervenir qu'avec des cartes non posables, sinon le joueur doit utiliser carte
-            if(!c.getClass().getSimpleName().equals("Objet")){
+            if(!(c instanceof Objet)){
                 // On vérifie si chaque carte est posable
                 map.put(c.getId().toString(), c.getId().toString());
             }

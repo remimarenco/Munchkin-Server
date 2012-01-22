@@ -173,7 +173,7 @@ public class Joueur extends Thread {
         	Donjon carte = this.partie.getPiocheDonjon().tirerCarte();
                 // TODO : Gérer le cas ou il ne reste plus que des monstres dans la pioche donjon
                 // On boucle tant qu'on a pas pioché une autre carte qu'un monstre
-                    if(carte.getClass().equals(Monstre.class))
+                    if(carte instanceof Monstre)
                     {
                         System.out.println("On a pioché un monstre, on le remet en dessous de la pile");
                             this.partie.getPiocheDonjon().poserEnDessousPioche(carte);

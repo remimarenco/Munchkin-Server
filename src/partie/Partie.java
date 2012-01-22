@@ -127,7 +127,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				// On désactive la pioche de carte Monstre pour le moment
 				// TODO : Réactiver
 				Carte carte = piocheDonjon.tirerCarte();
-				if(!carte.getClass().equals(Monstre.class))
+				if(!(carte instanceof Monstre))
 				{
 					j.getMain().ajouterCarte(carte);
 					j.getMain().ajouterCarte((Carte) piocheTresor.tirerCarte());
@@ -402,7 +402,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				Integer id = new Integer(msg.getIdCard());
 				final Joueur j= emetteur;
 				// On vérifie que la carte passée est un objet, puis on le déséquipe et on la supprime
-				if(Deck.getCardById(id).getClass().equals(Objet.class))
+				if(Deck.getCardById(id) instanceof Objet)
 				{
 					Objet obj = (Objet) Deck.getCardById(id);
 					obj.desequiper(j,new ArrayList<Joueur>(){{add(j);}}, this);
@@ -609,7 +609,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 			cartePiochee = phaseOuvrirPorte();
 
 			// === MONSTRE ===
-			if(cartePiochee.getClass().equals(Monstre.class))
+			if(cartePiochee instanceof Monstre)
 			{
 				// On cherche la bagarre, si on a gagné, on pille la pièce
 				this.sendMessageToAll("Au combat !!");
@@ -779,7 +779,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 		this.sendMessageToAll(enCours.getName() + " pioche une carte ! : \n");
 		this.sendCarteEnCoursToAll(cartePiochee);
 		
-		if(cartePiochee.getClass().equals(Malediction.class)){
+		if(cartePiochee instanceof Malediction){
 			Malediction carteMaledictionPiochee = (Malediction) cartePiochee;
 			this.sendMessageToAll("C'est un sort !!\n");
 			this.sendMessageToAllButCurrent("Le joueur "+enCours.getName()+" vient de piocher une carte Sort !");
@@ -932,7 +932,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	private void appliquerCartePoseMainSurJoueur(Joueur joueur,Carte cardById) {
                 
                 
-		if(cardById.getClass().equals(Objet.class))
+		if(cardById instanceof Objet)
 		{   
 			Objet carteObjet = (Objet) cardById;
 			final Joueur j=joueur;
@@ -972,7 +972,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 	 * TODO : Voir si à mettre plutôt dans le combat
 	 */
 	private void annulationBonusTemporaire(Carte cartePiochee) {
-		if(cartePiochee.getClass().equals(Monstre.class))
+		if(cartePiochee instanceof Monstre)
 			((Monstre) cartePiochee).setBonusPuissance(0);
 		this.enCours.getPersonnage().setBonusCapaciteFuite(0);
 		this.enCours.getPersonnage().setBonusPuissance(0);
@@ -1055,7 +1055,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 						}*/
 					}
 					// TODO : Si on a voulu utiliser un objet
-					else if(carteChoisie.getClass().equals(Objet.class))
+					else if(carteChoisie instanceof Objet)
 					{
 						// On applique le UtiliserObjet
 					}
@@ -1308,7 +1308,7 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         public boolean defausserCarte(Joueur joueur, CartesJoueur tas, Carte carteADefausser)
         {
             // On teste si le tas concerné par la défausse est la main ou le jeu
-            if(tas.getClass().equals(Main.class))
+            if(tas instanceof Main)
             {
                 if(joueur.getMain().supprimerCarte(carteADefausser))
                 {
@@ -1320,14 +1320,14 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     return false;
                 }
             }
-            else if(tas.getClass().equals(Jeu.class))
+            else if(tas instanceof Jeu)
             {
                 if(joueur.getJeu().supprimerCarte(carteADefausser))
                 {
                     System.out.println("On a réussi a défausser la carte du jeu");
                     // On applique le comportement de défausse d'une carte selon la carte
                     // Ici seulement pour les objets
-                    if(carteADefausser.getClass().equals(Objet.class))
+                    if(carteADefausser instanceof Objet)
                     {
                         Objet obj = (Objet) carteADefausser;
                         ArrayList<Joueur> joueurDestination = new ArrayList<Joueur>();
@@ -1352,11 +1352,11 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
             
             // On teste si la carte a defausser est une carte donjon ou une carte tresor
             // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
-            if(carteADefausser.getClass().getSuperclass().equals(Donjon.class))
+            if(carteADefausser instanceof Donjon)
             {
                 return this.defausseDonjon.ajouterCarte((Donjon)carteADefausser);
             }
-            else if(carteADefausser.getClass().getSuperclass().equals(Tresor.class))
+            else if(carteADefausser instanceof Tresor)
             {
                 return this.defausseTresor.ajouterCarte((Tresor)carteADefausser);
             }
@@ -1371,30 +1371,30 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
         public boolean defausserTout(Joueur joueur, CartesJoueur tas)
         {
             // On teste si le tas concerné par la défausse est la main ou le jeu
-            if(tas.getClass().equals(Main.class))
+            if(tas instanceof Main)
             {
                 // On les supprime toutes du jeu, et on les mets dans la défausse correspondante
                 for (Carte carte : joueur.getJeu().getCartes()) {
                     joueur.getMain().supprimerCarte(carte);
                     // On teste si la carte a defausser est une carte donjon ou une carte tresor
                     // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
-                    if (carte.getClass().getSuperclass().equals(Donjon.class)) {
+                    if (carte instanceof Donjon) {
                         return this.defausseDonjon.ajouterCarte((Donjon) carte);
-                    } else if (carte.getClass().getSuperclass().equals(Tresor.class)) {
+                    } else if (carte instanceof Tresor) {
                         return this.defausseTresor.ajouterCarte((Tresor) carte);
                     } else {
                         System.out.println("Le type de carte n'a pas été détecté");
                     }
                 }
             }
-            else if(tas.getClass().equals(Jeu.class))
+            else if(tas instanceof Jeu)
             {
                 for (Carte carte : joueur.getJeu().getCartes()) {
                     if (joueur.getJeu().supprimerCarte(carte)) {
                         System.out.println("On a réussi a défausser la carte du jeu");
                         // On applique le comportement de défausse d'une carte selon la carte
                         // Ici seulement pour les objets
-                        if (carte.getClass().equals(Objet.class)) {
+                        if (carte instanceof Objet) {
                             Objet obj = (Objet) carte;
                             ArrayList<Joueur> joueurDestination = new ArrayList<Joueur>();
                             joueurDestination.add(joueur);
@@ -1405,9 +1405,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 
                         // On teste si la carte a defausser est une carte donjon ou une carte tresor
                         // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
-                        if (carte.getClass().getSuperclass().equals(Donjon.class)) {
+                        if (carte instanceof Donjon) {
                             return this.defausseDonjon.ajouterCarte((Donjon) carte);
-                        } else if (carte.getClass().getSuperclass().equals(Tresor.class)) {
+                        } else if (carte instanceof Tresor) {
                             return this.defausseTresor.ajouterCarte((Tresor) carte);
                         } else {
                             System.out.println("Le type de carte n'a pas été détecté");

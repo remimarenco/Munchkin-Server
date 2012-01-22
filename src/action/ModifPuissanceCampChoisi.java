@@ -40,19 +40,19 @@ public class ModifPuissanceCampChoisi extends Action {
 			Object obj = demandeCampCible(partie, joueurEmetteur);
 			if(obj != null)
 			{
-				if(obj.getClass().equals(ArrayList.class))
+				if(obj instanceof ArrayList)
 				{
 					ArrayList aL = (ArrayList) obj;
 					java.util.Iterator it = aL.iterator();
 					if(it.hasNext())
 					{
 						Object o = it.next();
-						if(o.getClass().equals(Personnage.class))
+						if(o instanceof Personnage)
 						{
 							out += "On applique le bonus de "+ bonus + " au camp gentil";
 							partie.getCombat().setBonusTemporaireGentil(partie.getCombat().getBonusTemporaireGentil()+bonus);
 						}
-						else if(o.getClass().equals(Monstre.class))
+						else if(o instanceof Monstre)
 						{
 							out += "On applique le bonus de "+ bonus + " au camp mechant";
 							partie.getCombat().setBonusTemporaireMechant(partie.getCombat().getBonusTemporaireMechant()+bonus);
