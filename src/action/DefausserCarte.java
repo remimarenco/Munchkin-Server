@@ -100,7 +100,7 @@ public class DefausserCarte extends Action {
 
             if (this.nbCarte == Constante.NB_JOUEUR_MOINS_MOI) {
                 partie.sendMessageToAllButCurrent(partie.getEnCours() + " va defausser le nb joueur - lui");
-                partie.sendMessageToCurrent("Tu va defausser le nb joueur - toi");
+                partie.sendMessageToCurrent("Tu vas defausser le nb joueur - toi");
                 this.nbCarte = partie.size() - 1;
             }
 

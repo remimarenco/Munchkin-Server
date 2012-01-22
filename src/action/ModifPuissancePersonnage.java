@@ -111,7 +111,16 @@ public class ModifPuissancePersonnage extends Action{
             if(tabClasse != null){
                 out += ", les classes pour lesquelles ce bonus s'applique sont :";
                 for(Classe classe : tabClasse)
-                    out += " " + classe.toString();
+                {
+                    if(classe != null)
+                    {
+                        out += " " + classe.toString();
+                    }
+                    else
+                    {
+                        out += " aucune";
+                    }
+                }
             }
             else
                 out += "Aucune classe pour ce bonus";

@@ -1390,9 +1390,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                     // On teste si la carte a defausser est une carte donjon ou une carte tresor
                     // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
                     if (carte instanceof Donjon) {
-                        return this.defausseDonjon.ajouterCarte((Donjon) carte);
+                        this.defausseDonjon.ajouterCarte((Donjon) carte);
                     } else if (carte instanceof Tresor) {
-                        return this.defausseTresor.ajouterCarte((Tresor) carte);
+                        this.defausseTresor.ajouterCarte((Tresor) carte);
                     } else {
                         System.out.println("Le type de carte n'a pas été détecté");
                     }
@@ -1417,9 +1417,9 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
                         // On teste si la carte a defausser est une carte donjon ou une carte tresor
                         // TODO : Attention à l'héritage n+2 en profondeur sur les cartes...non géré
                         if (carte instanceof Donjon) {
-                            return this.defausseDonjon.ajouterCarte((Donjon) carte);
+                            this.defausseDonjon.ajouterCarte((Donjon) carte);
                         } else if (carte instanceof Tresor) {
-                            return this.defausseTresor.ajouterCarte((Tresor) carte);
+                            this.defausseTresor.ajouterCarte((Tresor) carte);
                         } else {
                             System.out.println("Le type de carte n'a pas été détecté");
                         }
