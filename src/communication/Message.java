@@ -1,6 +1,7 @@
 package communication;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
@@ -41,7 +42,7 @@ public class Message {
     private String nick_dest = "";    
     private String message   = "";
     private String idCard    = new String();
-    private JLabel avatar;
+    private BufferedImage avatar;
     private int type;
     private int action;
     private Color color;
@@ -160,7 +161,7 @@ public class Message {
      * @param nick_dest
      * @param map 
      */
-    public Message(int type,String nick_src,String nick_dest,String msg,JLabel avatar){
+    public Message(int type,String nick_src,String nick_dest,String msg,BufferedImage avatar){
         this.type       = type;            
         this.nick_src   = nick_src;          
         this.nick_dest  = nick_dest;    
@@ -210,7 +211,7 @@ public class Message {
                 if(type >= INFO_JOUEUR){
                     if(type==CONNECT){
                         this.message=in.readUTF();
-                        this.avatar=(JLabel)ois.readObject();
+                        this.avatar=(BufferedImage)ois.readObject();
                     }
                     else if(type==LISTE)
                         this.list=(LinkedHashMap<String, JLabel>)ois.readObject();
@@ -300,7 +301,7 @@ public class Message {
         return action;
     }
 
-    public JLabel getAvatar() {
+    public BufferedImage getAvatar() {
         return avatar;
     }
     
