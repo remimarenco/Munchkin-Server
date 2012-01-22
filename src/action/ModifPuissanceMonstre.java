@@ -104,9 +104,9 @@ public class ModifPuissanceMonstre extends Action{
             }
             
             // Si on ne se trouve pas dans la phase de recherche de la bagarre => En combat, cette carte n'aura aucun effet
-            if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE){
+            //if(partie.getPhaseTour() != Constante.PHASE_CHERCHER_LA_BAGARRE){
             	accept = false;
-            }
+            //}
             //TODO : Ce n'est pas le personnage qui recoit un bonus de puissance mais le camp méchant du combat
             if(accept){
                 monstre.setBonusPuissance(monstre.getBonusPuissance()+bonusPuissance);

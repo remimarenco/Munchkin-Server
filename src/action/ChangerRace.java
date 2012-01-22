@@ -63,10 +63,13 @@ public class ChangerRace extends Action {
                 // Si la carte est une carte de race, on la défausse
                 if(carte instanceof carte.Race)
                 {
-                    carteRace = (carte.Race) carte;
-                    if(!carteRace.getRace().equals(this.race))
+                    if(!(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1))
                     {
-                        carteTrouve = carteRace;
+                        carteRace = (carte.Race) carte;
+                        if(!carteRace.getRace().equals(this.race))
+                        {
+                            carteTrouve = carteRace;
+                        }
                     }
                 }
             }

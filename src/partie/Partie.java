@@ -439,14 +439,18 @@ public final class Partie extends ArrayList<Joueur> implements Runnable{
 				emetteur.getJeu().ajouterCarte(Deck.getCardById(id));
 				emetteur.getMain().supprimerCarte(Deck.getCardById(id));
 				// Activation de la carte
-				appliquerCartePoseMainSurJoueur(emetteur,Deck.getCardById(id));            
+				appliquerCartePoseMainSurJoueur(emetteur,Deck.getCardById(id)); 
+                                System.out.println("On a appliqué la pose de carte sur le joueur");
                                 this.sendInfos();
-                                if(joueurIntervenant!=null){                              
+                                System.out.println("On a envoyé les infos sur le joueur");
+                                if(joueurIntervenant!=null){
+                                    System.out.println("Le joueur intervenant n'est pas null");
                                     joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
                                             joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
                                     this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte pour intervenir");
                                 }
                                 if(joueurIntervenant!=null && joueurIntervenant.getName().equals(msg.getNick_src()) && this.phaseTour==Constante.PHASE_CHARITE_SIOUPLAIT ){
+                                    System.out.println("Le joueur intervenant n'est pas null et la phase du tout est la charité");
                                     joueurIntervenant.sendMessage(new Message(Message.CARTES_JOUABLES, "Partie" ,
                                             joueurIntervenant.getName(), joueurIntervenant.getMain().generateInfos()));
                                     this.sendMessageBackToSender(joueurIntervenant.getName(),"Choisissez la carte a");

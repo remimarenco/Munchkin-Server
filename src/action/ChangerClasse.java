@@ -49,14 +49,18 @@ public class ChangerClasse extends Action{
                     // On parcourt les cartes du jeu du joueur
                     for(Carte carte : joueurImpacte.getJeu().getCartes())
                     {
-                        carte.Classe carteClasse;
-                        // Si la carte est une carte de race, on la défausse
-                        if(carte instanceof carte.Classe)
+                        // Si c'est la dernière carte, on a pas besoin de l'évaluer c'est la carte en cours
+                        if(!(joueurImpacte.getJeu().getCartes().indexOf(carte) != joueurImpacte.getJeu().getCartes().size()-1))
                         {
-                            carteClasse = (carte.Classe) carte;
-                            if(!carteClasse.getClasse().equals(this.classe))
+                            carte.Classe carteClasse;
+                            // Si la carte est une carte de race, on la défausse
+                            if(carte instanceof carte.Classe)
                             {
-                                carteTrouve = carteClasse;
+                                carteClasse = (carte.Classe) carte;
+                                if(!carteClasse.getClasse().equals(this.classe))
+                                {
+                                    carteTrouve = carteClasse;
+                                }
                             }
                         }
                     }

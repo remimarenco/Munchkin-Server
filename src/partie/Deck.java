@@ -125,10 +125,12 @@ public final class Deck {
         // === MONSTRES ===
         // ================
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
-        //nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(Constante.CARTE_OBJET, 1, Constante.JEU));
+        tabClassCarte.clear();
+        tabClassCarte.add(Objet.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(-1000, null, null, null, null));
-        //cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1));
+        cartes.add(new Monstre(1, "Morpions", "Impossible de déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 1));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,1), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), null);
