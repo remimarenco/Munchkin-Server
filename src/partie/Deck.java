@@ -762,9 +762,9 @@ public final class Deck {
         cartes.add(new Objet(134 ,"Dague de traitrise", "Réservé aux voleurs. Bonus de +3", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
-        actionEquipement.add(new EquiperObjet(null, null, false, 0, 2, 1));
+        actionEquipement.add(new EquiperObjet(null, null, false, 0, -2, 1));
         actionDefausser.clear();
-        actionDefausser.add(new EquiperObjet(null, null, false, 0, -2, -1));
+        actionDefausser.add(new EquiperObjet(null, null, false, 0, 2, -1));
         cartes.add(new Objet(135 ,"Bottes de déplacement frénétique.", "Confère un bonus de +2 pour déguerpir.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
@@ -891,9 +891,9 @@ public final class Deck {
         cartes.add(new Objet(151 ,"Casque virilité ostentatoire", "Bonus de +1 +3 pour les elfes", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
         actionEquipement.clear();
-        actionEquipement.add(new EquiperObjet(null, null, false, 0, 3, 1));
+        actionEquipement.add(new EquiperObjet(null, null, false, 0, -3, 1));
         actionDefausser.clear();
-        actionDefausser.add(new EquiperObjet(null, null, false, 0, -3, -1));
+        actionDefausser.add(new EquiperObjet(null, null, false, 0, 3, -1));
         //cartes.add(new Objet(152 ,"Tuba d'envoutement", "Ce délicat instrument subjugue vos ennemis vous conférant un bonus de +3 pour déguerpir. Si vous réussissez à fuir, tirez une carte Trésor face cachée", new Equipement(actionEquipement), new UtiliserCarte(actionUtiliser), new ComportementDefausserCarte(actionDefausser)));
         cartes.add(new Objet(152 ,"Tuba d'envoutement", "Ce délicat instrument subjugue vos ennemis vous conférant un bonus de +3 pour déguerpir.", new Equipement(actionEquipement), new UtiliserCarte(null), new ComportementDefausserCarte(actionDefausser)));
         
