@@ -69,7 +69,9 @@ public class CartesJoueur {
         // Si le joueur n'a plus de carte en main
         if(typesCarte == null){
             System.out.println("GetRandomCarte, typesCarte est null");
-            return null;
+            int valeur = Constante.nbAleatoire(0, cartes.size());
+            System.out.println("valeur dans getRandomCarte est de :"+valeur);
+            return cartes.get(valeur);
         }
         
         ArrayList<Carte> cartesCorrespondantes = new ArrayList<Carte>();

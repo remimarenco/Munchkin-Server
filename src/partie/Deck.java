@@ -211,7 +211,7 @@ public final class Deck {
         tabClassCarte.add(Objet.class);
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, Constante.NB_PAR_DE, Constante.TAS_CHOISIR));
         resetCondition(actionTabCondition, tabClasse, tabRace);
-        actionTabCondition.add(new ModifDeguerpir(-2, null, null, null, null));
+        actionTabCondition.add(new ModifDeguerpir(2, null, null, null, null));
         cartes.add(new Monstre(11, "Escargot sous acide", "-2 pour déguerpir", new Condition(actionTabCondition), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 4));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
@@ -254,7 +254,9 @@ public final class Deck {
         // FAUX !!
         // TODO : Gérer correctemnt ce cas
         tabClassCarte.clear();
-        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, 1, Constante.JEU));
+        tabClassCarte.add(carte.Race.class);
+        tabClassCarte.add(carte.Classe.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, null, new DefausserCarte(tabClassCarte, Constante.NB_TOUT, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(16, "Binoclar Hurleur", "+6 contre les guerriers", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 6);
         tabClasse.add(Constante.CLASSE_GUERRIER);
@@ -265,7 +267,7 @@ public final class Deck {
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,2), new ChangerNiveau(1));
         tabClassCarte.clear();
         tabClassCarte.add(Objet.class);
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.MAIN));
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         mstr = new Monstre(17, "Suceur de tête", "C'est dégueu! +6 contre les elfes", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 8);
         tabRace.add(Constante.RACE_ELFE);
@@ -289,7 +291,8 @@ public final class Deck {
         // FAUX !!
         // TODO : Remettre le choix de supprimer CLASSE/RACE
         tabClassCarte.clear();
-        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-1), new DefausserCarte(tabClassCarte, 1, Constante.MAIN));
+        tabClassCarte.add(carte.Classe.class);
+        nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), new DefausserCarte(tabClassCarte, 1, Constante.MAIN));
         resetCondition(actionTabCondition, tabClasse, tabRace);
         actionTabCondition.add(new ModifDeguerpir(+1000, null, Constante.SEXE_F, null, null));
         actionDeguerpir.clear();
@@ -319,6 +322,9 @@ public final class Deck {
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
         nouvellesActionsIncidentFacheux(actionTabIncident, new ChangerNiveau(-3), null);
+        resetCondition(actionTabCondition, tabClasse, tabRace);
+        tabClasse.add(Constante.CLASSE_PRETRE);
+        actionTabCondition.add(new ModifDeguerpir(+1000, null, null, null, tabClasse));
         cartes.add(new Monstre(24, "Fan de Vampire", "Au lieu de le combattre, un prêtre peut chasser le fan de vampire en criant simplement \"bouga bouga!\" et s'emparer de son trésor. Dans ce cas il ne gagne aucun niveau.", new Condition(null), new IncidentFacheux(actionTabIncident), new MonstreVaincu(actionTabMonstreVaincu), new IncidentDeguerpir(null), 12));
         
         nouvellesActionsMonstreVaincu(actionTabMonstreVaincu, new PiocherCarte(Constante.TRESOR,3), new ChangerNiveau(1));
@@ -490,14 +496,14 @@ public final class Deck {
         actionTabMalediction = new ArrayList<Action>();
         // TODO : Refaire cette fonction en tant que déséquipement
         tabClassCarte.clear();
-        tabClassCarte.add(Objet.class);
+        tabClassCarte.add(carte.Classe.class);
         actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(54, "Malédiction! Déclassé!", "Défaussez votre carte de Classe si vous en avez une. Si vous avez deux classes en jeu, vous en perdez une au choix. Si vous n'avez pas de Classe, vous perdez 1 niveau.", new Sortilege(actionTabMalediction)));
         
         
         actionTabMalediction = new ArrayList<Action>();
         tabClassCarte.clear();
-        tabClassCarte.add(Objet.class);
+        tabClassCarte.add(carte.Race.class);
         actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(55, "Malédiction! Commun des Mortels", "Défaussez toute carte de Race que vous avez en jeu et redevenez Humain.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
@@ -513,12 +519,18 @@ public final class Deck {
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerSexe());
         cartes.add(new Malediction(58, "Malédiction! Changement de sexe", "Vous êtes momentanément distrait par le changement pendant votre prochain combat (malus de -5). Après, il n'y a plus aucun malus. Toutefois le changement est permanent.", new Sortilege(actionTabMalediction)));
+        tabClassCarte.clear();
+        tabClassCarte.add(carte.Race.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(59, "Malédiction! Changement de race", "Si vous n'avez pas encore de race, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de race que vous trouvez remplace votre (ou vos) race(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre race.", new Sortilege(actionTabMalediction)));
+        tabClassCarte.clear();
+        tabClassCarte.add(carte.Classe.class);
+        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 1, Constante.JEU));
         cartes.add(new Malediction(60, "Malédiction! Changement de classe", "Si vous n'avez pas encore de classe, cette malédiction est sans effet. Sinon, regardez les cartes de la défausse, en commençant par la dernière posée. La première carte de classe que vous trouvez remplace votre (ou vos) classe(s) actuelle(s). Si la défausse n'en contient aucune, vous perdez simplement votre classe.", new Sortilege(actionTabMalediction)));
         actionTabMalediction = new ArrayList<Action>();
         tabClassCarte.clear();
-        //tabClassCarte.add(Objet.class);
-        actionTabMalediction.add(new DefausserCarte(tabClassCarte, 2, Constante.MAIN));
+        tabClassCarte.add(Objet.class);
+        actionTabMalediction.add(new DefausserCarte(null, 2, Constante.MAIN));
         cartes.add(new Malediction(61, "Malédiction! Perdez deux cartes", "Le joueur situé à la gauche de la victime prend une carte au hasard dans la main de cette dernière et la conserve. Le joueur situé à la droite de la victime fait ensuite de même", new Sortilege(actionTabMalediction)));
        //FIN_TODO
         
@@ -574,8 +586,9 @@ public final class Deck {
         cartes.add(new Sort(157, "Erreur de calcul avantageuse", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(107, "Potion de machisme triomphant", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
         cartes.add(new Sort(108, "Invocation de règles obscures", "Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
-        //cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(105, "Pleurer dans les jupes du MJ", "Vous ne pouvez pas utiliser cette carte si vous êtes le joueur de plus haut niveau, ou ex-aequo avec celui-ci. Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        cartes.add(new Sort(106, "Tuer le fidèle serviteur", "Vous ne pouvez utiliser cette carte que si le Fidèle Serviteur est en jeu (quel que soit le possesseur). Le Fidèle Serviteur est défaussé.\n Vous gagnez un niveau", new Sortilege(actionTabMalediction)));
+        
         actionTabMalediction = new ArrayList<Action>();
         actionTabMalediction.add(new ChangerNiveau(-1,true));
         actionTabMalediction.add(new ChangerNiveau(1));
